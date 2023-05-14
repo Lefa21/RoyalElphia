@@ -12,5 +12,6 @@
           xmlns:fx="http://javafx.com/fxml"
           fx:controller="jeu.royalelphia.Controller.HelloController"
           fx:id="map" prefHeight="640" prefWidth="640">
-    </TilePane>
+
+</TilePane>
 
