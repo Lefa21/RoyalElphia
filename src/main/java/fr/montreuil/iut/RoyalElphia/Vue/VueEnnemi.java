@@ -34,6 +34,7 @@ public class VueEnnemi {
         circle.translateXProperty().set(ennemis.getX());
         circle.translateYProperty().set(ennemis.getY());
         circle.setFill(Color.RED);
+        circle.setId(ennemis.getId());
         circle.translateXProperty().bind(ennemis.getxProperty());
         circle.translateYProperty().bind(ennemis.getyProperty());
         this.pane.getChildren().add(circle);
