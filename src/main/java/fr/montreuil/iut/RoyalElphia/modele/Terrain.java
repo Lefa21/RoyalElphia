@@ -38,12 +38,4 @@ public class Terrain {
         return this.Tabterrain;
     }
 
-    public int getWidth() {
-        return largeur;
-    }
-
-    public int getHeight() {
-        return hauteur;
-    }
-
 }
