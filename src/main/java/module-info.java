@@ -4,8 +4,10 @@ module jeu.royalelphia {
 
     requires org.controlsfx.controls;
 
-    opens jeu.royalelphia to javafx.fxml;
-    exports jeu.royalelphia;
-    exports jeu.royalelphia.Controller;
-    opens jeu.royalelphia.Controller to javafx.fxml;
+    opens fr.montreuil.iut.RoyalElphia to javafx.fxml;
+    exports fr.montreuil.iut.RoyalElphia;
+    exports fr.montreuil.iut.RoyalElphia.Controller;
+    opens fr.montreuil.iut.RoyalElphia.Controller to javafx.fxml;
+    exports fr.montreuil.iut.RoyalElphia.modele;
+    opens fr.montreuil.iut.RoyalElphia.modele to javafx.fxml;
 }

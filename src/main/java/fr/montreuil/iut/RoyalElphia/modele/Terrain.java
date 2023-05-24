@@ -1,10 +1,6 @@
-package modele;
+package fr.montreuil.iut.RoyalElphia.modele;
 
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
+import java.util.ArrayList;
 
 public class Terrain {
     private int hauteur;
@@ -14,8 +10,9 @@ public class Terrain {
     public Terrain(int hauteur, int largeur) {
         this.hauteur = hauteur;
         this.largeur = largeur;
-        this.Tabterrain = new int[][]{{1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
-                {0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
+        this.Tabterrain = new int[][]{
+                {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
+                {0,0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
                 {1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
                 {1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
                 {1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
@@ -40,4 +37,13 @@ public class Terrain {
     public int[][] getTabTerrain(){
         return this.Tabterrain;
     }
+
+    public int getWidth() {
+        return largeur;
+    }
+
+    public int getHeight() {
+        return hauteur;
+    }
+
 }

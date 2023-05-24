@@ -1,4 +1,4 @@
-package jeu.royalelphia;
+package fr.montreuil.iut.RoyalElphia;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
