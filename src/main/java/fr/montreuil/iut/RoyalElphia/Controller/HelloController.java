@@ -47,6 +47,8 @@ private void initAnimation() {
             Duration.seconds(0.03),
             // on définit ce qui se passe à chaque frame
             // c'est un eventHandler d'ou le lambda
+
+            // si le nombre d'ennemis tué est égal au nombre d'ennemis de la vague alors la vague est terminé
             (ev ->{
                 if(jeu.getEnnemisTué().size() == jeu.getNbEnnemisMax()){
                     System.out.println("fini");
@@ -55,7 +57,8 @@ private void initAnimation() {
                 else if (temps%3 ==0){
                     jeu.unTour();
                 } else if (temps%5 == 0) {
-                    if(this.jeu.getEnnemis().size() < this.jeu.getNbEnnemisMax()){
+                    // si la liste des ennemis ayant spawn est inférieur au nombre d'ennemis max alors on fait spawn un nouvel ennemis
+                    if(this.jeu.getListeEnnemisSpawn().size() < this.jeu.getNbEnnemisMax()){
                         System.out.println("Un tour");
                         jeu.spwanEnnemi();
                     }

@@ -11,6 +11,8 @@ public class jeu {
 
     private ArrayList<Ennemis> listeEnnemisTuée;
 
+    private ArrayList<Ennemis> listeEnnemisSpawn;
+
 
 
     static int id;
@@ -21,6 +23,7 @@ public class jeu {
         this.ennemis = FXCollections.observableArrayList();
         this.nbEnnemis = nbEnnemis;
         this.listeEnnemisTuée = new ArrayList<>();
+        this.listeEnnemisSpawn = new ArrayList<>();
     }
 
 
@@ -29,9 +32,20 @@ public class jeu {
         this.ennemis.add(e);
     }
 
+    // permet d'ajouter un ennemi qui a spawn sur le terrain dans la liste de notre modèle
     public void spwanEnnemi(){
-            Ennemis enm = new Ennemis(terrain, 16, 48);
+        /*
+        Ennemis enm = new Ennemis(terrain, 16, 48);
             ennemis.add(enm);
+            listeEnnemisSpawn.add(enm);*
+
+         */
+    }
+
+
+   //permet de récuperer la liste des ennemis ayant spawn
+    public ArrayList<Ennemis> getListeEnnemisSpawn(){
+        return listeEnnemisSpawn;
     }
 
     public void ajoutEnnemisMort(Ennemis enm){

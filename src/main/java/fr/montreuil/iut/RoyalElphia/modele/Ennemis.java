@@ -5,54 +5,19 @@ import javafx.beans.property.SimpleIntegerProperty;
 
 import java.util.ArrayList;
 
-public class Ennemis {
+public  abstract class Ennemis {
 
     private IntegerProperty xProperty, yProperty;
-    private int vitesse; // vitesse de deplacement
+   // private int vitesse; // vitesse de deplacement
 
-   // private int dx,dy ;// direction
     protected Terrain terrain;
     public static int compteur=0;
     private String id;
-    private int pv, ptsDefense,Immunité,dégatBase;
+    private int pv, ptsDefense,Immunite,degatBase,butin;
+
+    //private Capacite capacite;
 
     private CasesParcourues casesParcourues;
-
-    /*
-    public Ennemis(int x, int y, int v, Terrain terrain, int pv, int ptsDefense, int immunite, int dégatBase) {
-        this.pv=pv;
-        this.xProperty = new SimpleIntegerProperty(x);
-        this.yProperty = new SimpleIntegerProperty(y);
-        this.vitesse = v;
-        this.terrain = terrain;
-        this.id="A"+compteur;
-        compteur++;
-        this.ptsDefense = ptsDefense;
-        this.Immunité = immunite;
-        this.dégatBase =  dégatBase;
-        this.tirerDirection();
-    }
-    */
-
-
-    /*
-
-    public Ennemis(int x, int y, int v, Terrain env, int pv,int ptsDefense,int immunite,int degatDefense) {
-        this.pv=pv;
-        Random random=new Random();
-        this.xProperty = new SimpleDoubleProperty(x);
-        this.yProperty = new SimpleDoubleProperty(y);
-        this.vitesse = v;
-        this.terrain =env;
-        this.id="A"+compteur;
-        compteur++;
-        this.ptsDefense = ptsDefense;
-        this.Immunité = immunite;
-        this.dégatBase =  degatDefense;
-        //System.out.println("y" + y + "x" +x);
-    }
-    */
-
 
 
     public Ennemis (Terrain terrain, int x, int y){
@@ -62,6 +27,22 @@ public class Ennemis {
         this.yProperty = new SimpleIntegerProperty(y);
         this.id = "" + compteur;
         this.casesParcourues = new CasesParcourues();
+    }
+
+
+    public Ennemis (Terrain terrain, int x,int y,int pv, int ptsDefense,int immunite,int degatBase, int butin){
+        compteur++;
+        this.terrain = terrain;
+        this.xProperty = new SimpleIntegerProperty(x);
+        this.yProperty = new SimpleIntegerProperty(y);
+        this.id = "" + compteur;
+        this.casesParcourues = new CasesParcourues();
+        this.Immunite = immunite;
+        this.degatBase =  degatBase;
+        this.ptsDefense = ptsDefense;
+        this.pv=pv;
+        this.butin = butin;
+
     }
 
     public final int getX() {
