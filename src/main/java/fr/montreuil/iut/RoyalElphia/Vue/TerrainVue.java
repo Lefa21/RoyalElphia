@@ -22,6 +22,15 @@ public class TerrainVue {
                     Image chemin = new Image(new FileInputStream("src/main/resources/fr/montreuil/iut/RoyalElphia/chemin.jpg"));
                     ImageView chemin2 = new ImageView(chemin);
                     map.getChildren().add(chemin2);
+                } else if (tab[i][j]==2) {
+                    Image pointDep = new Image(new FileInputStream("src/main/resources/fr/montreuil/iut/RoyalElphia/pointDep.jpg"));
+                    ImageView pointDep2 = new ImageView(pointDep);
+                    map.getChildren().add(pointDep2);
+                }
+                else if (tab[i][j]==3) {
+                    Image pointArv = new Image(new FileInputStream("src/main/resources/fr/montreuil/iut/RoyalElphia/pointArv.jpg"));
+                    ImageView pointArv2 = new ImageView(pointArv);
+                    map.getChildren().add(pointArv2);
                 }
             }
         }

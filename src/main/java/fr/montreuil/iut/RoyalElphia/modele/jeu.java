@@ -23,14 +23,12 @@ public class jeu {
         this.listeEnnemisTuée = new ArrayList<>();
     }
 
-
-
     public void ajouter(Ennemis e) {
         this.ennemis.add(e);
     }
 
     public void spwanEnnemi(){
-            Ennemis enm = new Ennemis(terrain, 16, 48);
+            Ennemis enm = new Ennemis(terrain);
             ennemis.add(enm);
     }
 
@@ -49,15 +47,14 @@ public class jeu {
     public void unTour() {
         for (int i = 0; i < ennemis.size(); i++) {
             this.ennemis.get(i).seDeplace();
-            if (this.ennemis.get(i).getX()==592 && this.ennemis.get(i).getY() == 624) {
+            if (this.ennemis.get(i).getX()== (this.terrain.getPointArv().getX()*32+16) && this.ennemis.get(i).getY() == (this.terrain.getPointArv().getY()*32+16)) {
                 System.out.println("-1 PV");
                 this.getEnnemis().remove(this.getEnnemis().get(i));
             }
         }
-        }
+    }
 
     public ObservableList<Ennemis> getEnnemis() {
         return ennemis;
     }
-
 }

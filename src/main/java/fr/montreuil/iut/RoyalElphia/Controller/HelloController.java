@@ -2,6 +2,7 @@ package fr.montreuil.iut.RoyalElphia.Controller;
 
 import fr.montreuil.iut.RoyalElphia.Vue.TerrainVue;
 import fr.montreuil.iut.RoyalElphia.Vue.VueEnnemi;
+import fr.montreuil.iut.RoyalElphia.modele.Cases;
 import fr.montreuil.iut.RoyalElphia.modele.Ennemis;
 import fr.montreuil.iut.RoyalElphia.modele.Terrain;
 import fr.montreuil.iut.RoyalElphia.modele.jeu;
@@ -44,7 +45,7 @@ private void initAnimation() {
 
     KeyFrame kf = new KeyFrame(
             // on définit le FPS (nbre de frame par seconde)
-            Duration.seconds(0.03),
+            Duration.seconds(0.05),
             // on définit ce qui se passe à chaque frame
             // c'est un eventHandler d'ou le lambda
             (ev ->{
