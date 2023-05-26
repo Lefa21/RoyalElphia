@@ -7,6 +7,7 @@ import fr.montreuil.iut.RoyalElphia.modele.Ennemis;
 import fr.montreuil.iut.RoyalElphia.modele.Terrain;
 import fr.montreuil.iut.RoyalElphia.modele.jeu;
 import javafx.collections.ListChangeListener;
+import javafx.event.Event;
 import javafx.scene.layout.Pane;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -79,7 +80,6 @@ private void initAnimation() {
             // demarre l'animation
 
             initAnimation();
-            gameLoop.play();
             ListChangeListener<Ennemis> listenerEnnemis = (c -> {
 
                 while (c.next()) {
@@ -106,5 +106,10 @@ private void initAnimation() {
             throw new RuntimeException(e);
         }
 
+    }
+
+    @FXML
+    public void Demarrer(Event event) {
+    gameLoop.play();
     }
 }

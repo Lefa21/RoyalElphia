@@ -9,13 +9,21 @@
 
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.shape.Circle?>
-<Pane xmlns="http://javafx.com/javafx"
-      xmlns:fx="http://javafx.com/fxml"
-      fx:controller="fr.montreuil.iut.RoyalElphia.Controller.HelloController" prefHeight="800" prefWidth="800" fx:id="panneauJeu">
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="fr.montreuil.iut.RoyalElphia.Controller.HelloController" prefHeight="800" prefWidth="800" fx:id="panneauJeu">
+<Pane>
     <TilePane
               fx:id="map" prefHeight="640" prefWidth="640">
     </TilePane>
-
 </Pane>
 
+    <right>
+        <VBox>
+            <Button onAction="#Demarrer" text="Demarrer">
+            </Button>
+        </VBox>
+    </right>
+
+</BorderPane>
 
