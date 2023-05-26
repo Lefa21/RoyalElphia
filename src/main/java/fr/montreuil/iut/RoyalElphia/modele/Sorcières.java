@@ -1,7 +1,8 @@
 package fr.montreuil.iut.RoyalElphia.modele;
 
-public class Sorcières {
+public class Sorcières extends Ennemis {
 
-    public Sorcières(Terrain terrain,int x,int y,int pv, int ptsDefense,int immunite,int degatBase, int butin){
+    public Sorcières(Terrain terrain,int x,int y){
+        super(terrain,x,y,150,70,3,40,80);
     }
 }

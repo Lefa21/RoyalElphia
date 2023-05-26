@@ -1,6 +1,7 @@
 package fr.montreuil.iut.RoyalElphia.modele;
 
-public class Squelette {
-    public Squelette(Terrain terrain,int x,int y,int pv, int ptsDefense,int immunite,int degatBase, int butin){
+public class Squelette extends Ennemis {
+    public Squelette(Terrain terrain,int x,int y){
+        super(terrain,x,y,50,20,4,30,20);
     }
 }

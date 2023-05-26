@@ -75,7 +75,26 @@ public  abstract class Ennemis {
         return id;
     }
 
-    /*
+    public int getPv() {
+        return pv;
+    }
+
+    public int getPtsDefense() {
+        return ptsDefense;
+    }
+
+    public int getImmunite() {
+        return Immunite;
+    }
+
+    public int getDegatBase() {
+        return degatBase;
+    }
+
+    public int getButin() {
+        return butin;
+    }
+/*
      public void seDeplace(){
         xProperty.setValue(xProperty.getValue()+3);
         yProperty.setValue(yProperty.getValue()+3);

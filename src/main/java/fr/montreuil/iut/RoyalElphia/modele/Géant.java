@@ -1,7 +1,8 @@
 package fr.montreuil.iut.RoyalElphia.modele;
 
-public class Géant {
+public class Géant extends Ennemis {
 
-    public Géant(Terrain terrain,int x,int y,int pv, int ptsDefense,int immunite,int degatBase, int butin){
+    public Géant(Terrain terrain,int x,int y){
+        super(terrain,x,y,200,80,1,100,70);
     }
 }

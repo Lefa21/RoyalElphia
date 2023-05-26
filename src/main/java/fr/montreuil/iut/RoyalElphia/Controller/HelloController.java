@@ -1,10 +1,7 @@
 package fr.montreuil.iut.RoyalElphia.Controller;
 
-import fr.montreuil.iut.RoyalElphia.Vue.TerrainVue;
-import fr.montreuil.iut.RoyalElphia.Vue.VueEnnemi;
-import fr.montreuil.iut.RoyalElphia.modele.Ennemis;
-import fr.montreuil.iut.RoyalElphia.modele.Terrain;
-import fr.montreuil.iut.RoyalElphia.modele.jeu;
+import fr.montreuil.iut.RoyalElphia.Vue.*;
+import fr.montreuil.iut.RoyalElphia.modele.*;
 import javafx.collections.ListChangeListener;
 import javafx.scene.layout.Pane;
 import javafx.animation.KeyFrame;
@@ -13,6 +10,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.layout.TilePane;
 import javafx.util.Duration;
+import fr.montreuil.iut.RoyalElphia.modele.GéantRoyal;
+
 
 import java.io.FileNotFoundException;
 import java.net.URL;
@@ -22,7 +21,6 @@ public class HelloController implements Initializable {
  private Terrain terrain;
 @FXML
  private TilePane map;
-
 private jeu jeu;
 
     @FXML
@@ -31,8 +29,6 @@ private jeu jeu;
     private Timeline gameLoop;
 
     private int temps;
-
-    private VueEnnemi vueEnnemi;
 
 
 
@@ -75,8 +71,7 @@ private void initAnimation() {
 
         try {
             this.terrain = new Terrain(20,20);
-            this.jeu = new jeu(this.terrain,10);
-
+            this.jeu = new jeu(this.terrain,10,2,2,2,2,2);
             TerrainVue terrainVue = new TerrainVue(terrain,map);
             // demarre l'animation
 
@@ -88,8 +83,29 @@ private void initAnimation() {
                     if(c.wasAdded()){
                         for (Ennemis a : c.getAddedSubList()
                         ) {
-                            VueEnnemi vueEnnemi1 = new VueEnnemi(panneauJeu);
-                            vueEnnemi1.créerSprite(a);
+                            if(a instanceof gobelins){
+                                VueEnnemi vueGob = new VueGobelins(panneauJeu);
+                                vueGob.créerSprite(a);
+                            }
+                            else if (a instanceof Sorcières) {
+                                VueEnnemi vueSorcieres = new VueSorcières(panneauJeu);
+                                vueSorcieres.créerSprite(a);
+                            }
+                            else if (a instanceof Squelette) {
+                                VueEnnemi vueSquelette = new VueSquelette(panneauJeu);
+                                vueSquelette.créerSprite(a);
+                            }
+
+                            else if (a instanceof GéantRoyal) {
+                                VueEnnemi vueGeantRoyale = new VueGeantRoyale(panneauJeu);
+                                vueGeantRoyale.créerSprite(a);
+                            }
+
+                            else if (a instanceof Géant) {
+                                VueEnnemi VueGéant = new VueGeant(panneauJeu);
+                                VueGéant.créerSprite(a);
+                            }
+
                         }
                     } else if (c.wasRemoved()) {
                         for (Ennemis a : c.getRemoved()
