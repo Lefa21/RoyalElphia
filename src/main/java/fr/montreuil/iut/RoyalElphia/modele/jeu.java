@@ -69,37 +69,6 @@ public  class jeu {
 
     // permet d'ajouter un ennemi qui a spawn sur le terrain dans la liste de notre modèle
 
-    /*
-    public void créerEnnemis(){
-        for (int i = 0; i < getNbGeantRoyale(); i++) {
-            Ennemis geantRoyale = new GéantRoyal(getTerrain(),16,48);
-            ennemis.add(geantRoyale);
-        }
-        for (int i = 0; i < getNbGeant(); i++) {
-            Ennemis geant = new Géant(getTerrain(),16,48);
-            ennemis.add(geant);
-        }
-
-        for (int i = 0; i < getNbSorciere(); i++) {
-            Ennemis sorcières = new Sorcières(getTerrain(),16,48);
-            ennemis.add(sorcières);
-        }
-        for (int i = 0; i < getNbSquelette(); i++) {
-            Ennemis squelette = new Squelette(getTerrain(),16,48);
-            ennemis.add(squelette);
-
-        }
-        for (int i = 0; i < getNbGobelins(); i++) {
-            Ennemis gobelins = new gobelins(getTerrain(),16,48);
-            ennemis.add(gobelins);
-        }
-
-        System.out.println("Nombre ennemis" +ennemis.size());
-    }
-
-    */
-
-
     public void setNbSquelette(int nbSquelette) {
         this.nbSquelette = nbSquelette;
     }
@@ -143,19 +112,18 @@ public  class jeu {
         }
 
         else if(nbTour%16 == 0 && getNbSquelette() != 0){
-            Ennemis enm = new Sorcières(terrain,16,48);
+            Ennemis enm = new Squelette(terrain,16,48);
             ennemis.add(enm);
             this.listeEnnemisSpawn.add(enm);
             this.setNbSquelette(getNbSquelette() -1);
         }
 
-        else if(nbTour%32 == 0 && getNbSorciere() != 0){
+        else if(nbTour%32 == 0 && getNbGeantRoyale() != 0){
             Ennemis enm = new GéantRoyal(terrain,16,48);
             ennemis.add(enm);
             this.listeEnnemisSpawn.add(enm);
             this.setNbGeantRoyale(getNbGeantRoyale() -1);
         }
-
     }
 
 

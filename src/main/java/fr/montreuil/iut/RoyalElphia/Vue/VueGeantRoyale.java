@@ -14,7 +14,7 @@ public VueGeantRoyale(Pane pane){
         Circle circle = new Circle(10);
         circle.translateXProperty().set(ennemis.getX());
         circle.translateYProperty().set(ennemis.getY());
-        circle.setFill(Color.YELLOW);
+        circle.setFill(Color.BLACK);
         circle.setId(ennemis.getId());
         circle.translateXProperty().bind(ennemis.getxProperty());
         circle.translateYProperty().bind(ennemis.getyProperty());
