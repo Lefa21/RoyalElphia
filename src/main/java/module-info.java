@@ -10,4 +10,10 @@ module jeu.royalelphia {
     opens fr.montreuil.iut.RoyalElphia.Controller to javafx.fxml;
     exports fr.montreuil.iut.RoyalElphia.modele;
     opens fr.montreuil.iut.RoyalElphia.modele to javafx.fxml;
+    exports fr.montreuil.iut.RoyalElphia.modele.Ennemis;
+    opens fr.montreuil.iut.RoyalElphia.modele.Ennemis to javafx.fxml;
+    exports fr.montreuil.iut.RoyalElphia.modele.Map;
+    opens fr.montreuil.iut.RoyalElphia.modele.Map to javafx.fxml;
+    exports fr.montreuil.iut.RoyalElphia.modele.Tour;
+    opens fr.montreuil.iut.RoyalElphia.modele.Tour to javafx.fxml;
 }

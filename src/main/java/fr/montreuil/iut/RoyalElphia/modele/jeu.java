@@ -2,8 +2,15 @@ package fr.montreuil.iut.RoyalElphia.modele;
 import fr.montreuil.iut.RoyalElphia.Vue.VueEnnemi;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
+
+import fr.montreuil.iut.RoyalElphia.modele.Ennemis.*;
+import fr.montreuil.iut.RoyalElphia.modele.Map.Terrain;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.util.Duration;
 
 import java.util.ArrayList;
 
@@ -15,11 +22,15 @@ public  class jeu {
 
     private ArrayList<Ennemis> listeEnnemisSpawn;
 
-    private int nbEnnemis,nbSquelette,nbGobelins,nbGeant,nbSorciere,nbGeantRoyale,nbTour;
+    private Timeline gameLoop;
 
     private IntegerProperty pvJoueur;
 
 
+    private int temps;
+
+
+    private int nbEnnemis,nbSquelette,nbGobelins,nbGeant,nbSorciere,nbGeantRoyale,nbTour;
 
     public jeu (Terrain terrain,int nbEnnemis, int nbGobelins, int nbSquelette, int nbGeant,int nbSorciere,int nbGeantRoyale) {
         this.terrain = terrain;
@@ -158,6 +169,41 @@ public  class jeu {
         nbTour++;
         }
 
+
+    public  void initAnimation() {
+        gameLoop = new Timeline();
+        temps = 0;
+        gameLoop.setCycleCount(Timeline.INDEFINITE);
+
+
+        KeyFrame kf = new KeyFrame(
+                // on définit le FPS (nbre de frame par seconde)
+                Duration.seconds(0.03),
+                // on définit ce qui se passe à chaque frame
+                // c'est un eventHandler d'ou le lambda
+                (ev -> {
+                    if (getEnnemisTué().size() == getNbEnnemisMax() || this.getPvJoueur()==0) {
+                        System.out.println("fini");
+                        gameLoop.stop();
+                    } else if (temps % 3 == 0) {
+                        unTour();
+                    } else if (temps % 5 == 0) {
+                        if (getEnnemis().size() < getNbEnnemisMax()) {
+                            System.out.println("Un tour");
+                            spwanEnnemi();
+                        }
+                    }
+                    temps++;
+                })
+        );
+        gameLoop.getKeyFrames().add(kf);
+    }
+
+    public void lancementLoop(){
+        gameLoop.play();
+    }
+
+
     public ObservableList<Ennemis> getEnnemis() {
         return ennemis;
     }
@@ -173,4 +219,5 @@ public  class jeu {
     public void setPvJoueur(int pvJoueur) {
         this.pvJoueur.setValue(pvJoueur);
     }
+
 }

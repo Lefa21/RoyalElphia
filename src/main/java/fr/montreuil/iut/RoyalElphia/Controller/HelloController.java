@@ -2,23 +2,22 @@ package fr.montreuil.iut.RoyalElphia.Controller;
 
 import fr.montreuil.iut.RoyalElphia.Vue.*;
 import fr.montreuil.iut.RoyalElphia.modele.*;
+import fr.montreuil.iut.RoyalElphia.modele.Ennemis.Ennemis;
+import fr.montreuil.iut.RoyalElphia.modele.Map.Terrain;
+import fr.montreuil.iut.RoyalElphia.modele.Tour.Tour;
+import fr.montreuil.iut.RoyalElphia.modele.Tour.TourABombe;
 import javafx.collections.ListChangeListener;
 import javafx.event.Event;
 
-import fr.montreuil.iut.RoyalElphia.modele.*;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 
 import javafx.scene.layout.Pane;
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.layout.TilePane;
-import javafx.util.Duration;
-import fr.montreuil.iut.RoyalElphia.modele.GéantRoyal;
 
 
 import java.io.FileInputStream;
@@ -41,18 +40,13 @@ private jeu jeu;
     @FXML
     private Pane panneauJeu;
 
-    private Timeline gameLoop;
-
-    private int temps;
-
-
-
     private VueEnnemi vueEnnemi;
 
     private Tour tour;
 
     private ArrayList<Tour> listeTour = new ArrayList<>();
 
+    @FXML
 
     public void CliqueTourABombe(MouseEvent mouseEvent) throws FileNotFoundException {
         System.out.println("tour cliqué");
@@ -76,36 +70,6 @@ private jeu jeu;
         }
     }
 
-    private void initAnimation() {
-        gameLoop = new Timeline();
-        temps = 0;
-        gameLoop.setCycleCount(Timeline.INDEFINITE);
-
-
-        KeyFrame kf = new KeyFrame(
-                // on définit le FPS (nbre de frame par seconde)
-                Duration.seconds(0.03),
-                // on définit ce qui se passe à chaque frame
-                // c'est un eventHandler d'ou le lambda
-                (ev -> {
-                    if (jeu.getEnnemisTué().size() == jeu.getNbEnnemisMax() || this.jeu.getPvJoueur() == 0) {
-                        System.out.println("fini");
-                        gameLoop.stop();
-                    } else if (temps % 3 == 0) {
-                        jeu.unTour();
-                    } else if (temps % 5 == 0) {
-                        if (this.jeu.getEnnemis().size() < this.jeu.getNbEnnemisMax()) {
-                            System.out.println("Un tour");
-                            jeu.spwanEnnemi();
-                        }
-                    }
-                    temps++;
-                })
-        );
-        gameLoop.getKeyFrames().add(kf);
-    }
-
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
@@ -118,36 +82,15 @@ private jeu jeu;
 
             // demarre l'animation
 
-            initAnimation();
+            jeu.initAnimation();
             ListChangeListener<Ennemis> listenerEnnemis = (c -> {
 
                 while (c.next()) {
                     if (c.wasAdded()) {
                         for (Ennemis a : c.getAddedSubList()
                         ) {
-                            if(a instanceof gobelins){
-                                VueEnnemi vueGob = new VueGobelins(panneauJeu);
-                                vueGob.créerSprite(a);
-                            }
-                            else if (a instanceof Sorcières) {
-                                VueEnnemi vueSorcieres = new VueSorcières(panneauJeu);
-                                vueSorcieres.créerSprite(a);
-                            }
-                            else if (a instanceof Squelette) {
-                                VueEnnemi vueSquelette = new VueSquelette(panneauJeu);
-                                vueSquelette.créerSprite(a);
-                            }
-
-                            else if (a instanceof GéantRoyal) {
-                                VueEnnemi vueGeantRoyale = new VueGeantRoyale(panneauJeu);
-                                vueGeantRoyale.créerSprite(a);
-                            }
-
-                            else if (a instanceof Géant) {
-                                VueEnnemi VueGéant = new VueGeant(panneauJeu);
-                                VueGéant.créerSprite(a);
-                            }
-
+                            VueEnnemi vueEnm = new VueEnnemi(panneauJeu);
+                            vueEnm.créerSprite(a);
                         }
                     } else if (c.wasRemoved()) {
                         for (Ennemis a : c.getRemoved()
@@ -171,7 +114,7 @@ private jeu jeu;
 
     @FXML
     public void Demarrer(Event event) {
-    gameLoop.play();
+        jeu.lancementLoop();
     }
 
 }
