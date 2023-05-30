@@ -46,28 +46,19 @@ private jeu jeu;
 
     private ArrayList<Tour> listeTour = new ArrayList<>();
 
-    @FXML
-
     public void CliqueTourABombe(MouseEvent mouseEvent) throws FileNotFoundException {
         System.out.println("tour cliqué");
         this.tour = new TourABombe();
-        if (listeTour.size() < 2) {
-            listeTour.add(this.tour);
-        }
+        this.jeu.ajouterTour(this.tour);
+        if(this.jeu.verifArgent(this.tour)){ this.jeu.setArgent(tour.getCoutAchat());}
     }
+    @FXML
     public void PoserTour(MouseEvent mouseEvent) throws FileNotFoundException {
         double cliqueX = mouseEvent.getX();
         double cliqueY = mouseEvent.getY();
-        if (cliqueX <= 960 && cliqueY <= 1280) {
-            for (Tour t : (listeTour)) {
-                Image TourBombe = new Image(new FileInputStream("src/main/resources/fr/montreuil/iut/RoyalElphia/tt-PhotoRoom.png-PhotoRoom(2).png"));
-                ImageView TourBombeView = new ImageView(TourBombe);
-                TourBombeView.setX(cliqueX);
-                TourBombeView.setY(cliqueY);
-                panneauJeu.getChildren().add(TourBombeView);
-                listeTour.remove(t);
-            }
-        }
+        VueTour vueTour = new VueTour(panneauJeu, tour, cliqueX, cliqueY);
+        vueTour.PoserTour();
+        this.tour = null;
     }
 
     @Override
@@ -104,6 +95,7 @@ private jeu jeu;
             });
 
             jeu.getEnnemis().addListener(listenerEnnemis);
+            this.LabelArgent.textProperty().bind(this.jeu.getArgentProperty().asString());
 
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);

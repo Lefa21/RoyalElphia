@@ -1,5 +1,6 @@
 package fr.montreuil.iut.RoyalElphia.modele;
 import fr.montreuil.iut.RoyalElphia.Vue.VueEnnemi;
+import fr.montreuil.iut.RoyalElphia.modele.Tour.Tour;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 
@@ -26,6 +27,10 @@ public  class jeu {
 
     private IntegerProperty pvJoueur;
 
+    private ArrayList<Tour> listeDeTour;
+
+    private IntegerProperty argent;
+
 
     private int temps;
 
@@ -45,9 +50,32 @@ public  class jeu {
         this.nbGeantRoyale = nbGeantRoyale;
         this.nbTour = 0;
         this.pvJoueur = new SimpleIntegerProperty(4);
+        this.listeDeTour = new ArrayList<>();
+        this.argent = new SimpleIntegerProperty(200);
+    }
+
+    public void ajouterTour(Tour t){
+        listeDeTour.add(t);
     }
 
 
+    public IntegerProperty getArgentProperty() {
+        return argent;
+    }
+
+    public void setArgent(int prix){
+        this.argent.setValue(this.argent.getValue()-prix);
+    }
+
+    public int getArgent(){
+        return this.argent.getValue();
+    }
+    public boolean verifArgent(Tour t){
+        if (t.getCoutAchat() > getArgent()){
+            return false;
+        }
+        return true;
+    }
     public Terrain getTerrain() {
         return terrain;
     }
