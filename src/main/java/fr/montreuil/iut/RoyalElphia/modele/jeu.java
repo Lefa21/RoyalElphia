@@ -1,5 +1,7 @@
 package fr.montreuil.iut.RoyalElphia.modele;
 import fr.montreuil.iut.RoyalElphia.Vue.VueEnnemi;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -15,6 +17,8 @@ public  class jeu {
 
     private int nbEnnemis,nbSquelette,nbGobelins,nbGeant,nbSorciere,nbGeantRoyale,nbTour;
 
+    private IntegerProperty pvJoueur;
+
 
 
     public jeu (Terrain terrain,int nbEnnemis, int nbGobelins, int nbSquelette, int nbGeant,int nbSorciere,int nbGeantRoyale) {
@@ -29,6 +33,7 @@ public  class jeu {
         this.nbSquelette = nbSquelette;
         this.nbGeantRoyale = nbGeantRoyale;
         this.nbTour = 0;
+        this.pvJoueur = new SimpleIntegerProperty(4);
     }
 
 
@@ -146,6 +151,7 @@ public  class jeu {
             this.ennemis.get(i).seDeplace();
             if (this.ennemis.get(i).getX()== (this.terrain.getPointArv().getX()*32+16) && this.ennemis.get(i).getY() == (this.terrain.getPointArv().getY()*32+16)) {
                 System.out.println("-1 PV");
+                setPvJoueur(this.getPvJoueur()-1);
                 this.getEnnemis().remove(this.getEnnemis().get(i));
             }
         }
@@ -154,5 +160,17 @@ public  class jeu {
 
     public ObservableList<Ennemis> getEnnemis() {
         return ennemis;
+    }
+
+    public IntegerProperty getPvJoueurProperty() {
+        return this.pvJoueur;
+    }
+
+    public int getPvJoueur() {
+        return this.pvJoueur.getValue();
+    }
+
+    public void setPvJoueur(int pvJoueur) {
+        this.pvJoueur.setValue(pvJoueur);
     }
 }

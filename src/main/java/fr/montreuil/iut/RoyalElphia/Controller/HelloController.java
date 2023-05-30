@@ -37,6 +37,8 @@ private jeu jeu;
     public Label LabelArgent;
 
     @FXML
+    public Label LabelPV;
+    @FXML
     private Pane panneauJeu;
 
     private Timeline gameLoop;
@@ -86,7 +88,7 @@ private jeu jeu;
                 // on définit ce qui se passe à chaque frame
                 // c'est un eventHandler d'ou le lambda
                 (ev -> {
-                    if (jeu.getEnnemisTué().size() == jeu.getNbEnnemisMax()) {
+                    if (jeu.getEnnemisTué().size() == jeu.getNbEnnemisMax() || this.jeu.getPvJoueur() == 0) {
                         System.out.println("fini");
                         gameLoop.stop();
                     } else if (temps % 3 == 0) {
@@ -111,6 +113,7 @@ private jeu jeu;
             this.terrain = new Terrain(40, 30) {
             };
             this.jeu = new jeu(this.terrain,10,2,2,2,2,2);
+            this.LabelPV.textProperty().bind(this.jeu.getPvJoueurProperty().asString());
             TerrainVue terrainVue = new TerrainVue(terrain,map);
 
             // demarre l'animation
