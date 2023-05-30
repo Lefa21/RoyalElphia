@@ -14,11 +14,11 @@ public class CasesParcourues {
         this.casesParcourues.add(cases);
     }
 
-    public boolean verif (int x, int y) {
+    public boolean verif (Cases c) {
         boolean verif = false;
         for (int i = 0; i < this.casesParcourues.size(); i++) {
             Cases cases = casesParcourues.get(i);
-            if (cases.getX() == x && cases.getY() == y) {
+            if (cases.getX() == c.getX() && cases.getY() == c.getY()) {
                 verif = true;
             }
         }

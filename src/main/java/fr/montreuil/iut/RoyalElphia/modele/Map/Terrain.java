@@ -94,7 +94,6 @@ public  class Terrain {
                     c = new Cases(j,i);
             }
         }
-        System.out.println(c.getX()+" "+c.getY());
         return c;
     }
 

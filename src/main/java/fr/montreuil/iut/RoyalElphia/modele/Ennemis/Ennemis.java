@@ -30,7 +30,8 @@ public  abstract class Ennemis {
         compteur++;
         this.terrain = terrain;
 
-        // On multiplie par 32 la case de départ du terrain, pour adapter les dimensions du tableau aux dimensions du terrains et on ajoute 16 pour mettre l'ennemi au centre de la case
+        /* On multiplie par 32 la case de départ du terrain, pour adapter les dimensions du tableau aux dimensions du
+         terrains et on ajoute 16 pour mettre l'ennemi au centre de la case*/
         this.xProperty = new SimpleIntegerProperty(terrain.getPointDep().getX() * 32 + 16);
         this.yProperty = new SimpleIntegerProperty(terrain.getPointDep().getY() * 32 + 16);
 
@@ -88,40 +89,82 @@ public  abstract class Ennemis {
             yProperty.setValue(n);
         }
 
-        public void seDeplace () {
-            // On récupère le tableau du terrain
-            int tab[][] = terrain.getTabTerrain();
+    public void seDeplace () {
+        // On récupère le tableau du terrain
+        int tab[][] = terrain.getTabTerrain();
 
 
-                    // On ajoute la case ou se situe l'ennemi à sa liste cases parcourues
+        // On ajoute la case ou se situe l'ennemi à sa liste cases parcourues
 
+        casesParcourues.ajouterCase(new Cases(this.getX(), this.getY()));
+
+        /* On vérifie si la case à droite de l'ennemi est dans sa liste de case parcourue et on vérifie
+        après si la case est un chemin ou la base */
+        if (peutSeDeplacer(1,"DROITE") || peutSeDeplacer(2,"DROITE")) {
+            this.setX(this.getX() + 32);
             casesParcourues.ajouterCase(new Cases(this.getX(), this.getY()));
+        }
 
-            // On vérifie si la case à droite de l'ennemi est dans sa liste de case parcourue et on vérifie après si la case est un chemin ou la base
-            if (!casesParcourues.verif(this.getX() + 32, this.getY()) && tab[this.getY() / 32][(this.getX() / 32) + 1] == 9 || !casesParcourues.verif(this.getX() + 32, this.getY()) && tab[this.getY() / 32][(this.getX() / 32) + 1] == 2) {
-                this.setX(this.getX() + 32);
-                casesParcourues.ajouterCase(new Cases(this.getX(), this.getY()));
-            }
+        /* On vérifie si la case en dessous de l'ennemi est dans sa liste de case parcourue et on vérifie
+        après si la case est un chemin ou la base */
+        else if (peutSeDeplacer(1,"BAS") || peutSeDeplacer(2,"BAS")) {
+            this.setY(this.getY() + 32);
+            casesParcourues.ajouterCase(new Cases(this.getX(), this.getY()));
+        }
 
-            // On vérifie si la case en dessous de l'ennemi est dans sa liste de case parcourue et on vérifie après si la case est un chemin ou la base
-            else if (!casesParcourues.verif(this.getX(), this.getY() + 32) && tab[(this.getY() / 32) + 1][(this.getX() / 32)] == 9 || !casesParcourues.verif(this.getX(), this.getY() + 32) && tab[(this.getY() / 32) + 1][(this.getX() / 32)] == 2) {
-                this.setY(this.getY() + 32);
-                casesParcourues.ajouterCase(new Cases(this.getX(), this.getY()));
-            }
+        /* On vérifie si la case à gauche de l'ennemi est dans sa liste de case parcourue et on vérifie
+        après si la case est un chemin ou la base */
+        else if (peutSeDeplacer(1,"GAUCHE") || peutSeDeplacer(2,"GAUCHE")) {
+            this.setX(this.getX() - 32);
+            casesParcourues.ajouterCase(new Cases(this.getX(), this.getY()));
+        }
 
-            // On vérifie si la case à gauche de l'ennemi est dans sa liste de case parcourue et on vérifie après si la case est un chemin ou la base
-            else if (!casesParcourues.verif(this.getX() - 32, this.getY()) && tab[(this.getY() / 32)][(this.getX() / 32) - 1] == 9 || !casesParcourues.verif(this.getX() - 32, this.getY()) && tab[(this.getY() / 32)][(this.getX() / 32) - 1] == 2) {
-                this.setX(this.getX() - 32);
-                casesParcourues.ajouterCase(new Cases(this.getX(), this.getY()));
-            }
-
-            // On vérifie si la case au dessus de l'ennemi est dans sa liste de case parcourue et on vérifie après si la case est un chemin ou la base
-            else if (!casesParcourues.verif(this.getX(), this.getY() - 32) && tab[(this.getY() / 32) - 1][this.getX() / 32] == 9 || !casesParcourues.verif(this.getX(), this.getY() - 32) && tab[(this.getY() / 32) - 1][this.getX() / 32] == 2) {
-                this.setY(this.getY() - 32);
-                casesParcourues.ajouterCase(new Cases(this.getX(), this.getY()));
-            }
-
+        /* On vérifie si la case au dessus de l'ennemi est dans sa liste de case parcourue et on vérifie
+        après si la case est un chemin ou la base */
+        else if (peutSeDeplacer(1,"HAUT") || peutSeDeplacer(2,"HAUT")) {
+            this.setY(this.getY() - 32);
+            casesParcourues.ajouterCase(new Cases(this.getX(), this.getY()));
         }
     }
+
+    public boolean peutSeDeplacer(int i,String s) {
+        boolean retour = false;
+        if (i==1) {
+            if(!casesParcourues.verif(CasesDirection(s)) && tabDirection(s) == 9)
+                retour = true;
+        }
+        else if (i==2) {
+            if(!casesParcourues.verif(CasesDirection(s)) && tabDirection(s) == 2)
+                retour = true;
+        }
+        return retour;
+    }
+
+    public Cases CasesDirection (String s) {
+        Cases c = null;
+        if (s.equals("DROITE"))
+            c = new Cases(this.getX()+32,this.getY());
+        else if (s.equals("BAS"))
+            c = new Cases(this.getX(),this.getY()+32);
+        else if (s.equals("GAUCHE"))
+            c = new Cases(this.getX()-32,this.getY());
+        else if (s.equals("HAUT"))
+            c = new Cases(this.getX(),this.getY()-32);
+        return c;
+    }
+
+    public int tabDirection(String s) {
+        int retour = 0;
+        if (s.equals("DROITE"))
+            retour = terrain.getTabTerrain()[this.getY()/32][(this.getX()/32)+1];
+        else if (s.equals("BAS"))
+            retour = terrain.getTabTerrain()[(this.getY()/32)+1][this.getX()/32];
+        else if (s.equals("GAUCHE"))
+            retour = terrain.getTabTerrain()[this.getY()/32][(this.getX()/32)-1];
+        else if (s.equals("HAUT"))
+            retour = terrain.getTabTerrain()[(this.getY()/32)-1][this.getX()/32];
+        return retour;
+    }
+}
 
 
