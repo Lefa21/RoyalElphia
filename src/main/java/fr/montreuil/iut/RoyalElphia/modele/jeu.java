@@ -1,7 +1,10 @@
 package fr.montreuil.iut.RoyalElphia.modele;
 import fr.montreuil.iut.RoyalElphia.Vue.VueEnnemi;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.util.Duration;
 
 import java.util.ArrayList;
 
@@ -12,6 +15,10 @@ public  class jeu {
     private ArrayList<Ennemis> listeEnnemisTuée;
 
     private ArrayList<Ennemis> listeEnnemisSpawn;
+
+    private Timeline gameLoop;
+
+    private int temps;
 
     private int nbEnnemis,nbSquelette,nbGobelins,nbGeant,nbSorciere,nbGeantRoyale,nbTour;
 
@@ -151,6 +158,39 @@ public  class jeu {
         }
         nbTour++;
         }
+
+    public  void initAnimation() {
+        gameLoop = new Timeline();
+        temps = 0;
+        gameLoop.setCycleCount(Timeline.INDEFINITE);
+
+
+        KeyFrame kf = new KeyFrame(
+                // on définit le FPS (nbre de frame par seconde)
+                Duration.seconds(0.03),
+                // on définit ce qui se passe à chaque frame
+                // c'est un eventHandler d'ou le lambda
+                (ev -> {
+                    if (getEnnemisTué().size() == getNbEnnemisMax()) {
+                        System.out.println("fini");
+                        gameLoop.stop();
+                    } else if (temps % 3 == 0) {
+                        unTour();
+                    } else if (temps % 5 == 0) {
+                        if (getEnnemis().size() < getNbEnnemisMax()) {
+                            System.out.println("Un tour");
+                            spwanEnnemi();
+                        }
+                    }
+                    temps++;
+                })
+        );
+        gameLoop.getKeyFrames().add(kf);
+    }
+
+    public void lancementLoop(){
+        gameLoop.play();
+    }
 
     public ObservableList<Ennemis> getEnnemis() {
         return ennemis;
