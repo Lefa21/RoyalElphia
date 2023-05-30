@@ -124,19 +124,19 @@ public  abstract class Ennemis {
 */
         casesParcourues.ajouterCase(new Cases(this.getX(), this.getY()));
 
-        if (!casesParcourues.verif(this.getX()+32,this.getY()) && tab[this.getY()/32][(this.getX()/32)+1] == 0){
+        if (!casesParcourues.verif(this.getX()+32,this.getY()) && tab[this.getY()/32][(this.getX()/32)+1] == 9){
             this.setX(this.getX()+32);
             casesParcourues.ajouterCase(new Cases(this.getX(),this.getY()));
         }
-        else if (!casesParcourues.verif(this.getX(),this.getY()+32) && tab[(this.getY()/32)+1][(this.getX()/32)] == 0) {
+        else if (!casesParcourues.verif(this.getX(),this.getY()+32) && tab[(this.getY()/32)+1][(this.getX()/32)] == 9) {
             this.setY(this.getY()+32);
             casesParcourues.ajouterCase(new Cases(this.getX(),this.getY()));
         }
-        else if (!casesParcourues.verif(this.getX()-32,this.getY()) && tab[(this.getY()/32)][(this.getX()/32)-1] == 0) {
+        else if (!casesParcourues.verif(this.getX()-32,this.getY()) && tab[(this.getY()/32)][(this.getX()/32)-1] == 9) {
             this.setX(this.getX()-32);
             casesParcourues.ajouterCase(new Cases(this.getX(),this.getY()));
         }
-        else if (!casesParcourues.verif(this.getX(),this.getY()-32) && tab[(this.getY()/32)-1][this.getX()/32] == 0) {
+        else if (!casesParcourues.verif(this.getX(),this.getY()-32) && tab[(this.getY()/32)-1][this.getX()/32] == 9) {
             this.setY(this.getY()-32);
             casesParcourues.ajouterCase(new Cases(this.getX(),this.getY()));
         }

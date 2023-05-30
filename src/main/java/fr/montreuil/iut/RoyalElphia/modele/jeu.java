@@ -91,35 +91,35 @@ public  class jeu {
 
     public void spwanEnnemi(){
         if(nbTour%2 == 0 && getNbSorciere() != 0){
-            Ennemis enm = new Sorcières(terrain,16,48);
+            Ennemis enm = new Sorcières(terrain,16,272);
             ennemis.add(enm);
             this.listeEnnemisSpawn.add(enm);
             this.setNbSorciere(getNbSorciere() -1);
         }
 
         else if(nbTour%4 == 0 && getNbGeant() != 0){
-            Ennemis  enm = new Géant(terrain,16,48);
+            Ennemis  enm = new Géant(terrain,16,272);
             ennemis.add(enm);
             this.listeEnnemisSpawn.add(enm);
             this.setNbGeant(getNbGeant() -1);
         }
 
         else if(nbTour%8 == 0 && getNbGobelins() != 0){
-            Ennemis enm = new gobelins(terrain,16,48);
+            Ennemis enm = new gobelins(terrain,16,272);
             ennemis.add(enm);
             this.listeEnnemisSpawn.add(enm);
             this.setNbGobelins(getNbGobelins() -1);
         }
 
         else if(nbTour%16 == 0 && getNbSquelette() != 0){
-            Ennemis enm = new Squelette(terrain,16,48);
+            Ennemis enm = new Squelette(terrain,16,272);
             ennemis.add(enm);
             this.listeEnnemisSpawn.add(enm);
             this.setNbSquelette(getNbSquelette() -1);
         }
 
         else if(nbTour%32 == 0 && getNbGeantRoyale() != 0){
-            Ennemis enm = new GéantRoyal(terrain,16,48);
+            Ennemis enm = new GéantRoyal(terrain,16,272);
             ennemis.add(enm);
             this.listeEnnemisSpawn.add(enm);
             this.setNbGeantRoyale(getNbGeantRoyale() -1);
