@@ -1,9 +1,10 @@
-package fr.montreuil.iut.RoyalElphia.modele;
+package fr.montreuil.iut.RoyalElphia.modele.Ennemis;
 
+import fr.montreuil.iut.RoyalElphia.modele.Map.Cases;
+import fr.montreuil.iut.RoyalElphia.modele.Map.CasesParcourues;
+import fr.montreuil.iut.RoyalElphia.modele.Map.Terrain;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
-
-import java.util.ArrayList;
 
 public  abstract class Ennemis {
 

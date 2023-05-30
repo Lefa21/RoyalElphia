@@ -1,6 +1,4 @@
-package fr.montreuil.iut.RoyalElphia.modele;
-
-import java.util.ArrayList;
+package fr.montreuil.iut.RoyalElphia.modele.Map;
 
 public  class Terrain {
     private int hauteur;

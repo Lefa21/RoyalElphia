@@ -1,5 +1,5 @@
 package fr.montreuil.iut.RoyalElphia.Vue;
-import fr.montreuil.iut.RoyalElphia.modele.Terrain;
+import fr.montreuil.iut.RoyalElphia.modele.Map.Terrain;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.TilePane;

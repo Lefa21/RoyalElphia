@@ -2,23 +2,22 @@ package fr.montreuil.iut.RoyalElphia.Controller;
 
 import fr.montreuil.iut.RoyalElphia.Vue.*;
 import fr.montreuil.iut.RoyalElphia.modele.*;
+import fr.montreuil.iut.RoyalElphia.modele.Ennemis.Ennemis;
+import fr.montreuil.iut.RoyalElphia.modele.Map.Terrain;
+import fr.montreuil.iut.RoyalElphia.modele.Tour.Tour;
+import fr.montreuil.iut.RoyalElphia.modele.Tour.TourABombe;
 import javafx.collections.ListChangeListener;
 import javafx.event.Event;
 
-import fr.montreuil.iut.RoyalElphia.modele.*;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 
 import javafx.scene.layout.Pane;
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.layout.TilePane;
-import javafx.util.Duration;
-import fr.montreuil.iut.RoyalElphia.modele.GéantRoyal;
 
 
 import java.io.FileInputStream;
@@ -38,7 +37,6 @@ private jeu jeu;
 
     @FXML
     private Pane panneauJeu;
-
 
     private VueEnnemi vueEnnemi;
 
@@ -71,8 +69,6 @@ private jeu jeu;
     }
 
 
-
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
@@ -91,29 +87,8 @@ private jeu jeu;
                     if (c.wasAdded()) {
                         for (Ennemis a : c.getAddedSubList()
                         ) {
-                            if(a instanceof gobelins){
-                                VueEnnemi vueGob = new VueGobelins(panneauJeu);
-                                vueGob.créerSprite(a);
-                            }
-                            else if (a instanceof Sorcières) {
-                                VueEnnemi vueSorcieres = new VueSorcières(panneauJeu);
-                                vueSorcieres.créerSprite(a);
-                            }
-                            else if (a instanceof Squelette) {
-                                VueEnnemi vueSquelette = new VueSquelette(panneauJeu);
-                                vueSquelette.créerSprite(a);
-                            }
-
-                            else if (a instanceof GéantRoyal) {
-                                VueEnnemi vueGeantRoyale = new VueGeantRoyale(panneauJeu);
-                                vueGeantRoyale.créerSprite(a);
-                            }
-
-                            else if (a instanceof Géant) {
-                                VueEnnemi VueGéant = new VueGeant(panneauJeu);
-                                VueGéant.créerSprite(a);
-                            }
-
+                            VueEnnemi vueEnm = new VueEnnemi(panneauJeu);
+                            vueEnm.créerSprite(a);
                         }
                     } else if (c.wasRemoved()) {
                         for (Ennemis a : c.getRemoved()
@@ -137,7 +112,7 @@ private jeu jeu;
 
     @FXML
     public void Demarrer(Event event) {
-        jeu.lancementGameloop();
+        jeu.lancementLoop();
     }
 
 }

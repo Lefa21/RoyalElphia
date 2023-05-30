@@ -1,4 +1,4 @@
-package fr.montreuil.iut.RoyalElphia.modele;
+package fr.montreuil.iut.RoyalElphia.modele.Map;
 
 import java.util.ArrayList;
 

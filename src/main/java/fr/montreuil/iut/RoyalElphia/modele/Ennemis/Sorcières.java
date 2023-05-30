@@ -1,4 +1,6 @@
-package fr.montreuil.iut.RoyalElphia.modele;
+package fr.montreuil.iut.RoyalElphia.modele.Ennemis;
+
+import fr.montreuil.iut.RoyalElphia.modele.Map.Terrain;
 
 public class Sorcières extends Ennemis {
 

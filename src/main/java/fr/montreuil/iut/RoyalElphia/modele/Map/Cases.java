@@ -1,4 +1,4 @@
-package fr.montreuil.iut.RoyalElphia.modele;
+package fr.montreuil.iut.RoyalElphia.modele.Map;
 
 public class Cases {
     private int x,y;

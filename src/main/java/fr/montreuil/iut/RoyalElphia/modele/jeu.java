@@ -1,5 +1,6 @@
 package fr.montreuil.iut.RoyalElphia.modele;
-import fr.montreuil.iut.RoyalElphia.Vue.VueEnnemi;
+import fr.montreuil.iut.RoyalElphia.modele.Ennemis.*;
+import fr.montreuil.iut.RoyalElphia.modele.Map.Terrain;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.collections.FXCollections;
@@ -16,12 +17,11 @@ public  class jeu {
 
     private ArrayList<Ennemis> listeEnnemisSpawn;
 
-    private int nbEnnemis,nbSquelette,nbGobelins,nbGeant,nbSorciere,nbGeantRoyale,nbTour;
-
     private Timeline gameLoop;
+
     private int temps;
 
-
+    private int nbEnnemis,nbSquelette,nbGobelins,nbGeant,nbSorciere,nbGeantRoyale,nbTour;
 
     public jeu (Terrain terrain,int nbEnnemis, int nbGobelins, int nbSquelette, int nbGeant,int nbSorciere,int nbGeantRoyale) {
         this.terrain = terrain;
@@ -158,7 +158,8 @@ public  class jeu {
         nbTour++;
         }
 
-    public void initAnimation() {
+
+    public  void initAnimation() {
         gameLoop = new Timeline();
         temps = 0;
         gameLoop.setCycleCount(Timeline.INDEFINITE);
@@ -187,11 +188,13 @@ public  class jeu {
         gameLoop.getKeyFrames().add(kf);
     }
 
+    public void lancementLoop(){
+        gameLoop.play();
+    }
+
+
     public ObservableList<Ennemis> getEnnemis() {
         return ennemis;
     }
 
-    public void lancementGameloop(){
-        gameLoop.play();
-    }
 }
