@@ -3,6 +3,7 @@ package fr.montreuil.iut.RoyalElphia.Controller;
 import fr.montreuil.iut.RoyalElphia.Vue.*;
 import fr.montreuil.iut.RoyalElphia.modele.*;
 import fr.montreuil.iut.RoyalElphia.modele.Ennemis.Ennemis;
+import fr.montreuil.iut.RoyalElphia.modele.Ennemis.ListObsEnnemis;
 import fr.montreuil.iut.RoyalElphia.modele.Map.Terrain;
 import fr.montreuil.iut.RoyalElphia.modele.Tour.Tour;
 import fr.montreuil.iut.RoyalElphia.modele.Tour.TourABombe;
@@ -71,38 +72,17 @@ private jeu jeu;
             this.LabelPV.textProperty().bind(this.jeu.getPvJoueurProperty().asString());
             TerrainVue terrainVue = new TerrainVue(terrain,map);
 
-            // demarre l'animation
+            //demarre l'animation
 
             jeu.initAnimation();
-            ListChangeListener<Ennemis> listenerEnnemis = (c -> {
-
-                while (c.next()) {
-                    if (c.wasAdded()) {
-                        for (Ennemis a : c.getAddedSubList()
-                        ) {
-                            VueEnnemi vueEnm = new VueEnnemi(panneauJeu);
-                            vueEnm.créerSprite(a);
-                        }
-                    } else if (c.wasRemoved()) {
-                        for (Ennemis a : c.getRemoved()
-                        ) {
-
-                            jeu.ajoutEnnemisMort(a);
-                            panneauJeu.getChildren().remove((panneauJeu.lookup("#" + a.getId())));
-                        }
-                    }
-                }
-            });
-
+            ListChangeListener<Ennemis> listenerEnnemis = new ListObsEnnemis(this.jeu,this.panneauJeu);
             jeu.getEnnemis().addListener(listenerEnnemis);
             this.LabelArgent.textProperty().bind(this.jeu.getArgentProperty().asString());
 
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }
-
     }
-
 
     @FXML
     public void Demarrer(Event event) {
