@@ -6,6 +6,9 @@ import fr.montreuil.iut.RoyalElphia.modele.Ennemis;
 import fr.montreuil.iut.RoyalElphia.modele.Terrain;
 import fr.montreuil.iut.RoyalElphia.modele.jeu;
 import javafx.collections.ListChangeListener;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -14,6 +17,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.layout.TilePane;
 import javafx.util.Duration;
 
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -105,5 +109,16 @@ private void initAnimation() {
             throw new RuntimeException(e);
         }
 
+    }
+
+    public void PoserTour(MouseEvent mouseEvent) throws FileNotFoundException {
+        double mouseX = mouseEvent.getX();
+        double mouseY = mouseEvent.getY();
+
+        Image herbe = new Image(new FileInputStream("src/main/resources/fr/montreuil/iut/RoyalElphia/chemin.jpg"));
+        ImageView herbe2 = new ImageView(herbe);
+        herbe2.setX(mouseX);
+        herbe2.setY(mouseY);
+        panneauJeu.getChildren().add(herbe2);
     }
 }

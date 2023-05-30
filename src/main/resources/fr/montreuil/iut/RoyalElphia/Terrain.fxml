@@ -11,7 +11,7 @@
 <?import javafx.scene.shape.Circle?>
 <Pane xmlns="http://javafx.com/javafx"
       xmlns:fx="http://javafx.com/fxml"
-      fx:controller="fr.montreuil.iut.RoyalElphia.Controller.HelloController" prefHeight="800" prefWidth="800" fx:id="panneauJeu">
+      fx:controller="fr.montreuil.iut.RoyalElphia.Controller.HelloController" prefHeight="800" prefWidth="800" fx:id="panneauJeu" onMouseClicked="#PoserTour">
     <TilePane
               fx:id="map" prefHeight="640" prefWidth="640">
     </TilePane>
