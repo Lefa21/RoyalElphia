@@ -70,7 +70,8 @@ private void initAnimation() {
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
         try {
-            this.terrain = new Terrain(20,20);
+            this.terrain = new Terrain(40, 30) {
+            };
             this.jeu = new jeu(this.terrain,10,2,2,2,2,2);
             TerrainVue terrainVue = new TerrainVue(terrain,map);
             // demarre l'animation
