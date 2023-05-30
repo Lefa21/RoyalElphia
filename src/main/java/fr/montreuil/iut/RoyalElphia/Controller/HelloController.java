@@ -39,11 +39,6 @@ private jeu jeu;
     @FXML
     private Pane panneauJeu;
 
-    private Timeline gameLoop;
-
-    private int temps;
-
-
 
     private VueEnnemi vueEnnemi;
 
@@ -51,6 +46,7 @@ private jeu jeu;
 
     private ArrayList<Tour> listeTour = new ArrayList<>();
 
+    @FXML
 
     public void CliqueTourABombe(MouseEvent mouseEvent) throws FileNotFoundException {
         System.out.println("tour cliqué");
@@ -74,34 +70,7 @@ private jeu jeu;
         }
     }
 
-    private void initAnimation() {
-        gameLoop = new Timeline();
-        temps = 0;
-        gameLoop.setCycleCount(Timeline.INDEFINITE);
 
-
-        KeyFrame kf = new KeyFrame(
-                // on définit le FPS (nbre de frame par seconde)
-                Duration.seconds(0.03),
-                // on définit ce qui se passe à chaque frame
-                // c'est un eventHandler d'ou le lambda
-                (ev -> {
-                    if (jeu.getEnnemisTué().size() == jeu.getNbEnnemisMax()) {
-                        System.out.println("fini");
-                        gameLoop.stop();
-                    } else if (temps % 3 == 0) {
-                        jeu.unTour();
-                    } else if (temps % 5 == 0) {
-                        if (this.jeu.getEnnemis().size() < this.jeu.getNbEnnemisMax()) {
-                            System.out.println("Un tour");
-                            jeu.spwanEnnemi();
-                        }
-                    }
-                    temps++;
-                })
-        );
-        gameLoop.getKeyFrames().add(kf);
-    }
 
 
     @Override
@@ -115,7 +84,7 @@ private jeu jeu;
 
             // demarre l'animation
 
-            initAnimation();
+            jeu.initAnimation();
             ListChangeListener<Ennemis> listenerEnnemis = (c -> {
 
                 while (c.next()) {
@@ -168,7 +137,7 @@ private jeu jeu;
 
     @FXML
     public void Demarrer(Event event) {
-    gameLoop.play();
+        jeu.lancementGameloop();
     }
 
 }
