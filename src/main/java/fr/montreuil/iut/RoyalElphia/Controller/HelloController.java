@@ -71,9 +71,7 @@ private jeu jeu;
             this.jeu = new jeu(this.terrain,10,2,2,2,2,2);
             this.LabelPV.textProperty().bind(this.jeu.getPvJoueurProperty().asString());
             TerrainVue terrainVue = new TerrainVue(terrain,map);
-
             //demarre l'animation
-
             jeu.initAnimation();
             ListChangeListener<Ennemis> listenerEnnemis = new ListObsEnnemis(this.jeu,this.panneauJeu);
             jeu.getEnnemis().addListener(listenerEnnemis);
@@ -83,7 +81,6 @@ private jeu jeu;
             throw new RuntimeException(e);
         }
     }
-
     @FXML
     public void Demarrer(Event event) {
         jeu.lancementLoop();
