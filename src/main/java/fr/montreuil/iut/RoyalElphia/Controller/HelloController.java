@@ -3,6 +3,14 @@ package fr.montreuil.iut.RoyalElphia.Controller;
 import fr.montreuil.iut.RoyalElphia.Vue.*;
 import fr.montreuil.iut.RoyalElphia.modele.*;
 import javafx.collections.ListChangeListener;
+import javafx.event.Event;
+
+import fr.montreuil.iut.RoyalElphia.modele.*;
+import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
+
 import javafx.scene.layout.Pane;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -13,8 +21,10 @@ import javafx.util.Duration;
 import fr.montreuil.iut.RoyalElphia.modele.GéantRoyal;
 
 
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 public class HelloController implements Initializable {
 
@@ -22,6 +32,9 @@ public class HelloController implements Initializable {
 @FXML
  private TilePane map;
 private jeu jeu;
+
+    @FXML
+    public Label LabelArgent;
 
     @FXML
     private Pane panneauJeu;
@@ -32,38 +45,63 @@ private jeu jeu;
 
 
 
-private void initAnimation() {
-    gameLoop = new Timeline();
-    temps=0;
-    gameLoop.setCycleCount(Timeline.INDEFINITE);
+    private VueEnnemi vueEnnemi;
+
+    private Tour tour;
+
+    private ArrayList<Tour> listeTour = new ArrayList<>();
 
 
-    KeyFrame kf = new KeyFrame(
-            // on définit le FPS (nbre de frame par seconde)
-            Duration.seconds(0.03),
-            // on définit ce qui se passe à chaque frame
-            // c'est un eventHandler d'ou le lambda
+    public void CliqueTourABombe(MouseEvent mouseEvent) throws FileNotFoundException {
+        System.out.println("tour cliqué");
+        this.tour = new TourABombe();
+        if (listeTour.size() < 2) {
+            listeTour.add(this.tour);
+        }
+    }
+    public void PoserTour(MouseEvent mouseEvent) throws FileNotFoundException {
+        double cliqueX = mouseEvent.getX();
+        double cliqueY = mouseEvent.getY();
+        if (cliqueX <= 960 && cliqueY <= 1280) {
+            for (Tour t : (listeTour)) {
+                Image TourBombe = new Image(new FileInputStream("src/main/resources/fr/montreuil/iut/RoyalElphia/tt-PhotoRoom.png-PhotoRoom(2).png"));
+                ImageView TourBombeView = new ImageView(TourBombe);
+                TourBombeView.setX(cliqueX);
+                TourBombeView.setY(cliqueY);
+                panneauJeu.getChildren().add(TourBombeView);
+                listeTour.remove(t);
+            }
+        }
+    }
 
-            // si le nombre d'ennemis tué est égal au nombre d'ennemis de la vague alors la vague est terminé
-            (ev ->{
-                if(jeu.getEnnemisTué().size() == jeu.getNbEnnemisMax()){
-                    System.out.println("fini");
-                    gameLoop.stop();
-                }
-                else if (temps%3 ==0){
-                    jeu.unTour();
-                } else if (temps%5 == 0) {
-                    // si la liste des ennemis ayant spawn est inférieur au nombre d'ennemis max alors on fait spawn un nouvel ennemis
-                    if(this.jeu.getListeEnnemisSpawn().size() < this.jeu.getNbEnnemisMax()){
-                        System.out.println("Un tour");
-                        jeu.spwanEnnemi();
+    private void initAnimation() {
+        gameLoop = new Timeline();
+        temps = 0;
+        gameLoop.setCycleCount(Timeline.INDEFINITE);
+
+
+        KeyFrame kf = new KeyFrame(
+                // on définit le FPS (nbre de frame par seconde)
+                Duration.seconds(0.03),
+                // on définit ce qui se passe à chaque frame
+                // c'est un eventHandler d'ou le lambda
+                (ev -> {
+                    if (jeu.getEnnemisTué().size() == jeu.getNbEnnemisMax()) {
+                        System.out.println("fini");
+                        gameLoop.stop();
+                    } else if (temps % 3 == 0) {
+                        jeu.unTour();
+                    } else if (temps % 5 == 0) {
+                        if (this.jeu.getEnnemis().size() < this.jeu.getNbEnnemisMax()) {
+                            System.out.println("Un tour");
+                            jeu.spwanEnnemi();
+                        }
                     }
-                }
-                temps++;
-            })
-    );
-    gameLoop.getKeyFrames().add(kf);
-}
+                    temps++;
+                })
+        );
+        gameLoop.getKeyFrames().add(kf);
+    }
 
 
     @Override
@@ -74,14 +112,14 @@ private void initAnimation() {
             };
             this.jeu = new jeu(this.terrain,10,2,2,2,2,2);
             TerrainVue terrainVue = new TerrainVue(terrain,map);
+
             // demarre l'animation
 
             initAnimation();
-            gameLoop.play();
             ListChangeListener<Ennemis> listenerEnnemis = (c -> {
 
                 while (c.next()) {
-                    if(c.wasAdded()){
+                    if (c.wasAdded()) {
                         for (Ennemis a : c.getAddedSubList()
                         ) {
                             if(a instanceof gobelins){
@@ -117,7 +155,7 @@ private void initAnimation() {
                         }
                     }
                 }
-            } );
+            });
 
             jeu.getEnnemis().addListener(listenerEnnemis);
 
@@ -126,4 +164,12 @@ private void initAnimation() {
         }
 
     }
+
+
+    @FXML
+    public void Demarrer(Event event) {
+    gameLoop.play();
+    }
+
 }
+

@@ -31,16 +31,13 @@ public  class jeu {
         this.nbTour = 0;
     }
 
+
     public Terrain getTerrain() {
         return terrain;
     }
 
     public ArrayList<Ennemis> getListeEnnemisTuée() {
         return listeEnnemisTuée;
-    }
-
-    public int getNbEnnemis() {
-        return nbEnnemis;
     }
 
     public int getNbSquelette() {
@@ -91,35 +88,35 @@ public  class jeu {
 
     public void spwanEnnemi(){
         if(nbTour%2 == 0 && getNbSorciere() != 0){
-            Ennemis enm = new Sorcières(terrain,16,272);
+            Ennemis enm = new Sorcières(terrain);
             ennemis.add(enm);
             this.listeEnnemisSpawn.add(enm);
             this.setNbSorciere(getNbSorciere() -1);
         }
 
         else if(nbTour%4 == 0 && getNbGeant() != 0){
-            Ennemis  enm = new Géant(terrain,16,272);
+            Ennemis  enm = new Géant(terrain);
             ennemis.add(enm);
             this.listeEnnemisSpawn.add(enm);
             this.setNbGeant(getNbGeant() -1);
         }
 
         else if(nbTour%8 == 0 && getNbGobelins() != 0){
-            Ennemis enm = new gobelins(terrain,16,272);
+            Ennemis enm = new gobelins(terrain);
             ennemis.add(enm);
             this.listeEnnemisSpawn.add(enm);
             this.setNbGobelins(getNbGobelins() -1);
         }
 
         else if(nbTour%16 == 0 && getNbSquelette() != 0){
-            Ennemis enm = new Squelette(terrain,16,272);
+            Ennemis enm = new Squelette(terrain);
             ennemis.add(enm);
             this.listeEnnemisSpawn.add(enm);
             this.setNbSquelette(getNbSquelette() -1);
         }
 
         else if(nbTour%32 == 0 && getNbGeantRoyale() != 0){
-            Ennemis enm = new GéantRoyal(terrain,16,272);
+            Ennemis enm = new GéantRoyal(terrain);
             ennemis.add(enm);
             this.listeEnnemisSpawn.add(enm);
             this.setNbGeantRoyale(getNbGeantRoyale() -1);
@@ -147,7 +144,7 @@ public  class jeu {
     public void unTour() {
         for (int i = 0; i < ennemis.size(); i++) {
             this.ennemis.get(i).seDeplace();
-            if (this.ennemis.get(i).getX()==592 && this.ennemis.get(i).getY() == 624) {
+            if (this.ennemis.get(i).getX()== (this.terrain.getPointArv().getX()*32+16) && this.ennemis.get(i).getY() == (this.terrain.getPointArv().getY()*32+16)) {
                 System.out.println("-1 PV");
                 this.getEnnemis().remove(this.getEnnemis().get(i));
             }
