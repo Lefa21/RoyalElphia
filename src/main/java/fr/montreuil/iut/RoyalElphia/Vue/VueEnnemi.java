@@ -12,19 +12,6 @@ public class VueEnnemi {
     private Ennemis ennemis;
     private Pane pane;
 
-    /*
-      public VueEnnemi(Ennemis ennemis, Pane pane) {
-            Circle circle = new Circle(10);
-            circle.translateXProperty().set(ennemis.getx());
-            circle.translateYProperty().set(ennemis.gety());
-            circle.setFill(Color.RED);
-            circle.translateXProperty().bind(ennemis.getxProperty());
-            circle.translateYProperty().bind(ennemis.getyProperty());
-            pane.getChildren().add(circle);
-        }
-
-     */
-
     public VueEnnemi(Pane pane) {
         this.pane = pane;
     }
