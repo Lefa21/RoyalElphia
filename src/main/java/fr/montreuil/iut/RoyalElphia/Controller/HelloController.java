@@ -2,10 +2,10 @@ package fr.montreuil.iut.RoyalElphia.Controller;
 
 import fr.montreuil.iut.RoyalElphia.Vue.TerrainVue;
 import fr.montreuil.iut.RoyalElphia.Vue.VueEnnemi;
-import fr.montreuil.iut.RoyalElphia.modele.Ennemis;
-import fr.montreuil.iut.RoyalElphia.modele.Terrain;
-import fr.montreuil.iut.RoyalElphia.modele.jeu;
+import fr.montreuil.iut.RoyalElphia.modele.*;
 import javafx.collections.ListChangeListener;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -20,14 +20,17 @@ import javafx.util.Duration;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.ResourceBundle;
 public class HelloController implements Initializable {
 
- private Terrain terrain;
-@FXML
- private TilePane map;
 
-private jeu jeu;
+    private Terrain terrain;
+    @FXML
+    private TilePane map;
+
+    private jeu jeu;
 
     @FXML
     private Pane panneauJeu;
@@ -36,49 +39,70 @@ private jeu jeu;
 
     private int temps;
 
-    private VueEnnemi vueEnnemi;
+    private Tour tour;
+
+    private ArrayList<Tour> listeTour = new ArrayList<>();
+
+    public void CliqueTourABombe(MouseEvent mouseEvent) throws FileNotFoundException {
+        System.out.println("tour cliqué");
+        this.tour = new TourABombe();
+        if (listeTour.size() < 2) {
+            listeTour.add(this.tour);
+        }
+    }
+    public void PoserTour(MouseEvent mouseEvent) throws FileNotFoundException {
+        double cliqueX = mouseEvent.getX();
+        double cliqueY = mouseEvent.getY();
+        if (cliqueX <= 640 && cliqueY <= 640) {
+            for (Tour t : Collections.unmodifiableList(listeTour)) {
+                Image TourBombe = new Image(new FileInputStream("src/main/resources/fr/montreuil/iut/RoyalElphia/tt-PhotoRoom.png-PhotoRoom(2).png"));
+                ImageView TourBombeView = new ImageView(TourBombe);
+                TourBombeView.setX(cliqueX);
+                TourBombeView.setY(cliqueY);
+                panneauJeu.getChildren().add(TourBombeView);
+                listeTour.remove(t);
+            }
+        }
+    }
+
+    private void initAnimation() {
+        gameLoop = new Timeline();
+        temps = 0;
+        gameLoop.setCycleCount(Timeline.INDEFINITE);
 
 
-
-private void initAnimation() {
-    gameLoop = new Timeline();
-    temps=0;
-    gameLoop.setCycleCount(Timeline.INDEFINITE);
-
-
-    KeyFrame kf = new KeyFrame(
-            // on définit le FPS (nbre de frame par seconde)
-            Duration.seconds(0.03),
-            // on définit ce qui se passe à chaque frame
-            // c'est un eventHandler d'ou le lambda
-            (ev ->{
-                if(jeu.getEnnemisTué().size() == jeu.getNbEnnemisMax()){
-                    System.out.println("fini");
-                    gameLoop.stop();
-                }
-                else if (temps%3 ==0){
-                    jeu.unTour();
-                } else if (temps%5 == 0) {
-                    if(this.jeu.getEnnemis().size() < this.jeu.getNbEnnemisMax()){
-                        System.out.println("Un tour");
-                        jeu.spwanEnnemi();
+        KeyFrame kf = new KeyFrame(
+                // on définit le FPS (nbre de frame par seconde)
+                Duration.seconds(0.3),
+                // on définit ce qui se passe à chaque frame
+                // c'est un eventHandler d'ou le lambda
+                (ev -> {
+                    if (jeu.getEnnemisTué().size() == jeu.getNbEnnemisMax()) {
+                        System.out.println("fini");
+                        gameLoop.stop();
+                    } else if (temps % 3 == 0) {
+                        jeu.unTour();
+                    } else if (temps % 5 == 0) {
+                        if (this.jeu.getEnnemis().size() < this.jeu.getNbEnnemisMax()) {
+                            System.out.println("Un tour");
+                            jeu.spwanEnnemi();
+                        }
                     }
-                }
-                temps++;
-            })
-    );
-    gameLoop.getKeyFrames().add(kf);
-}
+                    temps++;
+                })
+        );
+        gameLoop.getKeyFrames().add(kf);
+    }
 
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
         try {
-            this.terrain = new Terrain(20,20);
-            this.jeu = new jeu(this.terrain,10);
+            this.terrain = new Terrain(20, 20);
+            this.jeu = new jeu(this.terrain, 10);
 
-            TerrainVue terrainVue = new TerrainVue(terrain,map);
+            TerrainVue terrainVue = new TerrainVue(terrain, map);
             // demarre l'animation
 
             initAnimation();
@@ -86,7 +110,7 @@ private void initAnimation() {
             ListChangeListener<Ennemis> listenerEnnemis = (c -> {
 
                 while (c.next()) {
-                    if(c.wasAdded()){
+                    if (c.wasAdded()) {
                         for (Ennemis a : c.getAddedSubList()
                         ) {
                             VueEnnemi vueEnnemi1 = new VueEnnemi(panneauJeu);
@@ -101,7 +125,7 @@ private void initAnimation() {
                         }
                     }
                 }
-            } );
+            });
 
             jeu.getEnnemis().addListener(listenerEnnemis);
 
@@ -109,16 +133,5 @@ private void initAnimation() {
             throw new RuntimeException(e);
         }
 
-    }
-
-    public void PoserTour(MouseEvent mouseEvent) throws FileNotFoundException {
-        double mouseX = mouseEvent.getX();
-        double mouseY = mouseEvent.getY();
-
-        Image herbe = new Image(new FileInputStream("src/main/resources/fr/montreuil/iut/RoyalElphia/chemin.jpg"));
-        ImageView herbe2 = new ImageView(herbe);
-        herbe2.setX(mouseX);
-        herbe2.setY(mouseY);
-        panneauJeu.getChildren().add(herbe2);
     }
 }
