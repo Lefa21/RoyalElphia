@@ -1,6 +1,9 @@
 package fr.montreuil.iut.RoyalElphia.Vue;
 
 import fr.montreuil.iut.RoyalElphia.modele.Ennemis.*;
+import javafx.scene.control.Label;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
@@ -16,11 +19,17 @@ public  class VueEnnemi {
 
     public void créerSprite(Ennemis ennemis) {
         Circle circle = new Circle(10);
-        circle.translateXProperty().set(ennemis.getX());
-        circle.translateYProperty().set(ennemis.getY());
         circle.setId(ennemis.getId());
         circle.translateXProperty().bind(ennemis.getxProperty());
         circle.translateYProperty().bind(ennemis.getyProperty());
+
+        Label label = new Label();
+        label.setText(ennemis.getPv()+" PV");
+        label.setId(ennemis.getId()+"L");
+        label.translateXProperty().bind(ennemis.getxProperty().add(-16));
+        label.translateYProperty().bind(ennemis.getyProperty().add(-32));
+        label.setBackground(Background.fill(Color.WHITE));
+
 
         if (ennemis instanceof gobelins) {
             circle.setFill(Color.GREEN);
@@ -42,6 +51,6 @@ public  class VueEnnemi {
             circle.setFill(Color.GREY);
         }
         this.pane.getChildren().add(circle);
-
+        this.pane.getChildren().add(label);
     }
 }
