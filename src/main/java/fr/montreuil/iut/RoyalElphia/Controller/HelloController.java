@@ -19,6 +19,9 @@ import javafx.scene.layout.Pane;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.layout.TilePane;
+import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
 
 
 import java.io.FileInputStream;
@@ -42,6 +45,9 @@ private jeu jeu;
     private Pane panneauJeu;
 
     private VueEnnemi vueEnnemi;
+
+    @FXML
+    private VBox MenuEnnemi;
 
     private Tour tour;
 
@@ -70,12 +76,14 @@ private jeu jeu;
             };
             this.jeu = new jeu(this.terrain,10,2,2,2,2,2);
             this.LabelPV.textProperty().bind(this.jeu.getPvJoueurProperty().asString());
+
             TerrainVue terrainVue = new TerrainVue(terrain,map);
             //demarre l'animation
             jeu.initAnimation();
             ListChangeListener<Ennemis> listenerEnnemis = new ListObsEnnemis(this.jeu,this.panneauJeu);
             jeu.getEnnemis().addListener(listenerEnnemis);
             this.LabelArgent.textProperty().bind(this.jeu.getArgentProperty().asString());
+            MenuEnnemiAjout();
 
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
@@ -89,6 +97,12 @@ private jeu jeu;
     @FXML
     public void Pause(Event event) {
         jeu.arretLoop();
+    }
+
+    public void MenuEnnemiAjout() {
+        for (int i = 0; i < jeu.getMenuEnnemi().size(); i++) {
+            MenuEnnemi.getChildren().add(jeu.getMenuEnnemi().get(i));
+        }
     }
 
 }

@@ -11,6 +11,11 @@ import javafx.animation.Timeline;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.control.Label;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
 import javafx.util.Duration;
 
 import java.util.ArrayList;
@@ -30,6 +35,8 @@ public  class jeu {
     private ArrayList<Tour> listeDeTour;
 
     private IntegerProperty argent;
+
+    private ArrayList<HBox> menuEnnemi;
 
 
     private int temps;
@@ -52,6 +59,8 @@ public  class jeu {
         this.pvJoueur = new SimpleIntegerProperty(4);
         this.listeDeTour = new ArrayList<>();
         this.argent = new SimpleIntegerProperty(200);
+        this.menuEnnemi = new ArrayList<HBox>();
+        creationEnnemi();
     }
 
     public void ajouterTour(Tour t){
@@ -82,6 +91,10 @@ public  class jeu {
 
     public ArrayList<Ennemis> getListeEnnemisTuée() {
         return listeEnnemisTuée;
+    }
+
+    public ArrayList<HBox> getMenuEnnemi() {
+        return menuEnnemi;
     }
 
     public int getNbSquelette() {
@@ -167,6 +180,39 @@ public  class jeu {
         }
     }
 
+    public void creationEnnemi() {
+        for (int i = 0; i < getNbSorciere(); i++) {
+            HBox h = new HBox();
+            h.getChildren().add(new Label("PV"));
+            h.getChildren().add(new Circle(12,Color.VIOLET));
+            menuEnnemi.add(h);
+        }
+        for (int i = 0; i < getNbGeant(); i++) {
+            HBox h = new HBox();
+            h.getChildren().add(new Label("PV"));
+            h.getChildren().add(new Circle(12,Color.BROWN));
+            menuEnnemi.add(h);
+        }
+        for (int i = 0; i < getNbGobelins(); i++) {
+            HBox h = new HBox();
+            h.getChildren().add(new Label("PV"));
+            h.getChildren().add(new Circle(12,Color.GREEN));
+            menuEnnemi.add(h);
+        }
+        for (int i = 0; i < getNbSquelette(); i++) {
+            HBox h = new HBox();
+            h.getChildren().add(new Label("PV"));
+            h.getChildren().add(new Circle(12,Color.GREY));
+            menuEnnemi.add(h);
+        }
+        for (int i = 0; i < getNbGeantRoyale(); i++) {
+            HBox h = new HBox();
+            h.getChildren().add(new Label("PV"));
+            h.getChildren().add(new Circle(12,Color.BLACK));
+            menuEnnemi.add(h);
+        }
+    }
+
 
    //permet de récuperer la liste des ennemis ayant spawn
     public ArrayList<Ennemis> getListeEnnemisSpawn(){
@@ -206,7 +252,7 @@ public  class jeu {
 
         KeyFrame kf = new KeyFrame(
                 // on définit le FPS (nbre de frame par seconde)
-                Duration.seconds(0.1),
+                Duration.seconds(0.03),
                 // on définit ce qui se passe à chaque frame
                 // c'est un eventHandler d'ou le lambda
                 (ev -> {
