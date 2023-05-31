@@ -29,15 +29,38 @@
             <children>
                 <TilePane onMouseClicked="#PoserTour" fx:id="map" prefHeight="960" prefWidth="1280" />
                 <VBox layoutX="1280" prefHeight="90" prefWidth="90">
+                    <HBox>
                     <children>
-
-                        <ImageView onMouseClicked="#CliqueTourABombe" fitHeight="150.0" fitWidth="138.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fx:id="bombe" onMouseClicked="#TourClique" fitHeight="150.0" fitWidth="138.0" pickOnBounds="true" preserveRatio="true">
                             <image>
-                                <Image fx:id="TourABombe" url="@TirTourBombe.gif" />
+                                <Image url="@TourBombe.png" />
                             </image>
                         </ImageView>
-
                     </children>
+                    <children>
+                        <ImageView fx:id="feu" onMouseClicked="#TourClique" fitHeight="150.0" fitWidth="138.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@TourFeu.png" />
+                            </image>
+                        </ImageView>
+                    </children>
+                    </HBox>
+                    <HBox>
+                        <children>
+                            <ImageView fx:id="eclair" onMouseClicked="#TourClique" fitHeight="150.0" fitWidth="138.0" pickOnBounds="true" preserveRatio="true">
+                                <image>
+                                    <Image url="@TourEclair.png" />
+                                </image>
+                            </ImageView>
+                        </children>
+                        <children>
+                            <ImageView fx:id="fleche" onMouseClicked="#TourClique" fitHeight="150.0" fitWidth="138.0" pickOnBounds="true" preserveRatio="true">
+                                <image>
+                                    <Image url="@TourFleche.png" />
+                                </image>
+                            </ImageView>
+                        </children>
+                    </HBox>
                 </VBox>
             </children>
             <HBox layoutY="960" prefHeight="83.0" prefWidth="472.0">

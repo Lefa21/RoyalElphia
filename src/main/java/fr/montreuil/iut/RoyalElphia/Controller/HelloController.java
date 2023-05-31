@@ -5,8 +5,7 @@ import fr.montreuil.iut.RoyalElphia.modele.*;
 import fr.montreuil.iut.RoyalElphia.modele.Ennemis.Ennemis;
 import fr.montreuil.iut.RoyalElphia.modele.Ennemis.ListObsEnnemis;
 import fr.montreuil.iut.RoyalElphia.modele.Map.Terrain;
-import fr.montreuil.iut.RoyalElphia.modele.Tour.Tour;
-import fr.montreuil.iut.RoyalElphia.modele.Tour.TourABombe;
+import fr.montreuil.iut.RoyalElphia.modele.Tour.*;
 import javafx.collections.ListChangeListener;
 import javafx.event.Event;
 
@@ -45,13 +44,70 @@ private jeu jeu;
 
     private Tour tour;
 
-    private ArrayList<Tour> listeTour = new ArrayList<>();
+    private boolean TourPose = true;
 
-    public void CliqueTourABombe(MouseEvent mouseEvent) throws FileNotFoundException {
-        System.out.println("tour cliqué");
-        this.tour = new TourABombe();
-        this.jeu.ajouterTour(this.tour);
-        if(this.jeu.verifArgent(this.tour)){ this.jeu.setArgent(tour.getCoutAchat());}
+    private VueTour vt = new VueTour();
+    @FXML
+   /* public void CliqueTourABombe(MouseEvent mouseEvent) throws FileNotFoundException {
+        if (this.TourPose){
+            System.out.println("tour cliqué");
+            this.tour = new TourABombe();
+            VueTour vt = new VueTour();
+            vt.CliqueTour(jeu, tour);
+            this.TourPose = false;
+        }
+    }
+
+    public void CliqueTourFeu(MouseEvent mouseEvent) throws FileNotFoundException {
+        System.out.println(((ImageView)mouseEvent.getSource()).getId());
+
+        if (this.TourPose) {
+            System.out.println("tour cliqué");
+            this.tour = new TourBouleDeFeu();
+            VueTour vt = new VueTour();
+            vt.CliqueTour(jeu, tour);
+            this.TourPose = false;
+        }
+    }
+
+    public void CliqueTourFleche(MouseEvent mouseEvent) throws FileNotFoundException {
+        if (this.TourPose) {
+            System.out.println("tour cliqué");
+            this.tour = new TourFleche();
+            VueTour vt = new VueTour();
+            vt.CliqueTour(jeu, tour);
+            this.TourPose = false;
+        }
+    }*/
+
+    public void TourClique(MouseEvent mouseEvent) throws FileNotFoundException {
+        for (Tour T:
+                this.jeu.getListeDeTour()) {
+            System.out.println(T);
+        }
+        //this.tour = null;
+        if (this.TourPose && tour == null) {
+            if (((ImageView) mouseEvent.getSource()).getId().equals("bombe")) {
+                if (this.jeu.getArgent() >= 40){
+                vt.CliqueTour(this.jeu, "bombe");
+                this.tour = vt.getTour();
+                this.TourPose = false;}
+            } else if (((ImageView) mouseEvent.getSource()).getId().equals("feu")) {
+                if (this.jeu.getArgent() >= 22){
+                vt.CliqueTour(this.jeu, "feu");
+                this.tour = vt.getTour();
+                this.TourPose = false;}
+            } else if (((ImageView) mouseEvent.getSource()).getId().equals("fleche")) {
+                if (this.jeu.getArgent() >= 20){
+                    vt.CliqueTour(this.jeu, "fleche");
+                    this.tour = vt.getTour();
+                    this.TourPose = false;}
+            } /*else if (((ImageView) mouseEvent.getSource()).getId().equals("eclair")) {
+                this.tour = new TourElectrique();
+                vt.CliqueTour(jeu, tour);
+                this.TourPose = false;
+            }*/
+        }
     }
     @FXML
     public void PoserTour(MouseEvent mouseEvent) throws FileNotFoundException {
@@ -59,12 +115,12 @@ private jeu jeu;
         double cliqueY = mouseEvent.getY();
         VueTour vueTour = new VueTour(panneauJeu, tour, cliqueX, cliqueY);
         vueTour.PoserTour();
-        this.tour = null;
+        this.TourPose = true;
+        this.tour=null;
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
         try {
             this.terrain = new Terrain(40, 30) {
             };

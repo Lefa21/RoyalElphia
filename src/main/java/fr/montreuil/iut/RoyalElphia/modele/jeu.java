@@ -248,4 +248,7 @@ public  class jeu {
         this.pvJoueur.setValue(pvJoueur);
     }
 
+    public ArrayList<Tour> getListeDeTour() {
+        return listeDeTour;
+    }
 }
