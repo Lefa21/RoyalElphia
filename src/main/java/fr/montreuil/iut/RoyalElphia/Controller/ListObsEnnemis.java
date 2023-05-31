@@ -1,6 +1,7 @@
-package fr.montreuil.iut.RoyalElphia.modele.Ennemis;
+package fr.montreuil.iut.RoyalElphia.Controller;
 
 import fr.montreuil.iut.RoyalElphia.Vue.VueEnnemi;
+import fr.montreuil.iut.RoyalElphia.modele.Ennemis.Ennemis;
 import fr.montreuil.iut.RoyalElphia.modele.jeu;
 import javafx.collections.ListChangeListener;
 import javafx.scene.layout.Pane;

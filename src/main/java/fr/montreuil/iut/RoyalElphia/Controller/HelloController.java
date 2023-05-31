@@ -3,7 +3,6 @@ package fr.montreuil.iut.RoyalElphia.Controller;
 import fr.montreuil.iut.RoyalElphia.Vue.*;
 import fr.montreuil.iut.RoyalElphia.modele.*;
 import fr.montreuil.iut.RoyalElphia.modele.Ennemis.Ennemis;
-import fr.montreuil.iut.RoyalElphia.modele.Ennemis.ListObsEnnemis;
 import fr.montreuil.iut.RoyalElphia.modele.Map.Terrain;
 import fr.montreuil.iut.RoyalElphia.modele.Tour.Tour;
 import fr.montreuil.iut.RoyalElphia.modele.Tour.TourABombe;
@@ -11,8 +10,6 @@ import javafx.collections.ListChangeListener;
 import javafx.event.Event;
 
 import javafx.scene.control.Label;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 
 import javafx.scene.layout.Pane;
@@ -21,7 +18,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.layout.TilePane;
 
 
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.net.URL;
 import java.util.ArrayList;
