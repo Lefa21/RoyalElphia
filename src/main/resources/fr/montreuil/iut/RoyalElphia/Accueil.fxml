@@ -6,9 +6,9 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane prefHeight="800" prefWidth="600" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.montreuil.iut.RoyalElphia.Controller.Accueil">
+<BorderPane prefHeight="800" prefWidth="600" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.montreuil.iut.RoyalElphia.Controller.SceneController">
     <top>
-        <Label text="top" />
+        <Label />
     </top>
 
     <right>
@@ -20,12 +20,16 @@
     </right>
 
     <center>
-        <Pane style="-fx-background-color: grey;">
+        <Pane style="-fx-background-color: Brown;">
          <children>
             <VBox layoutX="93.0" layoutY="203.0" prefHeight="270.0" prefWidth="361.0">
                <children>
-                  <Button onAction="#Lancer" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" text="Play" />
-                  <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="62.0" prefWidth="115.0" text="Quit" />
+                  <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#LancerJeu" prefHeight="110.0" prefWidth="372.0" text="Play" />
+               </children>
+            </VBox>
+            <VBox layoutX="95.0" layoutY="417.0" prefHeight="200.0" prefWidth="379.0">
+               <children>
+                  <Button mnemonicParsing="false" prefHeight="99.0" prefWidth="370.0" text="Quit" />
                </children>
             </VBox>
          </children></Pane>
