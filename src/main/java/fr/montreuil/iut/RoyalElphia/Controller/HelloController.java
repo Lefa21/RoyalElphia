@@ -86,5 +86,10 @@ private jeu jeu;
         jeu.lancementLoop();
     }
 
+    @FXML
+    public void Pause(Event event) {
+        jeu.arretLoop();
+    }
+
 }
 

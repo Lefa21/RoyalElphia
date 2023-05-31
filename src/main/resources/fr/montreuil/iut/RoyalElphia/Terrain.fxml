@@ -22,6 +22,8 @@
         <VBox>
             <Button onAction="#Demarrer" text="Demarrer">
             </Button>
+            <Button onAction="#Pause" text="Pause">
+            </Button>
         </VBox>
     </right>
     <center>

@@ -231,6 +231,10 @@ public  class jeu {
         gameLoop.play();
     }
 
+    public void arretLoop() {
+        gameLoop.stop();
+    }
+
 
     public ObservableList<Ennemis> getEnnemis() {
         return ennemis;
