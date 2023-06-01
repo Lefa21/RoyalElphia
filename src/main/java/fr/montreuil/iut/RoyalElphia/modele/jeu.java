@@ -18,24 +18,15 @@ import java.util.ArrayList;
 public  class jeu {
     private Terrain terrain;
     private ObservableList<Ennemis> ennemis;
-
     private ArrayList<Ennemis> listeEnnemisTuée;
-
     private ArrayList<Ennemis> listeEnnemisSpawn;
-
     private Timeline gameLoop;
-
     private IntegerProperty pvJoueur;
-
     private ArrayList<Tour> listeDeTour;
-
     private IntegerProperty argent;
-
-
     private int temps;
-
-
     private int nbEnnemis,nbSquelette,nbGobelins,nbGeant,nbSorciere,nbGeantRoyale,nbTour;
+
 
     public jeu (Terrain terrain,int nbEnnemis, int nbGobelins, int nbSquelette, int nbGeant,int nbSorciere,int nbGeantRoyale) {
         this.terrain = terrain;
@@ -57,16 +48,12 @@ public  class jeu {
     public void ajouterTour(Tour t){
         listeDeTour.add(t);
     }
-
-
     public IntegerProperty getArgentProperty() {
         return argent;
     }
-
     public void setArgent(int prix){
         this.argent.setValue(this.argent.getValue()-prix);
     }
-
     public int getArgent(){
         return this.argent.getValue();
     }
@@ -259,4 +246,7 @@ public  class jeu {
         this.pvJoueur.setValue(pvJoueur);
     }
 
+    public ArrayList<Tour> getListeDeTour() {
+        return listeDeTour;
+    }
 }
