@@ -24,9 +24,9 @@ public  class VueEnnemi {
         circle.translateYProperty().bind(ennemis.getyProperty());
 
         Label label = new Label();
-        label.setText(ennemis.getPv()+" PV");
+        label.textProperty().bind(ennemis.getPvProperty().asString());
         label.setId(ennemis.getId()+"L");
-        label.translateXProperty().bind(ennemis.getxProperty().add(-16));
+        label.translateXProperty().bind(ennemis.getxProperty().add(-8));
         label.translateYProperty().bind(ennemis.getyProperty().add(-32));
         label.setBackground(Background.fill(Color.WHITE));
 

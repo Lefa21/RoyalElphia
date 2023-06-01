@@ -59,6 +59,14 @@ private jeu jeu;
         double cliqueY = mouseEvent.getY();
         VueTour vueTour = new VueTour(panneauJeu, tour, cliqueX, cliqueY);
         vueTour.PoserTour();
+        if (jeu.getTerrain().getTabTerrain()[(int)((cliqueY/32)-1)][(int)cliqueX/32] == 9)
+            jeu.getTerrain().getTabTerrain()[(int)((cliqueY/32)-1)][(int)cliqueX/32] = 88;
+        if (jeu.getTerrain().getTabTerrain()[(int)((cliqueY/32)+1)][(int)cliqueX/32] == 9)
+            jeu.getTerrain().getTabTerrain()[(int)((cliqueY/32)+1)][(int)cliqueX/32] = 88;
+        if (jeu.getTerrain().getTabTerrain()[(int)cliqueY/32][(int)((cliqueX/32)-1)] == 9)
+            jeu.getTerrain().getTabTerrain()[(int)cliqueY/32][(int)((cliqueX/32)-1)] = 88;
+        if (jeu.getTerrain().getTabTerrain()[(int)cliqueY/32][(int)((cliqueX/32)+1)] == 9)
+            jeu.getTerrain().getTabTerrain()[(int)cliqueY/32][(int)((cliqueX/32)+1)] = 88;
         this.tour = null;
     }
 

@@ -58,6 +58,10 @@ public class TerrainVue {
                     Image départ = new Image(new FileInputStream("src/main/resources/fr/montreuil/iut/RoyalElphia/départ.png"));
                     ImageView départ2 = new ImageView(départ);
                     map.getChildren().add(départ2);
+                } else if (tab[i][j] == 88) {
+                    Image t = new Image(new FileInputStream("src/main/resources/fr/montreuil/iut/RoyalElphia/TEST.png"));
+                    ImageView t2 = new ImageView(t);
+                    map.getChildren().add(t2);
                 }
             }
         }

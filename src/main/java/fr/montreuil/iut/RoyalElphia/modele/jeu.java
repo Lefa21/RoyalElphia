@@ -193,6 +193,13 @@ public  class jeu {
                 setPvJoueur(this.getPvJoueur()-1);
                 this.getEnnemis().remove(this.getEnnemis().get(i));
             }
+            if (terrain.getTabTerrain()[this.ennemis.get(i).getY()/32][this.ennemis.get(i).getX()/32] == 88) {
+                this.ennemis.get(i).setPv(50);
+            }
+        }
+        for (int i = ennemis.size()-1; i >= 0 ; i--) {
+            if (ennemis.get(i).getPv() == 0)
+                ennemis.remove(i);
         }
         nbTour++;
         }
@@ -206,7 +213,7 @@ public  class jeu {
 
         KeyFrame kf = new KeyFrame(
                 // on définit le FPS (nbre de frame par seconde)
-                Duration.seconds(0.1),
+                Duration.seconds(0.05),
                 // on définit ce qui se passe à chaque frame
                 // c'est un eventHandler d'ou le lambda
                 (ev -> {
