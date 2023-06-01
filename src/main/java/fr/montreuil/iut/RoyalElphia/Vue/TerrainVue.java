@@ -47,7 +47,7 @@ public class TerrainVue {
                     ImageView pont2 = new ImageView(pont);
                     map.getChildren().add(pont2);
                 } else if (tab[i][j] == 10) {
-                    Image rocher = new Image(new FileInputStream("src/main/resources/fr/montreuil/iut/RoyalElphia/ImageTuile/rocher.png"));
+                    Image rocher = new Image(new FileInputStream("src/main/resources/fr/montreuil/iut/RoyalElphia/ImageTuile/eau-overlay.png"));
                     ImageView rocher2 = new ImageView(rocher);
                     map.getChildren().add(rocher2);
                 } else if (tab[i][j] == 5) {
@@ -58,6 +58,10 @@ public class TerrainVue {
                     Image départ = new Image(new FileInputStream("src/main/resources/fr/montreuil/iut/RoyalElphia/ImageTuile/départ.png"));
                     ImageView départ2 = new ImageView(départ);
                     map.getChildren().add(départ2);
+                } else if (tab[i][j] == 88) {
+                    Image t = new Image(new FileInputStream("src/main/resources/fr/montreuil/iut/RoyalElphia/TEST.png"));
+                    ImageView t2 = new ImageView(t);
+                    map.getChildren().add(t2);
                 }
             }
         }

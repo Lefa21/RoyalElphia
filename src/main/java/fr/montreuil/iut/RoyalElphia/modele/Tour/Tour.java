@@ -1,5 +1,9 @@
 package fr.montreuil.iut.RoyalElphia.modele.Tour;
 
+import fr.montreuil.iut.RoyalElphia.modele.Map.Cases;
+
+import java.util.ArrayList;
+
 public class Tour {
 
     private String Nom;
@@ -14,7 +18,7 @@ public class Tour {
     private int NombreAttaqueMax;
     private int TempsRecharge;
 
-    public Tour(String nom, int coutAchat, int porteeAttaque, String typeAttaque, int coutVente, int coutAmelioration, int niveauAmelioration, int niveauMaxAmelioration, int dureeINtervalleAttaque, int nombreAttaqueMax, int tempsRecharge) {
+    public Tour(String nom, int coutAchat,int porteeAttaque, String typeAttaque, int coutVente, int coutAmelioration, int niveauAmelioration, int niveauMaxAmelioration, int dureeINtervalleAttaque, int nombreAttaqueMax, int tempsRecharge) {
         Nom = nom;
         CoutAchat = coutAchat;
         PorteeAttaque = porteeAttaque;
@@ -48,9 +52,6 @@ public class Tour {
         return PorteeAttaque;
     }
 
-    public void setPorteeAttaque(int porteeAttaque) {
-        PorteeAttaque = porteeAttaque;
-    }
 
     public String getTypeAttaque() {
         return TypeAttaque;

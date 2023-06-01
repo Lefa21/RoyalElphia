@@ -19,17 +19,11 @@ import java.util.ArrayList;
 public  class jeu {
     private Terrain terrain;
     private ObservableList<Ennemis> ennemis;
-
     private ArrayList<Ennemis> listeEnnemisTuée;
-
     private ArrayList<Ennemis> listeEnnemisSpawn;
-
     private Timeline gameLoop;
-
     private IntegerProperty pvJoueur;
-
     private ArrayList<Tour> listeDeTour;
-
     private IntegerProperty argent;
 
     private Niveau niveau;
@@ -52,16 +46,12 @@ public  class jeu {
     public void ajouterTour(Tour t){
         listeDeTour.add(t);
     }
-
-
     public IntegerProperty getArgentProperty() {
         return argent;
     }
-
     public void setArgent(int prix){
         this.argent.setValue(this.argent.getValue()-prix);
     }
-
     public int getArgent(){
         return this.argent.getValue();
     }
@@ -152,6 +142,13 @@ public  class jeu {
                 setPvJoueur(this.getPvJoueur()-1);
                 this.getEnnemis().remove(this.getEnnemis().get(i));
             }
+            if (terrain.getTabTerrain()[this.ennemis.get(i).getY()/32][this.ennemis.get(i).getX()/32] == 88) {
+                this.ennemis.get(i).setPv(50);
+            }
+        }
+        for (int i = ennemis.size()-1; i >= 0 ; i--) {
+            if (ennemis.get(i).getPv() == 0)
+                ennemis.remove(i);
         }
         nbTour++;
         }
@@ -165,7 +162,7 @@ public  class jeu {
 
         KeyFrame kf = new KeyFrame(
                 // on définit le FPS (nbre de frame par seconde)
-                Duration.seconds(0.03),
+                Duration.seconds(0.05),
                 // on définit ce qui se passe à chaque frame
                 // c'est un eventHandler d'ou le lambda
                 (ev -> {
@@ -190,6 +187,10 @@ public  class jeu {
         gameLoop.play();
     }
 
+    public void arretLoop() {
+        gameLoop.stop();
+    }
+
 
     public ObservableList<Ennemis> getEnnemis() {
         return ennemis;
@@ -207,4 +208,7 @@ public  class jeu {
         this.pvJoueur.setValue(pvJoueur);
     }
 
+    public ArrayList<Tour> getListeDeTour() {
+        return listeDeTour;
+    }
 }
