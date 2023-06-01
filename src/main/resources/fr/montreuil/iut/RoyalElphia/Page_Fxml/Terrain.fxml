@@ -33,7 +33,7 @@
 
                         <ImageView onMouseClicked="#CliqueTourABombe" fitHeight="150.0" fitWidth="138.0" pickOnBounds="true" preserveRatio="true">
                             <image>
-                                <Image fx:id="TourABombe" url="@TirTourBombe.gif" />
+                                <Image fx:id="TourABombe" url="@../ImageTour/TirTourBombe.gif" />
                             </image>
                         </ImageView>
 
