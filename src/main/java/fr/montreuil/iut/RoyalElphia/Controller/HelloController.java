@@ -3,7 +3,10 @@ package fr.montreuil.iut.RoyalElphia.Controller;
 import fr.montreuil.iut.RoyalElphia.Vue.*;
 import fr.montreuil.iut.RoyalElphia.modele.*;
 import fr.montreuil.iut.RoyalElphia.modele.Ennemis.Ennemis;
+import fr.montreuil.iut.RoyalElphia.modele.Map.Map2;
 import fr.montreuil.iut.RoyalElphia.modele.Map.Terrain;
+import fr.montreuil.iut.RoyalElphia.modele.Niveau.Facile;
+import fr.montreuil.iut.RoyalElphia.modele.Niveau.Niveau;
 import fr.montreuil.iut.RoyalElphia.modele.Tour.Tour;
 import fr.montreuil.iut.RoyalElphia.modele.Tour.TourABombe;
 import javafx.collections.ListChangeListener;
@@ -28,6 +31,7 @@ public class HelloController implements Initializable {
 @FXML
  private TilePane map;
 private jeu jeu;
+private Niveau niveau;
 
     @FXML
     public Label LabelArgent;
@@ -62,9 +66,10 @@ private jeu jeu;
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
         try {
-            this.terrain = new Terrain(40, 30) {
+            this.terrain = new Map2() {
             };
-            this.jeu = new jeu(this.terrain,10,2,2,2,2,2);
+            this.niveau = new Facile();
+            this.jeu = new jeu(this.terrain,this.niveau);
             this.LabelPV.textProperty().bind(this.jeu.getPvJoueurProperty().asString());
             TerrainVue terrainVue = new TerrainVue(terrain,map);
             //demarre l'animation

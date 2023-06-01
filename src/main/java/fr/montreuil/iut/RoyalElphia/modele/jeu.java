@@ -1,5 +1,6 @@
 package fr.montreuil.iut.RoyalElphia.modele;
 import fr.montreuil.iut.RoyalElphia.Vue.VueEnnemi;
+import fr.montreuil.iut.RoyalElphia.modele.Niveau.Niveau;
 import fr.montreuil.iut.RoyalElphia.modele.Tour.Tour;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -31,23 +32,17 @@ public  class jeu {
 
     private IntegerProperty argent;
 
+    private Niveau niveau;
 
-    private int temps;
 
+    private int temps,nbTour;
 
-    private int nbEnnemis,nbSquelette,nbGobelins,nbGeant,nbSorciere,nbGeantRoyale,nbTour;
-
-    public jeu (Terrain terrain,int nbEnnemis, int nbGobelins, int nbSquelette, int nbGeant,int nbSorciere,int nbGeantRoyale) {
+    public jeu (Terrain terrain,Niveau niveau) {
         this.terrain = terrain;
         this.ennemis = FXCollections.observableArrayList();
-        this.nbEnnemis = nbEnnemis;
         this.listeEnnemisTuée = new ArrayList<>();
         this.listeEnnemisSpawn = new ArrayList<>();
-        this.nbGeant = nbGeant;
-        this.nbSorciere = nbSorciere;
-        this.nbGobelins = nbGobelins;
-        this.nbSquelette = nbSquelette;
-        this.nbGeantRoyale = nbGeantRoyale;
+        this.niveau = niveau;
         this.nbTour = 0;
         this.pvJoueur = new SimpleIntegerProperty(4);
         this.listeDeTour = new ArrayList<>();
@@ -76,6 +71,11 @@ public  class jeu {
         }
         return true;
     }
+
+    public Niveau getNiveau() {
+        return niveau;
+    }
+
     public Terrain getTerrain() {
         return terrain;
     }
@@ -84,25 +84,6 @@ public  class jeu {
         return listeEnnemisTuée;
     }
 
-    public int getNbSquelette() {
-        return nbSquelette;
-    }
-
-    public int getNbGobelins() {
-        return nbGobelins;
-    }
-
-    public int getNbGeant() {
-        return nbGeant;
-    }
-
-    public int getNbSorciere() {
-        return nbSorciere;
-    }
-
-    public int getNbGeantRoyale() {
-        return nbGeantRoyale;
-    }
 
     public void ajouter(Ennemis e) {
         this.ennemis.add(e);
@@ -110,60 +91,41 @@ public  class jeu {
 
     // permet d'ajouter un ennemi qui a spawn sur le terrain dans la liste de notre modèle
 
-    public void setNbSquelette(int nbSquelette) {
-        this.nbSquelette = nbSquelette;
-    }
-
-    public void setNbGobelins(int nbGobelins) {
-        this.nbGobelins = nbGobelins;
-    }
-
-    public void setNbGeant(int nbGeant) {
-        this.nbGeant = nbGeant;
-    }
-
-    public void setNbSorciere(int nbSorciere) {
-        this.nbSorciere = nbSorciere;
-    }
-
-    public void setNbGeantRoyale(int nbGeantRoyale) {
-        this.nbGeantRoyale = nbGeantRoyale;
-    }
 
     public void spwanEnnemi(){
-        if(nbTour%2 == 0 && getNbSorciere() != 0){
+        if(nbTour%2 == 0 && niveau.getNbSorciere() != 0){
             Ennemis enm = new Sorcières(terrain);
             ennemis.add(enm);
             this.listeEnnemisSpawn.add(enm);
-            this.setNbSorciere(getNbSorciere() -1);
+            niveau.setNbSorciere(niveau.getNbSorciere() -1);
         }
 
-        else if(nbTour%4 == 0 && getNbGeant() != 0){
+        else if(nbTour%4 == 0 && niveau.getNbGeant() != 0){
             Ennemis  enm = new Géant(terrain);
             ennemis.add(enm);
             this.listeEnnemisSpawn.add(enm);
-            this.setNbGeant(getNbGeant() -1);
+            niveau.setNbGeant(niveau.getNbGeant() -1);
         }
 
-        else if(nbTour%8 == 0 && getNbGobelins() != 0){
+        else if(nbTour%8 == 0 && niveau.getNbGobelins() != 0){
             Ennemis enm = new gobelins(terrain);
             ennemis.add(enm);
             this.listeEnnemisSpawn.add(enm);
-            this.setNbGobelins(getNbGobelins() -1);
+            niveau.setNbGobelins(niveau.getNbGobelins() -1);
         }
 
-        else if(nbTour%16 == 0 && getNbSquelette() != 0){
+        else if(nbTour%16 == 0 && niveau.getNbSquelette() != 0){
             Ennemis enm = new Squelette(terrain);
             ennemis.add(enm);
             this.listeEnnemisSpawn.add(enm);
-            this.setNbSquelette(getNbSquelette() -1);
+            niveau.setNbSquelette(niveau.getNbSquelette() -1);
         }
 
-        else if(nbTour%32 == 0 && getNbGeantRoyale() != 0){
+        else if(nbTour%32 == 0 && niveau.getNbGeantRoyale() != 0){
             Ennemis enm = new GéantRoyal(terrain);
             ennemis.add(enm);
             this.listeEnnemisSpawn.add(enm);
-            this.setNbGeantRoyale(getNbGeantRoyale() -1);
+            niveau.setNbGeantRoyale(niveau.getNbGeantRoyale() -1);
         }
     }
 
@@ -181,9 +143,6 @@ public  class jeu {
         return listeEnnemisTuée;
     }
 
-    public int getNbEnnemisMax(){
-        return nbEnnemis;
-    }
 
     public void unTour() {
         for (int i = 0; i < ennemis.size(); i++) {
@@ -210,13 +169,13 @@ public  class jeu {
                 // on définit ce qui se passe à chaque frame
                 // c'est un eventHandler d'ou le lambda
                 (ev -> {
-                    if (getEnnemisTué().size() == getNbEnnemisMax() || this.getPvJoueur()==0) {
+                    if (getEnnemisTué().size() == niveau.getNbEnnemis()|| this.getPvJoueur()==0) {
                         System.out.println("fini");
                         gameLoop.stop();
                     } else if (temps % 3 == 0) {
                         unTour();
                     } else if (temps % 5 == 0) {
-                        if (getEnnemis().size() < getNbEnnemisMax()) {
+                        if (getEnnemis().size() < niveau.getNbEnnemis()) {
                             System.out.println("Un tour");
                             spwanEnnemi();
                         }

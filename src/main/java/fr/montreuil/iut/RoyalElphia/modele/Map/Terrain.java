@@ -1,14 +1,14 @@
 package fr.montreuil.iut.RoyalElphia.modele.Map;
 
-public  class Terrain {
+public  abstract class Terrain {
     private int hauteur;
     private int largeur;
     private int[][] Tabterrain;
     private Cases pointDep, pointArv;
 
-    public Terrain(int hauteur, int largeur) {
-        this.hauteur = hauteur;
-        this.largeur = largeur;
+    public Terrain() {
+        this.hauteur = 40;
+        this.largeur = 30;
         this.Tabterrain  = new int[][]{
                 {4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4},
                 {4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4},
