@@ -39,7 +39,6 @@ import java.util.ResourceBundle;
 
 public class HelloController implements Initializable {
 
-    public Label LabelVague;
     private Terrain terrain;
 @FXML
  private TilePane map;
@@ -51,9 +50,7 @@ private Niveau niveau;
 
 
     @FXML
-    public Label LabelArgent;
-    @FXML
-    public Label LabelPV;
+    public Label LabelPV,LabelnbEnnemisRestant,LabelArgent,LabelVague;
     @FXML
     private Pane panneauJeu;
     private VueEnnemi vueEnnemi;
@@ -164,6 +161,7 @@ private Niveau niveau;
             this.LabelVague.textProperty().bind(this.jeu.getNbVagueProperty().asString());
             this.LabelArgent.textProperty().bind(this.jeu.getArgentProperty().asString());
             this.LabelPV.textProperty().bind(this.jeu.getPvJoueurProperty().asString());
+            this.LabelnbEnnemisRestant.textProperty().bind(this.jeu.nbEnnemisRestantProperty().asString());
             ListChangeListener<Ennemis> listenerEnnemis = new ListObsEnnemis(this.jeu, this.panneauJeu);
             jeu.getEnnemis().addListener(listenerEnnemis);
         } catch (FileNotFoundException e) {

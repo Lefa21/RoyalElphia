@@ -31,7 +31,7 @@ public class jeu {
 
     private Niveau niveau;
 
-    private IntegerProperty nbVague;
+    private IntegerProperty nbVague,nbEnnemisRestant;
 
 
     private int temps, nbTour;
@@ -44,11 +44,14 @@ public class jeu {
         this.listeEnnemisSpawn = new ArrayList<>();
         this.niveau = niveau;
         this.nbTour = 0;
+        this.nbEnnemisRestant = new SimpleIntegerProperty(this.niveau.getNbEnnemis());
         this.nbVague = new SimpleIntegerProperty(1);
         this.pvJoueur = new SimpleIntegerProperty(4);
         this.listeDeTour = new ArrayList<>();
         this.argent = new SimpleIntegerProperty(200);
     }
+
+
 
 
     public void ajouterTour(Tour t) {
@@ -104,35 +107,44 @@ public class jeu {
     }
 
     public void vagueSuivante() {
+
+        for (int i = 0; i < listeEnnemisSpawn.size(); i++) {
+            listeEnnemisSpawn.remove(i);
+        }
+
+
         this.nbVague.setValue(this.nbVague.getValue() + 1);
         this.niveau.setNbEnnemis(this.niveau.getNbEnnemis() * 2);
+        this.nbEnnemisRestant.setValue((this.niveau.getNbEnnemis() - this.ennemis.size()));
     }
 
     // permet d'ajouter un ennemi qui a spawn sur le terrain dans la liste de notre modèle
     public void spwanEnnemi() {
-        if (nbTour % 2 == 0 && listeEnnemisSpawn.size() != this.niveau.getNbEnnemis()) {
+        if (nbTour % 2 == 0 && listeEnnemisSpawn.size() <= this.niveau.getNbEnnemis()) {
             Ennemis enm = new Sorcières(terrain);
             ennemis.add(enm);
             this.listeEnnemisSpawn.add(enm);
         }
 
-        if (nbTour % 2 == 0 && listeEnnemisSpawn.size() != this.niveau.getNbEnnemis()) {
+        if (nbTour % 8 == 0 && listeEnnemisSpawn.size() <= this.niveau.getNbEnnemis()) {
             Ennemis enm1 = new Géant(terrain);
             ennemis.add(enm1);
             this.listeEnnemisSpawn.add(enm1);
-        } else if (nbTour % 4 == 0 && listeEnnemisSpawn.size() != this.niveau.getNbEnnemis()) {
+
+        } else if (nbTour % 16 == 0 && listeEnnemisSpawn.size() <= this.niveau.getNbEnnemis()) {
             Ennemis enm = new gobelins(terrain);
             ennemis.add(enm);
             this.listeEnnemisSpawn.add(enm);
-        } else if (nbTour % 4 == 0 && listeEnnemisSpawn.size() != this.niveau.getNbEnnemis()) {
+
+        } else if (nbTour % 32 == 0 && listeEnnemisSpawn.size() <= this.niveau.getNbEnnemis()) {
             Ennemis enm = new Squelette(terrain);
             ennemis.add(enm);
             this.listeEnnemisSpawn.add(enm);
-        } else if (nbTour % 4 == 0 && listeEnnemisSpawn.size() != this.niveau.getNbEnnemis()) {
+
+        } else if (nbTour % 64 == 0 && listeEnnemisSpawn.size() <= this.niveau.getNbEnnemis()) {
             Ennemis enm = new GéantRoyal(terrain);
             ennemis.add(enm);
             this.listeEnnemisSpawn.add(enm);
-
         }
     }
 
@@ -180,8 +192,19 @@ public class jeu {
         return listeDeTour;
     }
 
+    public final void setNbEnnemisRestant(int nbEnnemisRestant) {
+        this.nbEnnemisRestant.setValue(nbEnnemisRestant);
+    }
 
-            public void unTour() {
+    public IntegerProperty nbEnnemisRestantProperty() {
+        return nbEnnemisRestant;
+    }
+
+    public int getNbEnnemisRestant() {
+        return this.nbEnnemisRestant.getValue();
+    }
+
+    public void unTour() {
                 for (int i = 0; i < ennemis.size(); i++) {
                     this.ennemis.get(i).seDeplace();
                     if (this.ennemis.get(i).getX() == (this.terrain.getPointArv().getX() * 32 + 16) && this.ennemis.get(i).getY() == (this.terrain.getPointArv().getY() * 32 + 16)) {
@@ -212,15 +235,11 @@ public class jeu {
                         // on définit ce qui se passe à chaque frame
                         // c'est un eventHandler d'ou le lambda
                         (ev -> {
-
                             if (this.getPvJoueur() == 0 || this.nbVague.getValue() == 5) {
                                 System.out.println("Vous avez perdu");
                                 gameLoop.stop();
                             } else if (getEnnemisTué().size() == niveau.getNbEnnemis()) {
-                                System.out.println("Le nombre d'ennemis max est de   " + this.niveau.getNbEnnemis());
-                                System.out.println("Le nombre d'ennemis est tué est  " + this.getEnnemisTué().size());
                                 vagueSuivante();
-                                System.out.println("Nous passons à la vague " + this.getNbVague());
                                 unTour();
                             } else if (temps % 3 == 0) {
                                 unTour();
