@@ -101,45 +101,6 @@ public  class jeu {
 
     // permet d'ajouter un ennemi qui a spawn sur le terrain dans la liste de notre modèle
 
-/*
-    public void spwanEnnemi(){
-        if(nbTour%2 == 0 && niveau.getNbSorciere() != 0){
-            Ennemis enm = new Sorcières(terrain);
-            ennemis.add(enm);
-            this.listeEnnemisSpawn.add(enm);
-            niveau.setNbSorciere(niveau.getNbSorciere() -1);
-        }
-
-        else if(nbTour%4 == 0 && niveau.getNbGeant() != 0){
-            Ennemis  enm = new Géant(terrain);
-            ennemis.add(enm);
-            this.listeEnnemisSpawn.add(enm);
-            niveau.setNbGeant(niveau.getNbGeant() -1);
-        }
-
-        else if(nbTour%8 == 0 && niveau.getNbGobelins() != 0){
-            Ennemis enm = new gobelins(terrain);
-            ennemis.add(enm);
-            this.listeEnnemisSpawn.add(enm);
-            niveau.setNbGobelins(niveau.getNbGobelins() -1);
-        }
-
-        else if(nbTour%16 == 0 && niveau.getNbSquelette() != 0){
-            Ennemis enm = new Squelette(terrain);
-            ennemis.add(enm);
-            this.listeEnnemisSpawn.add(enm);
-            niveau.setNbSquelette(niveau.getNbSquelette() -1);
-        }
-
-        else if(nbTour%32 == 0 && niveau.getNbGeantRoyale() != 0){
-            Ennemis enm = new GéantRoyal(terrain);
-            ennemis.add(enm);
-            this.listeEnnemisSpawn.add(enm);
-            niveau.setNbGeantRoyale(niveau.getNbGeantRoyale() -1);
-        }
-    }
-    */
-
     public void spwanEnnemi(){
         if(nbTour%2 == 0 && listeEnnemisSpawn.size() != this.niveau.getNbEnnemis()){
             Ennemis enm = new Sorcières(terrain);
@@ -147,25 +108,25 @@ public  class jeu {
             this.listeEnnemisSpawn.add(enm);
         }
 
-        if(nbTour%4 == 0 && listeEnnemisSpawn.size() != this.niveau.getNbEnnemis()){
+        if(nbTour%2 == 0 && listeEnnemisSpawn.size() != this.niveau.getNbEnnemis()){
             Ennemis  enm1 = new Géant(terrain);
             ennemis.add(enm1);
             this.listeEnnemisSpawn.add(enm1);
         }
 
-        else if(nbTour%8 == 0 && listeEnnemisSpawn.size() != this.niveau.getNbEnnemis()){
+        else if(nbTour%4 == 0 && listeEnnemisSpawn.size() != this.niveau.getNbEnnemis()){
             Ennemis enm = new gobelins(terrain);
             ennemis.add(enm);
             this.listeEnnemisSpawn.add(enm);
         }
 
-        else if(nbTour%16 == 0 && listeEnnemisSpawn.size() != this.niveau.getNbEnnemis()){
+        else if(nbTour%4 == 0 && listeEnnemisSpawn.size() != this.niveau.getNbEnnemis()){
             Ennemis enm = new Squelette(terrain);
             ennemis.add(enm);
             this.listeEnnemisSpawn.add(enm);
         }
 
-        else if(nbTour%32 == 0 && listeEnnemisSpawn.size() != this.niveau.getNbEnnemis()){
+        else if(nbTour%4 == 0 && listeEnnemisSpawn.size() != this.niveau.getNbEnnemis()){
             Ennemis enm = new GéantRoyal(terrain);
             ennemis.add(enm);
             this.listeEnnemisSpawn.add(enm);
