@@ -7,17 +7,6 @@
 <?import javafx.scene.layout.VBox?>
 
 <BorderPane prefHeight="800" prefWidth="600" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.montreuil.iut.RoyalElphia.Controller.SceneController">
-    <top>
-        <Label />
-    </top>
-
-    <right>
-        <VBox>
-            <Label text="right" />
-            <Label text="right" />
-            <Label text="right" />
-        </VBox>
-    </right>
 
     <center>
         <Pane style="-fx-background-color: Brown;">
@@ -34,12 +23,4 @@
             </VBox>
          </children></Pane>
     </center>
-
-    <left>
-        <Label text="left" />
-    </left>
-
-    <bottom>
-        <Label text="bottom" />
-    </bottom>
 </BorderPane>
