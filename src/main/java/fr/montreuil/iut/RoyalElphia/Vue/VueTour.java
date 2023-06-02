@@ -1,5 +1,6 @@
 package fr.montreuil.iut.RoyalElphia.Vue;
 
+import fr.montreuil.iut.RoyalElphia.modele.Map.CasesDégats;
 import fr.montreuil.iut.RoyalElphia.modele.Map.Terrain;
 import fr.montreuil.iut.RoyalElphia.modele.Tour.*;
 import fr.montreuil.iut.RoyalElphia.modele.jeu;
@@ -34,38 +35,42 @@ public class VueTour {
 
     public void PoserTour() throws FileNotFoundException {
         int[][] tab = terrain.getTabTerrain();
-        int posX = (int) this.x/32;
-        int posY = (int) this.y/32;
-        if (tab[posY][posX]==7){
+        int posX = (int) this.x / 32;
+        int posY = (int) this.y / 32;
+        if (tab[posY][posX] == 7) {
             if (this.tour instanceof TourABombe) {
                 Image TourBombe = new Image(new FileInputStream("src/main/resources/fr/montreuil/iut/RoyalElphia/Page_Fxml/tt-PhotoRoom.png-PhotoRoom(2).png"));
                 ImageView TourBombeView = new ImageView(TourBombe);
-                TourBombeView.setX(x-10);
-                TourBombeView.setY(y-15);
+                tour.rayonDegat(terrain,posX,posY, tour.getDegat());
+                TourBombeView.setX(x - 10);
+                TourBombeView.setY(y - 15);
                 panneauJeu.getChildren().add(TourBombeView);
                 this.tour = null;
             }
             if (this.tour instanceof TourBouleDeFeu) {
                 Image TourFeu = new Image(new FileInputStream("src/main/resources/fr/montreuil/iut/RoyalElphia/Page_Fxml/TourFeuTerrain.png"));
                 ImageView TourFeuView = new ImageView(TourFeu);
-                TourFeuView.setX(x-10);
-                TourFeuView.setY(y-15);
+                tour.rayonDegat(terrain,posX,posY, tour.getDegat());
+                TourFeuView.setX(x - 10);
+                TourFeuView.setY(y - 15);
                 panneauJeu.getChildren().add(TourFeuView);
                 this.tour = null;
             }
             if (this.tour instanceof TourFleche) {
                 Image TourFleche = new Image(new FileInputStream("src/main/resources/fr/montreuil/iut/RoyalElphia/Page_Fxml/TourFlecheM.png"));
                 ImageView TourFlecheView = new ImageView(TourFleche);
-                TourFlecheView.setX(x-10);
-                TourFlecheView.setY(y-15);
+                tour.rayonDegat(terrain,posX,posY, tour.getDegat());
+                TourFlecheView.setX(x - 10);
+                TourFlecheView.setY(y - 15);
                 panneauJeu.getChildren().add(TourFlecheView);
                 this.tour = null;
             }
             if (this.tour instanceof TourElectrique) {
                 Image TourElec = new Image(new FileInputStream("src/main/resources/fr/montreuil/iut/RoyalElphia/Page_Fxml/TourEclairM.png"));
                 ImageView TourElecView = new ImageView(TourElec);
-                TourElecView.setX(x-45);
-                TourElecView.setY(y-45);
+                tour.rayonDegat(terrain,posX,posY, tour.getDegat());
+                TourElecView.setX(x - 45);
+                TourElecView.setY(y - 45);
                 panneauJeu.getChildren().add(TourElecView);
                 this.tour = null;
             }

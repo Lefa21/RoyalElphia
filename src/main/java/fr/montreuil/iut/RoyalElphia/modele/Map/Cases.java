@@ -4,7 +4,7 @@ import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 
 public class Cases {
-    private IntegerProperty x,y;
+    private IntegerProperty x, y;
 
     public Cases(int x, int y) {
         this.x = new SimpleIntegerProperty(x);
@@ -23,7 +23,7 @@ public class Cases {
         return this.x;
     }
 
-    public IntegerProperty getYProperty(){
+    public IntegerProperty getYProperty() {
         return this.y;
     }
 }

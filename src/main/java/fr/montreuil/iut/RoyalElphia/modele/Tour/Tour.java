@@ -1,6 +1,8 @@
 package fr.montreuil.iut.RoyalElphia.modele.Tour;
 
 import fr.montreuil.iut.RoyalElphia.modele.Map.Cases;
+import fr.montreuil.iut.RoyalElphia.modele.Map.CasesDégats;
+import fr.montreuil.iut.RoyalElphia.modele.Map.Terrain;
 
 import java.util.ArrayList;
 
@@ -17,8 +19,10 @@ public class Tour {
     private int DureeINtervalleAttaque;
     private int NombreAttaqueMax;
     private int TempsRecharge;
+    private int degat;
 
-    public Tour(String nom, int coutAchat,int porteeAttaque, String typeAttaque, int coutVente, int coutAmelioration, int niveauAmelioration, int niveauMaxAmelioration, int dureeINtervalleAttaque, int nombreAttaqueMax, int tempsRecharge) {
+
+    public Tour(int degat, String nom, int coutAchat, int porteeAttaque, String typeAttaque, int coutVente, int coutAmelioration, int niveauAmelioration, int niveauMaxAmelioration, int dureeINtervalleAttaque, int nombreAttaqueMax, int tempsRecharge) {
         Nom = nom;
         CoutAchat = coutAchat;
         PorteeAttaque = porteeAttaque;
@@ -30,6 +34,8 @@ public class Tour {
         DureeINtervalleAttaque = dureeINtervalleAttaque;
         NombreAttaqueMax = nombreAttaqueMax;
         TempsRecharge = tempsRecharge;
+        this.degat = degat;
+
     }
 
     public String getNom() {
@@ -42,6 +48,10 @@ public class Tour {
 
     public int getCoutAchat() {
         return CoutAchat;
+    }
+
+    public int getDegat() {
+        return degat;
     }
 
     public void setCoutAchat(int coutAchat) {
@@ -115,5 +125,19 @@ public class Tour {
 
     public void setTempsRecharge(int tempsRecharge) {
         TempsRecharge = tempsRecharge;
+    }
+
+    public void rayonDegat(Terrain Terrain, int x, int y, int degat) {
+        for (int i = 0; i <= this.getPorteeAttaque(); i++) {
+            Terrain.ajouterCaseDegat(new CasesDégats((x * 32) + 16, (y * 32) - (32 * i) + 16, degat));
+            Terrain.ajouterCaseDegat(new CasesDégats((x * 32) + 16, (y * 32) + (32 * i) + 16, degat));
+            Terrain.ajouterCaseDegat(new CasesDégats((x * 32) + (32 * i) + 16, (y * 32) + 16, degat));
+            Terrain.ajouterCaseDegat(new CasesDégats((x * 32) - (32 * i) + 16, (y * 32) + 16, degat));
+
+            Terrain.ajouterCaseDegat(new CasesDégats((x * 32) - (32 * i) + 16, (y * 32) - (32 * i) + 16, degat));
+            Terrain.ajouterCaseDegat(new CasesDégats((x * 32) - (32 * i) + 16, (y * 32) + (32 * i) + 16, degat));
+            Terrain.ajouterCaseDegat(new CasesDégats((x * 32) + (32 * i) + 16, (y * 32) + (32 * i) + 16, degat));
+            Terrain.ajouterCaseDegat(new CasesDégats((x * 32) + (32 * i) + 16, (y * 32) - (32 * i) + 16, degat));
+        }
     }
 }
