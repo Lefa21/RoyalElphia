@@ -17,6 +17,7 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.text.Text?>
+<?import javafx.scene.text.Font?>
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.montreuil.iut.RoyalElphia.Controller.HelloController">
     <right>
         <VBox>
@@ -31,6 +32,11 @@
             <children>
                 <TilePane onMouseClicked="#PoserTour" fx:id="map" prefHeight="960" prefWidth="1280" />
                 <VBox layoutX="1280" prefHeight="90" prefWidth="90">
+                    <children><Label alignment="CENTER" contentDisplay="CENTER" prefHeight="62.0" prefWidth="239.0" text="Menu tour" textAlignment="CENTER">
+                        <font>
+                            <Font size="30.0" />
+                        </font>
+                    </Label></children>
                     <HBox>
                     <children>
                         <ImageView fx:id="bombe" onMouseClicked="#TourClique" fitHeight="150.0" fitWidth="138.0" pickOnBounds="true" preserveRatio="true">
@@ -65,6 +71,20 @@
                             </ImageView>
                         </children>
                     </HBox>
+                    <children>
+                        <ImageView fx:id="laser" onMouseClicked="#TourClique" fitHeight="110.0" fitWidth="108.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@TourLaser.png" />
+                            </image>
+                        </ImageView>
+                    </children>
+                    <children>
+                        <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="50.0" prefWidth="232.0" text="Caractéristiques Tours" textOverrun="CENTER_ELLIPSIS" onAction="#BoutonCaracteristiques">
+                            <font>
+                                <Font size="17.0" />
+                            </font>
+                        </Button>
+                    </children>
                 </VBox>
             </children>
             <HBox layoutY="960" prefHeight="83.0" prefWidth="472.0">

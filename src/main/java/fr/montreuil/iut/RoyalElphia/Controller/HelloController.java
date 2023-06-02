@@ -1,5 +1,6 @@
 package fr.montreuil.iut.RoyalElphia.Controller;
 
+import fr.montreuil.iut.RoyalElphia.HelloApplication;
 import fr.montreuil.iut.RoyalElphia.Vue.*;
 import fr.montreuil.iut.RoyalElphia.modele.*;
 import fr.montreuil.iut.RoyalElphia.modele.Ennemis.Ennemis;
@@ -11,8 +12,11 @@ import fr.montreuil.iut.RoyalElphia.modele.Niveau.Niveau;
 import fr.montreuil.iut.RoyalElphia.modele.Tour.Tour;
 
 import javafx.collections.ListChangeListener;
+import javafx.event.ActionEvent;
 import javafx.event.Event;
 
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 
 import javafx.scene.image.ImageView;
@@ -22,11 +26,12 @@ import javafx.scene.layout.Pane;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.layout.TilePane;
+import javafx.stage.Stage;
 
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class HelloController implements Initializable {
@@ -52,7 +57,8 @@ public class HelloController implements Initializable {
     @FXML
     public void TourClique(MouseEvent mouseEvent) throws FileNotFoundException {
         //this.tour = null;
-        if (this.TourPose && tour == null) {
+
+        if (this.TourPose && tour == null && mouseEvent.getClickCount()==2) {
             if (((ImageView) mouseEvent.getSource()).getId().equals("bombe")) {
                 if (this.jeu.getArgent() >= 40) {
                     vt.CliqueTour(this.jeu, "bombe");
@@ -76,6 +82,14 @@ public class HelloController implements Initializable {
                     vt.CliqueTour(this.jeu, "eclair");
                     this.tour = vt.getTour();
                     this.TourPose = false;
+
+                }
+            }
+            else if (((ImageView) mouseEvent.getSource()).getId().equals("laser")) {
+                if (this.jeu.getArgent() >= 60) {
+                    vt.CliqueTour(this.jeu, "laser");
+                    this.tour = vt.getTour();
+                    this.TourPose = false;
                 }
             }
         }
@@ -91,6 +105,14 @@ public class HelloController implements Initializable {
         this.tour = vueTour.getTour();
     }
 
+    @FXML
+    public void BoutonCaracteristiques(ActionEvent actionEvent) throws IOException {
+        Stage newWindow = new Stage();
+        newWindow.setTitle("Caractéristiques des tours");
+        FXMLLoader loader = new FXMLLoader(HelloApplication.class.getResource("Page_Fxml/CaracteristiquesTours.fxml"));
+        newWindow.setScene(new Scene(loader.load()));
+        newWindow.show();
+    }
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try {
@@ -114,13 +136,10 @@ public class HelloController implements Initializable {
     public void Demarrer(Event event) {
         jeu.lancementLoop();
     }
-
-
     @FXML
     public void Pause(Event event) {
         jeu.arretLoop();
     }
-
 
 }
 
