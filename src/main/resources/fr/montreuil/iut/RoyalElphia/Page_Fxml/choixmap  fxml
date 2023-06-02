@@ -1,0 +1,11 @@
+                  <ImageView fitHeight="172.0" fitWidth="237.0" onMouseClicked="#CliqueMap1" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image fx:id="Map1" url="@../ImageMap/Map1.png" />
+                            </image>
+                        </ImageView>
+
+                        <ImageView fitHeight="174.0" fitWidth="209.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image fx:id="Map2" url="@../ImageMap/Map2.png" />
+                            </image>
+                        </ImageView>

@@ -4,15 +4,19 @@ import fr.montreuil.iut.RoyalElphia.Vue.*;
 import fr.montreuil.iut.RoyalElphia.modele.*;
 import fr.montreuil.iut.RoyalElphia.modele.Ennemis.Ennemis;
 import fr.montreuil.iut.RoyalElphia.modele.Map.Map2;
+import fr.montreuil.iut.RoyalElphia.modele.Map.Map_1;
 import fr.montreuil.iut.RoyalElphia.modele.Map.Terrain;
 
+import fr.montreuil.iut.RoyalElphia.modele.Niveau.Difficile;
 import fr.montreuil.iut.RoyalElphia.modele.Niveau.Facile;
 import fr.montreuil.iut.RoyalElphia.modele.Niveau.Niveau;
+import fr.montreuil.iut.RoyalElphia.modele.Niveau.Normal;
 import fr.montreuil.iut.RoyalElphia.modele.Tour.Tour;
 
 import javafx.collections.ListChangeListener;
 import javafx.event.Event;
 
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
 
 import javafx.scene.image.ImageView;
@@ -30,11 +34,14 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 public class HelloController implements Initializable {
 
- private Terrain terrain;
+    public Label LabelVague;
+    private Terrain terrain;
 @FXML
  private TilePane map;
 private jeu jeu;
 private Niveau niveau;
+
+    private FXMLLoader fxmlLoader;
 
 
     @FXML
@@ -97,20 +104,49 @@ private Niveau niveau;
         this.tour=vueTour.getTour();
     }
 
+    public void créerNiveau(){
+        int niveau = SceneController.getNiveau();
+        if(niveau == 1){
+            this.niveau = new Facile();
+        }
+
+        else if(niveau == 2){
+            this.niveau = new Normal();
+        }
+
+        else if(niveau == 3){
+            this.niveau = new Difficile();
+        }
+    }
+
+    public void créerTerrain(){
+        int terrain = SceneController.getTerrain();
+        if(terrain == 1){
+            this.terrain = new Map2();
+        }
+
+        else if(terrain == 2){
+            this.terrain = new Map_1();
+        }
+    }
+
+    public void créationPartie(){
+        créerNiveau();
+        créerTerrain();
+        this.jeu = new jeu(this.terrain,this.niveau);
+    }
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try {
-            this.terrain = new Map2() {
-            };
-            this.niveau = new Facile();
-            this.jeu = new jeu(this.terrain,this.niveau);
-            this.LabelPV.textProperty().bind(this.jeu.getPvJoueurProperty().asString());
-            TerrainVue terrainVue = new TerrainVue(terrain,map);
+            créationPartie();
             //demarre l'animation
             jeu.initAnimation();
+            this.LabelPV.textProperty().bind(this.jeu.getPvJoueurProperty().asString());
+            this.LabelVague.textProperty().bind(this.jeu.getNbVagueProperty().asString());
+            this.LabelArgent.textProperty().bind(this.jeu.getArgentProperty().asString());
+            TerrainVue terrainVue = new TerrainVue(terrain,map);
             ListChangeListener<Ennemis> listenerEnnemis = new ListObsEnnemis(this.jeu,this.panneauJeu);
             jeu.getEnnemis().addListener(listenerEnnemis);
-            this.LabelArgent.textProperty().bind(this.jeu.getArgentProperty().asString());
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }
@@ -125,7 +161,6 @@ private Niveau niveau;
     public void Pause(Event event) {
         jeu.arretLoop();
     }
-
 
 }
 

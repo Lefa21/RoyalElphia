@@ -1,16 +1,21 @@
 package fr.montreuil.iut.RoyalElphia.Controller;
 
 import fr.montreuil.iut.RoyalElphia.HelloApplication;
+import fr.montreuil.iut.RoyalElphia.Vue.TerrainVue;
+import fr.montreuil.iut.RoyalElphia.modele.Ennemis.Ennemis;
 import fr.montreuil.iut.RoyalElphia.modele.Map.Map2;
+import fr.montreuil.iut.RoyalElphia.modele.Map.Map_1;
 import fr.montreuil.iut.RoyalElphia.modele.Map.Terrain;
 import fr.montreuil.iut.RoyalElphia.modele.Niveau.Difficile;
 import fr.montreuil.iut.RoyalElphia.modele.Niveau.Facile;
 import fr.montreuil.iut.RoyalElphia.modele.Niveau.Niveau;
 import fr.montreuil.iut.RoyalElphia.modele.Niveau.Normal;
 import fr.montreuil.iut.RoyalElphia.modele.jeu;
+import javafx.collections.ListChangeListener;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -19,22 +24,23 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
-public class SceneController {
+public class SceneController implements Initializable{
     private Stage stage;
     private Scene scene;
     private FXMLLoader fxmlLoader;
 
-    private jeu jeu;
 
-    private Terrain terrain;
-
-    private Niveau niveau;
-
+    private static int  niveau;
+    private static  int terrain;
 
     @FXML
-    private RadioButton buttonFacile,buttonNormal,buttonDifficile;
+    private RadioButton buttonFacile,buttonNormal,buttonDifficile,buttonMap1,buttonMap2;
+
 
 @FXML
     public void LancerJeu(ActionEvent event) throws IOException {
@@ -42,41 +48,70 @@ public class SceneController {
     scene = new Scene(fxmlLoader.load(), 1920,1080);
     stage = (Stage)((Node)event.getSource()).getScene().getWindow();
     stage.setScene(scene);
-    stage.show();
+   // stage.show();
     }
 
-    /*
-    @FXML
-    public void CliqueMap2(MouseEvent mouseEvent) {
-        fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("Niveau.fxml"));
-        scene = new Scene(fxmlLoader.load(), 1920,1080);
-        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        stage.setScene(scene);
-        stage.show();
-    }
-    */
 
-    public Niveau choixNiveau(){
+
+    public int choixNiveau(){
+    int niveau = 0;
         if(buttonFacile.isSelected()){
-            this.niveau = new Facile();
+            niveau =  1;
         }
         else if(buttonNormal.isSelected()){
-            this.niveau = new Normal();
+            niveau =  2;
         }
         else if(buttonDifficile.isSelected()){
-            this.niveau = new Difficile();
+           niveau =  3;
         }
-        return this.niveau;
+        return niveau;
     }
 
+    public int choixMap(){
+        int map = 0;
+        if(buttonMap1.isSelected()){
+            map =  1;
+        }
+        else if(buttonMap2.isSelected()){
+            map =  2;
+        }
+        return map;
+    }
+
+    public static int getNiveau() {
+        return SceneController.niveau;
+    }
+
+    public static int getTerrain() {
+        return SceneController.terrain;
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+    }
+
+    public void Jouer(ActionEvent actionEvent) throws IOException {
 
 
-
-    public void CliqueMap1(MouseEvent mouseEvent) throws IOException {
+    if(choixMap()== 1){
+        this.niveau = choixNiveau();
+        this.terrain = choixMap();
         fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("Page_Fxml/Terrain.fxml"));
         scene = new Scene(fxmlLoader.load(), 1920,1080);
-        stage = (Stage)((Node)mouseEvent.getSource()).getScene().getWindow();
+        stage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
+        //((HelloController)fxmlLoader.getController()).créationPartie();
+        stage.setScene(scene);
+        stage.show();
+
+    }
+    else{
+        fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("Page_Fxml/Terrain.fxml"));
+        scene = new Scene(fxmlLoader.load(), 1920,1080);
+        stage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
+        //((HelloController)fxmlLoader.getController()).test();
         stage.setScene(scene);
         stage.show();
     }
+    }
+
 }

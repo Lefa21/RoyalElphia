@@ -28,6 +28,8 @@ public  class jeu {
 
     private Niveau niveau;
 
+    private IntegerProperty  nbVague;
+
 
     private int temps,nbTour;
 
@@ -38,6 +40,7 @@ public  class jeu {
         this.listeEnnemisSpawn = new ArrayList<>();
         this.niveau = niveau;
         this.nbTour = 0;
+        this.nbVague = new SimpleIntegerProperty(1);
         this.pvJoueur = new SimpleIntegerProperty(4);
         this.listeDeTour = new ArrayList<>();
         this.argent = new SimpleIntegerProperty(200);
@@ -75,13 +78,30 @@ public  class jeu {
     }
 
 
+    public final void setNbVague(int nbVague) {
+        this.nbVague.set(nbVague);
+    }
+
+    public final int getNbVague() {
+        return nbVague.get();
+    }
+
+    public final IntegerProperty getNbVagueProperty() {
+        return this.nbVague;
+    }
+
     public void ajouter(Ennemis e) {
         this.ennemis.add(e);
     }
 
+    public void vagueSuivante(){
+        this.nbVague.setValue(this.nbVague.getValue() + 1);
+        this.niveau.setNbEnnemis(this.niveau.getNbEnnemis() * 2);
+    }
+
     // permet d'ajouter un ennemi qui a spawn sur le terrain dans la liste de notre modèle
 
-
+/*
     public void spwanEnnemi(){
         if(nbTour%2 == 0 && niveau.getNbSorciere() != 0){
             Ennemis enm = new Sorcières(terrain);
@@ -116,6 +136,39 @@ public  class jeu {
             ennemis.add(enm);
             this.listeEnnemisSpawn.add(enm);
             niveau.setNbGeantRoyale(niveau.getNbGeantRoyale() -1);
+        }
+    }
+    */
+
+    public void spwanEnnemi(){
+        if(nbTour%2 == 0 && listeEnnemisSpawn.size() != this.niveau.getNbEnnemis()){
+            Ennemis enm = new Sorcières(terrain);
+            ennemis.add(enm);
+            this.listeEnnemisSpawn.add(enm);
+        }
+
+        if(nbTour%4 == 0 && listeEnnemisSpawn.size() != this.niveau.getNbEnnemis()){
+            Ennemis  enm1 = new Géant(terrain);
+            ennemis.add(enm1);
+            this.listeEnnemisSpawn.add(enm1);
+        }
+
+        else if(nbTour%8 == 0 && listeEnnemisSpawn.size() != this.niveau.getNbEnnemis()){
+            Ennemis enm = new gobelins(terrain);
+            ennemis.add(enm);
+            this.listeEnnemisSpawn.add(enm);
+        }
+
+        else if(nbTour%16 == 0 && listeEnnemisSpawn.size() != this.niveau.getNbEnnemis()){
+            Ennemis enm = new Squelette(terrain);
+            ennemis.add(enm);
+            this.listeEnnemisSpawn.add(enm);
+        }
+
+        else if(nbTour%32 == 0 && listeEnnemisSpawn.size() != this.niveau.getNbEnnemis()){
+            Ennemis enm = new GéantRoyal(terrain);
+            ennemis.add(enm);
+            this.listeEnnemisSpawn.add(enm);
         }
     }
 
@@ -166,15 +219,23 @@ public  class jeu {
                 // on définit ce qui se passe à chaque frame
                 // c'est un eventHandler d'ou le lambda
                 (ev -> {
-                    if (getEnnemisTué().size() == niveau.getNbEnnemis()|| this.getPvJoueur()==0) {
-                        System.out.println("fini");
+                    if (this.getPvJoueur()==0 || this.nbVague.getValue() == 5) {
+                        System.out.println("Vous avez perdu");
                         gameLoop.stop();
+                    }
+                        else if(getEnnemisTué().size() == niveau.getNbEnnemis()) {
+                        System.out.println("Le nombre d'ennemis max est de   " + this.niveau.getNbEnnemis());
+                        System.out.println("Le nombre d'ennemis est tué est  " + this.getEnnemisTué().size());
+                        vagueSuivante();
+                        System.out.println("Nous passons à la vague " + this.getNbVague());
+                        unTour();
                     } else if (temps % 3 == 0) {
                         unTour();
                     } else if (temps % 5 == 0) {
-                        if (getEnnemis().size() < niveau.getNbEnnemis()) {
+                        if (getEnnemis().size() < this.niveau.getNbEnnemis()) {
                             System.out.println("Un tour");
                             spwanEnnemi();
+                            System.out.println("Ennemis spwan");
                         }
                     }
                     temps++;
