@@ -49,7 +49,10 @@ public  abstract class Ennemis {
     }
 
     public void setPv(int x) {
-        this.pv.setValue(this.getPv()-x);
+        if (getPv()-x < 0)
+            this.pv.setValue(0);
+        else
+            this.pv.setValue(this.getPv()-x);
     }
 
     public IntegerProperty getPvProperty() {
@@ -109,28 +112,28 @@ public  abstract class Ennemis {
 
         /* On vérifie si la case à droite de l'ennemi est dans sa liste de case parcourue et on vérifie
         après si la case est un chemin ou la base */
-        if (peutSeDeplacer(1,"DROITE") || peutSeDeplacer(2,"DROITE") || peutSeDeplacer(3,"DROITE")) {
+        if (peutSeDeplacer(1,"DROITE") || peutSeDeplacer(2,"DROITE")) {
             this.setX(this.getX() + 32);
             casesParcourues.ajouterCase(new Cases(this.getX(), this.getY()));
         }
 
         /* On vérifie si la case en dessous de l'ennemi est dans sa liste de case parcourue et on vérifie
         après si la case est un chemin ou la base */
-        else if (peutSeDeplacer(1,"BAS") || peutSeDeplacer(2,"BAS") || peutSeDeplacer(3,"BAS")) {
+        else if (peutSeDeplacer(1,"BAS") || peutSeDeplacer(2,"BAS")) {
             this.setY(this.getY() + 32);
             casesParcourues.ajouterCase(new Cases(this.getX(), this.getY()));
         }
 
         /* On vérifie si la case à gauche de l'ennemi est dans sa liste de case parcourue et on vérifie
         après si la case est un chemin ou la base */
-        else if (peutSeDeplacer(1,"GAUCHE") || peutSeDeplacer(2,"GAUCHE") || peutSeDeplacer(3,"GAUCHE")) {
+        else if (peutSeDeplacer(1,"GAUCHE") || peutSeDeplacer(2,"GAUCHE")) {
             this.setX(this.getX() - 32);
             casesParcourues.ajouterCase(new Cases(this.getX(), this.getY()));
         }
 
         /* On vérifie si la case au dessus de l'ennemi est dans sa liste de case parcourue et on vérifie
         après si la case est un chemin ou la base */
-        else if (peutSeDeplacer(1,"HAUT") || peutSeDeplacer(2,"HAUT") || peutSeDeplacer(3,"HAUT")) {
+        else if (peutSeDeplacer(1,"HAUT") || peutSeDeplacer(2,"HAUT")) {
             this.setY(this.getY() - 32);
             casesParcourues.ajouterCase(new Cases(this.getX(), this.getY()));
         }
@@ -144,10 +147,6 @@ public  abstract class Ennemis {
         }
         else if (i==2) {
             if(!casesParcourues.verif(CasesDirection(s)) && tabDirection(s) == 2)
-                retour = true;
-        }
-        else if (i==3) {
-            if(!casesParcourues.verif(CasesDirection(s)) && tabDirection(s) == 88)
                 retour = true;
         }
         return retour;
