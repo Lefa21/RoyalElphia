@@ -30,7 +30,7 @@
     <center>
         <Pane prefHeight="960" prefWidth="1280" BorderPane.alignment="CENTER" fx:id="panneauJeu" >
             <children>
-                <TilePane onMouseClicked="#PoserTour" fx:id="map" prefHeight="960" prefWidth="1280" />
+                <TilePane onMouseClicked="#PoserTour"  fx:id="map" prefHeight="960" prefWidth="1280" />
                 <VBox layoutX="1280" prefHeight="90" prefWidth="90">
                     <children><Label alignment="CENTER" contentDisplay="CENTER" prefHeight="62.0" prefWidth="239.0" text="Menu tour" textAlignment="CENTER">
                         <font>
@@ -38,22 +38,22 @@
                         </font>
                     </Label></children>
                     <HBox>
-                    <children>
-                        <ImageView fx:id="bombe" onMouseClicked="#TourClique" fitHeight="150.0" fitWidth="138.0" pickOnBounds="true" preserveRatio="true">
-                            <image>
+                        <children>
+                            <ImageView fx:id="bombe" onMouseClicked="#TourClique" fitHeight="150.0" fitWidth="138.0" pickOnBounds="true" preserveRatio="true">
+                                <image>
 
-                                <Image fx:id="TourABombe" url="@../ImageTour/TirTourBombe.gif" />
-                                <Image url="@TourBombe.png" />
-                            </image>
-                        </ImageView>
-                    </children>
-                    <children>
-                        <ImageView fx:id="feu" onMouseClicked="#TourClique" fitHeight="150.0" fitWidth="138.0" pickOnBounds="true" preserveRatio="true">
-                            <image>
-                                <Image url="@TourFeu.png" />
-                            </image>
-                        </ImageView>
-                    </children>
+                                    <Image fx:id="TourABombe" url="@../ImageTour/TirTourBombe.gif" />
+                                    <Image url="@TourBombe.png" />
+                                </image>
+                            </ImageView>
+                        </children>
+                        <children>
+                            <ImageView fx:id="feu" onMouseClicked="#TourClique" fitHeight="150.0" fitWidth="138.0" pickOnBounds="true" preserveRatio="true">
+                                <image>
+                                    <Image url="@TourFeu.png" />
+                                </image>
+                            </ImageView>
+                        </children>
                     </HBox>
                     <HBox>
                         <children>
@@ -85,8 +85,47 @@
                             </font>
                         </Button>
                     </children>
+                    <children><Label alignment="TOP_LEFT" contentDisplay="LEFT" prefHeight="62.0" prefWidth="239.0" text="Menu obstacles" textAlignment="LEFT">
+                        <font>
+                            <Font size="30.0" />
+                        </font>
+                    </Label></children>
+
+                    <HBox>
+                        <children>
+                            <ImageView fx:id="bois" onMouseClicked="#cliqueObstacle" fitHeight="80" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
+                                <image>
+                                    <Image url="@pont.png" />
+                                </image>
+                            </ImageView>
+                        </children>
+                        <children>
+                            <ImageView fx:id="pierre" onMouseClicked="#cliqueObstacle" fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
+                                <image>
+                                    <Image url="@rocher.png" />
+                                </image>
+                            </ImageView>
+                        </children>
+                    </HBox>
+                    <HBox>
+                        <children>
+                            <ImageView fx:id="metal" onMouseClicked="#cliqueObstacle" fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
+                                <image>
+                                    <Image url="@départ.png" />
+                                </image>
+                            </ImageView>
+                        </children>
+                        <children>
+                            <ImageView fx:id="fer" onMouseClicked="#cliqueObstacle" fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
+                                <image>
+                                    <Image url="@mur.png"/>
+                                </image>
+                            </ImageView>
+                        </children>
+                    </HBox>
                 </VBox>
             </children>
+
             <HBox layoutY="960" prefHeight="83.0" prefWidth="472.0">
                 <children>
                     <VBox prefHeight="200.0" prefWidth="100.0">

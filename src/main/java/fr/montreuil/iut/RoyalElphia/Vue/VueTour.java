@@ -31,7 +31,6 @@ public class VueTour {
     }
 
     public VueTour() {
-
     }
 
 

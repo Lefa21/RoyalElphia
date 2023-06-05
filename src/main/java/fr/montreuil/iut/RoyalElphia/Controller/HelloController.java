@@ -12,6 +12,7 @@ import fr.montreuil.iut.RoyalElphia.modele.Niveau.Difficile;
 import fr.montreuil.iut.RoyalElphia.modele.Niveau.Facile;
 import fr.montreuil.iut.RoyalElphia.modele.Niveau.Niveau;
 import fr.montreuil.iut.RoyalElphia.modele.Niveau.Normal;
+import fr.montreuil.iut.RoyalElphia.modele.Obstacle.Obstacle;
 import fr.montreuil.iut.RoyalElphia.modele.Tour.Tour;
 
 import javafx.collections.ListChangeListener;
@@ -55,8 +56,47 @@ private Niveau niveau;
     private Pane panneauJeu;
     private VueEnnemi vueEnnemi;
     private Tour tour;
+    private Obstacle obstacle;
     private boolean TourPose = true;
+
+    private boolean ObstaclePose = true;
     private VueTour vt = new VueTour();
+    private VueObstacle vo = new VueObstacle();
+
+
+    @FXML
+    public void cliqueObstacle(MouseEvent mouseEvent) throws FileNotFoundException {
+
+        if (this.ObstaclePose && obstacle == null && mouseEvent.getClickCount()==2) {
+            if (((ImageView) mouseEvent.getSource()).getId().equals("bois")) {
+                if (this.jeu.getArgent() >= 10) {
+                    vo.CliqueObstacle(this.jeu, "bois");
+                    this.obstacle = vo.getObstacle();
+                    this.ObstaclePose = false;
+                }
+            } else if (((ImageView) mouseEvent.getSource()).getId().equals("fer")) {
+                if (this.jeu.getArgent() >= 24) {
+                    vo.CliqueObstacle(this.jeu, "fer");
+                    this.obstacle = vo.getObstacle();
+                    this.ObstaclePose = false;
+                }
+            } else if (((ImageView) mouseEvent.getSource()).getId().equals("metal")) {
+                if (this.jeu.getArgent() >= 32) {
+                    vo.CliqueObstacle(this.jeu, "metal");
+                    this.obstacle = vo.getObstacle();
+                    this.ObstaclePose = false;
+                }
+            } else if (((ImageView) mouseEvent.getSource()).getId().equals("pierre")) {
+                if (this.jeu.getArgent() >= 10) {
+                    vo.CliqueObstacle(this.jeu, "pierre");
+                    this.obstacle = vo.getObstacle();
+                    this.ObstaclePose = false;
+
+                }
+            }
+            }
+        }
+
 
     @FXML
     public void TourClique(MouseEvent mouseEvent) throws FileNotFoundException {
@@ -99,6 +139,10 @@ private Niveau niveau;
         }
     }
 
+
+
+
+
     @FXML
     public void PoserTour(MouseEvent mouseEvent) throws FileNotFoundException {
         double cliqueX = mouseEvent.getX();
@@ -108,6 +152,24 @@ private Niveau niveau;
         this.TourPose = true;
         this.tour = vueTour.getTour();
     }
+
+
+
+
+
+
+    /*
+
+    public void PoserObstacle(MouseEvent mouseEvent) throws FileNotFoundException {
+        double cliqueX = mouseEvent.getX();
+        double cliqueY = mouseEvent.getY();
+        VueObstacle vueObstacle = new VueObstacle(panneauJeu, obstacle, cliqueX, cliqueY, terrain);
+        vueObstacle.PoserObstacle();
+        this.ObstaclePose = true;
+        this.obstacle = vueObstacle.getObstacle();
+    }
+
+     */
 
     public void créerNiveau(){
         int niveau = SceneController.getNiveau();
