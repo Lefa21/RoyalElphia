@@ -1,5 +1,7 @@
 package fr.montreuil.iut.RoyalElphia.Vue;
 
+import fr.montreuil.iut.RoyalElphia.modele.Map.Cases;
+import fr.montreuil.iut.RoyalElphia.modele.Map.CasesObstacles;
 import fr.montreuil.iut.RoyalElphia.modele.Map.Terrain;
 import fr.montreuil.iut.RoyalElphia.modele.Obstacle.*;
 import fr.montreuil.iut.RoyalElphia.modele.Tour.*;
@@ -38,9 +40,11 @@ public class VueObstacle {
         int posY = (int) this.y / 32;
         if (tab[posY][posX] == 9) {
             if (this.Obstacle instanceof BarricadeBois) {
+                tab[posY][posX] = 8;
+                CasesObstacles caseObstacle = new CasesObstacles(posX,posY,Obstacle.getPointDeVie());
+                terrain.ajouterCaseObstacle(caseObstacle);
                 Image BarricadeBois = new Image(new FileInputStream("src/main/resources/fr/montreuil/iut/RoyalElphia/Page_Fxml/pont.png"));
                 ImageView BarricadeBoisView = new ImageView(BarricadeBois);
-                //Obstacle.rayonDegat(terrain, posX, posY, Obstacle.getDegat());
                 BarricadeBoisView.setX(x - 10);
                 BarricadeBoisView.setY(y - 15);
                 BarricadeBoisView.setId("bois");
@@ -48,10 +52,9 @@ public class VueObstacle {
                 this.Obstacle = null;
             }
             if (this.Obstacle instanceof BarricadePierre) {
+                tab[posY][posX] = 8;
                 Image BarricadePierre = new Image(new FileInputStream("src/main/resources/fr/montreuil/iut/RoyalElphia/Page_Fxml/rocher.png"));
                 ImageView BarricadePierreView = new ImageView(BarricadePierre);
-
-                //Obstacle.rayonDegat(terrain, posX, posY, Obstacle.getDegat());
                 BarricadePierreView.setX(x - 10);
                 BarricadePierreView.setY(y - 15);
                 BarricadePierreView.setId("pierre");
@@ -63,10 +66,10 @@ public class VueObstacle {
                 }
             }
             if (this.Obstacle instanceof BarricadeMetal) {
+                tab[posY][posX] = 8;
                 Image BarricadeMetal = new Image(new FileInputStream("src/main/resources/fr/montreuil/iut/RoyalElphia/Page_Fxml/départ.png"));
                 ImageView BarricadeMetalView = new ImageView(BarricadeMetal);
 
-                //Obstacle.rayonDegat(terrain, posX, posY, Obstacle.getDegat());
                 BarricadeMetalView.setX(x - 10);
                 BarricadeMetalView.setY(y - 15);
                 BarricadeMetalView.setId("metal");
@@ -78,10 +81,9 @@ public class VueObstacle {
                 }
             }
             if (this.Obstacle instanceof BarricadeFer) {
+                tab[posY][posX] = 8;
                 Image BarricadeFer = new Image(new FileInputStream("src/main/resources/fr/montreuil/iut/RoyalElphia/Page_Fxml/mur.png"));
                 ImageView BarricadeFerView = new ImageView(BarricadeFer);
-
-                //Obstacle.rayonDegat(terrain, posX, posY, Obstacle.getDegat());
                 BarricadeFerView.setX(x - 45);
                 BarricadeFerView.setY(y - 45);
                 BarricadeFerView.setId("fer");
@@ -129,6 +131,8 @@ public class VueObstacle {
             }
         }
     }
+
+
 
     public Obstacle getObstacle() {
         return Obstacle;

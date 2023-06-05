@@ -9,6 +9,7 @@ public abstract class Terrain {
     private Cases pointDep, pointArv;
 
     private ArrayList<CasesDégats> casesDégats;
+    private ArrayList<CasesObstacles> casesObstacles;
 
     public Terrain() {
         this.hauteur = 40;
@@ -49,14 +50,23 @@ public abstract class Terrain {
         this.pointDep = calculPointDep();
         this.pointArv = calculPointArv();
         this.casesDégats = new ArrayList<CasesDégats>();
+        this.casesObstacles = new ArrayList<>();
     }
 
     public void ajouterCaseDegat (CasesDégats c) {
         this.casesDégats.add(c);
     }
 
+    public void ajouterCaseObstacle(CasesObstacles c){
+        this.casesObstacles.add(c);
+    }
+
     public ArrayList<CasesDégats> getCasesDégats () {
         return this.casesDégats;
+    }
+
+    public ArrayList<CasesObstacles> getCasesObstacles () {
+        return this.casesObstacles;
     }
 
     public int[][] getTabTerrain() {

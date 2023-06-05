@@ -1,5 +1,9 @@
 package fr.montreuil.iut.RoyalElphia.modele.Obstacle;
 
+import fr.montreuil.iut.RoyalElphia.modele.Map.CasesDégats;
+import fr.montreuil.iut.RoyalElphia.modele.Map.CasesObstacles;
+import fr.montreuil.iut.RoyalElphia.modele.Map.Terrain;
+
 public class Obstacle {
 
     private String NomObstacle;
@@ -21,6 +25,7 @@ public class Obstacle {
         MaxAmelioration = maxAmelioration;
         NiveauMaxAmelioration = niveauMaxAmelioration;
     }
+    
 
     public String getNomObstacle() {
         return NomObstacle;

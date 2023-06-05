@@ -30,7 +30,7 @@
     <center>
         <Pane prefHeight="960" prefWidth="1280" BorderPane.alignment="CENTER" fx:id="panneauJeu" >
             <children>
-                <TilePane onMouseClicked="#PoserTour"  fx:id="map" prefHeight="960" prefWidth="1280" />
+                <TilePane onMouseClicked="#PoserObstacle"  fx:id="map" prefHeight="960" prefWidth="1280" />
                 <VBox layoutX="1280" prefHeight="90" prefWidth="90">
                     <children><Label alignment="CENTER" contentDisplay="CENTER" prefHeight="62.0" prefWidth="239.0" text="Menu tour" textAlignment="CENTER">
                         <font>
