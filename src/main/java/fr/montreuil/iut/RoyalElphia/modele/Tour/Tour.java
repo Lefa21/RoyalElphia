@@ -21,6 +21,9 @@ public class Tour {
     private int TempsRecharge;
     private int degat;
 
+    private int ID;
+    private ArrayList<CasesDégats> ListeCasesDegats;
+
 
     public Tour(int degat, String nom, int coutAchat, int porteeAttaque, int typeAttaque, int coutVente, int coutAmelioration, int niveauAmelioration, int niveauMaxAmelioration, int dureeINtervalleAttaque, int nombreAttaqueMax, int tempsRecharge) {
         Nom = nom;
@@ -35,9 +38,16 @@ public class Tour {
         NombreAttaqueMax = nombreAttaqueMax;
         TempsRecharge = tempsRecharge;
         this.degat = degat;
+        this.ListeCasesDegats = new ArrayList<>();
 
     }
+    public void setID(int i){
+        this.ID = i;
+    }
 
+    public int getID() {
+        return ID;
+    }
     public String getNom() {
         return Nom;
     }
@@ -129,15 +139,47 @@ public class Tour {
 
     public void rayonDegat(Terrain Terrain, int x, int y, int degat) {
         for (int i = 0; i <= this.getPorteeAttaque(); i++) {
-            Terrain.ajouterCaseDegat(new CasesDégats((x * 32) + 16, (y * 32) - (32 * i) + 16, degat, this.getTypeAttaque()));
-            Terrain.ajouterCaseDegat(new CasesDégats((x * 32) + 16, (y * 32) + (32 * i) + 16, degat, this.getTypeAttaque()));
-            Terrain.ajouterCaseDegat(new CasesDégats((x * 32) + (32 * i) + 16, (y * 32) + 16, degat, this.getTypeAttaque()));
-            Terrain.ajouterCaseDegat(new CasesDégats((x * 32) - (32 * i) + 16, (y * 32) + 16, degat, this.getTypeAttaque()));
 
-            Terrain.ajouterCaseDegat(new CasesDégats((x * 32) - (32 * i) + 16, (y * 32) - (32 * i) + 16, degat, this.getTypeAttaque()));
-            Terrain.ajouterCaseDegat(new CasesDégats((x * 32) - (32 * i) + 16, (y * 32) + (32 * i) + 16, degat, this.getTypeAttaque()));
-            Terrain.ajouterCaseDegat(new CasesDégats((x * 32) + (32 * i) + 16, (y * 32) + (32 * i) + 16, degat, this.getTypeAttaque()));
-            Terrain.ajouterCaseDegat(new CasesDégats((x * 32) + (32 * i) + 16, (y * 32) - (32 * i) + 16, degat, this.getTypeAttaque()));
+            CasesDégats c1 = new CasesDégats((x * 32) + 16, (y * 32) - (32 * i) + 16, degat, this.getTypeAttaque());
+            Terrain.ajouterCaseDegat(c1);
+            ListeCasesDegats.add(c1);
+
+            CasesDégats c2 = new CasesDégats((x * 32) + 16, (y * 32) + (32 * i) + 16, degat, this.getTypeAttaque());
+            Terrain.ajouterCaseDegat(c2);
+            ListeCasesDegats.add(c2);
+
+            CasesDégats c3 = new CasesDégats((x * 32) + (32 * i) + 16, (y * 32) + 16, degat, this.getTypeAttaque());
+            Terrain.ajouterCaseDegat(c3);
+            ListeCasesDegats.add(c3);
+
+            CasesDégats c4 = new CasesDégats((x * 32) - (32 * i) + 16, (y * 32) + 16, degat, this.getTypeAttaque());
+            Terrain.ajouterCaseDegat(c4);
+            ListeCasesDegats.add(c4);
+
+            CasesDégats c5 = new CasesDégats((x * 32) - (32 * i) + 16, (y * 32) - (32 * i) + 16, degat, this.getTypeAttaque());
+            Terrain.ajouterCaseDegat(c5);
+            ListeCasesDegats.add(c5);
+
+            CasesDégats c6 = new CasesDégats((x * 32) - (32 * i) + 16, (y * 32) + (32 * i) + 16, degat, this.getTypeAttaque());
+            Terrain.ajouterCaseDegat(c6);
+            ListeCasesDegats.add(c6);
+
+            CasesDégats c7 = new CasesDégats((x * 32) + (32 * i) + 16, (y * 32) + (32 * i) + 16, degat, this.getTypeAttaque());
+            Terrain.ajouterCaseDegat(c7);
+            ListeCasesDegats.add(c7);
+
+            CasesDégats c8 = new CasesDégats((x * 32) + (32 * i) + 16, (y * 32) - (32 * i) + 16, degat, this.getTypeAttaque());
+            Terrain.ajouterCaseDegat(c8);
+            ListeCasesDegats.add(c8);
+        }
+    }
+    public void TourDevientInoffensif(Terrain t){
+        for (int i = 0; i < t.getCasesDégats().size(); i++) {
+            for (int j = 0; j < ListeCasesDegats.size(); j++) {
+                if (t.getCasesDégats().contains(ListeCasesDegats.get(j))){
+                    t.getCasesDégats().remove(i);
+                }
+            }
         }
     }
 }
