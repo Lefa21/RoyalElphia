@@ -213,7 +213,7 @@ public class jeu {
                         this.getEnnemis().remove(this.getEnnemis().get(i));
                     }
                     for (int j = 0; j < terrain.getCasesDégats().size(); j++) {
-                        if (this.ennemis.get(i).getX() == this.terrain.getCasesDégats().get(j).getX() && this.ennemis.get(i).getY() == this.terrain.getCasesDégats().get(j).getY())
+                        if (this.ennemis.get(i).getX() == this.terrain.getCasesDégats().get(j).getX() && this.ennemis.get(i).getY() == this.terrain.getCasesDégats().get(j).getY() && this.ennemis.get(i).getImmunite() != this.terrain.getCasesDégats().get(j).getTypeAttaque())
                             this.ennemis.get(i).setPv(this.terrain.getCasesDégats().get(j).getDegat());
                     }
                 }

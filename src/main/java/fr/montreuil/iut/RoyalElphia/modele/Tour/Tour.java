@@ -11,7 +11,7 @@ public class Tour {
     private String Nom;
     private int CoutAchat;
     private int PorteeAttaque;
-    private String TypeAttaque;
+    private int TypeAttaque;
     private int CoutVente;
     private int CoutAmelioration;
     private int NiveauAmelioration;
@@ -22,7 +22,7 @@ public class Tour {
     private int degat;
 
 
-    public Tour(int degat, String nom, int coutAchat, int porteeAttaque, String typeAttaque, int coutVente, int coutAmelioration, int niveauAmelioration, int niveauMaxAmelioration, int dureeINtervalleAttaque, int nombreAttaqueMax, int tempsRecharge) {
+    public Tour(int degat, String nom, int coutAchat, int porteeAttaque, int typeAttaque, int coutVente, int coutAmelioration, int niveauAmelioration, int niveauMaxAmelioration, int dureeINtervalleAttaque, int nombreAttaqueMax, int tempsRecharge) {
         Nom = nom;
         CoutAchat = coutAchat;
         PorteeAttaque = porteeAttaque;
@@ -63,11 +63,11 @@ public class Tour {
     }
 
 
-    public String getTypeAttaque() {
+    public int getTypeAttaque() {
         return TypeAttaque;
     }
 
-    public void setTypeAttaque(String typeAttaque) {
+    public void setTypeAttaque(int typeAttaque) {
         TypeAttaque = typeAttaque;
     }
 
@@ -129,15 +129,15 @@ public class Tour {
 
     public void rayonDegat(Terrain Terrain, int x, int y, int degat) {
         for (int i = 0; i <= this.getPorteeAttaque(); i++) {
-            Terrain.ajouterCaseDegat(new CasesDégats((x * 32) + 16, (y * 32) - (32 * i) + 16, degat));
-            Terrain.ajouterCaseDegat(new CasesDégats((x * 32) + 16, (y * 32) + (32 * i) + 16, degat));
-            Terrain.ajouterCaseDegat(new CasesDégats((x * 32) + (32 * i) + 16, (y * 32) + 16, degat));
-            Terrain.ajouterCaseDegat(new CasesDégats((x * 32) - (32 * i) + 16, (y * 32) + 16, degat));
+            Terrain.ajouterCaseDegat(new CasesDégats((x * 32) + 16, (y * 32) - (32 * i) + 16, degat, this.getTypeAttaque()));
+            Terrain.ajouterCaseDegat(new CasesDégats((x * 32) + 16, (y * 32) + (32 * i) + 16, degat, this.getTypeAttaque()));
+            Terrain.ajouterCaseDegat(new CasesDégats((x * 32) + (32 * i) + 16, (y * 32) + 16, degat, this.getTypeAttaque()));
+            Terrain.ajouterCaseDegat(new CasesDégats((x * 32) - (32 * i) + 16, (y * 32) + 16, degat, this.getTypeAttaque()));
 
-            Terrain.ajouterCaseDegat(new CasesDégats((x * 32) - (32 * i) + 16, (y * 32) - (32 * i) + 16, degat));
-            Terrain.ajouterCaseDegat(new CasesDégats((x * 32) - (32 * i) + 16, (y * 32) + (32 * i) + 16, degat));
-            Terrain.ajouterCaseDegat(new CasesDégats((x * 32) + (32 * i) + 16, (y * 32) + (32 * i) + 16, degat));
-            Terrain.ajouterCaseDegat(new CasesDégats((x * 32) + (32 * i) + 16, (y * 32) - (32 * i) + 16, degat));
+            Terrain.ajouterCaseDegat(new CasesDégats((x * 32) - (32 * i) + 16, (y * 32) - (32 * i) + 16, degat, this.getTypeAttaque()));
+            Terrain.ajouterCaseDegat(new CasesDégats((x * 32) - (32 * i) + 16, (y * 32) + (32 * i) + 16, degat, this.getTypeAttaque()));
+            Terrain.ajouterCaseDegat(new CasesDégats((x * 32) + (32 * i) + 16, (y * 32) + (32 * i) + 16, degat, this.getTypeAttaque()));
+            Terrain.ajouterCaseDegat(new CasesDégats((x * 32) + (32 * i) + 16, (y * 32) - (32 * i) + 16, degat, this.getTypeAttaque()));
         }
     }
 }
