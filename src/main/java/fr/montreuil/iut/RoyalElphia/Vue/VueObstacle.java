@@ -131,9 +131,6 @@ public class VueObstacle {
             }
         }
     }
-
-
-
     public Obstacle getObstacle() {
         return Obstacle;
     }
