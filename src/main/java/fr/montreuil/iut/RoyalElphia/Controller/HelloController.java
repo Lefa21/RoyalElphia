@@ -148,7 +148,7 @@ private Niveau niveau;
     public void PoserTour(MouseEvent mouseEvent) throws FileNotFoundException {
         double cliqueX = mouseEvent.getX();
         double cliqueY = mouseEvent.getY();
-        VueTour vueTour = new VueTour(panneauJeu, tour, cliqueX, cliqueY, terrain);
+        VueTour vueTour = new VueTour(panneauJeu, tour, cliqueX, cliqueY, terrain,jeu);
         vueTour.PoserTour();
         this.TourPose = true;
         this.tour = vueTour.getTour();
