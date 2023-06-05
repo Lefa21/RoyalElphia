@@ -30,6 +30,7 @@ public class ListObsEnnemis implements ListChangeListener<Ennemis> {
                 ) {
                     jeu.setArgent(-a.getButin());
                     jeu.ajoutEnnemisMort(a);
+                    this.jeu.setNbEnnemisRestant(this.jeu.getNbEnnemisRestant() - 1);
                     panneauJeu.getChildren().remove(panneauJeu.lookup("#" + a.getId()));
                     panneauJeu.getChildren().remove(panneauJeu.lookup("#"+a.getId()+"L"));
                 }

@@ -4,6 +4,7 @@ import fr.montreuil.iut.RoyalElphia.Vue.VueEnnemi;
 import fr.montreuil.iut.RoyalElphia.modele.Map.Cases;
 import fr.montreuil.iut.RoyalElphia.modele.Map.CasesDégats;
 import fr.montreuil.iut.RoyalElphia.modele.Niveau.Niveau;
+import fr.montreuil.iut.RoyalElphia.modele.Obstacle.Obstacle;
 import fr.montreuil.iut.RoyalElphia.modele.Tour.Tour;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -27,6 +28,8 @@ public class jeu {
     private Timeline gameLoop;
     private IntegerProperty pvJoueur;
     private ArrayList<Tour> listeDeTour;
+
+    private ArrayList<Obstacle> listeObstacle;
     private IntegerProperty argent;
 
     private Niveau niveau;
@@ -48,6 +51,7 @@ public class jeu {
         this.nbVague = new SimpleIntegerProperty(1);
         this.pvJoueur = new SimpleIntegerProperty(4);
         this.listeDeTour = new ArrayList<>();
+        this.listeObstacle = new ArrayList<>();
         this.argent = new SimpleIntegerProperty(200);
     }
 
@@ -56,6 +60,11 @@ public class jeu {
 
     public void ajouterTour(Tour t) {
         listeDeTour.add(t);
+    }
+
+
+    public void ajouterObstacle(Obstacle O) {
+        listeObstacle.add(O);
     }
 
     public IntegerProperty getArgentProperty() {
@@ -72,6 +81,13 @@ public class jeu {
 
     public boolean verifArgent(Tour t) {
         if (t.getCoutAchat() > getArgent()) {
+            return false;
+        }
+        return true;
+    }
+
+    public boolean verifArgentObstacle(Obstacle O) {
+        if (O.getCoutObstacle() > getArgent()) {
             return false;
         }
         return true;
@@ -107,15 +123,12 @@ public class jeu {
     }
 
     public void vagueSuivante() {
-
         for (int i = 0; i < listeEnnemisSpawn.size(); i++) {
             listeEnnemisSpawn.remove(i);
         }
-
-
         this.nbVague.setValue(this.nbVague.getValue() + 1);
         this.niveau.setNbEnnemis(this.niveau.getNbEnnemis() * 2);
-        this.nbEnnemisRestant.setValue((this.niveau.getNbEnnemis() - this.ennemis.size()));
+        this.nbEnnemisRestant.setValue(this.niveau.getNbEnnemis());
     }
 
     // permet d'ajouter un ennemi qui a spawn sur le terrain dans la liste de notre modèle
@@ -124,14 +137,23 @@ public class jeu {
             Ennemis enm = new Sorcières(terrain);
             ennemis.add(enm);
             this.listeEnnemisSpawn.add(enm);
+
+            Ennemis enm1 = new Géant(terrain);
+            ennemis.add(enm1);
+            this.listeEnnemisSpawn.add(enm1);
         }
 
+        /*
         if (nbTour % 8 == 0 && listeEnnemisSpawn.size() <= this.niveau.getNbEnnemis()) {
             Ennemis enm1 = new Géant(terrain);
             ennemis.add(enm1);
             this.listeEnnemisSpawn.add(enm1);
 
-        } else if (nbTour % 16 == 0 && listeEnnemisSpawn.size() <= this.niveau.getNbEnnemis()) {
+        }
+
+         */
+         else if (nbTour % 16 == 0 && listeEnnemisSpawn.size() <= this.niveau.getNbEnnemis()) {
+
             Ennemis enm = new gobelins(terrain);
             ennemis.add(enm);
             this.listeEnnemisSpawn.add(enm);
@@ -239,13 +261,15 @@ public class jeu {
                                 System.out.println("Vous avez perdu");
                                 gameLoop.stop();
                             } else if (getEnnemisTué().size() == niveau.getNbEnnemis()) {
+                                System.out.println("Vague suivante " + this.getNbVague());
                                 vagueSuivante();
+                                System.out.println("nombre d'ennemis spwan:  " + this.listeEnnemisSpawn.size());
                                 unTour();
                             } else if (temps % 3 == 0) {
                                 unTour();
+                                System.out.println("Un tour");
                             } else if (temps % 5 == 0) {
                                 if (getEnnemis().size() < this.niveau.getNbEnnemis()) {
-                                    System.out.println("Un tour");
                                     spwanEnnemi();
                                     System.out.println("Ennemis spwan");
                                 }

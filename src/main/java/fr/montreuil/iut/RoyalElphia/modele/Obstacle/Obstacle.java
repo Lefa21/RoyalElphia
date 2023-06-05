@@ -85,4 +85,5 @@ public class Obstacle {
     public void setNiveauMaxAmelioration(int niveauMaxAmelioration) {
         NiveauMaxAmelioration = niveauMaxAmelioration;
     }
+
 }
