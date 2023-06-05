@@ -177,24 +177,24 @@ public class Tour {
     }
     public void TourDevientInoffensif(Terrain t){
         for (int i = 0; i < t.getCasesDégats().size(); i++) {
-                if (t.getCasesDégats().contains(this.c1)){
-                    t.getCasesDégats().remove(i);
-                } else if (t.getCasesDégats().contains(this.c2)) {
-                    t.getCasesDégats().remove(i);
-                } else if (t.getCasesDégats().contains(this.c3)) {
-                    t.getCasesDégats().remove(i);
-                } else if (t.getCasesDégats().contains(this.c4)) {
-                    t.getCasesDégats().remove(i);
-                } else if (t.getCasesDégats().contains(this.c5)) {
-                    t.getCasesDégats().remove(i);
-                } else if (t.getCasesDégats().contains(this.c6)) {
-                    t.getCasesDégats().remove(i);
-                } else if (t.getCasesDégats().contains(this.c7)) {
-                    t.getCasesDégats().remove(i);
-                } else if (t.getCasesDégats().contains(this.c8)) {
-                    t.getCasesDégats().remove(i);
-                }
+            if (t.getCasesDégats().contains(this.c1)){
+                t.getCasesDégats().remove(i);
+            } else if (t.getCasesDégats().contains(this.c2)) {
+                t.getCasesDégats().remove(i);
+            } else if (t.getCasesDégats().contains(this.c3)) {
+                t.getCasesDégats().remove(i);
+            } else if (t.getCasesDégats().contains(this.c4)) {
+                t.getCasesDégats().remove(i);
+            } else if (t.getCasesDégats().contains(this.c5)) {
+                t.getCasesDégats().remove(i);
+            } else if (t.getCasesDégats().contains(this.c6)) {
+                t.getCasesDégats().remove(i);
+            } else if (t.getCasesDégats().contains(this.c7)) {
+                t.getCasesDégats().remove(i);
+            } else if (t.getCasesDégats().contains(this.c8)) {
+                t.getCasesDégats().remove(i);
             }
         }
+    }
 }
 
