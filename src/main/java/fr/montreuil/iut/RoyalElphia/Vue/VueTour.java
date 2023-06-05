@@ -26,6 +26,7 @@ public class VueTour {
     private static int IDImage = 1000;
 
     private jeu jeu;
+
     public VueTour(Pane p, Tour T, double x, double y, Terrain terrain, jeu jeu) {
         this.panneauJeu = p;
         this.tour = T;
@@ -163,16 +164,20 @@ public class VueTour {
     public Tour getTour() {
         return tour;
     }
-    public void VendreTour(ImageView i){
+
+    public void VendreTour(ImageView i) {
         i.setOnMouseClicked(event -> {
-            if (event.getClickCount()==2){
-                for (Tour t: this.jeu.getListeDeTour()) {
-                    if (Integer.toString(t.getID()).equals(i.getId())){
+            if (event.getClickCount() == 2) {
+                for (Tour t : this.jeu.getListeDeTour()) {
+                    if (Integer.toString(t.getID()).equals(i.getId())) {
                         panneauJeu.getChildren().remove(i);
                         this.jeu.getListeDeTour().remove(t);
                         this.jeu.setArgent(-t.getCoutVente());
                         t.TourDevientInoffensif(terrain);
                     }
-                }}});}
+                }
+            }
+        });
+    }
 }
 

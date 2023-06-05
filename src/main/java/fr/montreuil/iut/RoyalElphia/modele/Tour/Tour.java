@@ -24,7 +24,7 @@ public class Tour {
     private int ID;
     private ArrayList<CasesDégats> ListeCasesDegats;
 
-    private CasesDégats c1,c2,c3,c4,c5,c6,c7,c8;
+    private CasesDégats c1, c2, c3, c4, c5, c6, c7, c8;
 
 
     public Tour(int degat, String nom, int coutAchat, int porteeAttaque, int typeAttaque, int coutVente, int coutAmelioration, int niveauAmelioration, int niveauMaxAmelioration, int dureeINtervalleAttaque, int nombreAttaqueMax, int tempsRecharge) {
@@ -43,13 +43,15 @@ public class Tour {
         this.ListeCasesDegats = new ArrayList<>();
 
     }
-    public void setID(int i){
+
+    public void setID(int i) {
         this.ID = i;
     }
 
     public int getID() {
         return ID;
     }
+
     public String getNom() {
         return Nom;
     }
@@ -142,59 +144,45 @@ public class Tour {
     public void rayonDegat(Terrain Terrain, int x, int y, int degat) {
         for (int i = 0; i <= this.getPorteeAttaque(); i++) {
 
-            this.c1 = new CasesDégats((x * 32) + 16, (y * 32) - (32 * i) + 16, degat, this.getTypeAttaque());
+            this.c1 = new CasesDégats(x, y, degat, this.getTypeAttaque(), "H", i);
             Terrain.ajouterCaseDegat(c1);
             ListeCasesDegats.add(c1);
 
-            this.c2 = new CasesDégats((x * 32) + 16, (y * 32) + (32 * i) + 16, degat, this.getTypeAttaque());
+            this.c2 = new CasesDégats(x, y, degat, this.getTypeAttaque(), "D", i);
             Terrain.ajouterCaseDegat(c2);
             ListeCasesDegats.add(c2);
 
-            this.c3 = new CasesDégats((x * 32) + (32 * i) + 16, (y * 32) + 16, degat, this.getTypeAttaque());
+            this.c3 = new CasesDégats(x, y, degat, this.getTypeAttaque(), "B", i);
             Terrain.ajouterCaseDegat(c3);
             ListeCasesDegats.add(c3);
 
-            this.c4 = new CasesDégats((x * 32) - (32 * i) + 16, (y * 32) + 16, degat, this.getTypeAttaque());
+            this.c4 = new CasesDégats(x, y, degat, this.getTypeAttaque(), "G", i);
             Terrain.ajouterCaseDegat(c4);
             ListeCasesDegats.add(c4);
 
-            this.c5 = new CasesDégats((x * 32) - (32 * i) + 16, (y * 32) - (32 * i) + 16, degat, this.getTypeAttaque());
-            Terrain.ajouterCaseDegat(c5);
-            ListeCasesDegats.add(c5);
-
-            this.c6 = new CasesDégats((x * 32) - (32 * i) + 16, (y * 32) + (32 * i) + 16, degat, this.getTypeAttaque());
-            Terrain.ajouterCaseDegat(c6);
-            ListeCasesDegats.add(c6);
-
-            this.c7 = new CasesDégats((x * 32) + (32 * i) + 16, (y * 32) + (32 * i) + 16, degat, this.getTypeAttaque());
-            Terrain.ajouterCaseDegat(c7);
-            ListeCasesDegats.add(c7);
-
-            this.c8 = new CasesDégats((x * 32) + (32 * i) + 16, (y * 32) - (32 * i) + 16, degat, this.getTypeAttaque());
-            Terrain.ajouterCaseDegat(c8);
-            ListeCasesDegats.add(c8);
         }
     }
-    public void TourDevientInoffensif(Terrain t){
+
+    public void TourDevientInoffensif(Terrain t) {
         for (int i = 0; i < t.getCasesDégats().size(); i++) {
-                if (t.getCasesDégats().contains(this.c1)){
-                    t.getCasesDégats().remove(i);
-                } else if (t.getCasesDégats().contains(this.c2)) {
-                    t.getCasesDégats().remove(i);
-                } else if (t.getCasesDégats().contains(this.c3)) {
-                    t.getCasesDégats().remove(i);
-                } else if (t.getCasesDégats().contains(this.c4)) {
-                    t.getCasesDégats().remove(i);
-                } else if (t.getCasesDégats().contains(this.c5)) {
-                    t.getCasesDégats().remove(i);
-                } else if (t.getCasesDégats().contains(this.c6)) {
-                    t.getCasesDégats().remove(i);
-                } else if (t.getCasesDégats().contains(this.c7)) {
-                    t.getCasesDégats().remove(i);
-                } else if (t.getCasesDégats().contains(this.c8)) {
-                    t.getCasesDégats().remove(i);
-                }
+            if (t.getCasesDégats().contains(this.c1)) {
+                t.getCasesDégats().remove(i);
+            } else if (t.getCasesDégats().contains(this.c2)) {
+                t.getCasesDégats().remove(i);
+            } else if (t.getCasesDégats().contains(this.c3)) {
+                t.getCasesDégats().remove(i);
+            } else if (t.getCasesDégats().contains(this.c4)) {
+                t.getCasesDégats().remove(i);
+            } else if (t.getCasesDégats().contains(this.c5)) {
+                t.getCasesDégats().remove(i);
+            } else if (t.getCasesDégats().contains(this.c6)) {
+                t.getCasesDégats().remove(i);
+            } else if (t.getCasesDégats().contains(this.c7)) {
+                t.getCasesDégats().remove(i);
+            } else if (t.getCasesDégats().contains(this.c8)) {
+                t.getCasesDégats().remove(i);
             }
         }
+    }
 }
 

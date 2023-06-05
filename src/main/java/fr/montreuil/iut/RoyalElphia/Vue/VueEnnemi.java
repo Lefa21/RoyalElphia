@@ -8,7 +8,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 
-public  class VueEnnemi {
+public class VueEnnemi {
 
     private Ennemis ennemis;
     protected Pane pane;
@@ -25,7 +25,7 @@ public  class VueEnnemi {
 
         Label label = new Label();
         label.textProperty().bind(ennemis.getPvProperty().asString());
-        label.setId(ennemis.getId()+"L");
+        label.setId(ennemis.getId() + "L");
         label.translateXProperty().bind(ennemis.getxProperty().add(-8));
         label.translateYProperty().bind(ennemis.getyProperty().add(-32));
         label.setBackground(Background.fill(Color.WHITE));
@@ -33,21 +33,13 @@ public  class VueEnnemi {
 
         if (ennemis instanceof gobelins) {
             circle.setFill(Color.GREEN);
-        }
-
-        else if (ennemis instanceof Sorcières) {
+        } else if (ennemis instanceof Sorcières) {
             circle.setFill(Color.VIOLET);
-        }
-
-        else if (ennemis instanceof GéantRoyal) {
+        } else if (ennemis instanceof GéantRoyal) {
             circle.setFill(Color.BLACK);
-        }
-
-        else if (ennemis instanceof Géant) {
+        } else if (ennemis instanceof Géant) {
             circle.setFill(Color.BROWN);
-        }
-
-        else if (ennemis instanceof Squelette) {
+        } else if (ennemis instanceof Squelette) {
             circle.setFill(Color.GREY);
         }
         this.pane.getChildren().add(circle);
