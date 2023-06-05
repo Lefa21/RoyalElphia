@@ -101,7 +101,6 @@ private Niveau niveau;
     @FXML
     public void TourClique(MouseEvent mouseEvent) throws FileNotFoundException {
         //this.tour = null;
-
         if (this.TourPose && tour == null && mouseEvent.getClickCount()==2) {
             if (((ImageView) mouseEvent.getSource()).getId().equals("bombe")) {
                 if (this.jeu.getArgent() >= 40) {
@@ -126,10 +125,8 @@ private Niveau niveau;
                     vt.CliqueTour(this.jeu, "eclair");
                     this.tour = vt.getTour();
                     this.TourPose = false;
-
                 }
-            }
-            else if (((ImageView) mouseEvent.getSource()).getId().equals("laser")) {
+            } else if (((ImageView) mouseEvent.getSource()).getId().equals("laser")) {
                 if (this.jeu.getArgent() >= 60) {
                     vt.CliqueTour(this.jeu, "laser");
                     this.tour = vt.getTour();
@@ -138,10 +135,6 @@ private Niveau niveau;
             }
         }
     }
-
-
-
-
 
     @FXML
     public void PoserTour(MouseEvent mouseEvent) throws FileNotFoundException {
@@ -152,12 +145,6 @@ private Niveau niveau;
         this.TourPose = true;
         this.tour = vueTour.getTour();
     }
-
-
-
-
-
-
     /*
 
     public void PoserObstacle(MouseEvent mouseEvent) throws FileNotFoundException {
