@@ -8,4 +8,6 @@ public class Géant extends Ennemis {
         super(terrain,200,80,2,100,70);
     }
 
+    // Immunité 2 -->  Immunisé face au tour boule de feu
+
 }

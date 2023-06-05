@@ -98,6 +98,7 @@ public class VueTour {
             if (this.tour instanceof TourLaser) {
                 Image TourLaser = new Image(new FileInputStream("src/main/resources/fr/montreuil/iut/RoyalElphia/Page_Fxml/TourLaserView.png"));
                 ImageView TourLaserView = new ImageView(TourLaser);
+                tour.rayonDegat(terrain, posX, posY, tour.getDegat());
                 TourLaserView.setX(x - 16);
                 TourLaserView.setY(y - 16);
                 TourLaserView.setId("laser");
