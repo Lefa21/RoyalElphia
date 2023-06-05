@@ -139,7 +139,9 @@ private Niveau niveau;
         }
     }
 
-    /*
+
+
+
 
     @FXML
     public void PoserTour(MouseEvent mouseEvent) throws FileNotFoundException {
@@ -151,8 +153,12 @@ private Niveau niveau;
         this.tour = vueTour.getTour();
     }
 
-     */
 
+
+
+
+
+    /*
 
     public void PoserObstacle(MouseEvent mouseEvent) throws FileNotFoundException {
         double cliqueX = mouseEvent.getX();
@@ -162,6 +168,8 @@ private Niveau niveau;
         this.ObstaclePose = true;
         this.obstacle = vueObstacle.getObstacle();
     }
+
+     */
 
     public void créerNiveau(){
         int niveau = SceneController.getNiveau();
