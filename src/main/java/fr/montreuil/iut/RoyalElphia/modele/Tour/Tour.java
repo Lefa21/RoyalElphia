@@ -22,7 +22,7 @@ public class Tour {
     private int degat;
 
     private int ID;
-    private ArrayList<CasesDégats> ListeCasesDegats;
+    private ArrayList<CasesDégats> listeCasesDegats;
 
     private CasesDégats c1,c2,c3,c4,c5,c6,c7,c8;
 
@@ -40,7 +40,6 @@ public class Tour {
         NombreAttaqueMax = nombreAttaqueMax;
         TempsRecharge = tempsRecharge;
         this.degat = degat;
-        this.ListeCasesDegats = new ArrayList<>();
 
     }
     public void setID(int i){
@@ -139,7 +138,7 @@ public class Tour {
         TempsRecharge = tempsRecharge;
     }
 
-    public void rayonDegat(Terrain Terrain, int x, int y, int degat) {
+   /* public void rayonDegat(Terrain Terrain, int x, int y, int degat) {
         for (int i = 0; i <= this.getPorteeAttaque(); i++) {
 
             this.c1 = new CasesDégats((x * 32) + 16, (y * 32) - (32 * i) + 16, degat, this.getTypeAttaque());
@@ -175,7 +174,7 @@ public class Tour {
             ListeCasesDegats.add(c8);
         }
     }
-    /*public void TourDevientInoffensif(Terrain t){
+    public void TourDevientInoffensif(Terrain t){
         for (int i = 0; i < t.getCasesDégats().size(); i++) {
             if (t.getCasesDégats().contains(this.c1)){
                 t.getCasesDégats().remove(i);
@@ -195,7 +194,7 @@ public class Tour {
                 t.getCasesDégats().remove(i);
             }
         }
-    }*/
+    }
     public void TourDevientInoffensif(Terrain t) {
         ArrayList<CasesDégats> casesASupprimer = new ArrayList<>();
 
@@ -209,6 +208,52 @@ public class Tour {
 
         // Supprimer les cases de dégâts de la liste
         t.getCasesDégats().removeAll(casesASupprimer);
+    }*/
+   public ArrayList<CasesDégats> rayonDegat(Terrain terrain, int x, int y, int degat) {
+       this.listeCasesDegats = new ArrayList<>();
+
+       for (int i = 0; i <= this.getPorteeAttaque(); i++) {
+           CasesDégats c1 = new CasesDégats((x * 32) + 16, (y * 32) - (32 * i) + 16, degat, this.getTypeAttaque());
+           terrain.ajouterCaseDegat(c1);
+           listeCasesDegats.add(c1);
+
+           CasesDégats c2 = new CasesDégats((x * 32) + 16, (y * 32) + (32 * i) + 16, degat, this.getTypeAttaque());
+           terrain.ajouterCaseDegat(c2);
+           listeCasesDegats.add(c2);
+
+           CasesDégats c3 = new CasesDégats((x * 32) + (32 * i) + 16, (y * 32) + 16, degat, this.getTypeAttaque());
+           terrain.ajouterCaseDegat(c3);
+           listeCasesDegats.add(c3);
+
+           CasesDégats c4 = new CasesDégats((x * 32) - (32 * i) + 16, (y * 32) + 16, degat, this.getTypeAttaque());
+           terrain.ajouterCaseDegat(c4);
+           listeCasesDegats.add(c4);
+
+           CasesDégats c5 = new CasesDégats((x * 32) - (32 * i) + 16, (y * 32) - (32 * i) + 16, degat, this.getTypeAttaque());
+           terrain.ajouterCaseDegat(c5);
+           listeCasesDegats.add(c5);
+
+           CasesDégats c6 = new CasesDégats((x * 32) - (32 * i) + 16, (y * 32) + (32 * i) + 16, degat, this.getTypeAttaque());
+           terrain.ajouterCaseDegat(c6);
+           listeCasesDegats.add(c6);
+
+           CasesDégats c7 = new CasesDégats((x * 32) + (32 * i) + 16, (y * 32) + (32 * i) + 16, degat, this.getTypeAttaque());
+           terrain.ajouterCaseDegat(c7);
+           listeCasesDegats.add(c7);
+
+           CasesDégats c8 = new CasesDégats((x * 32) + (32 * i) + 16, (y * 32) - (32 * i) + 16, degat, this.getTypeAttaque());
+           terrain.ajouterCaseDegat(c8);
+           listeCasesDegats.add(c8);
+       }
+
+       return listeCasesDegats;
+   }
+
+    public void TourDevientInoffensif(Terrain terrain, ArrayList<CasesDégats> listeCasesDegats) {
+        terrain.getCasesDégats().removeAll(listeCasesDegats);
     }
+public ArrayList<CasesDégats> getListeCasesDegats() {
+    return listeCasesDegats;
+}
 }
 
