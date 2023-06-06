@@ -41,10 +41,10 @@ import java.util.ResourceBundle;
 public class HelloController implements Initializable {
 
     private Terrain terrain;
-@FXML
- private TilePane map;
-private jeu jeu;
-private Niveau niveau;
+    @FXML
+    private TilePane map;
+    private jeu jeu;
+    private Niveau niveau;
 
 
     private FXMLLoader fxmlLoader;
@@ -62,7 +62,6 @@ private Niveau niveau;
     private boolean ObstaclePose = true;
     private VueTour vt = new VueTour();
     private VueObstacle vo = new VueObstacle();
-
 
     @FXML
     public void cliqueObstacle(MouseEvent mouseEvent) throws FileNotFoundException {
@@ -94,14 +93,14 @@ private Niveau niveau;
 
                 }
             }
-            }
         }
+    }
 
 
     @FXML
     public void TourClique(MouseEvent mouseEvent) throws FileNotFoundException {
-        //this.tour = null;
-        if (this.TourPose && tour == null && mouseEvent.getClickCount()==2) {
+     //this.tour = null;
+       if (this.TourPose && tour == null && mouseEvent.getClickCount()==2) {
             if (((ImageView) mouseEvent.getSource()).getId().equals("bombe")) {
                 if (this.jeu.getArgent() >= 40) {
                     vt.CliqueTour(this.jeu, "bombe");
@@ -134,6 +133,7 @@ private Niveau niveau;
                 }
             }
         }
+       //vt.TourCliqueee(mouseEvent, TourPose, tour, jeu);
     }
 
     @FXML

@@ -175,7 +175,7 @@ public class Tour {
             ListeCasesDegats.add(c8);
         }
     }
-    public void TourDevientInoffensif(Terrain t){
+    /*public void TourDevientInoffensif(Terrain t){
         for (int i = 0; i < t.getCasesDégats().size(); i++) {
             if (t.getCasesDégats().contains(this.c1)){
                 t.getCasesDégats().remove(i);
@@ -195,6 +195,20 @@ public class Tour {
                 t.getCasesDégats().remove(i);
             }
         }
+    }*/
+    public void TourDevientInoffensif(Terrain t) {
+        ArrayList<CasesDégats> casesASupprimer = new ArrayList<>();
+
+        for (CasesDégats caseDegat : t.getCasesDégats()) {
+            if (caseDegat.equals(this.c1) || caseDegat.equals(this.c2) || caseDegat.equals(this.c3)
+                    || caseDegat.equals(this.c4) || caseDegat.equals(this.c5) || caseDegat.equals(this.c6)
+                    || caseDegat.equals(this.c7) || caseDegat.equals(this.c8)) {
+                casesASupprimer.add(caseDegat);
+            }
+        }
+
+        // Supprimer les cases de dégâts de la liste
+        t.getCasesDégats().removeAll(casesASupprimer);
     }
 }
 

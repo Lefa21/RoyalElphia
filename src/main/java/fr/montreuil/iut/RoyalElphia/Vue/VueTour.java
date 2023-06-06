@@ -1,5 +1,6 @@
 package fr.montreuil.iut.RoyalElphia.Vue;
 
+import fr.montreuil.iut.RoyalElphia.Controller.HelloController;
 import fr.montreuil.iut.RoyalElphia.modele.Map.CasesDégats;
 import fr.montreuil.iut.RoyalElphia.modele.Map.Terrain;
 import fr.montreuil.iut.RoyalElphia.modele.Tour.*;
@@ -180,41 +181,40 @@ public class VueTour {
         });
     }
 
-    public void TourCliqueee(MouseEvent mouseEvent, Tour tour, VueTour vt, jeu jeu, boolean TourPose) throws FileNotFoundException {
-        TourPose = true;
-        if (TourPose && tour == null && mouseEvent.getClickCount() == 2) {
+    public void TourCliqueee(MouseEvent mouseEvent, Boolean tp, Tour t, jeu j) throws FileNotFoundException {
+        if (tp && t == null && mouseEvent.getClickCount()==2) {
             if (((ImageView) mouseEvent.getSource()).getId().equals("bombe")) {
-                if (jeu.getArgent() >= 40) {
-                    vt.CliqueTour(jeu, "bombe");
-                    tour = vt.getTour();
-                    TourPose = false;
+                if (j.getArgent() >= 40) {
+                    CliqueTour(j, "bombe");
+                    t = getTour();
+                    tp = false;
+                    System.out.println(this.tour + " et " + t);
                 }
-            } else if (((ImageView) mouseEvent.getSource()).getId().equals("feu")) {
-                if (jeu.getArgent() >= 22) {
-                    vt.CliqueTour(jeu, "feu");
-                    tour = vt.getTour();
-                    TourPose = false;
+            } /*else if (((ImageView) mouseEvent.getSource()).getId().equals("feu")) {
+                if (this.jeu.getArgent() >= 22) {
+                    vt.CliqueTour(this.jeu, "feu");
+                    this.tour = vt.getTour();
+                    this.TourPose = false;
                 }
             } else if (((ImageView) mouseEvent.getSource()).getId().equals("fleche")) {
-                if (jeu.getArgent() >= 20) {
-                    vt.CliqueTour(jeu, "fleche");
-                    tour = vt.getTour();
-                    TourPose = false;
+                if (this.jeu.getArgent() >= 20) {
+                    vt.CliqueTour(this.jeu, "fleche");
+                    this.tour = vt.getTour();
+                    this.TourPose = false;
                 }
             } else if (((ImageView) mouseEvent.getSource()).getId().equals("eclair")) {
-                if (jeu.getArgent() >= 60) {
-                    vt.CliqueTour(jeu, "eclair");
-                    tour = vt.getTour();
-                    TourPose = false;
-
+                if (this.jeu.getArgent() >= 60) {
+                    vt.CliqueTour(this.jeu, "eclair");
+                    this.tour = vt.getTour();
+                    this.TourPose = false;
                 }
             } else if (((ImageView) mouseEvent.getSource()).getId().equals("laser")) {
-                if (jeu.getArgent() >= 60) {
-                    vt.CliqueTour(jeu, "laser");
-                    tour = vt.getTour();
-                    TourPose = false;
+                if (this.jeu.getArgent() >= 60) {
+                    vt.CliqueTour(this.jeu, "laser");
+                    this.tour = vt.getTour();
+                    this.TourPose = false;
                 }
-            }
+            }*/
         }
     }
 }
