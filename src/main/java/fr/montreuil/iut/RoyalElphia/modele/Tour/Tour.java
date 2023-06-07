@@ -122,6 +122,14 @@ public class Tour {
         DureeINtervalleAttaque = dureeINtervalleAttaque;
     }
 
+    public void setPorteeAttaque(int porteeAttaque) {
+        PorteeAttaque = porteeAttaque;
+    }
+
+    public void setDegat(int degat) {
+        this.degat = degat;
+    }
+
     public int getNombreAttaqueMax() {
         return NombreAttaqueMax;
     }

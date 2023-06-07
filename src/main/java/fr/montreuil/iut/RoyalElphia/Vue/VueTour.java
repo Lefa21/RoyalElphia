@@ -5,9 +5,13 @@ import fr.montreuil.iut.RoyalElphia.modele.Map.CasesDégats;
 import fr.montreuil.iut.RoyalElphia.modele.Map.Terrain;
 import fr.montreuil.iut.RoyalElphia.modele.Tour.*;
 import fr.montreuil.iut.RoyalElphia.modele.jeu;
+import javafx.event.EventHandler;
 import javafx.scene.Node;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 
@@ -78,12 +82,14 @@ public class VueTour {
                 } else {
                     tourImageView.setX(x - 10);
                     tourImageView.setY(y - 15);
+
                 }
                 tourImageView.setId(Integer.toString(IDImage));
                 IDImage++;
                 panneauJeu.getChildren().add(tourImageView);
                 this.tour = null;
                 VendreTour(tourImageView);
+                //AmeliorationTour(tourImageView);
             }
         }
     }
@@ -110,7 +116,6 @@ public class VueTour {
         if (tour != null) {
             tour.setID(IDtour);
             IDtour++;
-
             if (jeu.verifArgent(tour)) {
                 jeu.setArgent(tour.getCoutAchat());
                 jeu.ajouterTour(tour);
@@ -140,5 +145,22 @@ public class VueTour {
         });
     }
 
+    /*public void AmeliorationTour(ImageView i) {
+        i.setOnMouseClicked(event -> {
+            if (event.getClickCount() == 1 && !trouve) {
+                for (int j = 0; j < this.jeu.getListeDeTour().size(); j++) {
+                    Tour t = this.jeu.getListeDeTour().get(j);
+                    if (Integer.toString(t.getID()).equals(i.getId())) {
+                        for (int k = 0; k < t.getListeCasesDegats().size(); k++) {
+                            t.getListeCasesDegats().get(k).setDegat(15);
+                        }
+                        this.jeu.setArgent(-t.getCoutAmelioration());
+                        System.out.println("amelioré");
+                        trouve = true;
+                    }
+                }
+            }
+        });
+    }*/
 }
 

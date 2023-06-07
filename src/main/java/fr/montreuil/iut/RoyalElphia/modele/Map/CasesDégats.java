@@ -16,4 +16,8 @@ public class CasesDégats extends Cases {
     public int getTypeAttaque (){
         return this.typeAttaque;
     }
+
+    public void setDegat(int i){
+        this.degat = getDegat() + i;
+    }
 }
