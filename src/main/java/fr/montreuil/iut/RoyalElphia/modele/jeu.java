@@ -246,8 +246,12 @@ public class jeu {
                     // revoir les dégats qu'inflige les ennemis à l'obstacle check la case suivante
                     for (int j = 0; j < this.listeObstacle.size(); j++) {
                         ObservableList<Obstacle> listObs = getListeObstacle();
+                        System.out.println("Position X : " + enm.getX());
+                        System.out.println("Position Y : " + enm.getY());
+                        System.out.println("Position obstacle  X : " + (listObs.get(j).getPosX()* 31  - 22));
+                        System.out.println("Position obstacle  Y : " + (listObs.get(j).getPosY()* 32 + 16));
                         int degat = ennemis.get(i).getDegatObstacle();
-                        if (((enm.getX()-32) == (listObs.get(j).getPosX()* 31  - 22 )) && (enm.getY()) == ((listObs.get(j).getPosY() * 32 + 16)) && (listObs.get(j).getPointDeVie()!=0)) {
+                        if ((((enm.getX()-32) == (listObs.get(j).getPosX()* 31  - 22 )) ||(enm.getX()-32) == (listObs.get(j).getPosX()* 31  - 21 ) ) && (enm.getY()) == ((listObs.get(j).getPosY() * 32 + 16)) && (listObs.get(j).getPointDeVie()!=0)) {
                             System.out.println(listObs.get(j).toString());
                             listObs.get(j).setPointDeVie(listObs.get(j).getPointDeVie() - degat);
                             System.out.println(listObs.get(j).toString());
