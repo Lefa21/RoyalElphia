@@ -47,7 +47,7 @@ public class jeu {
         this.nbTour = 0;
         this.nbEnnemisRestant = new SimpleIntegerProperty(this.niveau.getNbEnnemis());
         this.nbVague = new SimpleIntegerProperty(1);
-        this.pvJoueur = new SimpleIntegerProperty(4);
+        this.pvJoueur = new SimpleIntegerProperty(400);
         this.listeDeTour = new ArrayList<>();
         this.listeObstacle = new ArrayList<>();
         this.argent = new SimpleIntegerProperty(200);
@@ -135,25 +135,25 @@ public class jeu {
             this.listeEnnemisSpawn.add(enm);
         }
 
-        if (nbTour % 3 == 0 && listeEnnemisSpawn.size() <= this.niveau.getNbEnnemis()) {
+        if (nbTour % 4 == 0 && listeEnnemisSpawn.size() <= this.niveau.getNbEnnemis()) {
             Ennemis enm1 = new Géant(terrain);
             ennemis.add(enm1);
             this.listeEnnemisSpawn.add(enm1);
         }
 
-        if (nbTour % 5 == 0 && listeEnnemisSpawn.size() <= this.niveau.getNbEnnemis()) {
+        if (nbTour % 8 == 0 && listeEnnemisSpawn.size() <= this.niveau.getNbEnnemis()) {
             Ennemis enm = new gobelins(terrain);
             ennemis.add(enm);
             this.listeEnnemisSpawn.add(enm);
 
         }
-        if (nbTour % 7 == 0 && listeEnnemisSpawn.size() <= this.niveau.getNbEnnemis()) {
+        if (nbTour % 16 == 0 && listeEnnemisSpawn.size() <= this.niveau.getNbEnnemis()) {
             Ennemis enm = new Squelette(terrain);
             ennemis.add(enm);
             this.listeEnnemisSpawn.add(enm);
 
         }
-        if (nbTour % 11 == 0 && listeEnnemisSpawn.size() <= this.niveau.getNbEnnemis()) {
+        if (nbTour % 32 == 0 && listeEnnemisSpawn.size() <= this.niveau.getNbEnnemis()) {
             Ennemis enm = new GéantRoyal(terrain);
             ennemis.add(enm);
             this.listeEnnemisSpawn.add(enm);

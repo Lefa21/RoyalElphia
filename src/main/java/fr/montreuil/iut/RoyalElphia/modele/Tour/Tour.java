@@ -3,6 +3,8 @@ package fr.montreuil.iut.RoyalElphia.modele.Tour;
 import fr.montreuil.iut.RoyalElphia.modele.Map.Cases;
 import fr.montreuil.iut.RoyalElphia.modele.Map.CasesDégats;
 import fr.montreuil.iut.RoyalElphia.modele.Map.Terrain;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 
 import java.util.ArrayList;
 
@@ -19,7 +21,7 @@ public class Tour {
     private int DureeINtervalleAttaque;
     private int NombreAttaqueMax;
     private int TempsRecharge;
-    private int degat;
+    private IntegerProperty degat;
 
     private int ID;
     private ArrayList<CasesDégats> ListeCasesDegats;
@@ -27,19 +29,19 @@ public class Tour {
     private CasesDégats c1, c2, c3, c4, c5, c6, c7, c8;
 
 
-    public Tour(int degat, String nom, int coutAchat, int porteeAttaque, int typeAttaque, int coutVente, int coutAmelioration, int niveauAmelioration, int niveauMaxAmelioration, int dureeINtervalleAttaque, int nombreAttaqueMax, int tempsRecharge) {
+    public Tour(int degat, String nom, int coutAchat, int porteeAttaque, int typeAttaque, int coutVente, int coutAmelioration, int niveauMaxAmelioration, int dureeINtervalleAttaque, int nombreAttaqueMax, int tempsRecharge) {
         Nom = nom;
         CoutAchat = coutAchat;
         PorteeAttaque = porteeAttaque;
         TypeAttaque = typeAttaque;
         CoutVente = coutVente;
         CoutAmelioration = coutAmelioration;
-        NiveauAmelioration = niveauAmelioration;
+        NiveauAmelioration = 1;
         NiveauMaxAmelioration = niveauMaxAmelioration;
         DureeINtervalleAttaque = dureeINtervalleAttaque;
         NombreAttaqueMax = nombreAttaqueMax;
         TempsRecharge = tempsRecharge;
-        this.degat = degat;
+        this.degat = new SimpleIntegerProperty(degat);
         this.ListeCasesDegats = new ArrayList<>();
 
     }
@@ -65,7 +67,15 @@ public class Tour {
     }
 
     public int getDegat() {
-        return degat;
+        return degat.getValue();
+    }
+
+    public IntegerProperty getDegatProperty() {
+        return this.degat;
+    }
+
+    public void setDegat() {
+        this.degat.setValue(this.degat.getValue() * 1.5);
     }
 
     public void setCoutAchat(int coutAchat) {
@@ -147,18 +157,22 @@ public class Tour {
             this.c1 = new CasesDégats(x, y, degat, this.getTypeAttaque(), "H", i);
             Terrain.ajouterCaseDegat(c1);
             ListeCasesDegats.add(c1);
+            c1.getDegatProperty().bind(this.getDegatProperty());
 
             this.c2 = new CasesDégats(x, y, degat, this.getTypeAttaque(), "D", i);
             Terrain.ajouterCaseDegat(c2);
             ListeCasesDegats.add(c2);
+            c2.getDegatProperty().bind(this.getDegatProperty());
 
             this.c3 = new CasesDégats(x, y, degat, this.getTypeAttaque(), "B", i);
             Terrain.ajouterCaseDegat(c3);
             ListeCasesDegats.add(c3);
+            c3.getDegatProperty().bind(this.getDegatProperty());
 
             this.c4 = new CasesDégats(x, y, degat, this.getTypeAttaque(), "G", i);
             Terrain.ajouterCaseDegat(c4);
             ListeCasesDegats.add(c4);
+            c4.getDegatProperty().bind(this.getDegatProperty());
 
         }
     }

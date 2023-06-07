@@ -25,6 +25,9 @@
             </Button>
             <Button onAction="#Pause" text="Pause">
             </Button>
+            <Button onAction="#Amelioration" text="Amelioration">
+
+            </Button>
         </VBox>
     </right>
     <center>
