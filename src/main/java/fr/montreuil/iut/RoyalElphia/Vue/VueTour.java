@@ -1,12 +1,17 @@
 package fr.montreuil.iut.RoyalElphia.Vue;
 
+import fr.montreuil.iut.RoyalElphia.Controller.HelloController;
 import fr.montreuil.iut.RoyalElphia.modele.Map.CasesDégats;
 import fr.montreuil.iut.RoyalElphia.modele.Map.Terrain;
 import fr.montreuil.iut.RoyalElphia.modele.Tour.*;
 import fr.montreuil.iut.RoyalElphia.modele.jeu;
+import javafx.event.EventHandler;
 import javafx.scene.Node;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 
@@ -26,6 +31,9 @@ public class VueTour {
     private static int IDImage = 1000;
 
     private jeu jeu;
+
+
+    private boolean trouve = false;
 
     public VueTour(Pane p, Tour T, double x, double y, Terrain terrain, jeu jeu) {
         this.panneauJeu = p;
@@ -47,116 +55,72 @@ public class VueTour {
         int[][] tab = terrain.getTabTerrain();
         int posX = (int) this.x / 32;
         int posY = (int) this.y / 32;
-        if (tab[posY][posX] == 7) {
-            if (this.tour instanceof TourABombe) {
-                Image TourBombe = new Image(new FileInputStream("src/main/resources/fr/montreuil/iut/RoyalElphia/Page_Fxml/tt-PhotoRoom.png-PhotoRoom(2).png"));
-                ImageView TourBombeView = new ImageView(TourBombe);
+        if (tab[posY][posX] == 7 && tour != null) {
+            Image tourImage = null;
+            switch (tour.getClass().getSimpleName()) {
+                case "TourABombe":
+                    tourImage = new Image(new FileInputStream("src/main/resources/fr/montreuil/iut/RoyalElphia/Page_Fxml/tt-PhotoRoom.png-PhotoRoom(2).png"));
+                    break;
+                case "TourBouleDeFeu":
+                    tourImage = new Image(new FileInputStream("src/main/resources/fr/montreuil/iut/RoyalElphia/Page_Fxml/TourFeuTerrain.png"));
+                    break;
+                case "TourFleche":
+                    tourImage = new Image(new FileInputStream("src/main/resources/fr/montreuil/iut/RoyalElphia/Page_Fxml/TourFlecheM.png"));
+                    break;
+                case "TourElectrique":
+                    tourImage = new Image(new FileInputStream("src/main/resources/fr/montreuil/iut/RoyalElphia/Page_Fxml/TourEclairM.png"));
+                    break;
+                case "TourLaser":
+                    tourImage = new Image(new FileInputStream("src/main/resources/fr/montreuil/iut/RoyalElphia/Page_Fxml/TourLaserView.png"));
+                    break;
+            }
+            if (tourImage != null) {
+                ImageView tourImageView = new ImageView(tourImage);
                 tour.rayonDegat(terrain, posX, posY, tour.getDegat());
-                TourBombeView.setX(x - 10);
-                TourBombeView.setY(y - 15);
-                TourBombeView.setId(Integer.toString(IDImage));
-                IDImage++;
-                panneauJeu.getChildren().add(TourBombeView);
-                this.tour = null;
-                VendreTour(TourBombeView);
+                if (tour instanceof TourElectrique) {
+                    tourImageView.setX(x - 45);
+                    tourImageView.setY(y - 45);
+                } else {
+                    tourImageView.setX(x - 10);
+                    tourImageView.setY(y - 15);
 
-            }
-            if (this.tour instanceof TourBouleDeFeu) {
-                Image TourFeu = new Image(new FileInputStream("src/main/resources/fr/montreuil/iut/RoyalElphia/Page_Fxml/TourFeuTerrain.png"));
-                ImageView TourFeuView = new ImageView(TourFeu);
-                tour.rayonDegat(terrain, posX, posY, tour.getDegat());
-                TourFeuView.setX(x - 10);
-                TourFeuView.setY(y - 15);
-                TourFeuView.setId(Integer.toString(IDImage));
+                }
+                tourImageView.setId(Integer.toString(IDImage));
                 IDImage++;
-                panneauJeu.getChildren().add(TourFeuView);
+                panneauJeu.getChildren().add(tourImageView);
                 this.tour = null;
-                VendreTour(TourFeuView);
-            }
-            if (this.tour instanceof TourFleche) {
-                Image TourFleche = new Image(new FileInputStream("src/main/resources/fr/montreuil/iut/RoyalElphia/Page_Fxml/TourFlecheM.png"));
-                ImageView TourFlecheView = new ImageView(TourFleche);
-                tour.rayonDegat(terrain, posX, posY, tour.getDegat());
-                TourFlecheView.setX(x - 10);
-                TourFlecheView.setY(y - 15);
-                TourFlecheView.setId(Integer.toString(IDImage));
-                IDImage++;
-                panneauJeu.getChildren().add(TourFlecheView);
-                this.tour = null;
-                VendreTour(TourFlecheView);
-            }
-            if (this.tour instanceof TourElectrique) {
-                Image TourElec = new Image(new FileInputStream("src/main/resources/fr/montreuil/iut/RoyalElphia/Page_Fxml/TourEclairM.png"));
-                ImageView TourElecView = new ImageView(TourElec);
-                tour.rayonDegat(terrain, posX, posY, tour.getDegat());
-                TourElecView.setX(x - 45);
-                TourElecView.setY(y - 45);
-                TourElecView.setId(Integer.toString(IDImage));
-                IDImage++;
-                panneauJeu.getChildren().add(TourElecView);
-                this.tour = null;
-                VendreTour(TourElecView);
-            }
-            if (this.tour instanceof TourLaser) {
-                Image TourLaser = new Image(new FileInputStream("src/main/resources/fr/montreuil/iut/RoyalElphia/Page_Fxml/TourLaserView.png"));
-                ImageView TourLaserView = new ImageView(TourLaser);
-                tour.rayonDegat(terrain, posX, posY, tour.getDegat());
-                TourLaserView.setX(x - 16);
-                TourLaserView.setY(y - 16);
-                TourLaserView.setId(Integer.toString(IDImage));
-                IDImage++;
-                panneauJeu.getChildren().add(TourLaserView);
-                this.tour = null;
-                VendreTour(TourLaserView);
+                VendreTour(tourImageView);
+                //AmeliorationTour(tourImageView);
             }
         }
     }
 
-    public void CliqueTour(jeu jeu, String TypeTour) throws FileNotFoundException {
-        if (TypeTour.equals("bombe")) {
-            this.tour = new TourABombe();
-            this.tour.setID(IDtour);
-            IDtour++;
-            //  System.out.println(this.tour.getID());
-            if (jeu.verifArgent(this.tour)) {
-                jeu.setArgent(this.tour.getCoutAchat());
-                jeu.ajouterTour(this.tour);
-            }
+    public void CliqueTour(jeu jeu, String TypeTour) {
+        Tour tour = null;
+        switch (TypeTour) {
+            case "bombe":
+                tour = new TourABombe();
+                break;
+            case "feu":
+                tour = new TourBouleDeFeu();
+                break;
+            case "fleche":
+                tour = new TourFleche();
+                break;
+            case "eclair":
+                tour = new TourElectrique();
+                break;
+            case "laser":
+                tour = new TourLaser();
+                break;
         }
-        if (TypeTour.equals("feu")) {
-            this.tour = new TourBouleDeFeu();
-            this.tour.setID(IDtour);
+        if (tour != null) {
+            tour.setID(IDtour);
             IDtour++;
-            if (jeu.verifArgent(this.tour)) {
-                jeu.ajouterTour(this.tour);
-                jeu.setArgent(this.tour.getCoutAchat());
-            }
-        }
-        if (TypeTour.equals("fleche")) {
-            this.tour = new TourFleche();
-            this.tour.setID(IDtour);
-            IDtour++;
-            if (jeu.verifArgent(this.tour)) {
-                jeu.ajouterTour(this.tour);
-                jeu.setArgent(this.tour.getCoutAchat());
-            }
-        }
-        if (TypeTour.equals("eclair")) {
-            this.tour = new TourElectrique();
-            this.tour.setID(IDtour);
-            IDtour++;
-            if (jeu.verifArgent(this.tour)) {
-                jeu.ajouterTour(this.tour);
-                jeu.setArgent(this.tour.getCoutAchat());
-            }
-        }
-        if (TypeTour.equals("laser")) {
-            this.tour = new TourLaser();
-            this.tour.setID(IDtour);
-            IDtour++;
-            if (jeu.verifArgent(this.tour)) {
-                jeu.ajouterTour(this.tour);
-                jeu.setArgent(this.tour.getCoutAchat());
+            if (jeu.verifArgent(tour)) {
+                jeu.setArgent(tour.getCoutAchat());
+                jeu.ajouterTour(tour);
+                this.tour = tour;
             }
         }
     }
@@ -167,17 +131,40 @@ public class VueTour {
 
     public void VendreTour(ImageView i) {
         i.setOnMouseClicked(event -> {
-            if (event.getClickCount() == 2) {
-                for (Tour t : this.jeu.getListeDeTour()) {
+            if (event.getClickCount() == 2 && !trouve) {
+                for (int j = 0; j < this.jeu.getListeDeTour().size(); j++) {
+                    Tour t = this.jeu.getListeDeTour().get(j);
+
                     if (Integer.toString(t.getID()).equals(i.getId())) {
                         panneauJeu.getChildren().remove(i);
                         this.jeu.getListeDeTour().remove(t);
                         this.jeu.setArgent(-t.getCoutVente());
-                        t.TourDevientInoffensif(terrain);
+                        t.TourDevientInoffensif(terrain, t.getListeCasesDegats());
+                        trouve = true;
                     }
                 }
             }
         });
     }
+
+
+    /*public void AmeliorationTour(ImageView i) {
+        i.setOnMouseClicked(event -> {
+            if (event.getClickCount() == 1 && !trouve) {
+                for (int j = 0; j < this.jeu.getListeDeTour().size(); j++) {
+                    Tour t = this.jeu.getListeDeTour().get(j);
+                    if (Integer.toString(t.getID()).equals(i.getId())) {
+                        for (int k = 0; k < t.getListeCasesDegats().size(); k++) {
+                            t.getListeCasesDegats().get(k).setDegat(15);
+                        }
+                        this.jeu.setArgent(-t.getCoutAmelioration());
+                        System.out.println("amelioré");
+                        trouve = true;
+                    }
+                }
+            }
+        });
+    }*/
+
 }
 

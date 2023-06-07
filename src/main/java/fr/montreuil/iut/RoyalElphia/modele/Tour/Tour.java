@@ -24,7 +24,7 @@ public class Tour {
     private IntegerProperty degat;
 
     private int ID;
-    private ArrayList<CasesDégats> ListeCasesDegats;
+    private ArrayList<CasesDégats> listeCasesDegats;
 
     private CasesDégats c1, c2, c3, c4, c5, c6, c7, c8;
 
@@ -42,8 +42,6 @@ public class Tour {
         NombreAttaqueMax = nombreAttaqueMax;
         TempsRecharge = tempsRecharge;
         this.degat = new SimpleIntegerProperty(degat);
-        this.ListeCasesDegats = new ArrayList<>();
-
     }
 
     public void setID(int i) {
@@ -135,6 +133,10 @@ public class Tour {
         DureeINtervalleAttaque = dureeINtervalleAttaque;
     }
 
+    public void setPorteeAttaque(int porteeAttaque) {
+        PorteeAttaque = porteeAttaque;
+    }
+
     public int getNombreAttaqueMax() {
         return NombreAttaqueMax;
     }
@@ -151,52 +153,53 @@ public class Tour {
         TempsRecharge = tempsRecharge;
     }
 
-    public void rayonDegat(Terrain Terrain, int x, int y, int degat) {
-        for (int i = 0; i <= this.getPorteeAttaque(); i++) {
 
-            this.c1 = new CasesDégats(x, y, degat, this.getTypeAttaque(), "H", i);
-            Terrain.ajouterCaseDegat(c1);
-            ListeCasesDegats.add(c1);
-            c1.getDegatProperty().bind(this.getDegatProperty());
+   public ArrayList<CasesDégats> rayonDegat(Terrain terrain, int x, int y, int degat) {
+       this.listeCasesDegats = new ArrayList<>();
 
-            this.c2 = new CasesDégats(x, y, degat, this.getTypeAttaque(), "D", i);
-            Terrain.ajouterCaseDegat(c2);
-            ListeCasesDegats.add(c2);
-            c2.getDegatProperty().bind(this.getDegatProperty());
+       for (int i = 0; i <= this.getPorteeAttaque(); i++) {
+           CasesDégats c1 = new CasesDégats(x, y, degat, this.getTypeAttaque(), "H", i);
+           terrain.ajouterCaseDegat(c1);
+           listeCasesDegats.add(c1);
 
-            this.c3 = new CasesDégats(x, y, degat, this.getTypeAttaque(), "B", i);
-            Terrain.ajouterCaseDegat(c3);
-            ListeCasesDegats.add(c3);
-            c3.getDegatProperty().bind(this.getDegatProperty());
+           CasesDégats c2 = new CasesDégats(x, y, degat, this.getTypeAttaque(), "D", i);
+           terrain.ajouterCaseDegat(c2);
+           listeCasesDegats.add(c2);
 
-            this.c4 = new CasesDégats(x, y, degat, this.getTypeAttaque(), "G", i);
-            Terrain.ajouterCaseDegat(c4);
-            ListeCasesDegats.add(c4);
-            c4.getDegatProperty().bind(this.getDegatProperty());
+           CasesDégats c3 = new CasesDégats(x, y, degat, this.getTypeAttaque(), "B", i);
+           terrain.ajouterCaseDegat(c3);
+           listeCasesDegats.add(c3);
 
-        }
+           CasesDégats c4 = new CasesDégats(x, y, degat, this.getTypeAttaque(), "G", i);
+           terrain.ajouterCaseDegat(c4);
+           listeCasesDegats.add(c4);
+
+           /*CasesDégats c5 = new CasesDégats((x * 32) - (32 * i) + 16, (y * 32) - (32 * i) + 16, degat, this.getTypeAttaque());
+           terrain.ajouterCaseDegat(c5);
+           listeCasesDegats.add(c5);
+
+           CasesDégats c6 = new CasesDégats((x * 32) - (32 * i) + 16, (y * 32) + (32 * i) + 16, degat, this.getTypeAttaque());
+           terrain.ajouterCaseDegat(c6);
+           listeCasesDegats.add(c6);
+
+           CasesDégats c7 = new CasesDégats((x * 32) + (32 * i) + 16, (y * 32) + (32 * i) + 16, degat, this.getTypeAttaque());
+           terrain.ajouterCaseDegat(c7);
+           listeCasesDegats.add(c7);
+
+           CasesDégats c8 = new CasesDégats((x * 32) + (32 * i) + 16, (y * 32) - (32 * i) + 16, degat, this.getTypeAttaque());
+           terrain.ajouterCaseDegat(c8);
+           listeCasesDegats.add(c8);*/
+       }
+
+       return listeCasesDegats;
+   }
+
+    public void TourDevientInoffensif(Terrain terrain, ArrayList<CasesDégats> listeCasesDegats) {
+        terrain.getCasesDégats().removeAll(listeCasesDegats);
     }
+public ArrayList<CasesDégats> getListeCasesDegats() {
+    return listeCasesDegats;
+}
 
-    public void TourDevientInoffensif(Terrain t) {
-        for (int i = 0; i < t.getCasesDégats().size(); i++) {
-            if (t.getCasesDégats().contains(this.c1)) {
-                t.getCasesDégats().remove(i);
-            } else if (t.getCasesDégats().contains(this.c2)) {
-                t.getCasesDégats().remove(i);
-            } else if (t.getCasesDégats().contains(this.c3)) {
-                t.getCasesDégats().remove(i);
-            } else if (t.getCasesDégats().contains(this.c4)) {
-                t.getCasesDégats().remove(i);
-            } else if (t.getCasesDégats().contains(this.c5)) {
-                t.getCasesDégats().remove(i);
-            } else if (t.getCasesDégats().contains(this.c6)) {
-                t.getCasesDégats().remove(i);
-            } else if (t.getCasesDégats().contains(this.c7)) {
-                t.getCasesDégats().remove(i);
-            } else if (t.getCasesDégats().contains(this.c8)) {
-                t.getCasesDégats().remove(i);
-            }
-        }
-    }
 }
 

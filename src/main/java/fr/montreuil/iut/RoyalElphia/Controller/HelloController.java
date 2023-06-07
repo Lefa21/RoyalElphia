@@ -13,7 +13,7 @@ import fr.montreuil.iut.RoyalElphia.modele.Niveau.Facile;
 import fr.montreuil.iut.RoyalElphia.modele.Niveau.Niveau;
 import fr.montreuil.iut.RoyalElphia.modele.Niveau.Normal;
 import fr.montreuil.iut.RoyalElphia.modele.Obstacle.Obstacle;
-import fr.montreuil.iut.RoyalElphia.modele.Tour.Tour;
+import fr.montreuil.iut.RoyalElphia.modele.Tour.*;
 
 import javafx.collections.ListChangeListener;
 import javafx.event.ActionEvent;
@@ -63,7 +63,6 @@ public class HelloController implements Initializable {
     private VueTour vt = new VueTour();
     private VueObstacle vo = new VueObstacle();
 
-
     @FXML
     public void cliqueObstacle(MouseEvent mouseEvent) throws FileNotFoundException {
 
@@ -99,44 +98,38 @@ public class HelloController implements Initializable {
 
 
     @FXML
-    public void TourClique(MouseEvent mouseEvent) throws FileNotFoundException {
-        //this.tour = null;
+    public void TourClique(MouseEvent mouseEvent){
+            if (this.TourPose && tour == null && mouseEvent.getClickCount() == 2) {
+                String imageId = ((ImageView) mouseEvent.getSource()).getId();
+                Tour tour = null;
 
-        if (this.TourPose && tour == null && mouseEvent.getClickCount() == 2) {
-            if (((ImageView) mouseEvent.getSource()).getId().equals("bombe")) {
-                if (this.jeu.getArgent() >= 40) {
-                    vt.CliqueTour(this.jeu, "bombe");
-                    this.tour = vt.getTour();
-                    this.TourPose = false;
+                switch (imageId) {
+                    case "bombe":
+                        tour = new TourABombe();
+                        break;
+                    case "feu":
+                        tour = new TourBouleDeFeu();
+                        break;
+                    case "fleche":
+                        tour = new TourFleche();
+                        break;
+                    case "eclair":
+                        tour = new TourElectrique();
+                        break;
+                    case "laser":
+                        tour = new TourLaser();
+                        break;
                 }
-            } else if (((ImageView) mouseEvent.getSource()).getId().equals("feu")) {
-                if (this.jeu.getArgent() >= 22) {
-                    vt.CliqueTour(this.jeu, "feu");
-                    this.tour = vt.getTour();
-                    this.TourPose = false;
-                }
-            } else if (((ImageView) mouseEvent.getSource()).getId().equals("fleche")) {
-                if (this.jeu.getArgent() >= 20) {
-                    vt.CliqueTour(this.jeu, "fleche");
-                    this.tour = vt.getTour();
-                    this.TourPose = false;
-                }
-            } else if (((ImageView) mouseEvent.getSource()).getId().equals("eclair")) {
-                if (this.jeu.getArgent() >= 60) {
-                    vt.CliqueTour(this.jeu, "eclair");
-                    this.tour = vt.getTour();
-                    this.TourPose = false;
-
-                }
-            } else if (((ImageView) mouseEvent.getSource()).getId().equals("laser")) {
-                if (this.jeu.getArgent() >= 60) {
-                    vt.CliqueTour(this.jeu, "laser");
+                if (tour != null && jeu.verifArgent(tour)) {
+                    vt.CliqueTour(this.jeu, imageId);
                     this.tour = vt.getTour();
                     this.TourPose = false;
                 }
             }
         }
-    }
+
+
+
 
 
     @FXML
@@ -154,20 +147,11 @@ public class HelloController implements Initializable {
 
 
 
-    /*
 
-    public void PoserObstacle(MouseEvent mouseEvent) throws FileNotFoundException {
-        double cliqueX = mouseEvent.getX();
-        double cliqueY = mouseEvent.getY();
-        VueObstacle vueObstacle = new VueObstacle(panneauJeu, obstacle, cliqueX, cliqueY, terrain);
-        vueObstacle.PoserObstacle();
-        this.ObstaclePose = true;
-        this.obstacle = vueObstacle.getObstacle();
-    }
 
-     */
 
-    public void créerNiveau() {
+
+    public void créerNiveau(){
         int niveau = SceneController.getNiveau();
         if (niveau == 1) {
             this.niveau = new Facile();

@@ -51,4 +51,10 @@ public class CasesDégats extends Cases {
             verif = true;
         return verif;
     }
+
+
+    public void setDegat(int i){
+        this.degat.setValue( getDegat() + i);
+    }
 }
+
