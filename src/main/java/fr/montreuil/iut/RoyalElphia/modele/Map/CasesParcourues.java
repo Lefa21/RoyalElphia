@@ -6,7 +6,7 @@ public class CasesParcourues {
 
     private ArrayList<Cases> casesParcourues;
 
-    public CasesParcourues(){
+    public CasesParcourues() {
         this.casesParcourues = new ArrayList<>();
     }
 
@@ -14,7 +14,7 @@ public class CasesParcourues {
         this.casesParcourues.add(cases);
     }
 
-    public boolean verif (Cases c) {
+    public boolean verif(Cases c) {
         boolean verif = false;
         for (int i = 0; i < this.casesParcourues.size(); i++) {
             Cases cases = casesParcourues.get(i);

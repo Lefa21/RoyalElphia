@@ -1,4 +1,5 @@
 package fr.montreuil.iut.RoyalElphia.Vue;
+
 import fr.montreuil.iut.RoyalElphia.modele.Map.Terrain;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -18,19 +19,15 @@ public class TerrainVue {
                     Image herbe = new Image(new FileInputStream("src/main/resources/fr/montreuil/iut/RoyalElphia/ImageTuile/herbe2.png"));
                     ImageView herbe2 = new ImageView(herbe);
                     map.getChildren().add(herbe2);
-
                 } else if (tab[i][j] == 1) {
                     Image départ = new Image(new FileInputStream("src/main/resources/fr/montreuil/iut/RoyalElphia/ImageTuile/pointDep.jpg"));
                     ImageView départ2 = new ImageView(départ);
                     map.getChildren().add(départ2);
-                }
-                else if (tab[i][j] == 2) {
+                } else if (tab[i][j] == 2) {
                     Image arrivé = new Image(new FileInputStream("src/main/resources/fr/montreuil/iut/RoyalElphia/ImageTuile/pointArv.jpg"));
                     ImageView arrivé2 = new ImageView(arrivé);
                     map.getChildren().add(arrivé2);
-                }
-
-                else if (tab[i][j] == 7) {
+                } else if (tab[i][j] == 7) {
                     Image contour = new Image(new FileInputStream("src/main/resources/fr/montreuil/iut/RoyalElphia/ImageTuile/contour.png"));
                     ImageView contour2 = new ImageView(contour);
                     map.getChildren().add(contour2);

@@ -19,6 +19,14 @@ public class Cases {
         return y.getValue();
     }
 
+    public void setX(int x) {
+        this.x.set(x);
+    }
+
+    public void setY(int y) {
+        this.y.set(y);
+    }
+
     public IntegerProperty getXProperty() {
         return this.x;
     }

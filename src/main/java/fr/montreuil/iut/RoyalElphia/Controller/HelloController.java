@@ -14,7 +14,7 @@ import fr.montreuil.iut.RoyalElphia.modele.Niveau.Niveau;
 import fr.montreuil.iut.RoyalElphia.modele.Niveau.Normal;
 import fr.montreuil.iut.RoyalElphia.modele.Obstacle.ListObservableObstacle;
 import fr.montreuil.iut.RoyalElphia.modele.Obstacle.Obstacle;
-import fr.montreuil.iut.RoyalElphia.modele.Tour.Tour;
+import fr.montreuil.iut.RoyalElphia.modele.Tour.*;
 
 import javafx.collections.ListChangeListener;
 import javafx.event.ActionEvent;
@@ -42,17 +42,17 @@ import java.util.ResourceBundle;
 public class HelloController implements Initializable {
 
     private Terrain terrain;
-@FXML
- private TilePane map;
-private jeu jeu;
-private Niveau niveau;
+    @FXML
+    private TilePane map;
+    private jeu jeu;
+    private Niveau niveau;
 
 
     private FXMLLoader fxmlLoader;
 
 
     @FXML
-    public Label LabelPV,LabelnbEnnemisRestant,LabelArgent,LabelVague;
+    public Label LabelPV, LabelnbEnnemisRestant, LabelArgent, LabelVague;
     @FXML
     private Pane panneauJeu;
     private VueEnnemi vueEnnemi;
@@ -64,11 +64,10 @@ private Niveau niveau;
     private VueTour vt = new VueTour();
     private VueObstacle vo = new VueObstacle();
 
-
     @FXML
     public void cliqueObstacle(MouseEvent mouseEvent) throws FileNotFoundException {
 
-        if (this.ObstaclePose && obstacle == null && mouseEvent.getClickCount()==2) {
+        if (this.ObstaclePose && obstacle == null && mouseEvent.getClickCount() == 2) {
             if (((ImageView) mouseEvent.getSource()).getId().equals("bois")) {
                 if (this.jeu.getArgent() >= 10) {
                     vo.CliqueObstacle(this.jeu, "bois");
@@ -95,74 +94,65 @@ private Niveau niveau;
 
                 }
             }
-            }
         }
+    }
 
 
 
 
     @FXML
-    public void TourClique(MouseEvent mouseEvent) throws FileNotFoundException {
-        //this.tour = null;
+    public void TourClique(MouseEvent mouseEvent){
+            if (this.TourPose && tour == null && mouseEvent.getClickCount() == 2) {
+                String imageId = ((ImageView) mouseEvent.getSource()).getId();
+                Tour tour = null;
 
-        if (this.TourPose && tour == null && mouseEvent.getClickCount()==2) {
-            if (((ImageView) mouseEvent.getSource()).getId().equals("bombe")) {
-                if (this.jeu.getArgent() >= 40) {
-                    vt.CliqueTour(this.jeu, "bombe");
-                    this.tour = vt.getTour();
-                    this.TourPose = false;
+                switch (imageId) {
+                    case "bombe":
+                        tour = new TourABombe();
+                        break;
+                    case "feu":
+                        tour = new TourBouleDeFeu();
+                        break;
+                    case "fleche":
+                        tour = new TourFleche();
+                        break;
+                    case "eclair":
+                        tour = new TourElectrique();
+                        break;
+                    case "laser":
+                        tour = new TourLaser();
+                        break;
                 }
-            } else if (((ImageView) mouseEvent.getSource()).getId().equals("feu")) {
-                if (this.jeu.getArgent() >= 22) {
-                    vt.CliqueTour(this.jeu, "feu");
-                    this.tour = vt.getTour();
-                    this.TourPose = false;
-                }
-            } else if (((ImageView) mouseEvent.getSource()).getId().equals("fleche")) {
-                if (this.jeu.getArgent() >= 20) {
-                    vt.CliqueTour(this.jeu, "fleche");
-                    this.tour = vt.getTour();
-                    this.TourPose = false;
-                }
-            } else if (((ImageView) mouseEvent.getSource()).getId().equals("eclair")) {
-                if (this.jeu.getArgent() >= 60) {
-                    vt.CliqueTour(this.jeu, "eclair");
-                    this.tour = vt.getTour();
-                    this.TourPose = false;
-
-                }
-            }
-            else if (((ImageView) mouseEvent.getSource()).getId().equals("laser")) {
-                if (this.jeu.getArgent() >= 60) {
-                    vt.CliqueTour(this.jeu, "laser");
+                if (tour != null && jeu.verifArgent(tour)) {
+                    vt.CliqueTour(this.jeu, imageId);
                     this.tour = vt.getTour();
                     this.TourPose = false;
                 }
             }
         }
+
+
+
+
+
+
+    @FXML
+    public void PoserTour(MouseEvent mouseEvent) throws FileNotFoundException {
+        double cliqueX = mouseEvent.getX();
+        double cliqueY = mouseEvent.getY();
+        VueTour vueTour = new VueTour(panneauJeu, tour, cliqueX, cliqueY, terrain, jeu);
+        vueTour.PoserTour();
+        this.TourPose = true;
+        this.tour = vueTour.getTour();
     }
+
+
 
 
 
 
 
     /*
-    @FXML
-    public void PoserTour(MouseEvent mouseEvent) throws FileNotFoundException {
-        double cliqueX = mouseEvent.getX();
-        double cliqueY = mouseEvent.getY();
-        VueTour vueTour = new VueTour(panneauJeu, tour, cliqueX, cliqueY, terrain,jeu);
-        vueTour.PoserTour();
-        this.TourPose = true;
-        this.tour = vueTour.getTour();
-    }
-
-     */
-
-
-
-
-
     public void PoserObstacle(MouseEvent mouseEvent) throws FileNotFoundException {
         double cliqueX = mouseEvent.getX();
         double cliqueY = mouseEvent.getY();
@@ -171,32 +161,27 @@ private Niveau niveau;
         this.ObstaclePose = true;
         this.obstacle = vueObstacle.getObstacle();
     }
+    */
 
 
 
 
     public void créerNiveau(){
         int niveau = SceneController.getNiveau();
-        if(niveau == 1){
+        if (niveau == 1) {
             this.niveau = new Facile();
-        }
-
-        else if(niveau == 2){
+        } else if (niveau == 2) {
             this.niveau = new Normal();
-        }
-
-        else if(niveau == 3){
+        } else if (niveau == 3) {
             this.niveau = new Difficile();
         }
     }
 
-    public void créerTerrain(){
+    public void créerTerrain() {
         int terrain = SceneController.getTerrain();
-        if(terrain == 1){
+        if (terrain == 1) {
             this.terrain = new Map2();
-        }
-
-        else if(terrain == 2){
+        } else if (terrain == 2) {
             this.terrain = new Map_1();
         }
     }
@@ -242,9 +227,28 @@ private Niveau niveau;
     public void Demarrer(Event event) {
         jeu.lancementLoop();
     }
+
     @FXML
     public void Pause(Event event) {
         jeu.arretLoop();
+    }
+
+    @FXML
+    public void Amelioration(Event event) {
+        for (int i = 0; i < jeu.getListeDeTour().size(); i++) {
+            Tour t = jeu.getListeDeTour().get(i);
+            if (t.getNiveauAmelioration() != t.getNiveauMaxAmelioration()) {
+                if (t.getCoutAmelioration() <= jeu.getArgent()) {
+                    jeu.setArgent(t.getCoutAmelioration());
+                    t.setNiveauAmelioration(t.getNiveauAmelioration() + 1);
+                    t.setDegat();
+                    t.setCoutAmelioration((int) (t.getCoutAmelioration()*1.5));
+                    System.out.println("NIV " + t.getNiveauAmelioration() + " DEGAT " + t.getDegat());
+                }
+            }
+            else
+                System.out.println("niv MAX");
+        }
     }
 
 }

@@ -6,14 +6,14 @@ import fr.montreuil.iut.RoyalElphia.modele.Map.Terrain;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 
-public  abstract class Ennemis {
+public abstract class Ennemis {
 
     private IntegerProperty xProperty, yProperty;
-   // private int vitesse; // vitesse de deplacement
+    // private int vitesse; // vitesse de deplacement
     protected Terrain terrain;
     public static int compteur = 0;
     private String id;
-    private int ptsDefense,Immunite,degatBase,butin;
+    private int ptsDefense, Immunite, degatBase, butin;
     private IntegerProperty pv;
 
     //private Capacite capacite;
@@ -21,13 +21,13 @@ public  abstract class Ennemis {
     private CasesParcourues casesParcourues;
     private int degatObstacle;
 
-    public Ennemis (Terrain terrain,int pv, int ptsDefense,int immunite,int degatBase, int butin){
+    public Ennemis(Terrain terrain, int pv, int ptsDefense, int immunite, int degatBase, int butin) {
         this.id = "" + compteur;
         this.casesParcourues = new CasesParcourues();
         this.Immunite = immunite;
-        this.degatBase =  degatBase;
+        this.degatBase = degatBase;
         this.ptsDefense = ptsDefense;
-        this.pv= new SimpleIntegerProperty(pv);
+        this.pv = new SimpleIntegerProperty(pv);
         this.butin = butin;
         this.degatObstacle = 15;
         compteur++;
@@ -41,7 +41,6 @@ public  abstract class Ennemis {
     }
 
 
-
     public String getId() {
         return id;
     }
@@ -51,10 +50,10 @@ public  abstract class Ennemis {
     }
 
     public void setPv(int x) {
-        if (getPv()-x < 0)
+        if (getPv() - x < 0)
             this.pv.setValue(0);
         else
-            this.pv.setValue(this.getPv()-x);
+            this.pv.setValue(this.getPv() - x);
     }
 
     public int getDegatObstacle() {
@@ -90,24 +89,24 @@ public  abstract class Ennemis {
     }
 
 
-    public final void setX ( int n){
-            xProperty.setValue(n);
-        }
+    public final void setX(int n) {
+        xProperty.setValue(n);
+    }
 
-        public final int getY () {
-            return yProperty.getValue();
-        }
+    public final int getY() {
+        return yProperty.getValue();
+    }
 
-        public final IntegerProperty getyProperty () {
-            return yProperty;
-        }
+    public final IntegerProperty getyProperty() {
+        return yProperty;
+    }
 
 
-        public final void setY ( int n){
-            yProperty.setValue(n);
-        }
+    public final void setY(int n) {
+        yProperty.setValue(n);
+    }
 
-    public void seDeplace () {
+    public void seDeplace() {
         // On récupère le tableau du terrain
         int tab[][] = terrain.getTabTerrain();
 
@@ -118,69 +117,68 @@ public  abstract class Ennemis {
 
         /* On vérifie si la case à droite de l'ennemi est dans sa liste de case parcourue et on vérifie
         après si la case est un chemin ou la base */
-        if (peutSeDeplacer(1,"DROITE") || peutSeDeplacer(2,"DROITE")) {
+        if (peutSeDeplacer(1, "DROITE") || peutSeDeplacer(2, "DROITE")) {
             this.setX(this.getX() + 32);
             casesParcourues.ajouterCase(new Cases(this.getX(), this.getY()));
         }
 
         /* On vérifie si la case en dessous de l'ennemi est dans sa liste de case parcourue et on vérifie
         après si la case est un chemin ou la base */
-        else if (peutSeDeplacer(1,"BAS") || peutSeDeplacer(2,"BAS")) {
+        else if (peutSeDeplacer(1, "BAS") || peutSeDeplacer(2, "BAS")) {
             this.setY(this.getY() + 32);
             casesParcourues.ajouterCase(new Cases(this.getX(), this.getY()));
         }
 
         /* On vérifie si la case à gauche de l'ennemi est dans sa liste de case parcourue et on vérifie
         après si la case est un chemin ou la base */
-        else if (peutSeDeplacer(1,"GAUCHE") || peutSeDeplacer(2,"GAUCHE")) {
+        else if (peutSeDeplacer(1, "GAUCHE") || peutSeDeplacer(2, "GAUCHE")) {
             this.setX(this.getX() - 32);
             casesParcourues.ajouterCase(new Cases(this.getX(), this.getY()));
         }
 
         /* On vérifie si la case au dessus de l'ennemi est dans sa liste de case parcourue et on vérifie
         après si la case est un chemin ou la base */
-        else if (peutSeDeplacer(1,"HAUT") || peutSeDeplacer(2,"HAUT")) {
+        else if (peutSeDeplacer(1, "HAUT") || peutSeDeplacer(2, "HAUT")) {
             this.setY(this.getY() - 32);
             casesParcourues.ajouterCase(new Cases(this.getX(), this.getY()));
         }
     }
 
-    public boolean peutSeDeplacer(int i,String s) {
+    public boolean peutSeDeplacer(int i, String s) {
         boolean retour = false;
-        if (i==1) {
-            if(!casesParcourues.verif(CasesDirection(s)) && tabDirection(s) == 9)
+        if (i == 1) {
+            if (!casesParcourues.verif(CasesDirection(s)) && tabDirection(s) == 9)
                 retour = true;
-        }
-        else if (i==2) {
-            if(!casesParcourues.verif(CasesDirection(s)) && tabDirection(s) == 2)
+        } else if (i == 2) {
+            if (!casesParcourues.verif(CasesDirection(s)) && tabDirection(s) == 2)
                 retour = true;
         }
         return retour;
     }
 
-    public Cases CasesDirection (String s) {
+    public Cases CasesDirection(String s) {
         Cases c = null;
         if (s.equals("DROITE"))
-            c = new Cases(this.getX()+32,this.getY());
+            c = new Cases(this.getX() + 32, this.getY());
         else if (s.equals("BAS"))
-            c = new Cases(this.getX(),this.getY()+32);
+            c = new Cases(this.getX(), this.getY() + 32);
         else if (s.equals("GAUCHE"))
-            c = new Cases(this.getX()-32,this.getY());
+            c = new Cases(this.getX() - 32, this.getY());
         else if (s.equals("HAUT"))
-            c = new Cases(this.getX(),this.getY()-32);
+            c = new Cases(this.getX(), this.getY() - 32);
         return c;
     }
 
     public int tabDirection(String s) {
         int retour = 0;
         if (s.equals("DROITE"))
-            retour = terrain.getTabTerrain()[this.getY()/32][(this.getX()/32)+1];
+            retour = terrain.getTabTerrain()[this.getY() / 32][(this.getX() / 32) + 1];
         else if (s.equals("BAS"))
-            retour = terrain.getTabTerrain()[(this.getY()/32)+1][this.getX()/32];
+            retour = terrain.getTabTerrain()[(this.getY() / 32) + 1][this.getX() / 32];
         else if (s.equals("GAUCHE"))
-            retour = terrain.getTabTerrain()[this.getY()/32][(this.getX()/32)-1];
+            retour = terrain.getTabTerrain()[this.getY() / 32][(this.getX() / 32) - 1];
         else if (s.equals("HAUT"))
-            retour = terrain.getTabTerrain()[(this.getY()/32)-1][this.getX()/32];
+            retour = terrain.getTabTerrain()[(this.getY() / 32) - 1][this.getX() / 32];
         return retour;
     }
 }

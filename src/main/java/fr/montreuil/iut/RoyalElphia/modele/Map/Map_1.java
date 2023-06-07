@@ -1,8 +1,8 @@
 package fr.montreuil.iut.RoyalElphia.modele.Map;
 
-public class Map_1 extends Terrain  {
+public class Map_1 extends Terrain {
 
-    public Map_1(){
+    public Map_1() {
         super();
         /*
         this.Tabterrain = new int[][]{
