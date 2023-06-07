@@ -12,6 +12,7 @@ import fr.montreuil.iut.RoyalElphia.modele.Niveau.Difficile;
 import fr.montreuil.iut.RoyalElphia.modele.Niveau.Facile;
 import fr.montreuil.iut.RoyalElphia.modele.Niveau.Niveau;
 import fr.montreuil.iut.RoyalElphia.modele.Niveau.Normal;
+import fr.montreuil.iut.RoyalElphia.modele.Obstacle.ListObservableObstacle;
 import fr.montreuil.iut.RoyalElphia.modele.Obstacle.Obstacle;
 import fr.montreuil.iut.RoyalElphia.modele.Tour.Tour;
 
@@ -98,6 +99,8 @@ private Niveau niveau;
         }
 
 
+
+
     @FXML
     public void TourClique(MouseEvent mouseEvent) throws FileNotFoundException {
         //this.tour = null;
@@ -142,8 +145,8 @@ private Niveau niveau;
 
 
 
-    /*
 
+    /*
     @FXML
     public void PoserTour(MouseEvent mouseEvent) throws FileNotFoundException {
         double cliqueX = mouseEvent.getX();
@@ -154,18 +157,21 @@ private Niveau niveau;
         this.tour = vueTour.getTour();
     }
 
-
-
      */
+
+
+
+
 
     public void PoserObstacle(MouseEvent mouseEvent) throws FileNotFoundException {
         double cliqueX = mouseEvent.getX();
         double cliqueY = mouseEvent.getY();
-        VueObstacle vueObstacle = new VueObstacle(panneauJeu, obstacle, cliqueX, cliqueY, terrain);
+        VueObstacle vueObstacle = new VueObstacle(panneauJeu, obstacle, cliqueX, cliqueY, terrain,jeu);
         vueObstacle.PoserObstacle();
         this.ObstaclePose = true;
         this.obstacle = vueObstacle.getObstacle();
     }
+
 
 
 
@@ -224,6 +230,9 @@ private Niveau niveau;
             this.LabelnbEnnemisRestant.textProperty().bind(this.jeu.nbEnnemisRestantProperty().asString());
             ListChangeListener<Ennemis> listenerEnnemis = new ListObsEnnemis(this.jeu, this.panneauJeu);
             jeu.getEnnemis().addListener(listenerEnnemis);
+
+            ListChangeListener<Obstacle> listenerObstacle = new ListObservableObstacle(this.jeu, this.panneauJeu);
+            jeu.getListeObstacle().addListener(listenerObstacle);
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }

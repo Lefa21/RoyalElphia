@@ -29,7 +29,7 @@ public class jeu {
     private IntegerProperty pvJoueur;
     private ArrayList<Tour> listeDeTour;
 
-    private ArrayList<Obstacle> listeObstacle;
+    private ObservableList<Obstacle> listeObstacle;
     private IntegerProperty argent;
 
     private Niveau niveau;
@@ -51,7 +51,7 @@ public class jeu {
         this.nbVague = new SimpleIntegerProperty(1);
         this.pvJoueur = new SimpleIntegerProperty(4);
         this.listeDeTour = new ArrayList<>();
-        this.listeObstacle = new ArrayList<>();
+        this.listeObstacle = FXCollections.observableArrayList();
         this.argent = new SimpleIntegerProperty(200);
     }
 
@@ -65,6 +65,10 @@ public class jeu {
 
     public void ajouterObstacle(Obstacle O) {
         listeObstacle.add(O);
+    }
+
+    public final ObservableList<Obstacle> getListeObstacle() {
+        return listeObstacle;
     }
 
     public IntegerProperty getArgentProperty() {
@@ -137,10 +141,12 @@ public class jeu {
             Ennemis enm = new Sorcières(terrain);
             ennemis.add(enm);
             this.listeEnnemisSpawn.add(enm);
-
+/*
             Ennemis enm1 = new Géant(terrain);
             ennemis.add(enm1);
             this.listeEnnemisSpawn.add(enm1);
+            */
+
         }
 
         /*
@@ -227,18 +233,52 @@ public class jeu {
     }
 
     public void unTour() {
+        int [][] tab = terrain.getTabTerrain();
                 for (int i = 0; i < ennemis.size(); i++) {
-                    this.ennemis.get(i).seDeplace();
-                    if (this.ennemis.get(i).getX() == (this.terrain.getPointArv().getX() * 32 + 16) && this.ennemis.get(i).getY() == (this.terrain.getPointArv().getY() * 32 + 16)) {
+                    Ennemis enm = this.ennemis.get(i);
+                    enm.seDeplace();
+                    if (enm.getX() == (this.terrain.getPointArv().getX() * 32 + 16) && enm.getY() == (this.terrain.getPointArv().getY() * 32 + 16)) {
                         System.out.println("-1 PV");
                         setPvJoueur(this.getPvJoueur() - 1);
                         this.getEnnemis().remove(this.getEnnemis().get(i));
                     }
+
+                    // revoir les dégats qu'inflige les ennemis à l'obstacle check la case suivante
+                    for (int j = 0; j < this.listeObstacle.size(); j++) {
+                        ObservableList<Obstacle> listObs = getListeObstacle();
+                        int degat = ennemis.get(i).getDegatObstacle();
+                        if (((enm.getX()-32) == (listObs.get(j).getPosX()* 31  - 22 )) && (enm.getY()) == ((listObs.get(j).getPosY() * 32 + 16)) && (listObs.get(j).getPointDeVie()!=0)) {
+                            System.out.println(listObs.get(j).toString());
+                            listObs.get(j).setPointDeVie(listObs.get(j).getPointDeVie() - degat);
+                            System.out.println(listObs.get(j).toString());
+                        }
+/*
+                        else if (((enm.getX()) == ((obs.getPosX()* 33)) && (enm.getY() == ((obs.getPosY() * 32) + 16)))) {
+                            System.out.println("check position ennemis obstacle");
+                            System.out.println("point de vie obstacle : " + obs.getPointDeVie());
+                            obs.setPointDeVie(obs.getPointDeVie() - degat);
+                            System.out.println("point de vie après dégat :" + obs.getPointDeVie());
+                        }
+
+
+
+ */
+                    }
+
                     for (int j = 0; j < terrain.getCasesDégats().size(); j++) {
-                        if (this.ennemis.get(i).getX() == this.terrain.getCasesDégats().get(j).getX() && this.ennemis.get(i).getY() == this.terrain.getCasesDégats().get(j).getY() && this.ennemis.get(i).getImmunite() != this.terrain.getCasesDégats().get(j).getTypeAttaque())
+                        if (enm.getX() == this.terrain.getCasesDégats().get(j).getX() && enm.getY() == this.terrain.getCasesDégats().get(j).getY() && enm.getImmunite() != this.terrain.getCasesDégats().get(j).getTypeAttaque())
                             this.ennemis.get(i).setPv(this.terrain.getCasesDégats().get(j).getDegat());
                     }
                 }
+
+        for (int i = 0; i < listeObstacle.size(); i++) {
+            if(this.listeObstacle.get(i).getPointDeVie() == 0){
+                tab[this.listeObstacle.get(i).getPosY()][this.listeObstacle.get(i).getPosX()] = 9;
+                this.listeObstacle.remove(this.listeObstacle.get(i));
+            }
+
+        }
+
                 for (int i = ennemis.size() - 1; i >= 0; i--) {
                     if (ennemis.get(i).getPv() == 0)
                         ennemis.remove(i);

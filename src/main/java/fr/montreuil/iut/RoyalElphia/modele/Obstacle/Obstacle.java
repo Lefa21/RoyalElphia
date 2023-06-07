@@ -1,9 +1,5 @@
 package fr.montreuil.iut.RoyalElphia.modele.Obstacle;
 
-import fr.montreuil.iut.RoyalElphia.modele.Map.CasesDégats;
-import fr.montreuil.iut.RoyalElphia.modele.Map.CasesObstacles;
-import fr.montreuil.iut.RoyalElphia.modele.Map.Terrain;
-
 public class Obstacle {
 
     private String NomObstacle;
@@ -15,17 +11,46 @@ public class Obstacle {
     private int MaxAmelioration;
     private int NiveauMaxAmelioration;
 
-    public Obstacle(String nomObstacle, int materiaux, int pointDeVie, int coutObstacle, int coutVente, int coutAmelioration, int maxAmelioration, int niveauMaxAmelioration) {
-        NomObstacle = nomObstacle;
-        Materiaux = materiaux;
-        PointDeVie = pointDeVie;
-        CoutObstacle = coutObstacle;
+    private int ID;
+
+    private int posX,posY;
+
+    public Obstacle(String nomObstacle, int materiaux, int coutObstacle, int coutVente,int PointDeVie, int coutAmelioration, int maxAmelioration, int niveauMaxAmelioration,int posX,int posY) {
+        this.NomObstacle = nomObstacle;
+        this.Materiaux = materiaux;
+        this.PointDeVie = PointDeVie;
+        this.CoutObstacle = coutObstacle;
         this.coutVente = coutVente;
-        CoutAmelioration = coutAmelioration;
-        MaxAmelioration = maxAmelioration;
-        NiveauMaxAmelioration = niveauMaxAmelioration;
+        this.CoutAmelioration = coutAmelioration;
+        this.MaxAmelioration = maxAmelioration;
+        this.NiveauMaxAmelioration = niveauMaxAmelioration;
+        this.posX = posX;
+        this.posY = posY;
     }
-    
+
+    public void setID(int i){
+        this.ID = i;
+    }
+
+    public int getID() {
+        return ID;
+    }
+
+    public void setPosX(int posX) {
+        this.posX = posX;
+    }
+
+    public void setPosY(int posY) {
+        this.posY = posY;
+    }
+
+    public int getPosX() {
+        return posX;
+    }
+
+    public int getPosY() {
+        return posY;
+    }
 
     public String getNomObstacle() {
         return NomObstacle;
@@ -44,7 +69,7 @@ public class Obstacle {
     }
 
     public int getPointDeVie() {
-        return PointDeVie;
+        return this.PointDeVie;
     }
 
     public void setPointDeVie(int pointDeVie) {
@@ -91,4 +116,14 @@ public class Obstacle {
         NiveauMaxAmelioration = niveauMaxAmelioration;
     }
 
+    @Override
+    public String toString() {
+        return "Obstacle{" +
+                "NomObstacle='" + NomObstacle + '\'' +
+                ", PointDeVie=" + PointDeVie +
+                ", ID=" + ID +
+                ", posX=" + posX +
+                ", posY=" + posY +
+                '}';
+    }
 }

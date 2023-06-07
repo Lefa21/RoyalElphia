@@ -19,6 +19,7 @@ public  abstract class Ennemis {
     //private Capacite capacite;
 
     private CasesParcourues casesParcourues;
+    private int degatObstacle;
 
     public Ennemis (Terrain terrain,int pv, int ptsDefense,int immunite,int degatBase, int butin){
         this.id = "" + compteur;
@@ -28,6 +29,7 @@ public  abstract class Ennemis {
         this.ptsDefense = ptsDefense;
         this.pv= new SimpleIntegerProperty(pv);
         this.butin = butin;
+        this.degatObstacle = 15;
         compteur++;
         this.terrain = terrain;
 
@@ -53,6 +55,10 @@ public  abstract class Ennemis {
             this.pv.setValue(0);
         else
             this.pv.setValue(this.getPv()-x);
+    }
+
+    public int getDegatObstacle() {
+        return degatObstacle;
     }
 
     public IntegerProperty getPvProperty() {

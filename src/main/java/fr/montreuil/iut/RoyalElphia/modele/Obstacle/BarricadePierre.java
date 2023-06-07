@@ -4,6 +4,6 @@ public class BarricadePierre extends Obstacle {
 
 
     public BarricadePierre() {
-        super("Pierre", 1, 15, 10, 4, 2, 2, 4);
+        super("Pierre", 1, 10, 4,15, 2, 2, 4,0,0);
     }
 }
