@@ -76,7 +76,7 @@ public class VueTour {
             }
             if (tourImage != null) {
                 ImageView tourImageView = new ImageView(tourImage);
-                tour.rayonDegat(terrain, posX, posY, tour.getDegat());
+                tour.rayonDegat(terrain, posX, posY, tour.getDegat(), this.panneauJeu);
                 if (tour instanceof TourElectrique) {
                     tourImageView.setX(x - 45);
                     tourImageView.setY(y - 45);

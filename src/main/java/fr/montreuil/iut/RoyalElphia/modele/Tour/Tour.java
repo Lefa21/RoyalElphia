@@ -5,6 +5,7 @@ import fr.montreuil.iut.RoyalElphia.modele.Map.CasesDégats;
 import fr.montreuil.iut.RoyalElphia.modele.Map.Terrain;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
+import javafx.scene.layout.Pane;
 
 import java.util.ArrayList;
 
@@ -26,11 +27,11 @@ public class Tour {
     private int ID;
     private ArrayList<CasesDégats> listeCasesDegats;
 
-    private CasesDégats c1, c2, c3, c4, c5, c6, c7, c8;
 
 
-    public Tour(int degat, String nom, int coutAchat, int porteeAttaque, int typeAttaque, int coutVente, int coutAmelioration, int niveauMaxAmelioration, int dureeINtervalleAttaque, int nombreAttaqueMax, int tempsRecharge) {
-        Nom = nom;
+
+    public Tour(int degat,int coutAchat, int porteeAttaque, int typeAttaque, int coutVente, int coutAmelioration, int niveauMaxAmelioration, int dureeINtervalleAttaque, int nombreAttaqueMax, int tempsRecharge) {
+
         CoutAchat = coutAchat;
         PorteeAttaque = porteeAttaque;
         TypeAttaque = typeAttaque;
@@ -154,27 +155,27 @@ public class Tour {
     }
 
 
-   public ArrayList<CasesDégats> rayonDegat(Terrain terrain, int x, int y, int degat) {
+   public ArrayList<CasesDégats> rayonDegat(Terrain terrain, int x, int y, int degat, Pane pane) {
        this.listeCasesDegats = new ArrayList<>();
 
        for (int i = 0; i <= this.getPorteeAttaque(); i++) {
-           CasesDégats c1 = new CasesDégats(x, y, degat, this.getTypeAttaque(), "H", i);
+           CasesDégats c1 = new CasesDégats(x, y, degat, this.getTypeAttaque(), "H", i, pane);
            terrain.ajouterCaseDegat(c1);
            listeCasesDegats.add(c1);
            c1.getDegatProperty().bind(this.getDegatProperty());
 
 
-           CasesDégats c2 = new CasesDégats(x, y, degat, this.getTypeAttaque(), "D", i);
+           CasesDégats c2 = new CasesDégats(x, y, degat, this.getTypeAttaque(), "D", i, pane);
            terrain.ajouterCaseDegat(c2);
            listeCasesDegats.add(c2);
            c2.getDegatProperty().bind(this.getDegatProperty());
 
-           CasesDégats c3 = new CasesDégats(x, y, degat, this.getTypeAttaque(), "B", i);
+           CasesDégats c3 = new CasesDégats(x, y, degat, this.getTypeAttaque(), "B", i, pane);
            terrain.ajouterCaseDegat(c3);
            listeCasesDegats.add(c3);
            c3.getDegatProperty().bind(this.getDegatProperty());
 
-           CasesDégats c4 = new CasesDégats(x, y, degat, this.getTypeAttaque(), "G", i);
+           CasesDégats c4 = new CasesDégats(x, y, degat, this.getTypeAttaque(), "G", i,pane);
            terrain.ajouterCaseDegat(c4);
            listeCasesDegats.add(c4);
            c4.getDegatProperty().bind(this.getDegatProperty());

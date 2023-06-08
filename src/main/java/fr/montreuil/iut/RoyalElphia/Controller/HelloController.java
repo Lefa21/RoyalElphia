@@ -31,6 +31,7 @@ import javafx.scene.layout.Pane;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.layout.TilePane;
+import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 
 
@@ -234,7 +235,7 @@ public class HelloController implements Initializable {
     }
 
     @FXML
-    public void Amelioration(Event event) {
+    public void Amelioration(ActionEvent actionEvent) {
         for (int i = 0; i < jeu.getListeDeTour().size(); i++) {
             Tour t = jeu.getListeDeTour().get(i);
             if (t.getNiveauAmelioration() != t.getNiveauMaxAmelioration()) {
@@ -251,5 +252,24 @@ public class HelloController implements Initializable {
         }
     }
 
+    @FXML
+    public void Portee(ActionEvent actionEvent){
+        int c = 0;
+        while (panneauJeu.lookup("#"+"A"+c)!=null) {
+            panneauJeu.lookup("#" + "A" + c).setVisible(true);
+            c++;
+        }
+    }
+
+    @FXML
+    public void Annul(MouseEvent mouseEvent) {
+        if (mouseEvent.getClickCount() == 2) {
+            int c = 0;
+            while (panneauJeu.lookup("#" + "A" + c) != null) {
+                panneauJeu.lookup("#" + "A" + c).setVisible(false);
+                c++;
+            }
+        }
+    }
 }
 
