@@ -25,9 +25,6 @@
             </Button>
             <Button onAction="#Pause" text="Pause">
             </Button>
-            <Button onAction="#Amelioration" text="Amelioration">
-
-            </Button>
         </VBox>
     </right>
     <center>
@@ -126,6 +123,8 @@
                             </ImageView>
                         </children>
                     </HBox>
+                    <Label text="Double clic pour vendre une tour" textFill="red" />
+                    <Label text="Alt+Clic pour améliorer une tour" textFill="red" />
                 </VBox>
             </children>
 
