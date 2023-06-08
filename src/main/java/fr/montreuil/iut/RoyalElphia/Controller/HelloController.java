@@ -130,12 +130,6 @@ public class HelloController implements Initializable {
                 }
             }
         }
-
-
-
-
-
-
     @FXML
     public void PoserTour(MouseEvent mouseEvent) throws FileNotFoundException {
         double cliqueX = mouseEvent.getX();
@@ -231,24 +225,6 @@ public class HelloController implements Initializable {
     @FXML
     public void Pause(Event event) {
         jeu.arretLoop();
-    }
-
-    @FXML
-    public void Amelioration(Event event) {
-        for (int i = 0; i < jeu.getListeDeTour().size(); i++) {
-            Tour t = jeu.getListeDeTour().get(i);
-            if (t.getNiveauAmelioration() != t.getNiveauMaxAmelioration()) {
-                if (t.getCoutAmelioration() <= jeu.getArgent()) {
-                    jeu.setArgent(t.getCoutAmelioration());
-                    t.setNiveauAmelioration(t.getNiveauAmelioration() + 1);
-                    t.setDegat();
-                    t.setCoutAmelioration((int) (t.getCoutAmelioration()*1.5));
-                    System.out.println("NIV " + t.getNiveauAmelioration() + " DEGAT " + t.getDegat());
-                }
-            }
-            else
-                System.out.println("niv MAX");
-        }
     }
 
 }
