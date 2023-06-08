@@ -67,7 +67,7 @@ public class HelloController implements Initializable {
     private VueObstacle vo = new VueObstacle();
 
     @FXML
-    public int cliqueObstacle(MouseEvent mouseEvent) throws FileNotFoundException {
+    public void cliqueObstacle(MouseEvent mouseEvent) throws FileNotFoundException {
         if (this.ObstaclePose && obstacle == null && mouseEvent.getClickCount() == 2) {
             System.out.println("clique obstacle ");
             String imageId = ((ImageView) mouseEvent.getSource()).getId();
@@ -83,22 +83,20 @@ public class HelloController implements Initializable {
                 case "metal":
                     obstacle = new BarricadeMetal();
                     break;
-                case "eclair":
+                case "pierre":
                     obstacle = new BarricadePierre();
                     break;
             }
             if (obstacle != null && jeu.verifArgent(obstacle)) {
                 vo.CliqueObstacle(this.jeu, imageId);
                 this.obstacle = vo.getObstacle();
-                this.TourPose = false;
-                return 1;
+                this.ObstaclePose = false;
             }
         }
-        return 0;
     }
 
     @FXML
-    public int TourClique(MouseEvent mouseEvent){
+    public void TourClique(MouseEvent mouseEvent){
         if (this.TourPose && tour == null && mouseEvent.getClickCount() == 2) {
             System.out.println("clique tour");
             String imageId = ((ImageView) mouseEvent.getSource()).getId();
@@ -122,18 +120,26 @@ public class HelloController implements Initializable {
                     break;
             }
             if (tour != null && jeu.verifArgent(tour)) {
+                System.out.println();
                 vt.CliqueTour(this.jeu, imageId);
                 this.tour = vt.getTour();
                 this.TourPose = false;
-                return 1;
             }
         }
-        return 0;
     }
-
     @FXML
     public void poserItem(MouseEvent mouseEvent) throws FileNotFoundException {
-        if(TourClique(mouseEvent) == 1 ){
+        if(this.obstacle != null){
+            double cliqueX = mouseEvent.getX();
+            double cliqueY = mouseEvent.getY();
+            System.out.println("obstacle poser ");
+            VueObstacle vueObstacle = new VueObstacle(panneauJeu, obstacle, cliqueX, cliqueY, terrain,jeu);
+            vueObstacle.PoserObstacle();
+            this.ObstaclePose = true;
+            this.obstacle = vueObstacle.getObstacle();
+        }
+        if(this.tour != null){
+            System.out.println("tour poser");
             double cliqueX = mouseEvent.getX();
             double cliqueY = mouseEvent.getY();
             VueTour vueTour = new VueTour(panneauJeu, tour, cliqueX, cliqueY, terrain, jeu);
@@ -141,17 +147,7 @@ public class HelloController implements Initializable {
             this.TourPose = true;
             this.tour = vueTour.getTour();
         }
-        if(cliqueObstacle(mouseEvent) ==1){
-            double cliqueX = mouseEvent.getX();
-            double cliqueY = mouseEvent.getY();
-            VueObstacle vueObstacle = new VueObstacle(panneauJeu, obstacle, cliqueX, cliqueY, terrain,jeu);
-            vueObstacle.PoserObstacle();
-            this.ObstaclePose = true;
-            this.obstacle = vueObstacle.getObstacle();
         }
-        TourClique(mouseEvent);
-        cliqueObstacle(mouseEvent);
-    }
 
 
     public void créerNiveau(){

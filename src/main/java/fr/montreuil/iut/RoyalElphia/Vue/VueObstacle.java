@@ -166,7 +166,8 @@ public class VueObstacle {
         int[][] tab = terrain.getTabTerrain();
         i.setOnMouseClicked(event -> {
             if (event.getClickCount()==2){
-                for (Obstacle o: this.jeu.getListeObstacle()) {
+                for (int j = 0; j < this.jeu.getListeObstacle().size(); j++) {
+                    Obstacle o = this.jeu.getListeObstacle().get(j);
                     if (Integer.toString(o.getID()).equals(i.getId())){
                         panneauJeu.getChildren().remove(i);
                         tab[o.getPosY()][o.getPosX()] = 9;
