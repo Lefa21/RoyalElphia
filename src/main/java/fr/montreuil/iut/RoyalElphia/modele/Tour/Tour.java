@@ -162,6 +162,7 @@ public class Tour {
            terrain.ajouterCaseDegat(c1);
            listeCasesDegats.add(c1);
 
+
            CasesDégats c2 = new CasesDégats(x, y, degat, this.getTypeAttaque(), "D", i);
            terrain.ajouterCaseDegat(c2);
            listeCasesDegats.add(c2);
