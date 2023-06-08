@@ -126,31 +126,27 @@ public class jeu {
         for (int i = 0; i < listeEnnemisSpawn.size(); i++) {
             listeEnnemisSpawn.remove(i);
         }
-        this.nbVague.setValue(this.nbVague.getValue() + 1);
-        this.niveau.setNbEnnemis(this.niveau.getNbEnnemis() * 2);
-        this.nbEnnemisRestant.setValue(this.niveau.getNbEnnemis());
+        if (this.nbVague.getValue()<5){
+            this.nbVague.setValue(this.nbVague.getValue() + 1);
+            this.niveau.setNbEnnemis(this.niveau.getNbEnnemis() * 2);
+            this.nbEnnemisRestant.setValue(this.niveau.getNbEnnemis());
+        }
     }
 
     // permet d'ajouter un ennemi qui a spawn sur le terrain dans la liste de notre modèle
     public void spwanEnnemi() {
-        if (nbTour % 2 == 0 && listeEnnemisSpawn.size() <= this.niveau.getNbEnnemis()) {
+        for (int i = 0; i < this.niveau.getNbEnnemis(); i++) {
+            if (nbTour % 2 == 0 /*&& listeEnnemisSpawn.size() <= this.niveau.getNbEnnemis()*/) {
+                Ennemis enm = new Sorcières(terrain);
+                ennemis.add(enm);
+                this.listeEnnemisSpawn.add(enm);
+            }
+        }
+        /*if (nbTour % 2 == 0 && listeEnnemisSpawn.size() <= this.niveau.getNbEnnemis()) {
             Ennemis enm = new Sorcières(terrain);
             ennemis.add(enm);
             this.listeEnnemisSpawn.add(enm);
-
-/*
-=======
         }
-
-        if (nbTour % 4 == 0 && listeEnnemisSpawn.size() <= this.niveau.getNbEnnemis()) {
->>>>>>> 2cd98ba8bad3a457bbe0ee5f99bcaf47999cb7fd
-            Ennemis enm1 = new Géant(terrain);
-            ennemis.add(enm1);
-            this.listeEnnemisSpawn.add(enm1);
-            */
-
-        }
-
         if (nbTour % 8 == 0 && listeEnnemisSpawn.size() <= this.niveau.getNbEnnemis()) {
             Ennemis enm = new gobelins(terrain);
             ennemis.add(enm);
@@ -167,7 +163,7 @@ public class jeu {
             Ennemis enm = new GéantRoyal(terrain);
             ennemis.add(enm);
             this.listeEnnemisSpawn.add(enm);
-        }
+        }*/
     }
 
 
@@ -227,6 +223,7 @@ public class jeu {
     }
 
     public void unTour() {
+        System.out.println(this.listeEnnemisSpawn.size());
         int [][] tab = terrain.getTabTerrain();
         for (int i = 0; i < this.ennemis.size(); i++) {
             Ennemis e = this.ennemis.get(i);
@@ -241,25 +238,11 @@ public class jeu {
             for (int j = 0; j < this.listeObstacle.size(); j++) {
                 ObservableList<Obstacle> listObs = getListeObstacle();
                 int degat = ennemis.get(i).getDegatObstacle();
-                /*
-                System.out.println("Position X : " + e.getX());
-                System.out.println("Position Y : " + e.getY());
-                System.out.println("Position obstacle  X : " + (listObs.get(j).getPosX()* 31  - 22));
-                System.out.println("Position obstacle  Y : " + (listObs.get(j).getPosY()* 32 + 16));
-                 */
                 if ((((e.getX()-32) == (listObs.get(j).getPosX()* 31  - 22 )) ||(e.getX()-32) == (listObs.get(j).getPosX()* 31  - 21 ) ) && (e.getY()) == ((listObs.get(j).getPosY() * 32 + 16)) && (listObs.get(j).getPointDeVie()!=0)) {
                     System.out.println(listObs.get(j).toString());
                     listObs.get(j).setPointDeVie(listObs.get(j).getPointDeVie() - degat);
                     System.out.println(listObs.get(j).toString());
                 }
-/*
-                        else if (((enm.getX()) == ((obs.getPosX()* 33)) && (enm.getY() == ((obs.getPosY() * 32) + 16)))) {
-                            System.out.println("check position ennemis obstacle");
-                            System.out.println("point de vie obstacle : " + obs.getPointDeVie());
-                            obs.setPointDeVie(obs.getPointDeVie() - degat);
-                            System.out.println("point de vie après dégat :" + obs.getPointDeVie());
-                        }
- */
             }
 
             for (int j = 0; j < this.terrain.getCasesDégats().size(); j++) {
@@ -284,8 +267,8 @@ public class jeu {
         }
 
 
-                nbTour++;
-            }
+        nbTour++;
+    }
 
     public void initAnimation() {
         gameLoop = new Timeline();
@@ -295,14 +278,14 @@ public class jeu {
 
         KeyFrame kf = new KeyFrame(
                 // on définit le FPS (nbre de frame par seconde)
-                Duration.seconds(0.05),
+                Duration.seconds(0.1),
                 // on définit ce qui se passe à chaque frame
                 // c'est un eventHandler d'ou le lambda
                 (ev -> {
-                    if (this.getPvJoueur() == 0 || this.nbVague.getValue() == 5) {
+                    if (this.getPvJoueur() == 0 || (this.nbVague.getValue() == 5 && getNbEnnemisRestant()==0 && this.listeEnnemisSpawn.size()==0)) {
                         System.out.println("Vous avez perdu");
                         gameLoop.stop();
-                    } else if (getEnnemisTué().size() == niveau.getNbEnnemis()) {
+                    } else if (getNbEnnemisRestant()==0) {
                         System.out.println("Vague suivante " + this.getNbVague());
                         vagueSuivante();
                         System.out.println("nombre d'ennemis spwan:  " + this.listeEnnemisSpawn.size());

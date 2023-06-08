@@ -140,26 +140,6 @@ public class HelloController implements Initializable {
         this.tour = vueTour.getTour();
     }
 
-
-
-
-
-
-
-    /*
-    public void PoserObstacle(MouseEvent mouseEvent) throws FileNotFoundException {
-        double cliqueX = mouseEvent.getX();
-        double cliqueY = mouseEvent.getY();
-        VueObstacle vueObstacle = new VueObstacle(panneauJeu, obstacle, cliqueX, cliqueY, terrain,jeu);
-        vueObstacle.PoserObstacle();
-        this.ObstaclePose = true;
-        this.obstacle = vueObstacle.getObstacle();
-    }
-    */
-
-
-
-
     public void créerNiveau(){
         int niveau = SceneController.getNiveau();
         if (niveau == 1) {

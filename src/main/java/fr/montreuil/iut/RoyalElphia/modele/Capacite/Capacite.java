@@ -1,5 +1,7 @@
 package fr.montreuil.iut.RoyalElphia.modele.Capacite;
 
+import fr.montreuil.iut.RoyalElphia.modele.Ennemis.Ennemis;
+
 public class Capacite {
 
     private int destruction;

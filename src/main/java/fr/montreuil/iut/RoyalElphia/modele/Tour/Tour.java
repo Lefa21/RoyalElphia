@@ -73,7 +73,7 @@ public class Tour {
     }
 
     public void setDegat() {
-        this.degat.setValue(this.degat.getValue() * 1.5);
+        this.degat.setValue(this.degat.getValue() * 3);
     }
 
     public void setCoutAchat(int coutAchat) {
