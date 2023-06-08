@@ -161,19 +161,23 @@ public class Tour {
            CasesDégats c1 = new CasesDégats(x, y, degat, this.getTypeAttaque(), "H", i);
            terrain.ajouterCaseDegat(c1);
            listeCasesDegats.add(c1);
+           c1.getDegatProperty().bind(this.getDegatProperty());
 
 
            CasesDégats c2 = new CasesDégats(x, y, degat, this.getTypeAttaque(), "D", i);
            terrain.ajouterCaseDegat(c2);
            listeCasesDegats.add(c2);
+           c2.getDegatProperty().bind(this.getDegatProperty());
 
            CasesDégats c3 = new CasesDégats(x, y, degat, this.getTypeAttaque(), "B", i);
            terrain.ajouterCaseDegat(c3);
            listeCasesDegats.add(c3);
+           c3.getDegatProperty().bind(this.getDegatProperty());
 
            CasesDégats c4 = new CasesDégats(x, y, degat, this.getTypeAttaque(), "G", i);
            terrain.ajouterCaseDegat(c4);
            listeCasesDegats.add(c4);
+           c4.getDegatProperty().bind(this.getDegatProperty());
 
            /*CasesDégats c5 = new CasesDégats((x * 32) - (32 * i) + 16, (y * 32) - (32 * i) + 16, degat, this.getTypeAttaque());
            terrain.ajouterCaseDegat(c5);
