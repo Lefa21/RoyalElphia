@@ -12,8 +12,7 @@ import fr.montreuil.iut.RoyalElphia.modele.Niveau.Difficile;
 import fr.montreuil.iut.RoyalElphia.modele.Niveau.Facile;
 import fr.montreuil.iut.RoyalElphia.modele.Niveau.Niveau;
 import fr.montreuil.iut.RoyalElphia.modele.Niveau.Normal;
-import fr.montreuil.iut.RoyalElphia.modele.Obstacle.ListObservableObstacle;
-import fr.montreuil.iut.RoyalElphia.modele.Obstacle.Obstacle;
+import fr.montreuil.iut.RoyalElphia.modele.Obstacle.*;
 import fr.montreuil.iut.RoyalElphia.modele.Tour.*;
 
 import javafx.collections.ListChangeListener;
@@ -59,111 +58,100 @@ public class HelloController implements Initializable {
     private Tour tour;
     private Obstacle obstacle;
     private boolean TourPose = true;
+   // private Boolean ItemPose = true;
+
+    // private Boolean ItemPose = true;
 
     private boolean ObstaclePose = true;
     private VueTour vt = new VueTour();
     private VueObstacle vo = new VueObstacle();
 
     @FXML
-    public void cliqueObstacle(MouseEvent mouseEvent) throws FileNotFoundException {
-
+    public int cliqueObstacle(MouseEvent mouseEvent) throws FileNotFoundException {
         if (this.ObstaclePose && obstacle == null && mouseEvent.getClickCount() == 2) {
-            if (((ImageView) mouseEvent.getSource()).getId().equals("bois")) {
-                if (this.jeu.getArgent() >= 10) {
-                    vo.CliqueObstacle(this.jeu, "bois");
-                    this.obstacle = vo.getObstacle();
-                    this.ObstaclePose = false;
-                }
-            } else if (((ImageView) mouseEvent.getSource()).getId().equals("fer")) {
-                if (this.jeu.getArgent() >= 24) {
-                    vo.CliqueObstacle(this.jeu, "fer");
-                    this.obstacle = vo.getObstacle();
-                    this.ObstaclePose = false;
-                }
-            } else if (((ImageView) mouseEvent.getSource()).getId().equals("metal")) {
-                if (this.jeu.getArgent() >= 32) {
-                    vo.CliqueObstacle(this.jeu, "metal");
-                    this.obstacle = vo.getObstacle();
-                    this.ObstaclePose = false;
-                }
-            } else if (((ImageView) mouseEvent.getSource()).getId().equals("pierre")) {
-                if (this.jeu.getArgent() >= 10) {
-                    vo.CliqueObstacle(this.jeu, "pierre");
-                    this.obstacle = vo.getObstacle();
-                    this.ObstaclePose = false;
+            System.out.println("clique obstacle ");
+            String imageId = ((ImageView) mouseEvent.getSource()).getId();
+            Obstacle obstacle = null;
 
-                }
+            switch (imageId) {
+                case "bois":
+                    obstacle = new BarricadeBois();
+                    break;
+                case "fer":
+                    obstacle = new BarricadeFer();
+                    break;
+                case "metal":
+                    obstacle = new BarricadeMetal();
+                    break;
+                case "eclair":
+                    obstacle = new BarricadePierre();
+                    break;
+            }
+            if (obstacle != null && jeu.verifArgent(obstacle)) {
+                vo.CliqueObstacle(this.jeu, imageId);
+                this.obstacle = vo.getObstacle();
+                this.TourPose = false;
+                return 1;
             }
         }
+        return 0;
     }
 
-
-
-
     @FXML
-    public void TourClique(MouseEvent mouseEvent){
-            if (this.TourPose && tour == null && mouseEvent.getClickCount() == 2) {
-                String imageId = ((ImageView) mouseEvent.getSource()).getId();
-                Tour tour = null;
+    public int TourClique(MouseEvent mouseEvent){
+        if (this.TourPose && tour == null && mouseEvent.getClickCount() == 2) {
+            System.out.println("clique tour");
+            String imageId = ((ImageView) mouseEvent.getSource()).getId();
+            Tour tour = null;
 
-                switch (imageId) {
-                    case "bombe":
-                        tour = new TourABombe();
-                        break;
-                    case "feu":
-                        tour = new TourBouleDeFeu();
-                        break;
-                    case "fleche":
-                        tour = new TourFleche();
-                        break;
-                    case "eclair":
-                        tour = new TourElectrique();
-                        break;
-                    case "laser":
-                        tour = new TourLaser();
-                        break;
-                }
-                if (tour != null && jeu.verifArgent(tour)) {
-                    vt.CliqueTour(this.jeu, imageId);
-                    this.tour = vt.getTour();
-                    this.TourPose = false;
-                }
+            switch (imageId) {
+                case "bombe":
+                    tour = new TourABombe();
+                    break;
+                case "feu":
+                    tour = new TourBouleDeFeu();
+                    break;
+                case "fleche":
+                    tour = new TourFleche();
+                    break;
+                case "eclair":
+                    tour = new TourElectrique();
+                    break;
+                case "laser":
+                    tour = new TourLaser();
+                    break;
+            }
+            if (tour != null && jeu.verifArgent(tour)) {
+                vt.CliqueTour(this.jeu, imageId);
+                this.tour = vt.getTour();
+                this.TourPose = false;
+                return 1;
             }
         }
-
-
-
-
-
+        return 0;
+    }
 
     @FXML
-    public void PoserTour(MouseEvent mouseEvent) throws FileNotFoundException {
-        double cliqueX = mouseEvent.getX();
-        double cliqueY = mouseEvent.getY();
-        VueTour vueTour = new VueTour(panneauJeu, tour, cliqueX, cliqueY, terrain, jeu);
-        vueTour.PoserTour();
-        this.TourPose = true;
-        this.tour = vueTour.getTour();
+    public void poserItem(MouseEvent mouseEvent) throws FileNotFoundException {
+        if(TourClique(mouseEvent) == 1 ){
+            double cliqueX = mouseEvent.getX();
+            double cliqueY = mouseEvent.getY();
+            VueTour vueTour = new VueTour(panneauJeu, tour, cliqueX, cliqueY, terrain, jeu);
+            vueTour.PoserTour();
+            this.TourPose = true;
+            this.tour = vueTour.getTour();
+        }
+        if(cliqueObstacle(mouseEvent) ==1){
+            double cliqueX = mouseEvent.getX();
+            double cliqueY = mouseEvent.getY();
+            VueObstacle vueObstacle = new VueObstacle(panneauJeu, obstacle, cliqueX, cliqueY, terrain,jeu);
+            vueObstacle.PoserObstacle();
+            this.ObstaclePose = true;
+            this.obstacle = vueObstacle.getObstacle();
+        }
+        TourClique(mouseEvent);
+        cliqueObstacle(mouseEvent);
     }
-
-
-
-
-
-
-
-    /*
-    public void PoserObstacle(MouseEvent mouseEvent) throws FileNotFoundException {
-        double cliqueX = mouseEvent.getX();
-        double cliqueY = mouseEvent.getY();
-        VueObstacle vueObstacle = new VueObstacle(panneauJeu, obstacle, cliqueX, cliqueY, terrain,jeu);
-        vueObstacle.PoserObstacle();
-        this.ObstaclePose = true;
-        this.obstacle = vueObstacle.getObstacle();
-    }
-    */
-
-
 
 
     public void créerNiveau(){
