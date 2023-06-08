@@ -7,6 +7,10 @@ import javafx.scene.layout.Pane;
 public class TourBouleDeFeu extends Tour {
 
     public TourBouleDeFeu() {
-        super(50, 22, 4, 0, 10, 7,  6, 3, 4, 7);
+        super(4,0,3,4,7,50);
+        setCoutAchat(22);
+        setCoutVente(10);
+        setCoutAmelioration(7);
+        setNiveauMaxAmelioration(6);
     }
 }

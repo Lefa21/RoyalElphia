@@ -5,6 +5,7 @@ import fr.montreuil.iut.RoyalElphia.modele.Map.CasesDégats;
 import fr.montreuil.iut.RoyalElphia.modele.Map.Terrain;
 import fr.montreuil.iut.RoyalElphia.modele.Tour.*;
 import fr.montreuil.iut.RoyalElphia.modele.jeu;
+import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
@@ -89,8 +90,8 @@ public class VueTour {
                 IDImage++;
                 panneauJeu.getChildren().add(tourImageView);
                 this.tour = null;
-                VendreTour(tourImageView);
-                //AmeliorationTour(tourImageView);
+                //VendreTour(tourImageView);
+                AmeliorationEtVente(tourImageView);
             }
         }
     }
@@ -129,7 +130,7 @@ public class VueTour {
         return tour;
     }
 
-    public void VendreTour(ImageView i) {
+   /* public void VendreTour(ImageView i) {
         i.setOnMouseClicked(event -> {
             if (event.getClickCount() == 2 && !trouve) {
                 for (int j = 0; j < this.jeu.getListeDeTour().size(); j++) {
@@ -148,9 +149,9 @@ public class VueTour {
     }
 
 
-    /*public void AmeliorationTour(ImageView i) {
-        i.setOnMouseClicked(event -> {
-            if (event.getClickCount() == 1 && !trouve) {
+    public void AmeliorationTour(ImageView i) {
+        i.setOnMouseClicked(KeyEvent -> {
+            if (KeyEvent.isAltDown() && !trouve) {
                 for (int j = 0; j < this.jeu.getListeDeTour().size(); j++) {
                     Tour t = this.jeu.getListeDeTour().get(j);
                     if (Integer.toString(t.getID()).equals(i.getId())) {
@@ -165,6 +166,41 @@ public class VueTour {
             }
         });
     }*/
+    public void AmeliorationEtVente(ImageView x) {
+        x.setOnMouseClicked(KeyEvent -> {
+            if (KeyEvent.isAltDown()) {
+                for (int i = 0; i < jeu.getListeDeTour().size(); i++) {
+                    Tour t = jeu.getListeDeTour().get(i);
+                    if (t.getNiveauAmelioration() != t.getNiveauMaxAmelioration()) {
+                        if (t.getCoutAmelioration() <= jeu.getArgent()) {
+                            jeu.setArgent(t.getCoutAmelioration());
+                            t.setNiveauAmelioration(t.getNiveauAmelioration() + 1);
+                            t.setDegat();
+                            t.setCoutAmelioration((int) (t.getCoutAmelioration() * 1.5));
+                            System.out.println("NIV " + t.getNiveauAmelioration() + " DEGAT " + t.getDegat());
+                        }
+                    } else
+                        System.out.println("niv MAX");
+                }
+            } else {
+                x.setOnMouseClicked(event -> {
+                    if (event.getClickCount() == 2 && !trouve) {
+                        for (int j = 0; j < this.jeu.getListeDeTour().size(); j++) {
+                            Tour t = this.jeu.getListeDeTour().get(j);
 
+                            if (Integer.toString(t.getID()).equals(x.getId())) {
+                                panneauJeu.getChildren().remove(x);
+                                this.jeu.getListeDeTour().remove(t);
+                                this.jeu.setArgent(-t.getCoutVente());
+                                t.TourDevientInoffensif(terrain, t.getListeCasesDegats());
+                                trouve = true;
+                            }
+                        }
+                    }
+                });
+            }
+        });
+
+    }
 }
 

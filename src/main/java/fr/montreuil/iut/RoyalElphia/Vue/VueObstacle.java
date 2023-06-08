@@ -111,9 +111,9 @@ public class VueObstacle {
             this.Obstacle.setID(idObstacle);
             System.out.println("Id de l'obstacle dans le modèle : " + this.Obstacle.getID());
             idObstacle++;
-            if (jeu.verifArgentObstacle(this.Obstacle)) {
+            if (jeu.verifArgent(this.Obstacle)) {
                 System.out.println("Ajout de l'obstacle à la liste ");
-                jeu.setArgent(this.Obstacle.getCoutObstacle());
+                jeu.setArgent(this.Obstacle.getCoutAchat());
                 jeu.ajouterObstacle(this.Obstacle);
                 System.out.println("Liste d'obstacle : "  + jeu.getListeObstacle().toString());
             }
@@ -124,9 +124,9 @@ public class VueObstacle {
             this.Obstacle.setID(idObstacle);
             System.out.println("Id de l'obstacle dans le modèle : " + this.Obstacle.getID());
             idObstacle++;
-            if (jeu.verifArgentObstacle(this.Obstacle)) {
+            if (jeu.verifArgent(this.Obstacle)) {
                 System.out.println("Ajout de l'obstacle à la liste ");
-                jeu.setArgent(this.Obstacle.getCoutObstacle());
+                jeu.setArgent(this.Obstacle.getCoutAchat());
                 jeu.ajouterObstacle(this.Obstacle);
                 System.out.println("Liste d'obstacle : "  + jeu.getListeObstacle().toString());
             }
@@ -137,9 +137,9 @@ public class VueObstacle {
             this.Obstacle.setID(idObstacle);
             System.out.println("Id de l'obstacle dans le modèle : " + this.Obstacle.getID());
             idObstacle++;
-            if (jeu.verifArgentObstacle(this.Obstacle)) {
+            if (jeu.verifArgent(this.Obstacle)) {
                 System.out.println("Ajout de l'obstacle à la liste ");
-                jeu.setArgent(this.Obstacle.getCoutObstacle());
+                jeu.setArgent(this.Obstacle.getCoutAchat());
                 jeu.ajouterObstacle(this.Obstacle);
                 System.out.println("Liste d'obstacle : "  + jeu.getListeObstacle().toString());
             }
@@ -150,9 +150,9 @@ public class VueObstacle {
             this.Obstacle.setID(idObstacle);
             System.out.println("Id de l'obstacle dans le modèle : " + this.Obstacle.getID());
             idObstacle++;
-            if (jeu.verifArgentObstacle(this.Obstacle)) {
+            if (jeu.verifArgent(this.Obstacle)) {
                 System.out.println("Ajout de l'obstacle à la liste ");
-                jeu.setArgent(this.Obstacle.getCoutObstacle());
+                jeu.setArgent(this.Obstacle.getCoutAchat());
                 jeu.ajouterObstacle(this.Obstacle);
                 System.out.println("Liste d'obstacle : "  + jeu.getListeObstacle().toString());
             }
@@ -166,7 +166,8 @@ public class VueObstacle {
         int[][] tab = terrain.getTabTerrain();
         i.setOnMouseClicked(event -> {
             if (event.getClickCount()==2){
-                for (Obstacle o: this.jeu.getListeObstacle()) {
+                for (int j = 0; j < this.jeu.getListeObstacle().size(); j++) {
+                    Obstacle o = this.jeu.getListeObstacle().get(j);
                     if (Integer.toString(o.getID()).equals(i.getId())){
                         panneauJeu.getChildren().remove(i);
                         tab[o.getPosY()][o.getPosX()] = 9;

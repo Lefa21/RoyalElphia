@@ -1,5 +1,6 @@
 package fr.montreuil.iut.RoyalElphia.modele;
 
+import fr.montreuil.iut.RoyalElphia.modele.Items.Items;
 import fr.montreuil.iut.RoyalElphia.modele.Map.CasesDégats;
 import fr.montreuil.iut.RoyalElphia.modele.Niveau.Niveau;
 import fr.montreuil.iut.RoyalElphia.modele.Obstacle.Obstacle;
@@ -15,6 +16,7 @@ import javafx.animation.Timeline;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.util.Duration;
+import org.controlsfx.control.PropertySheet;
 
 import java.util.ArrayList;
 
@@ -79,15 +81,8 @@ public class jeu {
         return this.argent.getValue();
     }
 
-    public boolean verifArgent(Tour t) {
-        if (t.getCoutAchat() > getArgent()) {
-            return false;
-        }
-        return true;
-    }
-
-    public boolean verifArgentObstacle(Obstacle O) {
-        if (O.getCoutObstacle() > getArgent()) {
+    public boolean verifArgent(Items items) {
+        if (items.getCoutAchat() > getArgent()) {
             return false;
         }
         return true;

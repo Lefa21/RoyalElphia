@@ -7,6 +7,10 @@ import javafx.scene.layout.Pane;
 public class TourLaser extends Tour {
 
     public TourLaser() {
-        super(40, 60, 2, 5, 35, 15,  6, 2, 4, 8);
+        super(2, 5, 2, 4, 8, 40);
+        setCoutAchat(60);
+        setCoutVente(35);
+        setCoutAmelioration(15);
+        setNiveauMaxAmelioration(6);
     }
 }

@@ -25,15 +25,14 @@
             </Button>
             <Button onAction="#Pause" text="Pause">
             </Button>
-            <Button onAction="#Amelioration" text="Amelioration">
+            <Button onAction="#Portee" onMouseClicked="#Annul" text="Portée">
             </Button>
-            <Button onAction="#Portee" onMouseClicked="#Annul" text="Portée"></Button>
         </VBox>
     </right>
     <center>
         <Pane prefHeight="960" prefWidth="1280" BorderPane.alignment="CENTER" fx:id="panneauJeu" >
             <children>
-                <TilePane onMouseClicked="#PoserTour"  fx:id="map" prefHeight="960" prefWidth="1280" />
+                <TilePane onMouseClicked="#poserItem"  fx:id="map" prefHeight="960" prefWidth="1280" />
                 <VBox layoutX="1280" prefHeight="90" prefWidth="90">
                     <children><Label alignment="CENTER" contentDisplay="CENTER" prefHeight="62.0" prefWidth="239.0" text="Menu tour" textAlignment="CENTER">
                         <font>
@@ -126,6 +125,8 @@
                             </ImageView>
                         </children>
                     </HBox>
+                    <Label text="Double clic pour vendre une tour" textFill="red" />
+                    <Label text="Alt+Clic pour améliorer une tour" textFill="red" />
                 </VBox>
             </children>
 
