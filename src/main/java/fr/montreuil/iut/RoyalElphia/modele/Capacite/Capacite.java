@@ -8,6 +8,10 @@ public class Capacite {
     private int augmentationVitesse;
     private int augmentationPv;
 
+   // private int capacitéObstacle;
+
+    //private int ;
+
     public Capacite(int capaciteObstacle, int capaciteStat) {
         if (capaciteObstacle == 1){
             this.destruction = 10;

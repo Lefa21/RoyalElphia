@@ -136,7 +136,6 @@ public class VueObstacle {
                         panneauJeu.getChildren().remove(i);
                         tab[o.getPosY()][o.getPosX()] = 9;
                         this.jeu.getListeObstacle().remove(o);
-                        System.out.println("Liste d'obstacle : " + this.jeu.getListeObstacle().toString());
                         System.out.println();
                         this.jeu.setArgent(-o.getCoutVente());
                     }
@@ -151,9 +150,8 @@ public class VueObstacle {
                         if (o.getCoutAmelioration() <= jeu.getArgent()) {
                             jeu.setArgent(o.getCoutAmelioration());
                             o.setNiveauAmelioration(o.getNiveauAmelioration() + 1);
-                            o.setPointDeVie(o.getPointDeVie() * 2);
+                            o.setPointDeVie((int)(o.getPointDeVie()* 1.5 ));
                             o.setCoutAmelioration((int) (o.getCoutAmelioration() * 1.5));
-                            System.out.println("NIV " + o.getNiveauAmelioration() + " PV " + o.getPointDeVie());
                         }
                     } else
                         System.out.println("niv MAX");
