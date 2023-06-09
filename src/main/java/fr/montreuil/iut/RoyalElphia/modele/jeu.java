@@ -136,35 +136,35 @@ public class jeu {
     // permet d'ajouter un ennemi qui a spawn sur le terrain dans la liste de notre modèle
     public void spwanEnnemi() {
         for (int i = 0; i < this.niveau.getNbEnnemis(); i++) {
-            //if (nbTour % 2 == 0 /*&& listeEnnemisSpawn.size() <= this.niveau.getNbEnnemis()*/) {
+            if (nbTour % 2 == 0 && listeEnnemisSpawn.size() <= this.niveau.getNbEnnemis()) {
                 Ennemis enm = new Sorcières(terrain);
                 ennemis.add(enm);
                 this.listeEnnemisSpawn.add(enm);
-        }
-        /*if (nbTour % 2 == 0 && listeEnnemisSpawn.size() <= this.niveau.getNbEnnemis()) {
-            Ennemis enm = new Sorcières(terrain);
-            ennemis.add(enm);
-            this.listeEnnemisSpawn.add(enm);
-        }
-        if (nbTour % 8 == 0 && listeEnnemisSpawn.size() <= this.niveau.getNbEnnemis()) {
-            Ennemis enm = new gobelins(terrain);
-            ennemis.add(enm);
-            this.listeEnnemisSpawn.add(enm);
+            }
+            if (nbTour % 2 == 0 && listeEnnemisSpawn.size() <= this.niveau.getNbEnnemis()) {
+                Ennemis enm = new Sorcières(terrain);
+                ennemis.add(enm);
+                this.listeEnnemisSpawn.add(enm);
+            }
+            if (nbTour % 8 == 0 && listeEnnemisSpawn.size() <= this.niveau.getNbEnnemis()) {
+                Ennemis enm = new gobelins(terrain);
+                ennemis.add(enm);
+                this.listeEnnemisSpawn.add(enm);
 
-        }
-        if (nbTour % 16 == 0 && listeEnnemisSpawn.size() <= this.niveau.getNbEnnemis()) {
-            Ennemis enm = new Squelette(terrain);
-            ennemis.add(enm);
-            this.listeEnnemisSpawn.add(enm);
+            }
+            if (nbTour % 16 == 0 && listeEnnemisSpawn.size() <= this.niveau.getNbEnnemis()) {
+                Ennemis enm = new Squelette(terrain);
+                ennemis.add(enm);
+                this.listeEnnemisSpawn.add(enm);
 
+            }
+            if (nbTour % 32 == 0 && listeEnnemisSpawn.size() <= this.niveau.getNbEnnemis()) {
+                Ennemis enm = new GéantRoyal(terrain);
+                ennemis.add(enm);
+                this.listeEnnemisSpawn.add(enm);
+            }
         }
-        if (nbTour % 32 == 0 && listeEnnemisSpawn.size() <= this.niveau.getNbEnnemis()) {
-            Ennemis enm = new GéantRoyal(terrain);
-            ennemis.add(enm);
-            this.listeEnnemisSpawn.add(enm);
-        }*/
     }
-
 
     //permet de récuperer la liste des ennemis ayant spawn
     public ArrayList<Ennemis> getListeEnnemisSpawn() {
