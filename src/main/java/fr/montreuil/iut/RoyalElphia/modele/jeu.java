@@ -16,7 +16,6 @@ import javafx.animation.Timeline;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.util.Duration;
-import org.controlsfx.control.PropertySheet;
 
 import java.util.ArrayList;
 
@@ -61,11 +60,11 @@ public class jeu {
     }
 
 
-    public void ajouterObstacle(Obstacle O) {
+    public void ajouterObstacle(fr.montreuil.iut.RoyalElphia.modele.Obstacle.Obstacle O) {
         listeObstacle.add(O);
     }
 
-    public final ObservableList<Obstacle> getListeObstacle() {
+    public final ObservableList<fr.montreuil.iut.RoyalElphia.modele.Obstacle.Obstacle> getListeObstacle() {
         return listeObstacle;
     }
 
@@ -236,13 +235,7 @@ public class jeu {
             for (int j = 0; j < this.listeObstacle.size(); j++) {
                 ObservableList<Obstacle> listObs = getListeObstacle();
                 int degat = ennemis.get(i).getDegatObstacle();
-                /*
-                System.out.println("Position X : " + e.getX());
-                System.out.println("Position Y : " + e.getY());
-                System.out.println("Position obstacle  X : " + (listObs.get(j).getPosX()* 31  - 22));
-                System.out.println("Position obstacle  Y : " + (listObs.get(j).getPosY()* 32 + 16));
-                 */
-                if ((((e.getX()-32) == (listObs.get(j).getPosX()* 31  - 22 )) ||(e.getX()-32) == (listObs.get(j).getPosX()* 31  - 21 ) ) && (e.getY()) == ((listObs.get(j).getPosY() * 32 + 16)) && (listObs.get(j).getPointDeVie()!=0)) {
+                if (((e.getX()/32+1 == listObs.get(j).getPosX() && e.getY()/32 == listObs.get(j).getPosY()) || (e.getX()/32 == listObs.get(j).getPosX() && e.getY()/32+1 == listObs.get(j).getPosY()) || (e.getX()/32 == listObs.get(j).getPosX() && e.getY()/32-1 == listObs.get(j).getPosY()) || (e.getX()/32-1 == listObs.get(j).getPosX() && e.getY()/32 == listObs.get(j).getPosY()))  && listObs.get(j).getPointDeVie()!=0) {
                     System.out.println(listObs.get(j).toString());
                     listObs.get(j).setPointDeVie(listObs.get(j).getPointDeVie() - degat);
                     System.out.println(listObs.get(j).toString());
@@ -277,8 +270,6 @@ public class jeu {
             if (this.ennemis.get(i).getPv() == 0)
                 this.ennemis.remove(i);
         }
-
-
                 nbTour++;
             }
 

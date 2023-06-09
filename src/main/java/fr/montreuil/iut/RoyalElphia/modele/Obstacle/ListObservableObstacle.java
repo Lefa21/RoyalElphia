@@ -24,6 +24,7 @@ public class ListObservableObstacle implements  ListChangeListener<Obstacle> {
                 for (Obstacle a : c.getRemoved()
                 ) {
                     panneauJeu.getChildren().remove(panneauJeu.lookup("#" + a.getID()));
+                    panneauJeu.getChildren().remove(panneauJeu.lookup("#"+a.getID()+"L"));
                 }
             }
         }

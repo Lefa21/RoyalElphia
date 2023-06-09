@@ -30,7 +30,6 @@ import javafx.scene.layout.Pane;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.layout.TilePane;
-import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 
 
@@ -72,7 +71,7 @@ public class HelloController implements Initializable {
         if (this.ObstaclePose && obstacle == null && mouseEvent.getClickCount() == 2) {
             System.out.println("clique obstacle ");
             String imageId = ((ImageView) mouseEvent.getSource()).getId();
-            Obstacle obstacle = null;
+            fr.montreuil.iut.RoyalElphia.modele.Obstacle.Obstacle obstacle = null;
 
             switch (imageId) {
                 case "bois":
@@ -201,7 +200,7 @@ public class HelloController implements Initializable {
             ListChangeListener<Ennemis> listenerEnnemis = new ListObsEnnemis(this.jeu, this.panneauJeu);
             jeu.getEnnemis().addListener(listenerEnnemis);
 
-            ListChangeListener<Obstacle> listenerObstacle = new ListObservableObstacle(this.jeu, this.panneauJeu);
+            ListChangeListener<fr.montreuil.iut.RoyalElphia.modele.Obstacle.Obstacle> listenerObstacle = new ListObservableObstacle(this.jeu, this.panneauJeu);
             jeu.getListeObstacle().addListener(listenerObstacle);
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
@@ -219,6 +218,7 @@ public class HelloController implements Initializable {
     }
 
 
+    /*
     @FXML
     public void Amelioration(ActionEvent actionEvent) {
         for (int i = 0; i < jeu.getListeDeTour().size(); i++) {
@@ -237,6 +237,8 @@ public class HelloController implements Initializable {
         }
     }
 
+
+     */
     @FXML
     public void Portee(ActionEvent actionEvent){
         int c = 0;

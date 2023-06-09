@@ -2,17 +2,21 @@ package fr.montreuil.iut.RoyalElphia.Vue;
 
 import fr.montreuil.iut.RoyalElphia.modele.Map.Terrain;
 import fr.montreuil.iut.RoyalElphia.modele.Obstacle.*;
+import fr.montreuil.iut.RoyalElphia.modele.Tour.*;
 import fr.montreuil.iut.RoyalElphia.modele.jeu;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Background;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
 public class VueObstacle {
 
-    private Obstacle Obstacle;
+    private Obstacle obstacle;
     private Pane panneauJeu;
 
     private double x, y;
@@ -22,11 +26,13 @@ public class VueObstacle {
     private static int idObstacle = 2000;
     private static int idImage = 2000;
 
+    private boolean trouve = false;
+
     private jeu jeu;
 
-    public VueObstacle(Pane p, Obstacle T, double x, double y, Terrain terrain,jeu jeu) {
+    public VueObstacle(Pane p, Obstacle T, double x, double y, Terrain terrain, jeu jeu) {
         this.panneauJeu = p;
-        this.Obstacle = T;
+        this.obstacle = T;
         this.x = x;
         this.y = y;
         this.terrain = terrain;
@@ -37,129 +43,87 @@ public class VueObstacle {
     }
 
     public void PoserObstacle() throws FileNotFoundException {
-        for (int i = 0; i < this.jeu.getListeObstacle().size(); i++) {
-            System.out.println("Taille de la liste  : " + this.jeu.getListeObstacle().size());
-        }
         int[][] tab = terrain.getTabTerrain();
+        System.out.println("position X obstacle " + this.x);
+        System.out.println("position Y obstacle " + this.y);
         int posX = (int) this.x / 32;
         int posY = (int) this.y / 32;
-        if (tab[posY][posX] == 9) {
-            if (this.Obstacle instanceof BarricadeBois) {
-                tab[posY][posX] = 8;
-                Obstacle.setPosX(posX);
-                Obstacle.setPosY(posY);
-                Image BarricadeBois = new Image(new FileInputStream("src/main/resources/fr/montreuil/iut/RoyalElphia/Page_Fxml/pont.png"));
-                ImageView BarricadeBoisView = new ImageView(BarricadeBois);
-                BarricadeBoisView.setX(x - 10);
-                BarricadeBoisView.setY(y - 15);
-                BarricadeBoisView.setId(Integer.toString(idImage));
-                System.out.println("Id de barricade bois : " + BarricadeBoisView.getId());
-                idImage++;
-                panneauJeu.getChildren().add(BarricadeBoisView);
-                this.Obstacle = null;
-                VendreObstacle(BarricadeBoisView);
-            }
-            if (this.Obstacle instanceof BarricadePierre) {
-                tab[posY][posX] = 8;
-                Obstacle.setPosX(posX);
-                Obstacle.setPosY(posY);
-                Image BarricadePierre = new Image(new FileInputStream("src/main/resources/fr/montreuil/iut/RoyalElphia/Page_Fxml/rocher.png"));
-                ImageView BarricadePierreView = new ImageView(BarricadePierre);
-                BarricadePierreView.setX(x - 10);
-                BarricadePierreView.setY(y - 15);
-                BarricadePierreView.setId(Integer.toString(idImage));
-                idImage++;
-                panneauJeu.getChildren().add(BarricadePierreView);
-                this.Obstacle = null;
-                VendreObstacle(BarricadePierreView);
-            }
-            if (this.Obstacle instanceof BarricadeMetal) {
-                  tab[posY][posX] = 8;
-                Obstacle.setPosX(posX);
-                Obstacle.setPosY(posY);
-                Image BarricadeMetal = new Image(new FileInputStream("src/main/resources/fr/montreuil/iut/RoyalElphia/Page_Fxml/départ.png"));
-                ImageView BarricadeMetalView = new ImageView(BarricadeMetal);
-                BarricadeMetalView.setX(x - 10);
-                BarricadeMetalView.setY(y - 15);
-                BarricadeMetalView.setId(Integer.toString(idImage));
-                panneauJeu.getChildren().add(BarricadeMetalView);
-                this.Obstacle = null;
-                VendreObstacle(BarricadeMetalView);
-            }
-            if (this.Obstacle instanceof BarricadeFer) {
-                tab[posY][posX] = 8;
-                Obstacle.setPosX(posX);
-                Obstacle.setPosY(posY);
-                Image BarricadeFer = new Image(new FileInputStream("src/main/resources/fr/montreuil/iut/RoyalElphia/Page_Fxml/mur.png"));
-                ImageView BarricadeFerView = new ImageView(BarricadeFer);
-                BarricadeFerView.setX(x - 45);
-                BarricadeFerView.setY(y - 45);
-                BarricadeFerView.setId("fer");
-                BarricadeFerView.setId(Integer.toString(idImage));
-                idImage++;
-                panneauJeu.getChildren().add(BarricadeFerView);
-                this.Obstacle = null;
-                VendreObstacle(BarricadeFerView);
+        System.out.println("pos x après : " + posX);
+        System.out.println("pos y après " + posY);
+        if (tab[posY][posX] == 9 && obstacle != null) {
+            Image obstacleImage = null;
+
+            switch (obstacle.getClass().getSimpleName()) {
+                case "BarricadeBois":
+                    obstacleImage = new Image(new FileInputStream("src/main/resources/fr/montreuil/iut/RoyalElphia/Page_Fxml/pont.png"));
+                    break;
+                case "BarricadeFer":
+                    obstacleImage = new Image(new FileInputStream("src/main/resources/fr/montreuil/iut/RoyalElphia/Page_Fxml/mur.png"));
+                    break;
+                case "BarricadeMetal":
+                    obstacleImage = new Image(new FileInputStream("src/main/resources/fr/montreuil/iut/RoyalElphia/Page_Fxml/départ.png"));
+                    break;
+                case "BarricadePierre":
+                    obstacleImage = new Image(new FileInputStream("src/main/resources/fr/montreuil/iut/RoyalElphia/Page_Fxml/rocher.png"));
+                    break;
             }
 
-        }
+            if (obstacleImage != null) {
+                ImageView obstacleImageView = new ImageView(obstacleImage);
+                tab[posY][posX] = 8;
+                obstacle.setPosX(posX);
+                obstacle.setPosy(posY);
+                obstacleImageView.setX(x - 20);
+                obstacleImageView.setY(y - 15);
+                System.out.println("pos x image " + obstacleImageView.getX());
+                System.out.println("pos Y image " + obstacleImageView.getX());
+                obstacleImageView.setId(Integer.toString(idImage));
+                Label label = new Label();
+                label.textProperty().bind(obstacle.getPvProperty().asString());
+                label.translateXProperty().bind(obstacle.getPosXProperty().multiply(32).add(10));
+                label.translateYProperty().bind(obstacle.getPosYProperty().multiply(32).add(40));
+                label.setBackground(Background.fill(Color.WHITE));
+                label.setId(obstacle.getID() + "L");
+                idImage++;
+                panneauJeu.getChildren().add(obstacleImageView);
+                this.panneauJeu.getChildren().add(label);
+                this.obstacle = null;
+                //VendreTour(obstacleImageView);
+                AmeliorationEtVente(obstacleImageView);
+                }
+            }
     }
 
     public void CliqueObstacle(jeu jeu, String typeObstacle) throws FileNotFoundException {
-        if (typeObstacle.equals("bois")) {
-            this.Obstacle = new BarricadeBois();
-            this.Obstacle.setID(idObstacle);
-            System.out.println("Id de l'obstacle dans le modèle : " + this.Obstacle.getID());
-            idObstacle++;
-            if (jeu.verifArgent(this.Obstacle)) {
-                System.out.println("Ajout de l'obstacle à la liste ");
-                jeu.setArgent(this.Obstacle.getCoutAchat());
-                jeu.ajouterObstacle(this.Obstacle);
-                System.out.println("Liste d'obstacle : "  + jeu.getListeObstacle().toString());
-            }
+        Obstacle obstacle = null;
+        switch (typeObstacle) {
+            case "bois":
+                obstacle = new BarricadeBois ();
+                break;
+            case "pierre":
+                obstacle = new BarricadePierre();
+                break;
+            case "metal":
+                obstacle = new BarricadeMetal();
+                break;
+            case "fer":
+                obstacle = new BarricadeFer();
+                break;
         }
 
-        if (typeObstacle.equals("fer")) {
-            this.Obstacle = new BarricadeFer();
-            this.Obstacle.setID(idObstacle);
-            System.out.println("Id de l'obstacle dans le modèle : " + this.Obstacle.getID());
+        if (obstacle != null) {
+            obstacle.setID(idObstacle);
             idObstacle++;
-            if (jeu.verifArgent(this.Obstacle)) {
-                System.out.println("Ajout de l'obstacle à la liste ");
-                jeu.setArgent(this.Obstacle.getCoutAchat());
-                jeu.ajouterObstacle(this.Obstacle);
-                System.out.println("Liste d'obstacle : "  + jeu.getListeObstacle().toString());
+            if (jeu.verifArgent(obstacle)) {
+                jeu.setArgent(obstacle.getCoutAchat());
+                jeu.ajouterObstacle(obstacle);
+                this.obstacle = obstacle;
             }
+        }
         }
 
-        if (typeObstacle.equals("pierre")) {
-            this.Obstacle = new BarricadePierre();
-            this.Obstacle.setID(idObstacle);
-            System.out.println("Id de l'obstacle dans le modèle : " + this.Obstacle.getID());
-            idObstacle++;
-            if (jeu.verifArgent(this.Obstacle)) {
-                System.out.println("Ajout de l'obstacle à la liste ");
-                jeu.setArgent(this.Obstacle.getCoutAchat());
-                jeu.ajouterObstacle(this.Obstacle);
-                System.out.println("Liste d'obstacle : "  + jeu.getListeObstacle().toString());
-            }
-        }
-
-        if (typeObstacle.equals("metal")) {
-            this.Obstacle = new BarricadeMetal();
-            this.Obstacle.setID(idObstacle);
-            System.out.println("Id de l'obstacle dans le modèle : " + this.Obstacle.getID());
-            idObstacle++;
-            if (jeu.verifArgent(this.Obstacle)) {
-                System.out.println("Ajout de l'obstacle à la liste ");
-                jeu.setArgent(this.Obstacle.getCoutAchat());
-                jeu.ajouterObstacle(this.Obstacle);
-                System.out.println("Liste d'obstacle : "  + jeu.getListeObstacle().toString());
-            }
-        }
-    }
     public Obstacle getObstacle() {
-        return Obstacle;
+        return obstacle;
     }
 
     public void VendreObstacle(ImageView i){
@@ -167,7 +131,7 @@ public class VueObstacle {
         i.setOnMouseClicked(event -> {
             if (event.getClickCount()==2){
                 for (int j = 0; j < this.jeu.getListeObstacle().size(); j++) {
-                    Obstacle o = this.jeu.getListeObstacle().get(j);
+                    fr.montreuil.iut.RoyalElphia.modele.Obstacle.Obstacle o = this.jeu.getListeObstacle().get(j);
                     if (Integer.toString(o.getID()).equals(i.getId())){
                         panneauJeu.getChildren().remove(i);
                         tab[o.getPosY()][o.getPosX()] = 9;
@@ -177,5 +141,41 @@ public class VueObstacle {
                         this.jeu.setArgent(-o.getCoutVente());
                     }
                 }}});}
+
+    public void AmeliorationEtVente(ImageView x) {
+        x.setOnMouseClicked(KeyEvent -> {
+            if (KeyEvent.isAltDown()) {
+                for (int i = 0; i < jeu.getListeObstacle().size(); i++) {
+                    Obstacle o = jeu.getListeObstacle().get(i);
+                    if (o.getNiveauAmelioration() != o.getNiveauMaxAmelioration()) {
+                        if (o.getCoutAmelioration() <= jeu.getArgent()) {
+                            jeu.setArgent(o.getCoutAmelioration());
+                            o.setNiveauAmelioration(o.getNiveauAmelioration() + 1);
+                            o.setPointDeVie(o.getPointDeVie() * 2);
+                            o.setCoutAmelioration((int) (o.getCoutAmelioration() * 1.5));
+                            System.out.println("NIV " + o.getNiveauAmelioration() + " PV " + o.getPointDeVie());
+                        }
+                    } else
+                        System.out.println("niv MAX");
+                }
+            } else {
+                x.setOnMouseClicked(event -> {
+                    if (event.getClickCount() == 2 && !trouve) {
+                        for (int j = 0; j < this.jeu.getListeObstacle().size(); j++) {
+                            Obstacle o = this.jeu.getListeObstacle().get(j);
+
+                            if (Integer.toString(o.getID()).equals(x.getId())) {
+                                panneauJeu.getChildren().remove(x);
+                                this.jeu.getListeObstacle().remove(o);
+                                this.jeu.setArgent(-o.getCoutVente());
+                                trouve = true;
+                            }
+                        }
+                    }
+                });
+            }
+        });
+
+    }
 }
 
