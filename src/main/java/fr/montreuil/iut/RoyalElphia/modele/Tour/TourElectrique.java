@@ -1,11 +1,15 @@
 package fr.montreuil.iut.RoyalElphia.modele.Tour;
 
-import fr.montreuil.iut.RoyalElphia.modele.Tour.Tour;
+import javafx.scene.layout.Pane;
 
 public class TourElectrique extends Tour {
 
     public TourElectrique() {
-        super("Tour électrique courte portée", 60, 2, "Eclair violent qui paralyse l'ennemi", 30, 25, 2, 8, 2, 8, 7);
+       super(2,3,2,8,7,15);
+        setCoutAchat(60);
+        setCoutVente(30);
+        setCoutAmelioration(25);
+        setNiveauMaxAmelioration(8);
     }
 
 }

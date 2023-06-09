@@ -1,9 +1,11 @@
 package fr.montreuil.iut.RoyalElphia.modele.Map;
 
-public class Map_1   {
-    /*
-    public Map_1(int largeur,int hauteur){
-        super(largeur,hauteur, new int[][]{
+public class Map_1 extends Terrain {
+
+    public Map_1() {
+        super();
+        /*
+        this.Tabterrain = new int[][]{
                 {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
                 {0,0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
                 {1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
@@ -24,8 +26,8 @@ public class Map_1   {
                 {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1},
                 {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1},
                 {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1}
-        });
-    }
+        };
 
-*/
+         */
+    }
 }

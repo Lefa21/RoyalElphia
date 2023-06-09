@@ -1,10 +1,16 @@
 package fr.montreuil.iut.RoyalElphia.modele.Tour;
 
+import fr.montreuil.iut.RoyalElphia.modele.Map.Terrain;
 import fr.montreuil.iut.RoyalElphia.modele.Tour.Tour;
+import javafx.scene.layout.Pane;
 
 public class TourLaser extends Tour {
 
     public TourLaser() {
-        super("Tour laser courte portée", 60, 2, "Tir laser continue", 35, 15, 2, 6, 2, 4, 8);
+        super(2, 5, 2, 4, 8, 40);
+        setCoutAchat(60);
+        setCoutVente(35);
+        setCoutAmelioration(15);
+        setNiveauMaxAmelioration(6);
     }
 }

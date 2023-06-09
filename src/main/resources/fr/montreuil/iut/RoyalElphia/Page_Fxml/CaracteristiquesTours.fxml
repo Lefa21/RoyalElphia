@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="493.0" prefWidth="675.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+        <VBox layoutX="14.0" layoutY="14.0" prefHeight="476.0" prefWidth="570.0">
+            <children>
+                <HBox prefHeight="100.0" prefWidth="200.0">
+                    <children>
+                        <ImageView fitHeight="117.0" fitWidth="79.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@TourBombe.png" />
+                            </image>
+                        </ImageView>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Tour à bombe, portée moyenne, coûte 40$, peut attaquer jusqu'a 15 fois d'affilées. Temps de recharge de 7 secondes " wrappingWidth="490.7294921875">
+                            <font>
+                                <Font size="19.0" />
+                            </font>
+                        </Text>
+                    </children>
+                </HBox>
+                <HBox prefHeight="104.0" prefWidth="644.0">
+                    <children>
+                        <ImageView fitHeight="103.0" fitWidth="61.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@TourFeu.png" />
+                            </image>
+                        </ImageView>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Tour Boule de feu, moyenne portée, coût de 22, peut attaquer 4 fois d'affilées, temps de recharge de 7 secondes " wrappingWidth="577.9755859375">
+                            <font>
+                                <Font size="19.0" />
+                            </font>
+                        </Text>
+                    </children>
+                </HBox>
+                <HBox prefHeight="85.0" prefWidth="650.0">
+                    <children>
+                        <ImageView fitHeight="93.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@TourEclair.png" />
+                            </image>
+                        </ImageView>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Tour eclair, courte portée, coût de 60$, jusqu'a 8 attaques d'affilées, temps de recharge de 7 secondes" wrappingWidth="526.7294921875">
+                            <font>
+                                <Font size="19.0" />
+                            </font>
+                        </Text>
+                    </children>
+                </HBox>
+                <HBox prefHeight="100.0" prefWidth="200.0">
+                    <children>
+                        <ImageView fitHeight="150.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@TourFleche.png" />
+                            </image>
+                        </ImageView>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Tour à lancé de flèche, longue portée, coût de 20$, jusqu'à 9 attaques d'affilées, temps de recharge de 5 secondes" wrappingWidth="591.1962890625">
+                            <font>
+                                <Font size="19.0" />
+                            </font>
+                        </Text>
+                    </children>
+                </HBox>
+                <HBox prefHeight="100.0" prefWidth="200.0">
+                    <children>
+                        <ImageView fitHeight="150.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@TourLaser.png" />
+                            </image>
+                        </ImageView>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Tour Laser, courte portée, coût de 60$, jusqu'à 4 attaques d'affilées, temps de recharge de 8 secondes" wrappingWidth="591.1962890625">
+                            <font>
+                                <Font size="19.0" />
+                            </font>
+                        </Text>
+                    </children>
+                </HBox>
+            </children>
+        </VBox>
+    </children>
+</Pane>
