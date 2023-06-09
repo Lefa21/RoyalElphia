@@ -123,46 +123,47 @@ public class jeu {
     }
 
     public void vagueSuivante() {
-        for (int i = 0; i < listeEnnemisSpawn.size(); i++) {
-            listeEnnemisSpawn.remove(i);
-        }
-        if (this.nbVague.getValue()<5){
-            this.nbVague.setValue(this.nbVague.getValue() + 1);
-            this.niveau.setNbEnnemis(this.niveau.getNbEnnemis() * 2);
-            this.nbEnnemisRestant.setValue(this.niveau.getNbEnnemis());
-        }
+
+        listeEnnemisSpawn.clear();
+        ennemis.clear();
+
+        this.nbVague.setValue(this.nbVague.getValue() + 1);
+        this.niveau.setNbEnnemis(this.niveau.getNbEnnemis() * 2);
+        this.nbEnnemisRestant.setValue(this.niveau.getNbEnnemis());
+
     }
 
     // permet d'ajouter un ennemi qui a spawn sur le terrain dans la liste de notre modèle
     public void spwanEnnemi() {
         for (int i = 0; i < this.niveau.getNbEnnemis(); i++) {
-            //if (nbTour % 2 == 0 /*&& listeEnnemisSpawn.size() <= this.niveau.getNbEnnemis()*/) {
+            //if(nbTour % 2 == 0 && listeEnnemisSpawn.size() <= this.niveau.getNbEnnemis()) {
                 Ennemis enm = new Sorcières(terrain);
                 ennemis.add(enm);
                 this.listeEnnemisSpawn.add(enm);
-        }
-        /*if (nbTour % 2 == 0 && listeEnnemisSpawn.size() <= this.niveau.getNbEnnemis()) {
-            Ennemis enm = new Sorcières(terrain);
-            ennemis.add(enm);
-            this.listeEnnemisSpawn.add(enm);
-        }
-        if (nbTour % 8 == 0 && listeEnnemisSpawn.size() <= this.niveau.getNbEnnemis()) {
-            Ennemis enm = new gobelins(terrain);
-            ennemis.add(enm);
-            this.listeEnnemisSpawn.add(enm);
+            //}
+            /*if (nbTour % 4 == 0 && listeEnnemisSpawn.size() <= this.niveau.getNbEnnemis()) {
+                Ennemis enm = new Sorcières(terrain);
+                ennemis.add(enm);
+                this.listeEnnemisSpawn.add(enm);
+            }
+            if (nbTour % 8 == 0 && listeEnnemisSpawn.size() <= this.niveau.getNbEnnemis()) {
+                Ennemis enm = new gobelins(terrain);
+                ennemis.add(enm);
+                this.listeEnnemisSpawn.add(enm);
 
-        }
-        if (nbTour % 16 == 0 && listeEnnemisSpawn.size() <= this.niveau.getNbEnnemis()) {
-            Ennemis enm = new Squelette(terrain);
-            ennemis.add(enm);
-            this.listeEnnemisSpawn.add(enm);
+            }
+            if (nbTour % 16 == 0 && listeEnnemisSpawn.size() <= this.niveau.getNbEnnemis()) {
+                Ennemis enm = new Squelette(terrain);
+                ennemis.add(enm);
+                this.listeEnnemisSpawn.add(enm);
 
+            }
+            if (nbTour % 32 == 0 && listeEnnemisSpawn.size() <= this.niveau.getNbEnnemis()) {
+                Ennemis enm = new GéantRoyal(terrain);
+                ennemis.add(enm);
+                this.listeEnnemisSpawn.add(enm);
+            }*/
         }
-        if (nbTour % 32 == 0 && listeEnnemisSpawn.size() <= this.niveau.getNbEnnemis()) {
-            Ennemis enm = new GéantRoyal(terrain);
-            ennemis.add(enm);
-            this.listeEnnemisSpawn.add(enm);
-        }*/
     }
 
 
@@ -259,13 +260,10 @@ public class jeu {
 
         }
 
-
-        for (int i = this.ennemis.size() - 1; i >= 0; i--) {
+        for (int i = 0; i < this.ennemis.size(); i++) {
             if (this.ennemis.get(i).getPv() == 0)
                 this.ennemis.remove(i);
         }
-
-
         nbTour++;
     }
 
@@ -277,11 +275,11 @@ public class jeu {
 
         KeyFrame kf = new KeyFrame(
                 // on définit le FPS (nbre de frame par seconde)
-                Duration.seconds(0.1),
+                Duration.seconds(0.025),
                 // on définit ce qui se passe à chaque frame
                 // c'est un eventHandler d'ou le lambda
                 (ev -> {
-                    if (this.getPvJoueur() == 0 || (this.nbVague.getValue() == 5 && getNbEnnemisRestant()==0 && this.listeEnnemisSpawn.size()==0)) {
+                    if (/*this.getPvJoueur() == 0 ||*/ this.nbVague.getValue() == 5 && this.getNbEnnemisRestant() == 0) {
                         System.out.println("Vous avez perdu");
                         gameLoop.stop();
                     } else if (getNbEnnemisRestant()==0) {
