@@ -135,24 +135,17 @@ public class jeu {
 
     // permet d'ajouter un ennemi qui a spawn sur le terrain dans la liste de notre modèle
     public void spwanEnnemi() {
-        if (nbTour % 2 == 0 && listeEnnemisSpawn.size() <= this.niveau.getNbEnnemis()) {
+        for (int i = 0; i < this.niveau.getNbEnnemis(); i++) {
+            //if (nbTour % 2 == 0 /*&& listeEnnemisSpawn.size() <= this.niveau.getNbEnnemis()*/) {
+                Ennemis enm = new Sorcières(terrain);
+                ennemis.add(enm);
+                this.listeEnnemisSpawn.add(enm);
+        }
+        /*if (nbTour % 2 == 0 && listeEnnemisSpawn.size() <= this.niveau.getNbEnnemis()) {
             Ennemis enm = new Sorcières(terrain);
             ennemis.add(enm);
             this.listeEnnemisSpawn.add(enm);
-
-/*
-=======
         }
-
-        if (nbTour % 4 == 0 && listeEnnemisSpawn.size() <= this.niveau.getNbEnnemis()) {
->>>>>>> 2cd98ba8bad3a457bbe0ee5f99bcaf47999cb7fd
-            Ennemis enm1 = new Géant(terrain);
-            ennemis.add(enm1);
-            this.listeEnnemisSpawn.add(enm1);
-            */
-
-        }
-
         if (nbTour % 8 == 0 && listeEnnemisSpawn.size() <= this.niveau.getNbEnnemis()) {
             Ennemis enm = new gobelins(terrain);
             ennemis.add(enm);
@@ -169,7 +162,7 @@ public class jeu {
             Ennemis enm = new GéantRoyal(terrain);
             ennemis.add(enm);
             this.listeEnnemisSpawn.add(enm);
-        }
+        }*/
     }
 
 
@@ -229,6 +222,7 @@ public class jeu {
     }
 
     public void unTour() {
+        System.out.println(this.listeEnnemisSpawn.size());
         int [][] tab = terrain.getTabTerrain();
         for (int i = 0; i < this.ennemis.size(); i++) {
             Ennemis e = this.ennemis.get(i);
@@ -243,7 +237,6 @@ public class jeu {
             for (int j = 0; j < this.listeObstacle.size(); j++) {
                 ObservableList<Obstacle> listObs = getListeObstacle();
                 int degat = ennemis.get(i).getDegatObstacle();
-
                 if ((((e.getX()-32) == (listObs.get(j).getPosX()* 31  - 22 )) ||(e.getX()-32) == (listObs.get(j).getPosX()* 31  - 21 ) ) && (e.getY()) == ((listObs.get(j).getPosY() * 32 + 16)) && (listObs.get(j).getPointDeVie()!=0)) {
                     System.out.println(listObs.get(j).toString());
                     listObs.get(j).setPointDeVie(listObs.get(j).getPointDeVie() - degat);
