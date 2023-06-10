@@ -71,7 +71,7 @@ public class HelloController implements Initializable {
         if (this.ObstaclePose && obstacle == null && mouseEvent.getClickCount() == 2) {
             System.out.println("clique obstacle ");
             String imageId = ((ImageView) mouseEvent.getSource()).getId();
-            fr.montreuil.iut.RoyalElphia.modele.Obstacle.Obstacle obstacle = null;
+           Obstacle obstacle = null;
 
             switch (imageId) {
                 case "bois":

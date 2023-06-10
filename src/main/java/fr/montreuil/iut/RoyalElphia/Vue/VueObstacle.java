@@ -126,22 +126,8 @@ public class VueObstacle {
         return obstacle;
     }
 
-    public void VendreObstacle(ImageView i){
-        int[][] tab = terrain.getTabTerrain();
-        i.setOnMouseClicked(event -> {
-            if (event.getClickCount()==2){
-                for (int j = 0; j < this.jeu.getListeObstacle().size(); j++) {
-                    fr.montreuil.iut.RoyalElphia.modele.Obstacle.Obstacle o = this.jeu.getListeObstacle().get(j);
-                    if (Integer.toString(o.getID()).equals(i.getId())){
-                        panneauJeu.getChildren().remove(i);
-                        tab[o.getPosY()][o.getPosX()] = 9;
-                        this.jeu.getListeObstacle().remove(o);
-                        System.out.println();
-                        this.jeu.setArgent(-o.getCoutVente());
-                    }
-                }}});}
-
     public void AmeliorationEtVente(ImageView x) {
+        int[][] tab = terrain.getTabTerrain();
         x.setOnMouseClicked(KeyEvent -> {
             if (KeyEvent.isAltDown()) {
                 for (int i = 0; i < jeu.getListeObstacle().size(); i++) {
@@ -164,6 +150,7 @@ public class VueObstacle {
 
                             if (Integer.toString(o.getID()).equals(x.getId())) {
                                 panneauJeu.getChildren().remove(x);
+                                tab[o.getPosY()][o.getPosX()] = 9;
                                 this.jeu.getListeObstacle().remove(o);
                                 this.jeu.setArgent(-o.getCoutVente());
                                 trouve = true;

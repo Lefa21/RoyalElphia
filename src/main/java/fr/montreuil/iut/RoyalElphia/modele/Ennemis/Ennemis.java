@@ -13,15 +13,16 @@ public abstract class Ennemis {
     protected Terrain terrain;
     public static int compteur = 0;
     private String id;
-    private int ptsDefense, Immunite, degatBase, butin;
+    private int ptsDefense, Immunite, degatBase, butin,capaciteObstacle,capaciteDegatObstacle,capaciteVie,capaciteDegatsBase;
     private IntegerProperty pv;
+
 
     //private Capacite capacite;
 
     private CasesParcourues casesParcourues;
     private int degatObstacle;
 
-    public Ennemis(Terrain terrain, int pv, int ptsDefense, int immunite, int degatBase, int butin) {
+    public Ennemis(Terrain terrain, int pv, int ptsDefense, int immunite, int degatBase, int butin,int capaciteObstacle,int capaciteDegatObstacle,int capaciteVie,int capaciteDegatsBase) {
         this.id = "" + compteur;
         this.casesParcourues = new CasesParcourues();
         this.Immunite = immunite;
@@ -29,6 +30,10 @@ public abstract class Ennemis {
         this.ptsDefense = ptsDefense;
         this.pv = new SimpleIntegerProperty(pv);
         this.butin = butin;
+        this.capaciteObstacle = capaciteObstacle;
+        this.capaciteDegatObstacle = capaciteDegatObstacle;
+        this.capaciteVie = capaciteVie;
+        this.capaciteDegatsBase = capaciteDegatsBase;
         this.degatObstacle = 15;
         compteur++;
         this.terrain = terrain;
@@ -37,7 +42,6 @@ public abstract class Ennemis {
          terrains et on ajoute 16 pour mettre l'ennemi au centre de la case*/
         this.xProperty = new SimpleIntegerProperty(terrain.getPointDep().getX() * 32 + 16);
         this.yProperty = new SimpleIntegerProperty(terrain.getPointDep().getY() * 32 + 16);
-
     }
 
 
@@ -101,9 +105,33 @@ public abstract class Ennemis {
         return yProperty;
     }
 
+    public int getCapaciteObstacle() {
+        return capaciteObstacle;
+    }
+
+    public int getCapaciteDegatObstacle() {
+        return capaciteDegatObstacle;
+    }
+
+    public int getCapaciteDegatsBase() {
+        return capaciteDegatsBase;
+    }
+
+    public int getCapaciteVie() {
+        return capaciteVie;
+    }
+
 
     public final void setY(int n) {
         yProperty.setValue(n);
+    }
+
+    public void setDegatBase(int degatBase) {
+        this.degatBase = degatBase;
+    }
+
+    public void setDegatObstacle(int degatObstacle) {
+        this.degatObstacle = degatObstacle;
     }
 
     public void seDeplace() {
@@ -147,7 +175,7 @@ public abstract class Ennemis {
     public boolean peutSeDeplacer(int i, String s) {
         boolean retour = false;
         if (i == 1) {
-            if (!casesParcourues.verif(CasesDirection(s)) && tabDirection(s) == 9)
+            if ((!casesParcourues.verif(CasesDirection(s)) && tabDirection(s) == 9))
                 retour = true;
         } else if (i == 2) {
             if (!casesParcourues.verif(CasesDirection(s)) && tabDirection(s) == 2)
