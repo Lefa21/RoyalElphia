@@ -1,7 +1,5 @@
 package fr.montreuil.iut.RoyalElphia.modele.Tour;
 
-import javafx.scene.layout.Pane;
-
 public class TourElectrique extends Tour {
 
     public TourElectrique() {

@@ -1,9 +1,5 @@
 package fr.montreuil.iut.RoyalElphia.modele.Tour;
 
-import fr.montreuil.iut.RoyalElphia.modele.Map.Terrain;
-import fr.montreuil.iut.RoyalElphia.modele.Tour.Tour;
-import javafx.beans.property.SimpleIntegerProperty;import javafx.scene.layout.Pane;
-
 
 public class TourABombe extends Tour {
     public TourABombe(){

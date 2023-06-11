@@ -16,7 +16,6 @@ import javafx.animation.Timeline;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.util.Duration;
-import org.controlsfx.control.PropertySheet;
 
 import java.util.ArrayList;
 
@@ -61,11 +60,11 @@ public class jeu {
     }
 
 
-    public void ajouterObstacle(Obstacle O) {
+    public void ajouterObstacle(fr.montreuil.iut.RoyalElphia.modele.Obstacle.Obstacle O) {
         listeObstacle.add(O);
     }
 
-    public final ObservableList<Obstacle> getListeObstacle() {
+    public final ObservableList<fr.montreuil.iut.RoyalElphia.modele.Obstacle.Obstacle> getListeObstacle() {
         return listeObstacle;
     }
 
@@ -235,16 +234,18 @@ public class jeu {
 
             for (int j = 0; j < this.listeObstacle.size(); j++) {
                 ObservableList<Obstacle> listObs = getListeObstacle();
+                if(this.listeObstacle.get(j).getPointDeVie() == 10){
+                    tab[this.listeObstacle.get(j).getPosY()][this.listeObstacle.get(j).getPosX()] = 9;
+                    this.listeObstacle.remove(this.listeObstacle.get(j));
+                }
                 int degat = ennemis.get(i).getDegatObstacle();
-                /*
-                System.out.println("Position X : " + e.getX());
-                System.out.println("Position Y : " + e.getY());
-                System.out.println("Position obstacle  X : " + (listObs.get(j).getPosX()* 31  - 22));
-                System.out.println("Position obstacle  Y : " + (listObs.get(j).getPosY()* 32 + 16));
-                 */
-                if ((((e.getX()-32) == (listObs.get(j).getPosX()* 31  - 22 )) ||(e.getX()-32) == (listObs.get(j).getPosX()* 31  - 21 ) ) && (e.getY()) == ((listObs.get(j).getPosY() * 32 + 16)) && (listObs.get(j).getPointDeVie()!=0)) {
+                System.out.println("vie obstacle " + this.listeObstacle.get(i).getPointDeVie());
+                int vieObstacle = this.listeObstacle.get(i).getPointDeVie() - degat;
+                System.out.println("vie obs après dégats : " + vieObstacle);
+                if (((e.getX()/32+1 == listObs.get(j).getPosX() && e.getY()/32 == listObs.get(j).getPosY()) || (e.getX()/32 == listObs.get(j).getPosX() && e.getY()/32+1 == listObs.get(j).getPosY()) || (e.getX()/32 == listObs.get(j).getPosX() && e.getY()/32-1 == listObs.get(j).getPosY()) || (e.getX()/32-1 == listObs.get(j).getPosX() && e.getY()/32 == listObs.get(j).getPosY())) && vieObstacle >=0) {
                     System.out.println(listObs.get(j).toString());
-                    listObs.get(j).setPointDeVie(listObs.get(j).getPointDeVie() - degat);
+                    listObs.get(j).setPointDeVie(vieObstacle);
+                    System.out.println("vie obs après dégats réel : " + vieObstacle);
                     System.out.println(listObs.get(j).toString());
                 }
 /*
@@ -263,22 +264,23 @@ public class jeu {
                     e.setPv(this.terrain.getCasesDégats().get(j).getDegat());
             }
         }
-
+/*
         for (int i = 0; i < listeObstacle.size(); i++) {
-            if(this.listeObstacle.get(i).getPointDeVie() == 0){
+            if(this.listeObstacle.get(i).getPointDeVie() == 10){
                 tab[this.listeObstacle.get(i).getPosY()][this.listeObstacle.get(i).getPosX()] = 9;
                 this.listeObstacle.remove(this.listeObstacle.get(i));
             }
-
         }
+
+ */
+
+
 
 
         for (int i = this.ennemis.size() - 1; i >= 0; i--) {
             if (this.ennemis.get(i).getPv() == 0)
                 this.ennemis.remove(i);
         }
-
-
                 nbTour++;
             }
 
@@ -290,6 +292,7 @@ public class jeu {
 
         KeyFrame kf = new KeyFrame(
                 // on définit le FPS (nbre de frame par seconde)
+
                 Duration.seconds(0.025),
                 // on définit ce qui se passe à chaque frame
                 // c'est un eventHandler d'ou le lambda

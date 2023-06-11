@@ -45,11 +45,11 @@ public abstract class Ennemis {
         return id;
     }
 
-    public int getPv() {
+    public final int getPv() {
         return pv.getValue();
     }
 
-    public void setPv(int x) {
+    public final void setPv(int x) {
         if (getPv() - x < 0)
             this.pv.setValue(0);
         else

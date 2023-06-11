@@ -1,7 +1,6 @@
 package fr.montreuil.iut.RoyalElphia.modele.Tour;
 
 import fr.montreuil.iut.RoyalElphia.modele.Items.Items;
-import fr.montreuil.iut.RoyalElphia.modele.Map.Cases;
 import fr.montreuil.iut.RoyalElphia.modele.Map.CasesDégats;
 import fr.montreuil.iut.RoyalElphia.modele.Map.Terrain;
 import javafx.beans.property.IntegerProperty;
@@ -25,7 +24,7 @@ public  class Tour extends Items {
 
 
 
-    public Tour(int porteeAttaque, int typeAttaque,  int dureeINtervalleAttaque, int nombreAttaqueMax, int tempsRecharge,int degat) {
+    public Tour(int porteeAttaque, int typeAttaque, int dureeINtervalleAttaque, int nombreAttaqueMax, int tempsRecharge, int degat) {
         super(0,0,0,0,0);
         PorteeAttaque = porteeAttaque;
         TypeAttaque = typeAttaque;
@@ -92,30 +91,30 @@ public  class Tour extends Items {
     }
 
 
-   public ArrayList<CasesDégats> rayonDegat(Terrain terrain, int x, int y, int degat, Pane pane) {
-       this.listeCasesDegats = new ArrayList<>();
+    public ArrayList<CasesDégats> rayonDegat(Terrain terrain, int x, int y, int degat, Pane pane) {
+        this.listeCasesDegats = new ArrayList<>();
 
-       for (int i = 0; i <= this.getPorteeAttaque(); i++) {
-           CasesDégats c1 = new CasesDégats(x, y, degat, this.getTypeAttaque(), "H", i, pane);
-           terrain.ajouterCaseDegat(c1);
-           listeCasesDegats.add(c1);
-           c1.getDegatProperty().bind(this.getDegatProperty());
+        for (int i = 0; i <= this.getPorteeAttaque(); i++) {
+            CasesDégats c1 = new CasesDégats(x, y, degat, this.getTypeAttaque(), "H", i, pane);
+            terrain.ajouterCaseDegat(c1);
+            listeCasesDegats.add(c1);
+            c1.getDegatProperty().bind(this.getDegatProperty());
 
 
-           CasesDégats c2 = new CasesDégats(x, y, degat, this.getTypeAttaque(), "D", i, pane);
-           terrain.ajouterCaseDegat(c2);
-           listeCasesDegats.add(c2);
-           c2.getDegatProperty().bind(this.getDegatProperty());
+            CasesDégats c2 = new CasesDégats(x, y, degat, this.getTypeAttaque(), "D", i, pane);
+            terrain.ajouterCaseDegat(c2);
+            listeCasesDegats.add(c2);
+            c2.getDegatProperty().bind(this.getDegatProperty());
 
-           CasesDégats c3 = new CasesDégats(x, y, degat, this.getTypeAttaque(), "B", i, pane);
-           terrain.ajouterCaseDegat(c3);
-           listeCasesDegats.add(c3);
-           c3.getDegatProperty().bind(this.getDegatProperty());
+            CasesDégats c3 = new CasesDégats(x, y, degat, this.getTypeAttaque(), "B", i, pane);
+            terrain.ajouterCaseDegat(c3);
+            listeCasesDegats.add(c3);
+            c3.getDegatProperty().bind(this.getDegatProperty());
 
-           CasesDégats c4 = new CasesDégats(x, y, degat, this.getTypeAttaque(), "G", i,pane);
-           terrain.ajouterCaseDegat(c4);
-           listeCasesDegats.add(c4);
-           c4.getDegatProperty().bind(this.getDegatProperty());
+            CasesDégats c4 = new CasesDégats(x, y, degat, this.getTypeAttaque(), "G", i,pane);
+            terrain.ajouterCaseDegat(c4);
+            listeCasesDegats.add(c4);
+            c4.getDegatProperty().bind(this.getDegatProperty());
 
            /*CasesDégats c5 = new CasesDégats((x * 32) - (32 * i) + 16, (y * 32) - (32 * i) + 16, degat, this.getTypeAttaque());
            terrain.ajouterCaseDegat(c5);
@@ -132,17 +131,17 @@ public  class Tour extends Items {
            CasesDégats c8 = new CasesDégats((x * 32) + (32 * i) + 16, (y * 32) - (32 * i) + 16, degat, this.getTypeAttaque());
            terrain.ajouterCaseDegat(c8);
            listeCasesDegats.add(c8);*/
-       }
+        }
 
-       return listeCasesDegats;
-   }
+        return listeCasesDegats;
+    }
 
     public void TourDevientInoffensif(Terrain terrain, ArrayList<CasesDégats> listeCasesDegats) {
         terrain.getCasesDégats().removeAll(listeCasesDegats);
     }
-public ArrayList<CasesDégats> getListeCasesDegats() {
-    return listeCasesDegats;
-}
+    public ArrayList<CasesDégats> getListeCasesDegats() {
+        return listeCasesDegats;
+    }
 
 }
 

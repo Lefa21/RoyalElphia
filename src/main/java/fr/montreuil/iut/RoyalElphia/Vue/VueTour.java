@@ -1,19 +1,10 @@
 package fr.montreuil.iut.RoyalElphia.Vue;
 
-import fr.montreuil.iut.RoyalElphia.Controller.HelloController;
-import fr.montreuil.iut.RoyalElphia.modele.Map.CasesDégats;
 import fr.montreuil.iut.RoyalElphia.modele.Map.Terrain;
 import fr.montreuil.iut.RoyalElphia.modele.Tour.*;
 import fr.montreuil.iut.RoyalElphia.modele.jeu;
-import javafx.event.Event;
-import javafx.event.EventHandler;
-import javafx.scene.Node;
-import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 
 import java.io.FileInputStream;
