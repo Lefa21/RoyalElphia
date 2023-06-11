@@ -4,15 +4,16 @@ import fr.montreuil.iut.RoyalElphia.modele.Ennemis.*;
 import fr.montreuil.iut.RoyalElphia.modele.Map.Terrain;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 
 public class Vague {
 
-    private ArrayList<Ennemis> listeEnnemis;
+    private LinkedList<Ennemis> listeEnnemis;
     private Terrain terrain;
 
     public Vague(int nbEnnemi, Terrain terrain) {
-        this.listeEnnemis = new ArrayList<>();
+        this.listeEnnemis = new LinkedList<Ennemis>();
         this.terrain = terrain;
         for (int i = 0; i < nbEnnemi; i++) {
             int ran = ((int) (Math.random() * 101));
@@ -28,7 +29,11 @@ public class Vague {
             } else {
                 ennemis = new Squelette(terrain);
             }
-            this.listeEnnemis.add(ennemis);
+            this.listeEnnemis.addFirst(ennemis);
         }
+    }
+
+    public LinkedList<Ennemis> getListeEnnemis() {
+        return listeEnnemis;
     }
 }

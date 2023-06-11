@@ -137,6 +137,9 @@ public class jeu {
 
     // permet d'ajouter un ennemi qui a spawn sur le terrain dans la liste de notre modèle
     public void spwanEnnemi() {
+        for (int i = 0; i < vague.getListeEnnemis().size(); i++) {
+            vague.getListeEnnemis().pollLast();
+        }
     }
 
 
