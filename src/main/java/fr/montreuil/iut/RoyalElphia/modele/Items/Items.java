@@ -14,16 +14,20 @@ public abstract class Items {
     private int CoutAmelioration;
     private int NiveauAmelioration;
     private int NiveauMaxAmelioration;
+
+    private IntegerProperty posX,posY;
     private int ID;
 
 
 
-    public Items(int CoutAchat, int CoutVente, int CoutAmelioration, int NiveauAmelioration, int NiveauMaxAmelioration) {
+    public Items(int CoutAchat, int CoutVente, int CoutAmelioration, int NiveauAmelioration, int NiveauMaxAmelioration,int posX,int posY) {
         this.CoutAchat = CoutAchat;
         this.CoutVente = CoutVente;
         this.CoutAmelioration = CoutAmelioration;
         this.NiveauAmelioration = NiveauAmelioration;
         this.NiveauMaxAmelioration = NiveauMaxAmelioration;
+        this.posX = new SimpleIntegerProperty(posX);
+        this.posY = new SimpleIntegerProperty(posY);
     }
     public void setID(int i) {
         this.ID = i;
@@ -31,6 +35,30 @@ public abstract class Items {
 
     public int getID() {
         return ID;
+    }
+
+    public final IntegerProperty getPosXProperty(){
+        return this.posX;
+    }
+
+    public final int getPosX(){
+        return  this.posX.getValue();
+    }
+
+    public final void setPosX(int posX){
+        this.posX.setValue(posX);
+    }
+
+    public final IntegerProperty getPosYProperty(){
+        return this.posY;
+    }
+
+    public final int getPosY(){
+        return  this.posY.getValue();
+    }
+
+    public final void setPosy(int posy){
+        this.posY.setValue(posy);
     }
 
     public int getCoutAchat() {

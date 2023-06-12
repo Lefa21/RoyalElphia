@@ -3,9 +3,17 @@ package fr.montreuil.iut.RoyalElphia.Vue;
 import fr.montreuil.iut.RoyalElphia.modele.Map.Terrain;
 import fr.montreuil.iut.RoyalElphia.modele.Tour.*;
 import fr.montreuil.iut.RoyalElphia.modele.jeu;
+
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+
+import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.Background;
+
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -67,6 +75,8 @@ public class VueTour {
                     break;
             }
             if (tourImage != null) {
+                tour.setPosX(posX);
+                tour.setPosy(posY);
                 ImageView tourImageView = new ImageView(tourImage);
                 tour.rayonDegat(terrain, posX, posY, tour.getDegat(), this.panneauJeu);
                 if (tour instanceof TourElectrique) {
@@ -78,8 +88,16 @@ public class VueTour {
 
                 }
                 tourImageView.setId(Integer.toString(IDImage));
+                Label label = new Label();
+                label.textProperty().bind(tour.getDegatProperty().asString());
+                label.translateXProperty().bind(tour.getPosXProperty().multiply(32).add(10));
+                label.translateYProperty().bind(tour.getPosYProperty().multiply(32).add(40));
+                label.setBackground(Background.fill(Color.RED));
+                System.out.println();
+                label.setId(tour.getID() + "Lt");
                 IDImage++;
                 panneauJeu.getChildren().add(tourImageView);
+                this.panneauJeu.getChildren().add(label);
                 this.tour = null;
                 //VendreTour(tourImageView);
                 AmeliorationEtVente(tourImageView);
