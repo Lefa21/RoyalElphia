@@ -75,6 +75,13 @@ public class jeu {
         this.argent.setValue(this.argent.getValue() - prix);
     }
 
+    public void setArgentAZero() {
+        this.argent.setValue(0);
+    }
+
+    public void setPvZero() {
+        this.pvJoueur.setValue(0);
+    }
     public int getArgent() {
         return this.argent.getValue();
     }
@@ -141,7 +148,7 @@ public class jeu {
                 ennemis.add(enm);
                 this.listeEnnemisSpawn.add(enm);
             }
-            /*if (nbTour % 4 == 0 && listeEnnemisSpawn.size() <= this.niveau.getNbEnnemis()) {
+            if (nbTour % 4 == 0 && listeEnnemisSpawn.size() <= this.niveau.getNbEnnemis()) {
                 Ennemis enm = new Sorcières(terrain);
                 ennemis.add(enm);
                 this.listeEnnemisSpawn.add(enm);
@@ -162,7 +169,7 @@ public class jeu {
                 Ennemis enm = new GéantRoyal(terrain);
                 ennemis.add(enm);
                 this.listeEnnemisSpawn.add(enm);
-            }*/
+            }
         }
     }
 
@@ -263,6 +270,13 @@ public class jeu {
         for (int i = 0; i < this.ennemis.size(); i++) {
             if (this.ennemis.get(i).getPv() == 0)
                 this.ennemis.remove(i);
+
+            if (getArgent() < 0){
+                setArgentAZero();
+            }
+            if (getPvJoueur() < 0){
+                setPvZero();
+            }
         }
         nbTour++;
     }
@@ -279,7 +293,7 @@ public class jeu {
                 // on définit ce qui se passe à chaque frame
                 // c'est un eventHandler d'ou le lambda
                 (ev -> {
-                    if (/*this.getPvJoueur() == 0 ||*/ this.nbVague.getValue() == 5 && this.getNbEnnemisRestant() == 0) {
+                    if (this.getPvJoueur() == 0 || this.nbVague.getValue() == 5 && this.getNbEnnemisRestant() == 0) {
                         System.out.println("Vous avez perdu");
                         gameLoop.stop();
                     } else if (getNbEnnemisRestant()==0) {
