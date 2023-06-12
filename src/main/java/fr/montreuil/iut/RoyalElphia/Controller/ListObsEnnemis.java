@@ -17,11 +17,10 @@ public class ListObsEnnemis implements ListChangeListener<Ennemis> {
 
     @Override
     public void onChanged(Change<? extends Ennemis> c) {
-        System.out.println("changement");
+        // System.out.println("changement");
         while (c.next()) {
             if (c.wasAdded()) {
-                for (Ennemis a : c.getAddedSubList()
-                ) {
+                for (Ennemis a : c.getAddedSubList()) {
                     VueEnnemi vueEnm = new VueEnnemi(panneauJeu);
                     vueEnm.créerSprite(a);
                 }
@@ -36,6 +35,5 @@ public class ListObsEnnemis implements ListChangeListener<Ennemis> {
                 }
             }
         }
-
     }
 }

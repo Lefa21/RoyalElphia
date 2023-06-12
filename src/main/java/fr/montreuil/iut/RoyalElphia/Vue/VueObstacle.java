@@ -82,13 +82,14 @@ public class VueObstacle {
                 label.textProperty().bind(obstacle.getPvProperty().asString());
                 label.translateXProperty().bind(obstacle.getPosXProperty().multiply(32).add(10));
                 label.translateYProperty().bind(obstacle.getPosYProperty().multiply(32).add(40));
+                System.out.println("pos x label" + label.getTranslateX());
+                System.out.println("pos y label" + label.getTranslateY());
                 label.setBackground(Background.fill(Color.WHITE));
                 label.setId(obstacle.getID() + "L");
                 idImage++;
                 panneauJeu.getChildren().add(obstacleImageView);
                 this.panneauJeu.getChildren().add(label);
                 this.obstacle = null;
-                //VendreTour(obstacleImageView);
                 AmeliorationEtVente(obstacleImageView);
                 }
             }

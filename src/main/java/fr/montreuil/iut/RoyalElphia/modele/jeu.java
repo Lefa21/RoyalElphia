@@ -26,7 +26,7 @@ public class jeu {
     private ArrayList<Ennemis> listeEnnemisSpawn;
     private Timeline gameLoop;
     private IntegerProperty pvJoueur;
-    private ArrayList<Tour> listeDeTour;
+    private ObservableList<Tour> listeDeTour;
 
     private ObservableList<Obstacle> listeObstacle;
     private IntegerProperty argent;
@@ -49,7 +49,7 @@ public class jeu {
         this.nbEnnemisRestant = new SimpleIntegerProperty(this.niveau.getNbEnnemis());
         this.nbVague = new SimpleIntegerProperty(1);
         this.pvJoueur = new SimpleIntegerProperty(400);
-        this.listeDeTour = new ArrayList<>();
+        this.listeDeTour = FXCollections.observableArrayList();
         this.listeObstacle = FXCollections.observableArrayList();
         this.argent = new SimpleIntegerProperty(200);
     }
@@ -204,7 +204,7 @@ public class jeu {
         this.pvJoueur.setValue(pvJoueur);
     }
 
-    public ArrayList<Tour> getListeDeTour() {
+    public ObservableList<Tour> getListeDeTour() {
         return listeDeTour;
     }
 

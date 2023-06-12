@@ -8,42 +8,13 @@ public class Obstacle extends Items {
 
     private int Materiaux;
     private IntegerProperty  PointDeVie;
-    private int ID;
 
-    private IntegerProperty posX,posY;
 
-    public Obstacle(int materiaux,int PointDeVie,int posX,int posY) {
-        super(0,0,0,0,0);
+    public Obstacle(int materiaux,int PointDeVie) {
+        super(0,0,0,0,0,0,0);
         this.Materiaux = materiaux;
         this.PointDeVie = new SimpleIntegerProperty(PointDeVie);
-        this.posX = new SimpleIntegerProperty(posX);
-        this.posY = new SimpleIntegerProperty(posY);
     }
-
-    public final IntegerProperty getPosXProperty(){
-        return this.posX;
-    }
-
-    public final int getPosX(){
-       return  this.posX.getValue();
-    }
-
-    public final void setPosX(int posX){
-        this.posX.setValue(posX);
-    }
-
-    public final IntegerProperty getPosYProperty(){
-        return this.posY;
-    }
-
-    public final int getPosY(){
-        return  this.posY.getValue();
-    }
-
-    public final void setPosy(int posy){
-        this.posY.setValue(posy);
-    }
-
 
     public int getMateriaux() {
         return Materiaux;
@@ -68,11 +39,11 @@ public class Obstacle extends Items {
     @Override
     public String toString() {
         return "Obstacle{" +
-                ", ID=" + ID +
+                ", ID=" + super.getID() +
                 ", PointDeVie=" + PointDeVie +
-                ", ID=" + ID +
-                ", posX=" + posX +
-                ", posY=" + posY +
+                ", ID=" + super.getID() +
+                ", posX=" + super.getPosX() +
+                ", posY=" + super.getPosY() +
                 '}';
     }
 }

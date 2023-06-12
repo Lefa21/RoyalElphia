@@ -71,7 +71,7 @@ public class HelloController implements Initializable {
         if (this.ObstaclePose && obstacle == null && mouseEvent.getClickCount() == 2) {
             System.out.println("clique obstacle ");
             String imageId = ((ImageView) mouseEvent.getSource()).getId();
-           Obstacle obstacle = null;
+            Obstacle obstacle = null;
 
             switch (imageId) {
                 case "bois":
@@ -197,10 +197,14 @@ public class HelloController implements Initializable {
             this.LabelArgent.textProperty().bind(this.jeu.getArgentProperty().asString());
             this.LabelPV.textProperty().bind(this.jeu.getPvJoueurProperty().asString());
             this.LabelnbEnnemisRestant.textProperty().bind(this.jeu.nbEnnemisRestantProperty().asString());
+
+
             ListChangeListener<Ennemis> listenerEnnemis = new ListObsEnnemis(this.jeu, this.panneauJeu);
             jeu.getEnnemis().addListener(listenerEnnemis);
 
-            ListChangeListener<fr.montreuil.iut.RoyalElphia.modele.Obstacle.Obstacle> listenerObstacle = new ListObservableObstacle(this.jeu, this.panneauJeu);
+            ListChangeListener<Obstacle> listenerObstacle = new ListObservableObstacle(this.jeu, this.panneauJeu);
+            ListChangeListener<Tour> listenerTour = new ListObservableTour(this.jeu, this.panneauJeu);
+            jeu.getListeDeTour().addListener(listenerTour);
             jeu.getListeObstacle().addListener(listenerObstacle);
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);

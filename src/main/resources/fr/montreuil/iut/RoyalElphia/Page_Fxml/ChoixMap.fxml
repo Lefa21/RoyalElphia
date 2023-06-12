@@ -4,30 +4,17 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.ToggleGroup?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane prefHeight="800" prefWidth="600" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.montreuil.iut.RoyalElphia.Controller.SceneController">
+<BorderPane prefHeight="1080" prefWidth="1920" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.montreuil.iut.RoyalElphia.Controller.SceneController">
 
 
     <center>
         <Pane style="-fx-background-color: green;">
             <children>
-                <VBox layoutX="71.0" layoutY="162.0" prefHeight="270.0" prefWidth="361.0">
-                    <children>
-
-                        <RadioButton fx:id="buttonMap1" mnemonicParsing="false" prefHeight="20.0" prefWidth="95.0" selected="true" styleClass="label-bright" text="Map1">
-                            <toggleGroup>
-                                <ToggleGroup fx:id="groupeMap"/>
-                            </toggleGroup>
-                        </RadioButton>
-                        <RadioButton fx:id="buttonMap2" mnemonicParsing="false" prefHeight="20.0" prefWidth="98.0" styleClass="label-bright" text="Map2" toggleGroup="$groupeMap" />
-                    </children>
-                </VBox>
             <VBox layoutX="179.0" layoutY="432.0" prefHeight="100.0" prefWidth="122.0">
                <children>
                   <Label prefHeight="28.0" prefWidth="102.0" text="Niveau" />
@@ -41,14 +28,17 @@
                    <RadioButton fx:id="buttonDifficile" mnemonicParsing="false" prefHeight="20.0" prefWidth="98.0" styleClass="label-bright" text="Difficile" toggleGroup="$groupeNiveau" />
                </children>
             </VBox>
-                <Label alignment="CENTER" contentDisplay="CENTER" layoutX="84.0" layoutY="13.0" prefHeight="174.0" prefWidth="401.0" text="Veuillez cliquer la map sur laquelle vous souhaitez jouer">
+                <Label alignment="CENTER" contentDisplay="CENTER" layoutX="534.0" layoutY="14.0" prefHeight="174.0" prefWidth="401.0" text="Veuillez cliquer la map sur laquelle vous souhaitez jouer">
                 </Label>
-            <HBox layoutX="174.0" layoutY="585.0" prefHeight="100.0" prefWidth="200.0">
+            <HBox layoutX="174.0" layoutY="585.0" prefHeight="100.0" prefWidth="200.0" />
 
-               <children>
-                  <Button onAction="#Jouer" mnemonicParsing="false" prefHeight="100.0" prefWidth="205.0" text="Jouer " />
-               </children>
-            </HBox>
+                  <RadioButton fx:id="buttonMap1" layoutX="548.0" layoutY="374.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="95.0" selected="true" styleClass="label-bright" text="Map1">
+               <toggleGroup>
+                          <ToggleGroup fx:id="groupeMap" />
+               </toggleGroup>
+                  </RadioButton>
+                  <RadioButton fx:id="buttonMap2" layoutX="911.0" layoutY="364.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="98.0" styleClass="label-bright" text="Map2" toggleGroup="$groupeMap" />
+            <Button layoutX="651.0" layoutY="655.0" mnemonicParsing="false" onAction="#Jouer" prefHeight="100.0" prefWidth="205.0" text="Jouer " />
             </children></Pane>
     </center>
 </BorderPane>
