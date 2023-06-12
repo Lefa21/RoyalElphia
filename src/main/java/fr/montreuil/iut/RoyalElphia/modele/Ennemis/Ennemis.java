@@ -34,7 +34,7 @@ public abstract class Ennemis {
         this.capaciteDegatObstacle = capaciteDegatObstacle;
         this.capaciteVie = capaciteVie;
         this.capaciteDegatsBase = capaciteDegatsBase;
-        this.degatObstacle = 15;
+        this.degatObstacle = 100;
         compteur++;
         this.terrain = terrain;
 
@@ -58,6 +58,10 @@ public abstract class Ennemis {
             this.pv.setValue(0);
         else
             this.pv.setValue(this.getPv() - x);
+    }
+
+    public void améliorationPv(int pv){
+        this.pv.setValue(pv);
     }
 
     public int getDegatObstacle() {

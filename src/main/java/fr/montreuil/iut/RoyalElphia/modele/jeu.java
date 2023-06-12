@@ -127,6 +127,9 @@ public class jeu {
 
     // permet d'ajouter un ennemi qui a spawn sur le terrain dans la liste de notre modèle
     public void spwanEnnemi() {
+
+        /*
+
         if (nbTour % 2 == 0 && listeEnnemisSpawn.size() <= this.niveau.getNbEnnemis()) {
             Ennemis enm = new Sorcières(terrain);
             ennemis.add(enm);
@@ -141,23 +144,24 @@ public class jeu {
             Ennemis enm1 = new Géant(terrain);
             ennemis.add(enm1);
             this.listeEnnemisSpawn.add(enm1);
-            */
+
 
         }
-
         if (nbTour % 8 == 0 && listeEnnemisSpawn.size() <= this.niveau.getNbEnnemis()) {
             Ennemis enm = new gobelins(terrain);
             ennemis.add(enm);
             this.listeEnnemisSpawn.add(enm);
 
         }
-        if (nbTour % 16 == 0 && listeEnnemisSpawn.size() <= this.niveau.getNbEnnemis()) {
+
+        */
+        if (nbTour % 2 == 0 && listeEnnemisSpawn.size() <= this.niveau.getNbEnnemis()) {
             Ennemis enm = new Squelette(terrain);
             ennemis.add(enm);
             this.listeEnnemisSpawn.add(enm);
 
         }
-        if (nbTour % 32 == 0 && listeEnnemisSpawn.size() <= this.niveau.getNbEnnemis()) {
+        if (nbTour % 4 == 0 && listeEnnemisSpawn.size() <= this.niveau.getNbEnnemis()) {
             Ennemis enm = new GéantRoyal(terrain);
             ennemis.add(enm);
             this.listeEnnemisSpawn.add(enm);
@@ -223,11 +227,19 @@ public class jeu {
     public void enleveObstacleDetruit(int [][] tab,Ennemis e) {
         for (int j = 0; j < this.listeObstacle.size(); j++) {
             Obstacle obstacle = this.listeObstacle.get(j);
+            System.out.println("pos X enm : " + e.getX()/32);
+            System.out.println("pos Y enm : " + e.getY()/32);
+            System.out.println("pos X obs " + this.listeObstacle.get(j).getPosX());
+            System.out.println("pos Y obs " + this.listeObstacle.get(j).getPosY());
             if(obstacle.getPointDeVie() <=0){
+                System.out.println("degat détruit");
                 tab[obstacle.getPosY()][obstacle.getPosX()] = 9;
                 this.listeObstacle.remove(this.listeObstacle.get(j));
             }
-            if (e.getCapaciteObstacle() >= obstacle.getMateriaux() && ((e.getX()/32+1 == obstacle.getPosX() && e.getY()/32 == obstacle.getPosY()) || (e.getX()/32 == obstacle.getPosX() && e.getY()/32+1 == obstacle.getPosY()) || (e.getX()/32 == obstacle.getPosX() && e.getY()/32-1 == obstacle.getPosY()) || (e.getX()/32-1 == obstacle.getPosX() && e.getY()/32 == obstacle.getPosY())) ) {
+
+            // e.getCapaciteObstacle() >= obstacle.getMateriaux()
+            if (((e.getX()/32+1 == obstacle.getPosX() && e.getY()/32 == obstacle.getPosY()) || (e.getX()/32 == obstacle.getPosX() && e.getY()/32+1 == obstacle.getPosY()) || (e.getX()/32 == obstacle.getPosX() && e.getY()/32-1 == obstacle.getPosY()) || (e.getX()/32-1 == obstacle.getPosX() && e.getY()/32 == obstacle.getPosY())) ) {
+                System.out.println(" afflige degatdegat ");
                 int degat = e.getDegatObstacle();
                 int vieObstacle = obstacle.getPointDeVie() - degat;
                 obstacle.setPointDeVie(vieObstacle);
@@ -259,21 +271,21 @@ public class jeu {
     }
 
     public void augmentationCapacité(int nbTour,Ennemis e){
-        if(nbTour%64==0){
+        if(nbTour%64 ==0){
             System.out.println("augmentation capacité");
             if(e.getCapaciteDegatObstacle() == 1){
                 System.out.println("degat obs av:" + e.getDegatObstacle());
-                e.setDegatObstacle((int)(e.getDegatObstacle() * 1.1));
+                e.setDegatObstacle((int)(e.getDegatObstacle() * 1.5));
                 System.out.println("degat obs ap : " + e.getDegatObstacle());
             }
             if(e.getCapaciteVie() == 1){
                 System.out.println("pv  av :" + e.getPv());
-                e.setPv((int)(e.getPv() * 1.1));
+                e.améliorationPv((int)(e.getPv() * 1.5));
                 System.out.println("pv ap :" + e.getPv() );
             }
             if(e.getCapaciteDegatsBase() == 1){
                 System.out.println("degat base av :" + e.getDegatBase());
-                e.setDegatBase((int)(e.getDegatBase() * 1.1));
+                e.setDegatBase((int)(e.getDegatBase() * 1.5));
                 System.out.println("degat base ap: " + e.getDegatBase());
 
             }
