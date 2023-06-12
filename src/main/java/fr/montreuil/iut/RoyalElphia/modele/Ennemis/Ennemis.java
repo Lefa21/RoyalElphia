@@ -181,6 +181,22 @@ public abstract class Ennemis {
             retour = terrain.getTabTerrain()[(this.getY() / 32) - 1][this.getX() / 32];
         return retour;
     }
+
+    public String affichageImmunité() {
+        String affichage = "Cet ennemi est immunisé face aux tours";
+        if (this.Immunite == 1) {
+            affichage = affichage + " à bombes";
+        } else if (this.Immunite == 2) {
+            affichage = affichage + " boule de feu";
+        } else if (this.Immunite == 3) {
+            affichage = affichage + " électriques";
+        } else if (this.Immunite == 4) {
+            affichage = affichage + " à flèches";
+        } else if (this.Immunite == 5) {
+            affichage = affichage + " laser";
+        }
+        return affichage;
+    }
 }
 
 

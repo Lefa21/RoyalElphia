@@ -280,11 +280,13 @@ public class jeu {
                         System.out.println("Vous avez perdu");
                         gameLoop.stop();
                     } else if (getEnnemisTué().size() == niveau.getNbEnnemis()) {
+
                         System.out.println("Vague suivante " + this.getNbVague());
                         vagueSuivante();
                         getEnnemisTué().removeAll(getEnnemisTué());
                         System.out.println("nombre d'ennemis spwan:  " + this.listeEnnemisSpawn.size());
-                        unTour();
+
+
                     } else if (temps % 3 == 0) {
                         unTour();
                         System.out.println("Un tour");
@@ -304,18 +306,28 @@ public class jeu {
 
     public void menuEnnemiA(VBox vBox) {
         for (int i = 0; i < ennemis.size(); i++) {
-            Ennemis e = ennemis.get(i);
-            if (e instanceof gobelins) {
-                vBox.getChildren().add(new Circle(12, Color.GREEN));
-            } else if (e instanceof Sorcières) {
-                vBox.getChildren().add(new Circle(12, Color.VIOLET));
-            } else if (e instanceof GéantRoyal) {
-                vBox.getChildren().add(new Circle(12, Color.BLACK));
-            } else if (e instanceof Géant) {
-                vBox.getChildren().add(new Circle(12, Color.BROWN));
-            } else if (e instanceof Squelette) {
-                vBox.getChildren().add(new Circle(12, Color.GREY));
+            Ennemis en = ennemis.get(i);
+            Circle c = new Circle(12);
+            c.setOnMouseClicked(e -> System.out.println(en.affichageImmunité()));
+            if (en instanceof gobelins) {
+                c.setFill(Color.GREEN);
+                vBox.getChildren().add(c);
+            } else if (en instanceof Sorcières) {
+                c.setFill(Color.VIOLET);
+                vBox.getChildren().add(c);
+            } else if (en instanceof GéantRoyal) {
+                c.setFill(Color.BLACK);
+                vBox.getChildren().add(c);
+            } else if (en instanceof Géant) {
+                c.setFill(Color.BROWN);
+                vBox.getChildren().add(c);
+            } else if (en instanceof Squelette) {
+                c.setFill(Color.GREY);
+                vBox.getChildren().add(c);
             }
+            Label l = new Label();
+            l.textProperty().bind(en.getPvProperty().asString());
+            vBox.getChildren().add(l);
         }
     }
 
