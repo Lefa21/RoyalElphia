@@ -227,19 +227,13 @@ public class jeu {
     public void enleveObstacleDetruit(int [][] tab,Ennemis e) {
         for (int j = 0; j < this.listeObstacle.size(); j++) {
             Obstacle obstacle = this.listeObstacle.get(j);
-            System.out.println("pos X enm : " + e.getX()/32);
-            System.out.println("pos Y enm : " + e.getY()/32);
-            System.out.println("pos X obs " + this.listeObstacle.get(j).getPosX());
-            System.out.println("pos Y obs " + this.listeObstacle.get(j).getPosY());
             if(obstacle.getPointDeVie() <=0){
-                System.out.println("degat détruit");
                 tab[obstacle.getPosY()][obstacle.getPosX()] = 9;
                 this.listeObstacle.remove(this.listeObstacle.get(j));
             }
 
             // e.getCapaciteObstacle() >= obstacle.getMateriaux()
             if (((e.getX()/32+1 == obstacle.getPosX() && e.getY()/32 == obstacle.getPosY()) || (e.getX()/32 == obstacle.getPosX() && e.getY()/32+1 == obstacle.getPosY()) || (e.getX()/32 == obstacle.getPosX() && e.getY()/32-1 == obstacle.getPosY()) || (e.getX()/32-1 == obstacle.getPosX() && e.getY()/32 == obstacle.getPosY())) ) {
-                System.out.println(" afflige degatdegat ");
                 int degat = e.getDegatObstacle();
                 int vieObstacle = obstacle.getPointDeVie() - degat;
                 obstacle.setPointDeVie(vieObstacle);
