@@ -42,13 +42,14 @@ public class jeu {
 
     private IntegerProperty nbVague, nbEnnemisRestant;
 
+    private VBox vBox;
 
 
     private int temps, nbTour;
     private Vague vague;
 
 
-    public jeu(Terrain terrain, Niveau niveau) {
+    public jeu(Terrain terrain, Niveau niveau, VBox vBox) {
         this.terrain = terrain;
         this.ennemis = FXCollections.observableArrayList();
         this.listeEnnemisTuée = new ArrayList<>();
@@ -61,7 +62,8 @@ public class jeu {
         this.listeDeTour = new ArrayList<>();
         this.listeObstacle = FXCollections.observableArrayList();
         this.argent = new SimpleIntegerProperty(200);
-        this.vague = new Vague(this.niveau.getNbEnnemis(),this.terrain);
+        this.vague = new Vague(this.niveau.getNbEnnemis(), this.terrain);
+        this.vBox = vBox;
     }
 
 
@@ -127,18 +129,19 @@ public class jeu {
     }
 
     public void vagueSuivante() {
-        for (int i = 0; i < listeEnnemisSpawn.size(); i++) {
-            listeEnnemisSpawn.remove(i);
-        }
+        listeEnnemisSpawn.removeAll(listeEnnemisSpawn);
         this.nbVague.setValue(this.nbVague.getValue() + 1);
         this.niveau.setNbEnnemis(this.niveau.getNbEnnemis() * 2);
         this.nbEnnemisRestant.setValue(this.niveau.getNbEnnemis());
+        this.vague = new Vague(this.niveau.getNbEnnemis(), terrain);
     }
 
     // permet d'ajouter un ennemi qui a spawn sur le terrain dans la liste de notre modèle
     public void spwanEnnemi() {
         for (int i = 0; i < vague.getListeEnnemis().size(); i++) {
-            vague.getListeEnnemis().pollLast();
+            Ennemis e = vague.getListeEnnemis().pollLast();
+            ennemis.add(e);
+            this.listeEnnemisSpawn.add(e);
         }
     }
 
@@ -199,7 +202,7 @@ public class jeu {
     }
 
     public void unTour() {
-        int [][] tab = terrain.getTabTerrain();
+        int[][] tab = terrain.getTabTerrain();
         for (int i = 0; i < this.ennemis.size(); i++) {
             Ennemis e = this.ennemis.get(i);
             e.seDeplace();
@@ -207,7 +210,7 @@ public class jeu {
             if (this.terrain.verifPArv(e.getX(), e.getY())) {
                 System.out.println("-1 PV");
                 setPvJoueur(this.getPvJoueur() - 1);
-                this.getEnnemis().remove(this.getEnnemis().get(i));
+                ennemis.remove(ennemis.get(i));
             }
 
             for (int j = 0; j < this.listeObstacle.size(); j++) {
@@ -219,7 +222,7 @@ public class jeu {
                 System.out.println("Position obstacle  X : " + (listObs.get(j).getPosX()* 31  - 22));
                 System.out.println("Position obstacle  Y : " + (listObs.get(j).getPosY()* 32 + 16));
                  */
-                if ((((e.getX()-32) == (listObs.get(j).getPosX()* 31  - 22 )) ||(e.getX()-32) == (listObs.get(j).getPosX()* 31  - 21 ) ) && (e.getY()) == ((listObs.get(j).getPosY() * 32 + 16)) && (listObs.get(j).getPointDeVie()!=0)) {
+                if ((((e.getX() - 32) == (listObs.get(j).getPosX() * 31 - 22)) || (e.getX() - 32) == (listObs.get(j).getPosX() * 31 - 21)) && (e.getY()) == ((listObs.get(j).getPosY() * 32 + 16)) && (listObs.get(j).getPointDeVie() != 0)) {
                     System.out.println(listObs.get(j).toString());
                     listObs.get(j).setPointDeVie(listObs.get(j).getPointDeVie() - degat);
                     System.out.println(listObs.get(j).toString());
@@ -242,7 +245,7 @@ public class jeu {
         }
 
         for (int i = 0; i < listeObstacle.size(); i++) {
-            if(this.listeObstacle.get(i).getPointDeVie() == 0){
+            if (this.listeObstacle.get(i).getPointDeVie() == 0) {
                 tab[this.listeObstacle.get(i).getPosY()][this.listeObstacle.get(i).getPosX()] = 9;
                 this.listeObstacle.remove(this.listeObstacle.get(i));
             }
@@ -256,8 +259,8 @@ public class jeu {
         }
 
 
-                nbTour++;
-            }
+        nbTour++;
+    }
 
     public void initAnimation() {
         gameLoop = new Timeline();
@@ -273,11 +276,13 @@ public class jeu {
                 // c'est un eventHandler d'ou le lambda
                 (ev -> {
                     if (this.getPvJoueur() == 0 || this.nbVague.getValue() == 5) {
+                        menuEnnemiS(vBox);
                         System.out.println("Vous avez perdu");
                         gameLoop.stop();
                     } else if (getEnnemisTué().size() == niveau.getNbEnnemis()) {
                         System.out.println("Vague suivante " + this.getNbVague());
                         vagueSuivante();
+                        getEnnemisTué().removeAll(getEnnemisTué());
                         System.out.println("nombre d'ennemis spwan:  " + this.listeEnnemisSpawn.size());
                         unTour();
                     } else if (temps % 3 == 0) {
@@ -285,7 +290,9 @@ public class jeu {
                         System.out.println("Un tour");
                     } else if (temps % 5 == 0) {
                         if (getEnnemis().size() < this.niveau.getNbEnnemis()) {
+                            menuEnnemiS(vBox);
                             spwanEnnemi();
+                            menuEnnemiA(vBox);
                             System.out.println("Ennemis spwan");
                         }
                     }
@@ -293,6 +300,27 @@ public class jeu {
                 })
         );
         gameLoop.getKeyFrames().add(kf);
+    }
+
+    public void menuEnnemiA(VBox vBox) {
+        for (int i = 0; i < ennemis.size(); i++) {
+            Ennemis e = ennemis.get(i);
+            if (e instanceof gobelins) {
+                vBox.getChildren().add(new Circle(12, Color.GREEN));
+            } else if (e instanceof Sorcières) {
+                vBox.getChildren().add(new Circle(12, Color.VIOLET));
+            } else if (e instanceof GéantRoyal) {
+                vBox.getChildren().add(new Circle(12, Color.BLACK));
+            } else if (e instanceof Géant) {
+                vBox.getChildren().add(new Circle(12, Color.BROWN));
+            } else if (e instanceof Squelette) {
+                vBox.getChildren().add(new Circle(12, Color.GREY));
+            }
+        }
+    }
+
+    public void menuEnnemiS(VBox vBox) {
+        vBox.getChildren().removeAll(vBox.getChildren());
     }
 
 }

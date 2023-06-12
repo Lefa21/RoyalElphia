@@ -50,6 +50,10 @@ public class HelloController implements Initializable {
     private Terrain terrain;
     @FXML
     private TilePane map;
+
+    @FXML
+    private VBox menuEnnemi;
+
     private jeu jeu;
     private Niveau niveau;
 
@@ -181,7 +185,7 @@ public class HelloController implements Initializable {
     public void créationPartie() {
         créerNiveau();
         créerTerrain();
-        this.jeu = new jeu(this.terrain, this.niveau);
+        this.jeu = new jeu(this.terrain, this.niveau,this.menuEnnemi);
     }
 
     @FXML
