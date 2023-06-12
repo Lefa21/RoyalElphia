@@ -118,7 +118,7 @@ public class VueObstacle {
         if (obstacle != null) {
             obstacle.setID(idObstacle);
             idObstacle++;
-            if (jeu.verifArgent(obstacle)) {
+            if (jeu.verifArgentObstacle(obstacle)) {
                 jeu.setArgent(obstacle.getCoutAchat());
                 jeu.ajouterObstacle(obstacle);
                 this.obstacle = obstacle;

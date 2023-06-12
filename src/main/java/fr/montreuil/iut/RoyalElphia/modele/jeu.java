@@ -1,23 +1,23 @@
 package fr.montreuil.iut.RoyalElphia.modele;
 
-import fr.montreuil.iut.RoyalElphia.modele.Items.Items;
-import fr.montreuil.iut.RoyalElphia.modele.Map.CasesDégats;
-import fr.montreuil.iut.RoyalElphia.modele.Niveau.Niveau;
-import fr.montreuil.iut.RoyalElphia.modele.Obstacle.Obstacle;
-import fr.montreuil.iut.RoyalElphia.modele.Tour.Tour;
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.SimpleIntegerProperty;
+        import fr.montreuil.iut.RoyalElphia.modele.Map.CasesDégats;
+        import fr.montreuil.iut.RoyalElphia.modele.Niveau.Niveau;
+        import fr.montreuil.iut.RoyalElphia.modele.Obstacle.Obstacle;
+        import fr.montreuil.iut.RoyalElphia.modele.Tour.Tour;
+        import javafx.beans.property.IntegerProperty;
+        import javafx.beans.property.SimpleIntegerProperty;
 
-import fr.montreuil.iut.RoyalElphia.modele.Ennemis.*;
-import fr.montreuil.iut.RoyalElphia.modele.Map.Terrain;
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
+        import fr.montreuil.iut.RoyalElphia.modele.Ennemis.*;
+        import fr.montreuil.iut.RoyalElphia.modele.Map.Terrain;
+        import javafx.animation.KeyFrame;
+        import javafx.animation.Timeline;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.util.Duration;
+        import javafx.collections.FXCollections;
+        import javafx.collections.ObservableList;
+        import javafx.util.Duration;
 
-import java.util.ArrayList;
+        import java.io.FileWriter;
+        import java.util.ArrayList;
 
 public class jeu {
     private Terrain terrain;
@@ -52,165 +52,6 @@ public class jeu {
         this.listeDeTour = FXCollections.observableArrayList();
         this.listeObstacle = FXCollections.observableArrayList();
         this.argent = new SimpleIntegerProperty(200);
-    }
-
-
-    public void ajouterTour(Tour t) {
-        listeDeTour.add(t);
-    }
-
-
-    public void ajouterObstacle(fr.montreuil.iut.RoyalElphia.modele.Obstacle.Obstacle O) {
-        listeObstacle.add(O);
-    }
-
-    public final ObservableList<fr.montreuil.iut.RoyalElphia.modele.Obstacle.Obstacle> getListeObstacle() {
-        return listeObstacle;
-    }
-
-    public IntegerProperty getArgentProperty() {
-        return argent;
-    }
-
-    public void setArgent(int prix) {
-        this.argent.setValue(this.argent.getValue() - prix);
-    }
-
-    public void setArgentAZero() {
-        this.argent.setValue(0);
-    }
-
-    public void setPvZero() {
-        this.pvJoueur.setValue(0);
-    }
-
-    public int getArgent() {
-        return this.argent.getValue();
-    }
-
-    public boolean verifArgent(Items items) {
-        if (items.getCoutAchat() > getArgent()) {
-            return false;
-        }
-        return true;
-    }
-
-    public Niveau getNiveau() {
-        return niveau;
-    }
-
-    public Terrain getTerrain() {
-        return terrain;
-    }
-
-    public ArrayList<Ennemis> getListeEnnemisTuée() {
-        return listeEnnemisTuée;
-    }
-
-
-    public final void setNbVague(int nbVague) {
-        this.nbVague.set(nbVague);
-    }
-
-    public final int getNbVague() {
-        return nbVague.get();
-    }
-
-    public final IntegerProperty getNbVagueProperty() {
-        return this.nbVague;
-    }
-
-    public void ajouter(Ennemis e) {
-        this.ennemis.add(e);
-    }
-
-    public void vagueSuivante() {
-
-        listeEnnemisSpawn.clear();
-        ennemis.clear();
-
-        this.nbVague.setValue(this.nbVague.getValue() + 1);
-        this.niveau.setNbEnnemis(this.niveau.getNbEnnemis() * 2);
-        this.nbEnnemisRestant.setValue(this.niveau.getNbEnnemis());
-
-    }
-
-    // permet d'ajouter un ennemi qui a spawn sur le terrain dans la liste de notre modèle
-    public void spwanEnnemi() {
-
-        for (int i = 0; i < this.niveau.getNbEnnemis(); i++) {
-            if (nbTour % 2 == 0) {
-                Ennemis enm = new Sorcières(terrain);
-                ennemis.add(enm);
-                this.listeEnnemisSpawn.add(enm);
-            }
-            if (nbTour % 4 == 0 && listeEnnemisSpawn.size() <= this.niveau.getNbEnnemis()) {
-                Ennemis enm = new Sorcières(terrain);
-                ennemis.add(enm);
-                this.listeEnnemisSpawn.add(enm);
-            }
-            if (nbTour % 8 == 0 && listeEnnemisSpawn.size() <= this.niveau.getNbEnnemis()) {
-                Ennemis enm = new gobelins(terrain);
-                ennemis.add(enm);
-                this.listeEnnemisSpawn.add(enm);
-            }
-        }
-    }
-
-
-    //permet de récuperer la liste des ennemis ayant spawn
-    public ArrayList<Ennemis> getListeEnnemisSpawn() {
-        return listeEnnemisSpawn;
-    }
-
-    public void ajoutEnnemisMort(Ennemis enm) {
-        listeEnnemisTuée.add(enm);
-    }
-
-    public ArrayList<Ennemis> getEnnemisTué() {
-        return listeEnnemisTuée;
-    }
-
-
-    public void lancementLoop() {
-        gameLoop.play();
-    }
-
-    public void arretLoop() {
-        gameLoop.stop();
-    }
-
-
-    public ObservableList<Ennemis> getEnnemis() {
-        return ennemis;
-    }
-
-    public IntegerProperty getPvJoueurProperty() {
-        return this.pvJoueur;
-    }
-
-    public int getPvJoueur() {
-        return this.pvJoueur.getValue();
-    }
-
-    public void setPvJoueur(int pvJoueur) {
-        this.pvJoueur.setValue(pvJoueur);
-    }
-
-    public ObservableList<Tour> getListeDeTour() {
-        return listeDeTour;
-    }
-
-    public final void setNbEnnemisRestant(int nbEnnemisRestant) {
-        this.nbEnnemisRestant.setValue(nbEnnemisRestant);
-    }
-
-    public IntegerProperty nbEnnemisRestantProperty() {
-        return nbEnnemisRestant;
-    }
-
-    public int getNbEnnemisRestant() {
-        return this.nbEnnemisRestant.getValue();
     }
 
     public void enleveObstacleDetruit(int[][] tab, Ennemis e) {
@@ -275,6 +116,180 @@ public class jeu {
         }
     }
 
+    public void ajouterTour(Tour t) {
+        listeDeTour.add(t);
+    }
+
+
+    public void ajouterObstacle(Obstacle O) {
+        listeObstacle.add(O);
+    }
+
+    public final ObservableList<Obstacle> getListeObstacle() {
+        return listeObstacle;
+    }
+
+    public IntegerProperty getArgentProperty() {
+        return argent;
+    }
+
+    public void setArgent(int prix) {
+        this.argent.setValue(this.argent.getValue() - prix);
+    }
+
+    public void setArgentAZero() {
+        this.argent.setValue(0);
+    }
+
+    public void setPvZero() {
+        this.pvJoueur.setValue(0);
+    }
+    public int getArgent() {
+        return this.argent.getValue();
+    }
+
+    public boolean verifArgent(Tour t) {
+        if (t.getCoutAchat() > getArgent()) {
+            return false;
+        }
+        return true;
+    }
+
+    public boolean verifArgentObstacle(Obstacle O) {
+        if (O.getCoutAchat() > getArgent()) {
+            return false;
+        }
+        return true;
+    }
+
+    public Niveau getNiveau() {
+        return niveau;
+    }
+
+    public Terrain getTerrain() {
+        return terrain;
+    }
+
+    public ArrayList<Ennemis> getListeEnnemisTuée() {
+        return listeEnnemisTuée;
+    }
+
+
+    public final void setNbVague(int nbVague) {
+        this.nbVague.set(nbVague);
+    }
+
+    public final int getNbVague() {
+        return nbVague.get();
+    }
+
+    public final IntegerProperty getNbVagueProperty() {
+        return this.nbVague;
+    }
+
+    public void ajouter(Ennemis e) {
+        this.ennemis.add(e);
+    }
+
+    public void vagueSuivante() {
+
+        listeEnnemisSpawn.clear();
+        ennemis.clear();
+
+        this.nbVague.setValue(this.nbVague.getValue() + 1);
+        this.niveau.setNbEnnemis(this.niveau.getNbEnnemis() * 2);
+        this.nbEnnemisRestant.setValue(this.niveau.getNbEnnemis());
+
+    }
+
+    // permet d'ajouter un ennemi qui a spawn sur le terrain dans la liste de notre modèle
+    public void spwanEnnemi() {
+        for (int i = 0; i < this.niveau.getNbEnnemis(); i++) {
+            if(nbTour % 2 == 0) {
+                Ennemis enm = new Sorcières(terrain);
+                ennemis.add(enm);
+                this.listeEnnemisSpawn.add(enm);
+            }
+            if (nbTour % 4 == 0 && listeEnnemisSpawn.size() <= this.niveau.getNbEnnemis()) {
+                Ennemis enm = new Sorcières(terrain);
+                ennemis.add(enm);
+                this.listeEnnemisSpawn.add(enm);
+            }
+            if (nbTour % 8 == 0 && listeEnnemisSpawn.size() <= this.niveau.getNbEnnemis()) {
+                Ennemis enm = new gobelins(terrain);
+                ennemis.add(enm);
+                this.listeEnnemisSpawn.add(enm);
+
+            }
+            if (nbTour % 16 == 0 && listeEnnemisSpawn.size() <= this.niveau.getNbEnnemis()) {
+                Ennemis enm = new Squelette(terrain);
+                ennemis.add(enm);
+                this.listeEnnemisSpawn.add(enm);
+
+            }
+            if (nbTour % 32 == 0 && listeEnnemisSpawn.size() <= this.niveau.getNbEnnemis()) {
+                Ennemis enm = new GéantRoyal(terrain);
+                ennemis.add(enm);
+                this.listeEnnemisSpawn.add(enm);
+            }
+        }
+    }
+
+
+    //permet de récuperer la liste des ennemis ayant spawn
+    public ArrayList<Ennemis> getListeEnnemisSpawn() {
+        return listeEnnemisSpawn;
+    }
+
+    public void ajoutEnnemisMort(Ennemis enm) {
+        listeEnnemisTuée.add(enm);
+    }
+
+    public ArrayList<Ennemis> getEnnemisTué() {
+        return listeEnnemisTuée;
+    }
+
+
+    public void lancementLoop() {
+        gameLoop.play();
+    }
+
+    public void arretLoop() {
+        gameLoop.stop();
+    }
+
+
+    public ObservableList<Ennemis> getEnnemis() {
+        return ennemis;
+    }
+
+    public IntegerProperty getPvJoueurProperty() {
+        return this.pvJoueur;
+    }
+
+    public int getPvJoueur() {
+        return this.pvJoueur.getValue();
+    }
+
+    public void setPvJoueur(int pvJoueur) {
+        this.pvJoueur.setValue(pvJoueur);
+    }
+
+    public ObservableList<Tour> getListeDeTour() {
+        return listeDeTour;
+    }
+
+    public final void setNbEnnemisRestant(int nbEnnemisRestant) {
+        this.nbEnnemisRestant.setValue(nbEnnemisRestant);
+    }
+
+    public IntegerProperty nbEnnemisRestantProperty() {
+        return nbEnnemisRestant;
+    }
+
+    public int getNbEnnemisRestant() {
+        return this.nbEnnemisRestant.getValue();
+    }
 
     public void unTour() {
         int[][] tab = terrain.getTabTerrain();
@@ -298,7 +313,6 @@ public class jeu {
         nbTour++;
     }
 
-
     public void initAnimation() {
         gameLoop = new Timeline();
         temps = 0;
@@ -314,7 +328,7 @@ public class jeu {
                     if (this.getPvJoueur() == 0 || this.nbVague.getValue() == 5 && this.getNbEnnemisRestant() == 0) {
                         System.out.println("Vous avez perdu");
                         gameLoop.stop();
-                    } else if (getNbEnnemisRestant() == 0) {
+                    } else if (getNbEnnemisRestant()==0) {
                         System.out.println("Vague suivante " + this.getNbVague());
                         vagueSuivante();
                         System.out.println("nombre d'ennemis spwan:  " + this.listeEnnemisSpawn.size());
@@ -333,4 +347,6 @@ public class jeu {
         );
         gameLoop.getKeyFrames().add(kf);
     }
+
 }
+

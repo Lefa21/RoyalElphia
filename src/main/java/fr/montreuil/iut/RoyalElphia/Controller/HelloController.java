@@ -87,7 +87,7 @@ public class HelloController implements Initializable {
                     obstacle = new BarricadePierre();
                     break;
             }
-            if (obstacle != null && jeu.verifArgent(obstacle)) {
+            if (obstacle != null && jeu.verifArgentObstacle(obstacle)) {
                 vo.CliqueObstacle(this.jeu, imageId);
                 this.obstacle = vo.getObstacle();
                 this.ObstaclePose = false;
@@ -214,10 +214,11 @@ public class HelloController implements Initializable {
 
 
             ListChangeListener<Obstacle> listenerObstacle = new ListObservableObstacle(this.jeu, this.panneauJeu);
+            jeu.getListeObstacle().addListener(listenerObstacle);
+
             ListChangeListener<Tour> listenerTour = new ListObservableTour(this.jeu, this.panneauJeu);
             jeu.getListeDeTour().addListener(listenerTour);
 
-            jeu.getListeObstacle().addListener(listenerObstacle);
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }
