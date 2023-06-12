@@ -150,6 +150,16 @@ public class HelloController implements Initializable {
         }
 
 
+    public void PoserTour(MouseEvent mouseEvent) throws FileNotFoundException {
+        double cliqueX = mouseEvent.getX();
+        double cliqueY = mouseEvent.getY();
+        VueTour vueTour = new VueTour(panneauJeu, tour, cliqueX, cliqueY, terrain, jeu);
+        vueTour.PoserTour();
+        this.TourPose = true;
+        this.tour = vueTour.getTour();
+    }
+
+
     public void créerNiveau(){
         int niveau = SceneController.getNiveau();
         if (niveau == 1) {
@@ -194,8 +204,8 @@ public class HelloController implements Initializable {
             jeu.initAnimation();
             TerrainVue terrainVue = new TerrainVue(terrain, map);
             this.LabelVague.textProperty().bind(this.jeu.getNbVagueProperty().asString());
-            this.LabelArgent.textProperty().bind(this.jeu.getArgentProperty().asString());
-            this.LabelPV.textProperty().bind(this.jeu.getPvJoueurProperty().asString());
+            this.LabelArgent.textProperty().bind(this.jeu.getArgentProperty().asString().concat(" $"));
+            this.LabelPV.textProperty().bind(this.jeu.getPvJoueurProperty().asString().concat(" pv"));
             this.LabelnbEnnemisRestant.textProperty().bind(this.jeu.nbEnnemisRestantProperty().asString());
             ListChangeListener<Ennemis> listenerEnnemis = new ListObsEnnemis(this.jeu, this.panneauJeu);
             jeu.getEnnemis().addListener(listenerEnnemis);

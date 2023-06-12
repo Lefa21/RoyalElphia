@@ -76,6 +76,14 @@ public class jeu {
         this.argent.setValue(this.argent.getValue() - prix);
     }
 
+    public void setArgentAZero() {
+        this.argent.setValue(0);
+    }
+
+    public void setPvZero() {
+        this.pvJoueur.setValue(0);
+    }
+
     public int getArgent() {
         return this.argent.getValue();
     }
@@ -117,50 +125,46 @@ public class jeu {
     }
 
     public void vagueSuivante() {
-        for (int i = 0; i < listeEnnemisSpawn.size(); i++) {
-            listeEnnemisSpawn.remove(i);
-        }
+
+        listeEnnemisSpawn.clear();
+        ennemis.clear();
+
         this.nbVague.setValue(this.nbVague.getValue() + 1);
         this.niveau.setNbEnnemis(this.niveau.getNbEnnemis() * 2);
         this.nbEnnemisRestant.setValue(this.niveau.getNbEnnemis());
+
     }
 
     // permet d'ajouter un ennemi qui a spawn sur le terrain dans la liste de notre modèle
     public void spwanEnnemi() {
-        if (nbTour % 2 == 0 && listeEnnemisSpawn.size() <= this.niveau.getNbEnnemis()) {
-            Ennemis enm = new Sorcières(terrain);
-            ennemis.add(enm);
-            this.listeEnnemisSpawn.add(enm);
+        for (int i = 0; i < this.niveau.getNbEnnemis(); i++) {
+            if (nbTour % 2 == 0) {
+                Ennemis enm = new Sorcières(terrain);
+                ennemis.add(enm);
+                this.listeEnnemisSpawn.add(enm);
+            }
+            if (nbTour % 4 == 0 && listeEnnemisSpawn.size() <= this.niveau.getNbEnnemis()) {
+                Ennemis enm = new Sorcières(terrain);
+                ennemis.add(enm);
+                this.listeEnnemisSpawn.add(enm);
+            }
+            if (nbTour % 8 == 0 && listeEnnemisSpawn.size() <= this.niveau.getNbEnnemis()) {
+                Ennemis enm = new gobelins(terrain);
+                ennemis.add(enm);
+                this.listeEnnemisSpawn.add(enm);
 
-/*
-=======
-        }
+            }
+            if (nbTour % 16 == 0 && listeEnnemisSpawn.size() <= this.niveau.getNbEnnemis()) {
+                Ennemis enm = new Squelette(terrain);
+                ennemis.add(enm);
+                this.listeEnnemisSpawn.add(enm);
 
-        if (nbTour % 4 == 0 && listeEnnemisSpawn.size() <= this.niveau.getNbEnnemis()) {
->>>>>>> 2cd98ba8bad3a457bbe0ee5f99bcaf47999cb7fd
-            Ennemis enm1 = new Géant(terrain);
-            ennemis.add(enm1);
-            this.listeEnnemisSpawn.add(enm1);
-            */
-
-        }
-
-        if (nbTour % 8 == 0 && listeEnnemisSpawn.size() <= this.niveau.getNbEnnemis()) {
-            Ennemis enm = new gobelins(terrain);
-            ennemis.add(enm);
-            this.listeEnnemisSpawn.add(enm);
-
-        }
-        if (nbTour % 16 == 0 && listeEnnemisSpawn.size() <= this.niveau.getNbEnnemis()) {
-            Ennemis enm = new Squelette(terrain);
-            ennemis.add(enm);
-            this.listeEnnemisSpawn.add(enm);
-
-        }
-        if (nbTour % 32 == 0 && listeEnnemisSpawn.size() <= this.niveau.getNbEnnemis()) {
-            Ennemis enm = new GéantRoyal(terrain);
-            ennemis.add(enm);
-            this.listeEnnemisSpawn.add(enm);
+            }
+            if (nbTour % 32 == 0 && listeEnnemisSpawn.size() <= this.niveau.getNbEnnemis()) {
+                Ennemis enm = new GéantRoyal(terrain);
+                ennemis.add(enm);
+                this.listeEnnemisSpawn.add(enm);
+            }
         }
     }
 
@@ -221,7 +225,8 @@ public class jeu {
     }
 
     public void unTour() {
-        int [][] tab = terrain.getTabTerrain();
+        System.out.println(this.listeEnnemisSpawn.size());
+        int[][] tab = terrain.getTabTerrain();
         for (int i = 0; i < this.ennemis.size(); i++) {
             Ennemis e = this.ennemis.get(i);
             e.seDeplace();
@@ -234,36 +239,32 @@ public class jeu {
 
             for (int j = 0; j < this.listeObstacle.size(); j++) {
                 ObservableList<Obstacle> listObs = getListeObstacle();
-                if(this.listeObstacle.get(j).getPointDeVie() == 10){
+                if (this.listeObstacle.get(j).getPointDeVie() == 10) {
                     tab[this.listeObstacle.get(j).getPosY()][this.listeObstacle.get(j).getPosX()] = 9;
                     this.listeObstacle.remove(this.listeObstacle.get(j));
                 }
                 int degat = ennemis.get(i).getDegatObstacle();
+
                 System.out.println("vie obstacle " + this.listeObstacle.get(i).getPointDeVie());
                 int vieObstacle = this.listeObstacle.get(i).getPointDeVie() - degat;
                 System.out.println("vie obs après dégats : " + vieObstacle);
-                if (((e.getX()/32+1 == listObs.get(j).getPosX() && e.getY()/32 == listObs.get(j).getPosY()) || (e.getX()/32 == listObs.get(j).getPosX() && e.getY()/32+1 == listObs.get(j).getPosY()) || (e.getX()/32 == listObs.get(j).getPosX() && e.getY()/32-1 == listObs.get(j).getPosY()) || (e.getX()/32-1 == listObs.get(j).getPosX() && e.getY()/32 == listObs.get(j).getPosY())) && vieObstacle >=0) {
-                    System.out.println(listObs.get(j).toString());
-                    listObs.get(j).setPointDeVie(vieObstacle);
-                    System.out.println("vie obs après dégats réel : " + vieObstacle);
-                    System.out.println(listObs.get(j).toString());
-                }
-/*
-                        else if (((enm.getX()) == ((obs.getPosX()* 33)) && (enm.getY() == ((obs.getPosY() * 32) + 16)))) {
-                            System.out.println("check position ennemis obstacle");
-                            System.out.println("point de vie obstacle : " + obs.getPointDeVie());
-                            obs.setPointDeVie(obs.getPointDeVie() - degat);
-                            System.out.println("point de vie après dégat :" + obs.getPointDeVie());
-                        }
- */
-            }
+                if (((e.getX() / 32 + 1 == listObs.get(j).getPosX() && e.getY() / 32 == listObs.get(j).getPosY()) || (e.getX() / 32 == listObs.get(j).getPosX() && e.getY() / 32 + 1 == listObs.get(j).getPosY()) || (e.getX() / 32 == listObs.get(j).getPosX() && e.getY() / 32 - 1 == listObs.get(j).getPosY()) || (e.getX() / 32 - 1 == listObs.get(j).getPosX() && e.getY() / 32 == listObs.get(j).getPosY())) && vieObstacle >= 0) {
 
-            for (int j = 0; j < this.terrain.getCasesDégats().size(); j++) {
-                CasesDégats c = this.terrain.getCasesDégats().get(j);
-                if (c.verifDegat(e))
-                    e.setPv(this.terrain.getCasesDégats().get(j).getDegat());
+                    if ((((e.getX() - 32) == (listObs.get(j).getPosX() * 31 - 22)) || (e.getX() - 32) == (listObs.get(j).getPosX() * 31 - 21)) && (e.getY()) == ((listObs.get(j).getPosY() * 32 + 16)) && (listObs.get(j).getPointDeVie() != 0)) {
+
+                        System.out.println(listObs.get(j).toString());
+                        listObs.get(j).setPointDeVie(vieObstacle);
+                        System.out.println("vie obs après dégats réel : " + vieObstacle);
+                        System.out.println(listObs.get(j).toString());
+                    }
+                }
+
+                for (j = 0; j < this.terrain.getCasesDégats().size(); j++) {
+                    CasesDégats c = this.terrain.getCasesDégats().get(j);
+                    if (c.verifDegat(e))
+                        e.setPv(this.terrain.getCasesDégats().get(j).getDegat());
+                }
             }
-        }
 /*
         for (int i = 0; i < listeObstacle.size(); i++) {
             if(this.listeObstacle.get(i).getPointDeVie() == 10){
@@ -272,53 +273,67 @@ public class jeu {
             }
         }
 
+<<<<<<< HEAD
  */
 
 
-
-
-        for (int i = this.ennemis.size() - 1; i >= 0; i--) {
-            if (this.ennemis.get(i).getPv() == 0)
-                this.ennemis.remove(i);
-        }
-                nbTour++;
+            for (i = this.ennemis.size() - 1; i >= 0; i--) {
+                if (this.ennemis.get(i).getPv() == 0)
+                    this.ennemis.remove(i);
             }
+            nbTour++;
 
-    public void initAnimation() {
-        gameLoop = new Timeline();
-        temps = 0;
-        gameLoop.setCycleCount(Timeline.INDEFINITE);
+            for (i = 0; i < this.ennemis.size(); i++) {
+                if (this.ennemis.get(i).getPv() == 0)
+                    this.ennemis.remove(i);
 
+                if (getArgent() < 0) {
+                    setArgentAZero();
 
-        KeyFrame kf = new KeyFrame(
-                // on définit le FPS (nbre de frame par seconde)
-
-                Duration.seconds(0.025),
-                // on définit ce qui se passe à chaque frame
-                // c'est un eventHandler d'ou le lambda
-                (ev -> {
-                    if (this.getPvJoueur() == 0 || this.nbVague.getValue() == 5) {
-                        System.out.println("Vous avez perdu");
-                        gameLoop.stop();
-                    } else if (getEnnemisTué().size() == niveau.getNbEnnemis()) {
-                        System.out.println("Vague suivante " + this.getNbVague());
-                        vagueSuivante();
-                        System.out.println("nombre d'ennemis spwan:  " + this.listeEnnemisSpawn.size());
-                        unTour();
-                    } else if (temps % 3 == 0) {
-                        unTour();
-                        System.out.println("Un tour");
-                    } else if (temps % 5 == 0) {
-                        if (getEnnemis().size() < this.niveau.getNbEnnemis()) {
-                            spwanEnnemi();
-                            System.out.println("Ennemis spwan");
-                        }
-                    }
-                    temps++;
-                })
-        );
-        gameLoop.getKeyFrames().add(kf);
+                }
+                if (getPvJoueur() < 0) {
+                    setPvZero();
+                }
+            }
+            nbTour++;
+        }
     }
 
-}
+        public void initAnimation() {
+            gameLoop = new Timeline();
+            temps = 0;
+            gameLoop.setCycleCount(Timeline.INDEFINITE);
+
+
+            KeyFrame kf = new KeyFrame(
+                    // on définit le FPS (nbre de frame par seconde)
+                    Duration.seconds(0.025),
+                    // on définit ce qui se passe à chaque frame
+                    // c'est un eventHandler d'ou le lambda
+                    (ev -> {
+                        if (this.getPvJoueur() == 0 || this.nbVague.getValue() == 5 && this.getNbEnnemisRestant() == 0) {
+                            System.out.println("Vous avez perdu");
+                            gameLoop.stop();
+                        } else if (getNbEnnemisRestant() == 0) {
+                            System.out.println("Vague suivante " + this.getNbVague());
+                            vagueSuivante();
+                            System.out.println("nombre d'ennemis spwan:  " + this.listeEnnemisSpawn.size());
+                            unTour();
+                        } else if (temps % 3 == 0) {
+                            unTour();
+                            System.out.println("Un tour");
+                        } else if (temps % 5 == 0) {
+                            if (getEnnemis().size() < this.niveau.getNbEnnemis()) {
+                                spwanEnnemi();
+                                System.out.println("Ennemis spwan");
+                            }
+                        }
+                        temps++;
+                    })
+            );
+            gameLoop.getKeyFrames().add(kf);
+        }
+
+    }
+
 

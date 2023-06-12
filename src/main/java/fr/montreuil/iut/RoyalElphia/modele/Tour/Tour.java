@@ -43,7 +43,7 @@ public  class Tour extends Items {
     }
 
     public void setDegat() {
-        this.degat.setValue(this.degat.getValue() * 1.5);
+        this.degat.setValue(this.degat.getValue() * 3);
     }
 
 

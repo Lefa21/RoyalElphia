@@ -21,6 +21,7 @@ public abstract class Ennemis {
     private CasesParcourues casesParcourues;
     private int degatObstacle;
 
+
     public Ennemis(Terrain terrain, int pv, int ptsDefense, int immunite, int degatBase, int butin) {
         this.id = "" + compteur;
         this.casesParcourues = new CasesParcourues();
@@ -32,7 +33,6 @@ public abstract class Ennemis {
         this.degatObstacle = 15;
         compteur++;
         this.terrain = terrain;
-
         /* On multiplie par 32 la case de départ du terrain, pour adapter les dimensions du tableau aux dimensions du
          terrains et on ajoute 16 pour mettre l'ennemi au centre de la case*/
         this.xProperty = new SimpleIntegerProperty(terrain.getPointDep().getX() * 32 + 16);
