@@ -30,6 +30,7 @@ public class ListObsEnnemis implements ListChangeListener<Ennemis> {
                         throw new RuntimeException(e);
                     }
                 }
+
             } else if (c.wasRemoved()) {
                 for (Ennemis a : c.getRemoved()
                 ) {

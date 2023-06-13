@@ -21,16 +21,10 @@ public class VueEnnemi {
     public VueEnnemi(Pane pane) {
         this.pane = pane;
     }
+    //circle.setOnMouseClicked(e -> System.out.println(en.affichageImmunité()));
 
     public void créerSprite(Ennemis ennemis) throws FileNotFoundException {
 
-        /*
->>>>>>> 3321a63a035e361ba20cd832619261b73aff8498
-        Circle circle = new Circle(10);
-        circle.setId(ennemis.getId());
-        circle.translateXProperty().bind(ennemis.getxProperty());
-        circle.translateYProperty().bind(ennemis.getyProperty());
-         */
         Label label = new Label();
         label.textProperty().bind(ennemis.getPvProperty().asString());
         label.setId(ennemis.getId() + "L");
@@ -52,6 +46,7 @@ public class VueEnnemi {
             sorciereView.setId(ennemis.getId());
             sorciereView.translateXProperty().bind(ennemis.getxProperty());
             sorciereView.translateYProperty().bind(ennemis.getyProperty().subtract(20));
+
             this.pane.getChildren().add(sorciereView);}
         else if (ennemis instanceof GéantRoyal) {
             Image golem = new Image(new FileInputStream("src/main/resources/fr/montreuil/iut/RoyalElphia/Page_Fxml/Golem(1).png"));
