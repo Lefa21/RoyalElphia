@@ -137,15 +137,17 @@ public class VueObstacle {
             if (KeyEvent.isAltDown()) {
                 for (int i = 0; i < jeu.getListeObstacle().size(); i++) {
                     Obstacle o = jeu.getListeObstacle().get(i);
-                    if (o.getNiveauAmelioration() != o.getNiveauMaxAmelioration()) {
-                        if (o.getCoutAmelioration() <= jeu.getArgent()) {
-                            jeu.setArgent(o.getCoutAmelioration());
-                            o.setNiveauAmelioration(o.getNiveauAmelioration() + 1);
-                            o.setPointDeVie((int)(o.getPointDeVie()* 1.5 ));
-                            o.setCoutAmelioration((int) (o.getCoutAmelioration() * 1.5));
-                        }
-                    } else
-                        System.out.println("niv MAX");
+                    if (Integer.toString(o.getID()).equals(x.getId())){
+                        if (o.getNiveauAmelioration() != o.getNiveauMaxAmelioration()) {
+                            if (o.getCoutAmelioration() <= jeu.getArgent()) {
+                                jeu.setArgent(o.getCoutAmelioration());
+                                o.setNiveauAmelioration(o.getNiveauAmelioration() + 1);
+                                o.setPointDeVie((int) (o.getPointDeVie() * 1.5));
+                                o.setCoutAmelioration((int) (o.getCoutAmelioration() * 1.5));
+                            }
+                        } else
+                            System.out.println("niv MAX");
+                }
                 }
             } else {
                 x.setOnMouseClicked(event -> {

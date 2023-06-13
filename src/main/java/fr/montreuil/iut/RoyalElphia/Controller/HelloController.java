@@ -295,5 +295,17 @@ public class HelloController implements Initializable {
             }
         }
     }
+
+    public void Rejouer(ActionEvent actionEvent) throws IOException{
+      // Stage stage =  SceneController.fermetureStage();
+        //stage.close();
+        Stage newWindow = new Stage();
+        newWindow.setTitle("Paramètres de ma partie");
+        FXMLLoader loader = new FXMLLoader(HelloApplication.class.getResource("Page_Fxml/ChoixMap.fxml"));
+        newWindow.setScene(new Scene(loader.load()));
+
+        newWindow.show();
+        ((Stage)  LabelPV.getScene().getWindow()).close();
+    }
 }
 

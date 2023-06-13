@@ -89,7 +89,7 @@ public class jeu {
                 this.listeObstacle.remove(this.listeObstacle.get(j));
             }
 
-            //
+//
             if ((e.getCapaciteObstacle() >= obstacle.getMateriaux() && (e.getX() / 32 + 1 == obstacle.getPosX() && e.getY() / 32 == obstacle.getPosY()) || (e.getX() / 32 == obstacle.getPosX() && e.getY() / 32 + 1 == obstacle.getPosY()) || (e.getX() / 32 == obstacle.getPosX() && e.getY() / 32 - 1 == obstacle.getPosY()) || (e.getX() / 32 - 1 == obstacle.getPosX() && e.getY() / 32 == obstacle.getPosY()))) {
                 int degat = e.getDegatObstacle();
                 int vieObstacle = obstacle.getPointDeVie() - degat;
@@ -121,28 +121,27 @@ public class jeu {
         }
     }
 
-    public void augmentationCapacité(int nbTour, Ennemis e) {
-        if (nbTour % 64 == 0) {
+    public void augmentationCapacité(int nbTour,Ennemis e){
+        if(nbTour%128 ==0){
             System.out.println("augmentation capacité");
-            if (e.getCapaciteDegatObstacle() == 1) {
+            if(e.getCapaciteDegatObstacle() == 1){
                 System.out.println("degat obs av:" + e.getDegatObstacle());
-                e.setDegatObstacle((int) (e.getDegatObstacle() * 1.5));
+                e.setDegatObstacle((e.getDegatObstacle() + (e.getDegatObstacle() * 50/100)));
                 System.out.println("degat obs ap : " + e.getDegatObstacle());
             }
-            if (e.getCapaciteVie() == 1) {
+            if(e.getCapaciteVie() == 1){
                 System.out.println("pv  av :" + e.getPv());
-                e.améliorationPv((int) (e.getPv() * 1.5));
-                System.out.println("pv ap :" + e.getPv());
+                e.améliorationPv((e.getPv() + (e.getPv() * 50/100)));
+                System.out.println("pv ap :" + e.getPv() );
             }
-            if (e.getCapaciteDegatsBase() == 1) {
+            if(e.getCapaciteDegatsBase() == 1){
                 System.out.println("degat base av :" + e.getDegatBase());
-                e.setDegatBase((int) (e.getDegatBase() * 1.5));
+                e.setDegatBase((e.getDegatBase() + (e.getDegatBase() * 50/100)));
                 System.out.println("degat base ap: " + e.getDegatBase());
 
             }
         }
     }
-
     public void ajouterTour(Tour t) {
         listeDeTour.add(t);
     }
@@ -233,10 +232,6 @@ public class jeu {
 
     // permet d'ajouter un ennemi qui a spawn sur le terrain dans la liste de notre modèle
     public void spwanEnnemi(){
-                /*Ennemis enm = new Sorcières(terrain);
-                ennemis.add(enm);
-                this.listeEnnemisSpawn.add(enm);
-                */
         Ennemis e = this.vague.getListeEnnemis().pollLast();
         ennemis.add(e);
         this.listeEnnemisSpawn.add(e);
@@ -342,11 +337,12 @@ public class jeu {
 
 
         KeyFrame kf = new KeyFrame(
-                // on définit le FPS (nbre de frame par seconde)
+// on définit le FPS (nbre de frame par seconde)
 
                 Duration.seconds(0.005),
                 // on définit ce qui se passe à chaque frame
                 // c'est un eventHandler d'ou le lambda
+
                 (ev -> {
                     if (this.getPvJoueur() == 0 || (this.nbVague.getValue() == 5 && this.getNbEnnemisRestant()==0)) {
                         menuEnnemiS(vBox);
@@ -369,7 +365,6 @@ public class jeu {
                         }
                         temps++;
                         System.out.println("Ennemis spwan");
-
                         }
                         if (this.getPvJoueur() > 0 && (this.nbVague.getValue() == 5 && getNbEnnemisRestant()==0)) {
                         try {
@@ -436,5 +431,3 @@ public class jeu {
 
 
 }
-
-
