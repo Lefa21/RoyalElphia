@@ -1,6 +1,5 @@
 package fr.montreuil.iut.RoyalElphia.modele;
 
-import fr.montreuil.iut.RoyalElphia.modele.Items.Items;
 import fr.montreuil.iut.RoyalElphia.modele.Map.CasesDégats;
 import fr.montreuil.iut.RoyalElphia.modele.Niveau.Niveau;
 import fr.montreuil.iut.RoyalElphia.modele.Obstacle.Obstacle;
@@ -13,10 +12,22 @@ import fr.montreuil.iut.RoyalElphia.modele.Map.Terrain;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 
+
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.scene.control.Label;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
+import javafx.util.Duration;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.util.Duration;
 
+
+import java.io.FileWriter;
 import java.util.ArrayList;
 
 public class jeu {
@@ -31,15 +42,19 @@ public class jeu {
     private ObservableList<Obstacle> listeObstacle;
     private IntegerProperty argent;
 
+
     private Niveau niveau;
 
     private IntegerProperty nbVague, nbEnnemisRestant;
 
+    private VBox vBox;
+
 
     private int temps, nbTour;
+    private Vague vague;
 
 
-    public jeu(Terrain terrain, Niveau niveau) {
+    public jeu(Terrain terrain, Niveau niveau, VBox vBox) {
         this.terrain = terrain;
         this.ennemis = FXCollections.observableArrayList();
         this.listeEnnemisTuée = new ArrayList<>();
@@ -52,19 +67,20 @@ public class jeu {
         this.listeDeTour = FXCollections.observableArrayList();
         this.listeObstacle = FXCollections.observableArrayList();
         this.argent = new SimpleIntegerProperty(200);
+        this.vague = new Vague(this.niveau.getNbEnnemis(), this.terrain);
+        this.vBox = vBox;
     }
-
 
     public void ajouterTour(Tour t) {
         listeDeTour.add(t);
     }
 
 
-    public void ajouterObstacle(fr.montreuil.iut.RoyalElphia.modele.Obstacle.Obstacle O) {
+    public void ajouterObstacle(Obstacle O) {
         listeObstacle.add(O);
     }
 
-    public final ObservableList<fr.montreuil.iut.RoyalElphia.modele.Obstacle.Obstacle> getListeObstacle() {
+    public final ObservableList<Obstacle> getListeObstacle() {
         return listeObstacle;
     }
 
@@ -76,12 +92,27 @@ public class jeu {
         this.argent.setValue(this.argent.getValue() - prix);
     }
 
+    public void setArgentAZero() {
+        this.argent.setValue(0);
+    }
+
+    public void setPvZero() {
+        this.pvJoueur.setValue(0);
+    }
+
     public int getArgent() {
         return this.argent.getValue();
     }
 
-    public boolean verifArgent(Items items) {
-        if (items.getCoutAchat() > getArgent()) {
+    public boolean verifArgent(Tour t) {
+        if (t.getCoutAchat() > getArgent()) {
+            return false;
+        }
+        return true;
+    }
+
+    public boolean verifArgentObstacle(Obstacle O) {
+        if (O.getCoutAchat() > getArgent()) {
             return false;
         }
         return true;
@@ -117,34 +148,62 @@ public class jeu {
     }
 
     public void vagueSuivante() {
-        for (int i = 0; i < listeEnnemisSpawn.size(); i++) {
-            listeEnnemisSpawn.remove(i);
-        }
+
+        listeEnnemisSpawn.removeAll(listeEnnemisSpawn);
         this.nbVague.setValue(this.nbVague.getValue() + 1);
         this.niveau.setNbEnnemis(this.niveau.getNbEnnemis() * 2);
         this.nbEnnemisRestant.setValue(this.niveau.getNbEnnemis());
+        this.vague = new Vague(this.niveau.getNbEnnemis(), terrain);
+
+
+       /* listeEnnemisSpawn.clear();
+        ennemis.clear();
+
+        this.nbVague.setValue(this.nbVague.getValue() + 1);
+        this.niveau.setNbEnnemis(this.niveau.getNbEnnemis() * 2);
+        this.nbEnnemisRestant.setValue(this.niveau.getNbEnnemis());*/
+
+
     }
 
     // permet d'ajouter un ennemi qui a spawn sur le terrain dans la liste de notre modèle
     public void spwanEnnemi() {
 
-        /*
+        for (int i = 0; i < vague.getListeEnnemis().size(); i++) {
+            Ennemis e = vague.getListeEnnemis().pollLast();
+            ennemis.add(e);
+            this.listeEnnemisSpawn.add(e);
 
-        if (nbTour % 2 == 0 && listeEnnemisSpawn.size() <= this.niveau.getNbEnnemis()) {
-            Ennemis enm = new Sorcières(terrain);
-            ennemis.add(enm);
-            this.listeEnnemisSpawn.add(enm);
+           /* for (int i = 0; i < this.niveau.getNbEnnemis(); i++) {
+                if (nbTour % 2 == 0) {
+                    Ennemis enm = new Sorcières(terrain);
+                    ennemis.add(enm);
+                    this.listeEnnemisSpawn.add(enm);
+                }
+                if (nbTour % 4 == 0 && listeEnnemisSpawn.size() <= this.niveau.getNbEnnemis()) {
+                    Ennemis enm = new Sorcières(terrain);
+                    ennemis.add(enm);
+                    this.listeEnnemisSpawn.add(enm);
+                }
+                if (nbTour % 8 == 0 && listeEnnemisSpawn.size() <= this.niveau.getNbEnnemis()) {
+                    Ennemis enm = new gobelins(terrain);
+                    ennemis.add(enm);
+                    this.listeEnnemisSpawn.add(enm);
 
-/*
-=======
-        }
+                }
+                if (nbTour % 16 == 0 && listeEnnemisSpawn.size() <= this.niveau.getNbEnnemis()) {
+                    Ennemis enm = new Squelette(terrain);
+                    ennemis.add(enm);
+                    this.listeEnnemisSpawn.add(enm);
 
-        if (nbTour % 4 == 0 && listeEnnemisSpawn.size() <= this.niveau.getNbEnnemis()) {
->>>>>>> 2cd98ba8bad3a457bbe0ee5f99bcaf47999cb7fd
-            Ennemis enm1 = new Géant(terrain);
-            ennemis.add(enm1);
-            this.listeEnnemisSpawn.add(enm1);
+                }
+                if (nbTour % 32 == 0 && listeEnnemisSpawn.size() <= this.niveau.getNbEnnemis()) {
+                    Ennemis enm = new GéantRoyal(terrain);
+                    ennemis.add(enm);
+                    this.listeEnnemisSpawn.add(enm);
+                }
 
+<<<<<<< HEAD
 
         }
         if (nbTour % 8 == 0 && listeEnnemisSpawn.size() <= this.niveau.getNbEnnemis()) {
@@ -163,17 +222,21 @@ public class jeu {
 
         }
 
-         */
+         /*
         if (nbTour % 4 == 0 && listeEnnemisSpawn.size() <= this.niveau.getNbEnnemis()) {
             Ennemis enm = new GéantRoyal(terrain);
             ennemis.add(enm);
             this.listeEnnemisSpawn.add(enm);
+
+            }
+        }
+
+         */
         }
     }
 
-
     //permet de récuperer la liste des ennemis ayant spawn
-    public ArrayList<Ennemis> getListeEnnemisSpawn() {
+    public ArrayList<Ennemis> dgetListeEnnemisSpawn() {
         return listeEnnemisSpawn;
     }
 
@@ -293,18 +356,27 @@ public class jeu {
 
 
     public void unTour() {
-        int [][] tab = terrain.getTabTerrain();
+        int[][] tab = terrain.getTabTerrain();
         for (int i = 0; i < this.ennemis.size(); i++) {
             Ennemis e = this.ennemis.get(i);
-            augmentationCapacité(this.nbTour,e);
+            augmentationCapacité(this.nbTour, e);
             e.seDeplace();
             degatBase(e);
-            enleveObstacleDetruit(tab,e);
+            enleveObstacleDetruit(tab, e);
             degatEnnemis(e);
         }
         enleveEnnemisMort();
-                nbTour++;
-            }
+        if (getArgent() < 0) {
+            setArgentAZero();
+        }
+
+
+        if (getPvJoueur() < 0) {
+            setPvZero();
+        }
+        nbTour++;
+    }
+
 
     public void initAnimation() {
         gameLoop = new Timeline();
@@ -314,24 +386,31 @@ public class jeu {
 
         KeyFrame kf = new KeyFrame(
                 // on définit le FPS (nbre de frame par seconde)
-                Duration.seconds(0.03),
+
+
+                Duration.seconds(0.05),
                 // on définit ce qui se passe à chaque frame
                 // c'est un eventHandler d'ou le lambda
                 (ev -> {
                     if (this.getPvJoueur() == 0 || this.nbVague.getValue() == 5) {
+                        menuEnnemiS(vBox);
                         System.out.println("Vous avez perdu");
                         gameLoop.stop();
                     } else if (getEnnemisTué().size() == niveau.getNbEnnemis()) {
                         System.out.println("Vague suivante " + this.getNbVague());
                         vagueSuivante();
+                        getEnnemisTué().removeAll(getEnnemisTué());
                         System.out.println("nombre d'ennemis spwan:  " + this.listeEnnemisSpawn.size());
-                        unTour();
+
+
                     } else if (temps % 3 == 0) {
                         unTour();
                         System.out.println("Un tour");
                     } else if (temps % 5 == 0) {
                         if (getEnnemis().size() < this.niveau.getNbEnnemis()) {
+                            menuEnnemiS(vBox);
                             spwanEnnemi();
+                            menuEnnemiA(vBox);
                             System.out.println("Ennemis spwan");
                         }
                     }
@@ -340,6 +419,39 @@ public class jeu {
         );
         gameLoop.getKeyFrames().add(kf);
     }
+
+
+    public void menuEnnemiA(VBox vBox) {
+        for (int i = 0; i < ennemis.size(); i++) {
+            Ennemis en = ennemis.get(i);
+            Circle c = new Circle(12);
+            c.setOnMouseClicked(e -> System.out.println(en.affichageImmunité()));
+            if (en instanceof gobelins) {
+                c.setFill(Color.GREEN);
+                vBox.getChildren().add(c);
+            } else if (en instanceof Sorcières) {
+                c.setFill(Color.VIOLET);
+                vBox.getChildren().add(c);
+            } else if (en instanceof GéantRoyal) {
+                c.setFill(Color.BLACK);
+                vBox.getChildren().add(c);
+            } else if (en instanceof Géant) {
+                c.setFill(Color.BROWN);
+                vBox.getChildren().add(c);
+            } else if (en instanceof Squelette) {
+                c.setFill(Color.GREY);
+                vBox.getChildren().add(c);
+            }
+            Label l = new Label();
+            l.textProperty().bind(en.getPvProperty().asString());
+            vBox.getChildren().add(l);
+        }
+    }
+
+    public void menuEnnemiS(VBox vBox) {
+        vBox.getChildren().removeAll(vBox.getChildren());
+    }
+
 
 }
 

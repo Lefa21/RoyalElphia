@@ -30,7 +30,16 @@ import javafx.scene.layout.Pane;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.layout.TilePane;
+
+
+import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
+
+import javafx.scene.shape.Circle;
+
 import javafx.stage.Stage;
+
 
 
 import java.io.FileNotFoundException;
@@ -43,6 +52,10 @@ public class HelloController implements Initializable {
     private Terrain terrain;
     @FXML
     private TilePane map;
+
+    @FXML
+    private VBox menuEnnemi;
+
     private jeu jeu;
     private Niveau niveau;
 
@@ -55,6 +68,7 @@ public class HelloController implements Initializable {
     @FXML
     private Pane panneauJeu;
     private VueEnnemi vueEnnemi;
+
     private Tour tour;
     private Obstacle obstacle;
     private boolean TourPose = true;
@@ -71,7 +85,7 @@ public class HelloController implements Initializable {
         if (this.ObstaclePose && obstacle == null && mouseEvent.getClickCount() == 2) {
             System.out.println("clique obstacle ");
             String imageId = ((ImageView) mouseEvent.getSource()).getId();
-            Obstacle obstacle = null;
+            fr.montreuil.iut.RoyalElphia.modele.Obstacle.Obstacle obstacle = null;
 
             switch (imageId) {
                 case "bois":
@@ -87,7 +101,7 @@ public class HelloController implements Initializable {
                     obstacle = new BarricadePierre();
                     break;
             }
-            if (obstacle != null && jeu.verifArgent(obstacle)) {
+            if (obstacle != null && jeu.verifArgentObstacle(obstacle)) {
                 vo.CliqueObstacle(this.jeu, imageId);
                 this.obstacle = vo.getObstacle();
                 this.ObstaclePose = false;
@@ -150,6 +164,16 @@ public class HelloController implements Initializable {
         }
 
 
+    public void PoserTour(MouseEvent mouseEvent) throws FileNotFoundException {
+        double cliqueX = mouseEvent.getX();
+        double cliqueY = mouseEvent.getY();
+        VueTour vueTour = new VueTour(panneauJeu, tour, cliqueX, cliqueY, terrain, jeu);
+        vueTour.PoserTour();
+        this.TourPose = true;
+        this.tour = vueTour.getTour();
+    }
+
+
     public void créerNiveau(){
         int niveau = SceneController.getNiveau();
         if (niveau == 1) {
@@ -173,7 +197,7 @@ public class HelloController implements Initializable {
     public void créationPartie() {
         créerNiveau();
         créerTerrain();
-        this.jeu = new jeu(this.terrain, this.niveau);
+        this.jeu = new jeu(this.terrain, this.niveau,this.menuEnnemi);
     }
 
     @FXML
@@ -190,12 +214,15 @@ public class HelloController implements Initializable {
         try {
 
             créationPartie();
+
             //demarre l'animation
             jeu.initAnimation();
             TerrainVue terrainVue = new TerrainVue(terrain, map);
             this.LabelVague.textProperty().bind(this.jeu.getNbVagueProperty().asString());
-            this.LabelArgent.textProperty().bind(this.jeu.getArgentProperty().asString());
-            this.LabelPV.textProperty().bind(this.jeu.getPvJoueurProperty().asString());
+
+            this.LabelArgent.textProperty().bind(this.jeu.getArgentProperty().asString().concat(" $"));
+            this.LabelPV.textProperty().bind(this.jeu.getPvJoueurProperty().asString().concat(" pv"));
+
             this.LabelnbEnnemisRestant.textProperty().bind(this.jeu.nbEnnemisRestantProperty().asString());
 
 
@@ -203,9 +230,11 @@ public class HelloController implements Initializable {
             jeu.getEnnemis().addListener(listenerEnnemis);
 
             ListChangeListener<Obstacle> listenerObstacle = new ListObservableObstacle(this.jeu, this.panneauJeu);
+            jeu.getListeObstacle().addListener(listenerObstacle);
+
             ListChangeListener<Tour> listenerTour = new ListObservableTour(this.jeu, this.panneauJeu);
             jeu.getListeDeTour().addListener(listenerTour);
-            jeu.getListeObstacle().addListener(listenerObstacle);
+
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }
@@ -222,7 +251,11 @@ public class HelloController implements Initializable {
     }
 
 
+
     /*
+=======
+
+>>>>>>> Integration
     @FXML
     public void Amelioration(ActionEvent actionEvent) {
         for (int i = 0; i < jeu.getListeDeTour().size(); i++) {

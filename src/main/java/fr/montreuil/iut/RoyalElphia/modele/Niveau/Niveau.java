@@ -14,4 +14,5 @@ public abstract class Niveau {
     public void setNbEnnemis(int nbEnnemis) {
         this.nbEnnemis = nbEnnemis;
     }
+
 }

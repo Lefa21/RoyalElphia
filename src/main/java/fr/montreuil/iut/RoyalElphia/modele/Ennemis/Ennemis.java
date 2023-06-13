@@ -22,6 +22,9 @@ public abstract class Ennemis {
     private CasesParcourues casesParcourues;
     private int degatObstacle;
 
+
+
+
     public Ennemis(Terrain terrain, int pv, int ptsDefense, int immunite, int degatBase, int butin,int capaciteObstacle,int capaciteDegatObstacle,int capaciteVie,int capaciteDegatsBase) {
         this.id = "" + compteur;
         this.casesParcourues = new CasesParcourues();
@@ -37,7 +40,6 @@ public abstract class Ennemis {
         this.degatObstacle = 100;
         compteur++;
         this.terrain = terrain;
-
         /* On multiplie par 32 la case de départ du terrain, pour adapter les dimensions du tableau aux dimensions du
          terrains et on ajoute 16 pour mettre l'ennemi au centre de la case*/
         this.xProperty = new SimpleIntegerProperty(terrain.getPointDep().getX() * 32 + 16);
@@ -212,6 +214,22 @@ public abstract class Ennemis {
         else if (s.equals("HAUT"))
             retour = terrain.getTabTerrain()[(this.getY() / 32) - 1][this.getX() / 32];
         return retour;
+    }
+
+    public String affichageImmunité() {
+        String affichage = "Cet ennemi est immunisé face aux tours";
+        if (this.Immunite == 1) {
+            affichage = affichage + " à bombes";
+        } else if (this.Immunite == 2) {
+            affichage = affichage + " boule de feu";
+        } else if (this.Immunite == 3) {
+            affichage = affichage + " électriques";
+        } else if (this.Immunite == 4) {
+            affichage = affichage + " à flèches";
+        } else if (this.Immunite == 5) {
+            affichage = affichage + " laser";
+        }
+        return affichage;
     }
 }
 

@@ -8,7 +8,9 @@ public class Obstacle extends Items {
 
     private int Materiaux;
     private IntegerProperty  PointDeVie;
+    private int ID;
 
+    private IntegerProperty posX,posY;
 
     public Obstacle(int materiaux,int PointDeVie) {
         super(0,0,0,0,0,0,0);

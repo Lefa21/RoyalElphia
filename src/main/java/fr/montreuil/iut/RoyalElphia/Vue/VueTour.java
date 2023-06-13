@@ -3,10 +3,15 @@ package fr.montreuil.iut.RoyalElphia.Vue;
 import fr.montreuil.iut.RoyalElphia.modele.Map.Terrain;
 import fr.montreuil.iut.RoyalElphia.modele.Tour.*;
 import fr.montreuil.iut.RoyalElphia.modele.jeu;
+
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Background;
+
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 
@@ -186,6 +191,7 @@ public class VueTour {
                                 t = this.jeu.getListeDeTour().get(j);
                                 if (Integer.toString(t.getID()).equals(x.getId())) {
                                     for (int k = 0; k < t.getListeCasesDegats().size(); k++) {
+<<<<<<< HEAD
                                         t.getListeCasesDegats().get(k).setDegat(15);
                                     }}}
                             t.setCoutAmelioration((int) (t.getCoutAmelioration() * 1.5));
@@ -205,8 +211,10 @@ public class VueTour {
                     Tour t = jeu.getListeDeTour().get(i);
                     if (t.getNiveauAmelioration() != t.getNiveauMaxAmelioration()) {
                         if (t.getCoutAmelioration() <= jeu.getArgent()) {
+                            System.out.println("niveau amélioration " + t.getNiveauAmelioration());
                             jeu.setArgent(t.getCoutAmelioration());
                             t.setNiveauAmelioration(t.getNiveauAmelioration() + 1);
+                            System.out.println("niveau amélioration " + t.getNiveauAmelioration());
                             t.setDegat();
                             for (int j = 0; j < this.jeu.getListeDeTour().size(); j++) {
                                 t = this.jeu.getListeDeTour().get(j);
@@ -241,4 +249,3 @@ public class VueTour {
 
     }
 }
-
