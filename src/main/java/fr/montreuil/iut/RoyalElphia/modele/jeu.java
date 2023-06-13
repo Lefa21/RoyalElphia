@@ -37,6 +37,8 @@ public class jeu {
 
     private int temps, nbTour;
 
+    private boolean vagueS = false;
+
 
     public jeu(Terrain terrain, Niveau niveau) {
         this.terrain = terrain;
@@ -130,7 +132,7 @@ public class jeu {
     }
 
     public void vagueSuivante() {
-
+        vagueS = true;
         listeEnnemisSpawn.clear();
         ennemis.clear();
 
@@ -141,12 +143,13 @@ public class jeu {
     }
 
     // permet d'ajouter un ennemi qui a spawn sur le terrain dans la liste de notre modèle
-    public void spwanEnnemi() {
-        for (int i = 0; i < this.niveau.getNbEnnemis(); i++) {
+    public void spwanEnnemi(){
+        //for (int i = 0; i < this.niveau.getNbEnnemis(); i++) {
             //if(nbTour % 2 == 0) {
                 Ennemis enm = new Sorcières(terrain);
                 ennemis.add(enm);
                 this.listeEnnemisSpawn.add(enm);
+                vagueS = false;
            // }
            /* if (nbTour % 4 == 0 && listeEnnemisSpawn.size() <= this.niveau.getNbEnnemis()) {
                 Ennemis enm = new Sorcières(terrain);
@@ -170,7 +173,7 @@ public class jeu {
                 ennemis.add(enm);
                 this.listeEnnemisSpawn.add(enm);
             }*/
-        }
+        //}
     }
 
 
@@ -280,7 +283,6 @@ public class jeu {
         }
         nbTour++;
     }
-
     public void initAnimation() {
         gameLoop = new Timeline();
         temps = 0;
@@ -289,7 +291,7 @@ public class jeu {
 
         KeyFrame kf = new KeyFrame(
                 // on définit le FPS (nbre de frame par seconde)
-                Duration.seconds(0.0025),
+                Duration.seconds(0.025),
                 // on définit ce qui se passe à chaque frame
                 // c'est un eventHandler d'ou le lambda
                 (ev -> {
@@ -304,11 +306,12 @@ public class jeu {
                     } else if (temps % 3 == 0) {
                         unTour();
                         System.out.println("Un tour");
-                    } else if (temps % 5 == 0) {
-                        if (getEnnemis().size() < this.niveau.getNbEnnemis()) {
-                            spwanEnnemi();
+                    } else if (temps % 20 == 0 && getListeEnnemisSpawn().size() < this.niveau.getNbEnnemis() ) {
+                        //if (getEnnemis().size() < this.niveau.getNbEnnemis()) {
+                                spwanEnnemi();
+                                temps++;
                             System.out.println("Ennemis spwan");
-                        }
+                        //}
                     }
                     temps++;
                 })
