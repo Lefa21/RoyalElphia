@@ -180,22 +180,19 @@ public class VueTour {
             if (KeyEvent.isAltDown()) {
                 for (int i = 0; i < jeu.getListeDeTour().size(); i++) {
                     Tour t = jeu.getListeDeTour().get(i);
-                    if (t.getNiveauAmelioration() != t.getNiveauMaxAmelioration()) {
-                        if (t.getCoutAmelioration() <= jeu.getArgent()) {
-                            jeu.setArgent(t.getCoutAmelioration());
-                            t.setNiveauAmelioration(t.getNiveauAmelioration() + 1);
-                            t.setDegat();
-                            for (int j = 0; j < this.jeu.getListeDeTour().size(); j++) {
-                                t = this.jeu.getListeDeTour().get(j);
-                                if (Integer.toString(t.getID()).equals(x.getId())) {
-                                    for (int k = 0; k < t.getListeCasesDegats().size(); k++) {
-                                        //t.getListeCasesDegats().get(k).setDegat(15);
-                                    }}}
-                            t.setCoutAmelioration((int) (t.getCoutAmelioration() * 1.5));
-                            System.out.println("NIV " + t.getNiveauAmelioration() + " DEGAT " + t.getDegat());
+                    if (Integer.toString(t.getID()).equals(x.getId())) {
+                        if (t.getNiveauAmelioration() != t.getNiveauMaxAmelioration()) {
+                            if (t.getCoutAmelioration() <= jeu.getArgent()) {
+                                jeu.setArgent(t.getCoutAmelioration());
+                                t.setNiveauAmelioration(t.getNiveauAmelioration() + 1);
+                                t.setDegat();
+                                t.setCoutAmelioration((int) (t.getCoutAmelioration() * 1.5));
+                                System.out.println("NIV " + t.getNiveauAmelioration() + " DEGAT " + t.getDegat());
+                            }
                         }
-                    } else
-                        System.out.println("niv MAX");
+                        else
+                            System.out.println("niv MAX");
+                    }
                 }
             } else {
                 x.setOnMouseClicked(event -> {
