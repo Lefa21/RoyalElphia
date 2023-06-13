@@ -28,41 +28,39 @@
                 </ImageView>
             </children>
             <children>
-                <Label textFill="ghostwhite" alignment="CENTER" contentDisplay="CENTER" layoutX="15.0" layoutY="0.0" prefHeight="225.0" prefWidth="801.0" text="Veuillez cliquer la map sur laquelle vous souhaitez jouer : ">
+                <Label textFill="ghostwhite" alignment="CENTER" contentDisplay="CENTER" layoutX="15.0" layoutY="0.0" prefHeight="225.0" prefWidth="801.0" text="Choisissez votre map et votre niveau : ">
                     <font>
                         <Font size="20.0" />
                     </font>
-            </Label>
+                </Label>
             </children>
-                <VBox layoutX="250.0" layoutY="162.0" prefHeight="270.0" prefWidth="361.0">
-                    <children>
-                        <RadioButton textFill="ghostwhite" fx:id="buttonMap1" mnemonicParsing="false" prefHeight="20.0" prefWidth="200.0" selected="true" styleClass="label-bright" text="Map Simple">
-                            <toggleGroup>
-                                <ToggleGroup fx:id="groupeMap"/>
-                            </toggleGroup>
-                        </RadioButton>
-                        <RadioButton textFill="ghostwhite" fx:id="buttonMap2" mnemonicParsing="false" prefHeight="20.0" prefWidth="200.0" styleClass="label-bright" text="Map évoluée" toggleGroup="$groupeMap" />
-                    </children>
-                </VBox>
-
-
-            <VBox layoutX="250.0" layoutY="232.0" prefHeight="100.0" prefWidth="122.0">
-               <children>
-                  <Label textFill="ghostwhite" prefHeight="28.0" prefWidth="102.0" text="Niveau : " />
-                   <RadioButton textFill="rosybrown" fx:id="buttonFacile" mnemonicParsing="false" prefHeight="20.0" prefWidth="295.0" selected="true" styleClass="label-bright" text="Facile">
-                       <toggleGroup>
-                           <ToggleGroup fx:id="groupeNiveau" />
-                       </toggleGroup>
-                   </RadioButton>
-                   <RadioButton textFill="orange" fx:id="buttonNormal" mnemonicParsing="false" prefHeight="20.0" prefWidth="398.0" styleClass="label-bright" text="Moyen" toggleGroup="$groupeNiveau" />
-                   <RadioButton textFill="red" fx:id="buttonDifficile" mnemonicParsing="false" prefHeight="20.0" prefWidth="298.0" styleClass="label-bright" text="Difficile" toggleGroup="$groupeNiveau" />
-               </children>
+            <VBox layoutX="250.0" layoutY="162.0" prefHeight="270.0" prefWidth="361.0">
+                <children>
+                    <Label textFill="ghostwhite" prefHeight="28.0" prefWidth="102.0" text="Maps : " />
+                    <RadioButton textFill="ghostwhite" fx:id="buttonMap1" mnemonicParsing="false" prefHeight="20.0" prefWidth="200.0" selected="true" styleClass="label-bright" text="Map Simple">
+                        <toggleGroup>
+                            <ToggleGroup fx:id="groupeMap"/>
+                        </toggleGroup>
+                    </RadioButton>
+                    <RadioButton textFill="ghostwhite" fx:id="buttonMap2" mnemonicParsing="false" prefHeight="20.0" prefWidth="200.0" styleClass="label-bright" text="Map évoluée" toggleGroup="$groupeMap" />
+                </children>
             </VBox>
-
+            <VBox layoutX="250.0" layoutY="232.0" prefHeight="100.0" prefWidth="122.0">
+                <children>
+                    <Label textFill="ghostwhite" prefHeight="28.0" prefWidth="102.0" text="Niveau : " />
+                    <RadioButton textFill="rosybrown" fx:id="buttonFacile" mnemonicParsing="false" prefHeight="20.0" prefWidth="295.0" selected="true" styleClass="label-bright" text="Facile">
+                        <toggleGroup>
+                            <ToggleGroup fx:id="groupeNiveau" />
+                        </toggleGroup>
+                    </RadioButton>
+                    <RadioButton textFill="orange" fx:id="buttonNormal" mnemonicParsing="false" prefHeight="20.0" prefWidth="398.0" styleClass="label-bright" text="Moyen" toggleGroup="$groupeNiveau" />
+                    <RadioButton textFill="red" fx:id="buttonDifficile" mnemonicParsing="false" prefHeight="20.0" prefWidth="298.0" styleClass="label-bright" text="Difficile" toggleGroup="$groupeNiveau" />
+                </children>
+            </VBox>
             <HBox layoutX="340.0" layoutY="415.0" prefHeight="100.0" prefWidth="200.0">
-               <children>
-                  <Button onAction="#Jouer" mnemonicParsing="false" prefHeight="50.0" prefWidth="85.0" text="Lancer" />
-               </children>
+                <children>
+                    <Button onAction="#Jouer" mnemonicParsing="false" prefHeight="50.0" prefWidth="85.0" text="Lancer" />
+                </children>
             </HBox>
         </Pane>
     </center>

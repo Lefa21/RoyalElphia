@@ -205,12 +205,12 @@ public class jeu {
     // permet d'ajouter un ennemi qui a spawn sur le terrain dans la liste de notre modèle
     public void spwanEnnemi() {
         for (int i = 0; i < this.niveau.getNbEnnemis(); i++) {
-            if(nbTour % 2 == 0) {
+            //if(nbTour % 2 == 0) {
                 Ennemis enm = new Sorcières(terrain);
                 ennemis.add(enm);
                 this.listeEnnemisSpawn.add(enm);
-            }
-            if (nbTour % 4 == 0 && listeEnnemisSpawn.size() <= this.niveau.getNbEnnemis()) {
+           // }
+           /* if (nbTour % 4 == 0 && listeEnnemisSpawn.size() <= this.niveau.getNbEnnemis()) {
                 Ennemis enm = new Sorcières(terrain);
                 ennemis.add(enm);
                 this.listeEnnemisSpawn.add(enm);
@@ -231,7 +231,7 @@ public class jeu {
                 Ennemis enm = new GéantRoyal(terrain);
                 ennemis.add(enm);
                 this.listeEnnemisSpawn.add(enm);
-            }
+            }*/
         }
     }
 
