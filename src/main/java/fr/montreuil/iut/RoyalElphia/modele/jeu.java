@@ -327,7 +327,7 @@ public class jeu {
                 // on définit ce qui se passe à chaque frame
                 // c'est un eventHandler d'ou le lambda
                 (ev -> {
-                    if (this.getPvJoueur() == 0 || this.nbVague.getValue() == 5) {
+                    if (this.getPvJoueur() == 0 || (this.nbVague.getValue() == 5 && this.getNbEnnemisRestant()==0)) {
                         menuEnnemiS(vBox);
                         System.out.println("Vous avez perdu");
                         gameLoop.stop();

@@ -20,7 +20,6 @@
     <center>
         <Pane>
             <children>
-
                 <ImageView fitHeight="800.0" fitWidth="950.0" pickOnBounds="true" preserveRatio="true">
                     <image>
                         <Image url="@fond-parametrage.jpeg" />
