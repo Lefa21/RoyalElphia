@@ -53,6 +53,8 @@ public class jeu {
 
     private VBox vBox;
 
+    private IntegerProperty comptEnnemiTue = new SimpleIntegerProperty(0);
+
     private int temps, nbTour;
     private Vague vague;
 
@@ -262,6 +264,18 @@ public class jeu {
 
     public ObservableList<Ennemis> getEnnemis() {
         return ennemis;
+    }
+
+    public IntegerProperty ComptEnnemiTueProperty() {
+        return comptEnnemiTue;
+    }
+
+    public int getComptEnnemiTue(){
+        return this.comptEnnemiTue.getValue();
+    }
+
+    public void setComptEnnemiTue() {
+        this.comptEnnemiTue.setValue(getComptEnnemiTue()+1);
     }
 
     public IntegerProperty getPvJoueurProperty() {

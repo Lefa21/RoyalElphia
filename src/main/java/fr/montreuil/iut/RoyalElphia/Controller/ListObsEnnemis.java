@@ -34,6 +34,7 @@ public class ListObsEnnemis implements ListChangeListener<Ennemis> {
             } else if (c.wasRemoved()) {
                 for (Ennemis a : c.getRemoved()
                 ) {
+                    jeu.setComptEnnemiTue();
                     jeu.setArgent(-a.getButin());
                     jeu.ajoutEnnemisMort(a);
                     this.jeu.setNbEnnemisRestant(this.jeu.getNbEnnemisRestant() - 1);

@@ -64,7 +64,7 @@ public class HelloController implements Initializable {
 
 
     @FXML
-    public Label LabelPV, LabelnbEnnemisRestant, LabelArgent, LabelVague;
+    public Label LabelPV, LabelnbEnnemisRestant, LabelArgent, LabelVague, LabelMort;
     @FXML
     private Pane panneauJeu;
     private VueEnnemi vueEnnemi;
@@ -219,12 +219,10 @@ public class HelloController implements Initializable {
             jeu.initAnimation();
             TerrainVue terrainVue = new TerrainVue(terrain, map);
             this.LabelVague.textProperty().bind(this.jeu.getNbVagueProperty().asString());
-
             this.LabelArgent.textProperty().bind(this.jeu.getArgentProperty().asString().concat(" $"));
             this.LabelPV.textProperty().bind(this.jeu.getPvJoueurProperty().asString().concat(" pv"));
-
             this.LabelnbEnnemisRestant.textProperty().bind(this.jeu.nbEnnemisRestantProperty().asString());
-
+            this.LabelMort.textProperty().bind(this.jeu.ComptEnnemiTueProperty().asString());
 
             ListChangeListener<Ennemis> listenerEnnemis = new ListObsEnnemis(this.jeu, this.panneauJeu);
             jeu.getEnnemis().addListener(listenerEnnemis);
@@ -234,6 +232,7 @@ public class HelloController implements Initializable {
 
             ListChangeListener<Tour> listenerTour = new ListObservableTour(this.jeu, this.panneauJeu);
             jeu.getListeDeTour().addListener(listenerTour);
+
 
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
