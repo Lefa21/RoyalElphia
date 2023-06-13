@@ -16,6 +16,8 @@ import javafx.animation.Timeline;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -27,6 +29,8 @@ import javafx.collections.ObservableList;
 import javafx.util.Duration;
 
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.util.ArrayList;
 
@@ -216,15 +220,16 @@ public class jeu {
         this.nbVague.setValue(this.nbVague.getValue() + 1);
         this.niveau.setNbEnnemis(this.niveau.getNbEnnemis() * 2);
         this.nbEnnemisRestant.setValue(this.niveau.getNbEnnemis());
+        this.vague = new Vague(this.niveau.getNbEnnemis(),terrain);
 
 
     }
 
     // permet d'ajouter un ennemi qui a spawn sur le terrain dans la liste de notre modèle
     public void spwanEnnemi(){
-        Ennemis enm = new Sorcières(terrain);
-        ennemis.add(enm);
-        this.listeEnnemisSpawn.add(enm);
+        Ennemis e = this.vague.getListeEnnemis().pollLast();
+        ennemis.add(e);
+        this.listeEnnemisSpawn.add(e);
     }
 
     //permet de récuperer la liste des ennemis ayant spawn
@@ -313,9 +318,12 @@ public class jeu {
         KeyFrame kf = new KeyFrame(
 // on définit le FPS (nbre de frame par seconde)
 
-                Duration.seconds(0.017),
 // on définit ce qui se passe à chaque frame
 // c'est un eventHandler d'ou le lambda
+                Duration.seconds(0.05),
+                // on définit ce qui se passe à chaque frame
+                // c'est un eventHandler d'ou le lambda
+
                 (ev -> {
                     if (this.getPvJoueur() == 0 || (this.nbVague.getValue() == 5 && this.getNbEnnemisRestant()==0)) {
                         menuEnnemiS(vBox);
@@ -331,41 +339,54 @@ public class jeu {
                     } else if (temps % 3 == 0) {
                         unTour();
                         System.out.println("Un tour");
-
                     } else if (temps % 10 == 0 && getListeEnnemisSpawn().size() < this.niveau.getNbEnnemis()) {
                         spwanEnnemi();
                         menuEnnemiS(vBox);
-                        menuEnnemiA(vBox);
+                        try {
+                            menuEnnemiA(vBox);
+                        } catch (FileNotFoundException e) {
+                            throw new RuntimeException(e);
+                        }
                         temps++;
                         System.out.println("Ennemis spwan");
-                    }
-                    temps++;
-                })
-        );
+                        }
+                        temps++;
+                    })
+                );
         gameLoop.getKeyFrames().add(kf);
     }
 
-    public void menuEnnemiA(VBox vBox) {
+
+
+    public void menuEnnemiA(VBox vBox) throws FileNotFoundException {
+
         for (int i = 0; i < ennemis.size(); i++) {
             Ennemis en = ennemis.get(i);
-            Circle c = new Circle(12);
-            c.setOnMouseClicked(e -> System.out.println(en.affichageImmunité()));
+            Image im;
+            ImageView imV = null;
+
             if (en instanceof gobelins) {
-                c.setFill(Color.GREEN);
-                vBox.getChildren().add(c);
+                im = new Image(new FileInputStream("src/main/resources/fr/montreuil/iut/RoyalElphia/Page_Fxml/gobelin.jpg"));
+                imV = new ImageView(im);
+                vBox.getChildren().add(imV);
             } else if (en instanceof Sorcières) {
-                c.setFill(Color.VIOLET);
-                vBox.getChildren().add(c);
+                im = new Image(new FileInputStream("src/main/resources/fr/montreuil/iut/RoyalElphia/Page_Fxml/sorcière.png"));
+                imV = new ImageView(im);
+                vBox.getChildren().add(imV);
             } else if (en instanceof GéantRoyal) {
-                c.setFill(Color.BLACK);
-                vBox.getChildren().add(c);
+                im = new Image(new FileInputStream("src/main/resources/fr/montreuil/iut/RoyalElphia/Page_Fxml/Golem(1).png"));
+                imV = new ImageView(im);
+                vBox.getChildren().add(imV);
             } else if (en instanceof Géant) {
-                c.setFill(Color.BROWN);
-                vBox.getChildren().add(c);
+                im = new Image(new FileInputStream("src/main/resources/fr/montreuil/iut/RoyalElphia/Page_Fxml/Geant.jpg"));
+                imV = new ImageView(im);
+                vBox.getChildren().add(imV);
             } else if (en instanceof Squelette) {
-                c.setFill(Color.GREY);
-                vBox.getChildren().add(c);
+                im = new Image(new FileInputStream("src/main/resources/fr/montreuil/iut/RoyalElphia/Page_Fxml/squelette.png"));
+                imV = new ImageView(im);
+                vBox.getChildren().add(imV);
             }
+            imV.setOnMouseClicked(e -> System.out.println(en.affichageImmunité()));
             Label l = new Label();
             l.textProperty().bind(en.getPvProperty().asString());
             vBox.getChildren().add(l);
