@@ -106,6 +106,8 @@ public class SceneController implements Initializable{
 
     }
     else{
+        this.niveau = choixNiveau();
+        this.terrain = choixMap();
         fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("Page_Fxml/Terrain.fxml"));
         scene = new Scene(fxmlLoader.load(), 1920,1080);
         stage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();

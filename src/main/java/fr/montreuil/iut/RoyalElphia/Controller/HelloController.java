@@ -188,9 +188,9 @@ public class HelloController implements Initializable {
     public void créerTerrain() {
         int terrain = SceneController.getTerrain();
         if (terrain == 1) {
-            this.terrain = new Map2();
-        } else if (terrain == 2) {
             this.terrain = new Map_1();
+        } else if (terrain == 2) {
+            this.terrain = new Map2();
         }
     }
 
@@ -250,31 +250,6 @@ public class HelloController implements Initializable {
     }
 
 
-
-    /*
-=======
-
->>>>>>> Integration
-    @FXML
-    public void Amelioration(ActionEvent actionEvent) {
-        for (int i = 0; i < jeu.getListeDeTour().size(); i++) {
-            Tour t = jeu.getListeDeTour().get(i);
-            if (t.getNiveauAmelioration() != t.getNiveauMaxAmelioration()) {
-                if (t.getCoutAmelioration() <= jeu.getArgent()) {
-                    jeu.setArgent(t.getCoutAmelioration());
-                    t.setNiveauAmelioration(t.getNiveauAmelioration() + 1);
-                    t.setDegat();
-                    t.setCoutAmelioration((int) (t.getCoutAmelioration()*1.5));
-                    System.out.println("NIV " + t.getNiveauAmelioration() + " DEGAT " + t.getDegat());
-                }
-            }
-            else
-                System.out.println("niv MAX");
-        }
-    }
-
-
-     */
     @FXML
     public void Portee(ActionEvent actionEvent){
         int c = 0;
