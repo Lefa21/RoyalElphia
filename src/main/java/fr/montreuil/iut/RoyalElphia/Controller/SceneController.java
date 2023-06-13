@@ -40,16 +40,19 @@ public class SceneController implements Initializable{
     private static  int terrain;
 
     @FXML
+    private Button lancer;
+
+    @FXML
     private RadioButton buttonFacile,buttonNormal,buttonDifficile,buttonMap1,buttonMap2;
 
 
 @FXML
     public void LancerJeu(ActionEvent event) throws IOException {
-    Stage newWindow = new Stage();
+    Stage newWindow =    (Stage) this.lancer.getScene().getWindow();
     newWindow.setTitle("Paramètres de ma partie");
     FXMLLoader loader = new FXMLLoader(HelloApplication.class.getResource("Page_Fxml/ChoixMap.fxml"));
     newWindow.setScene(new Scene(loader.load()));
-    newWindow.show();
+    //newWindow.show();
     }
 
 
@@ -83,6 +86,13 @@ public class SceneController implements Initializable{
         return SceneController.niveau;
     }
 
+    /*
+    public  Stage fermetureStage(){
+        return this.stage;
+    }
+
+
+     */
     public static int getTerrain() {
         return SceneController.terrain;
     }

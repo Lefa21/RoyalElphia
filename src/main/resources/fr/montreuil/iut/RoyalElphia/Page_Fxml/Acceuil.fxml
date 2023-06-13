@@ -29,7 +29,7 @@
          <children>
             <VBox layoutX="300.0" layoutY="180.0" prefHeight="270.0" prefWidth="361.0">
                <children>
-                  <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#LancerJeu" prefHeight="65.0" prefWidth="200.0" text="Jouer" />
+                  <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" fx:id="lancer" onAction="#LancerJeu" prefHeight="65.0" prefWidth="200.0" text="Jouer" />
                </children>
             </VBox>
             <VBox layoutX="300.0" layoutY="250.0" prefHeight="200.0" prefWidth="379.0">
