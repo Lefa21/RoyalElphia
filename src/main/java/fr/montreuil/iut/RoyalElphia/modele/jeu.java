@@ -401,8 +401,6 @@ public class jeu {
                         vagueSuivante();
                         getEnnemisTué().removeAll(getEnnemisTué());
                         System.out.println("nombre d'ennemis spwan:  " + this.listeEnnemisSpawn.size());
-
-
                     } else if (temps % 3 == 0) {
                         unTour();
                         System.out.println("Un tour");
