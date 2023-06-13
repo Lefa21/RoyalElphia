@@ -44,8 +44,10 @@ public class VueEnnemi {
             Image sorciere = new Image(new FileInputStream("src/main/resources/fr/montreuil/iut/RoyalElphia/Page_Fxml/sorcière.png"));
             ImageView sorciereView = new ImageView(sorciere);
             sorciereView.setId(ennemis.getId());
+            int nb = 1 + (int)(Math.random() * ((64 - 0) + 1));
             sorciereView.translateXProperty().bind(ennemis.getxProperty());
             sorciereView.translateYProperty().bind(ennemis.getyProperty().subtract(20));
+
             this.pane.getChildren().add(sorciereView);}
         else if (ennemis instanceof GéantRoyal) {
             Image golem = new Image(new FileInputStream("src/main/resources/fr/montreuil/iut/RoyalElphia/Page_Fxml/Golem(1).png"));
@@ -72,7 +74,7 @@ public class VueEnnemi {
             this.pane.getChildren().add(Squelette);
            // circle.setFill(Color.GREY);
         }
-      //  this.pane.getChildren().add(circle);
+
         this.pane.getChildren().add(label);
     }
 }
