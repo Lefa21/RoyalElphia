@@ -49,7 +49,6 @@ public class jeu {
 
     private VBox vBox;
 
-
     private int temps, nbTour;
     private Vague vague;
 
@@ -370,7 +369,7 @@ public class jeu {
                         menuEnnemiS(vBox);
                         System.out.println("Vous avez perdu");
                         gameLoop.stop();
-                    } else if (getEnnemisTué().size() == niveau.getNbEnnemis()) {
+                    } else if (getNbEnnemisRestant()==0) {
                         System.out.println("Vague suivante " + this.getNbVague());
                         vagueSuivante();
                         getEnnemisTué().removeAll(getEnnemisTué());
@@ -384,7 +383,7 @@ public class jeu {
                     } else if (temps % 5 == 0) {
                         if (getEnnemis().size() < this.niveau.getNbEnnemis()) {
                             menuEnnemiS(vBox);
-                            spwanEnnemi();
+                            //spwanEnnemi();
                             menuEnnemiA(vBox);
                         }
                         } else if (temps % 20 == 0 && getListeEnnemisSpawn().size() < this.niveau.getNbEnnemis()) {
@@ -397,7 +396,6 @@ public class jeu {
                 );
         gameLoop.getKeyFrames().add(kf);
     }
-
 
     public void menuEnnemiA(VBox vBox) {
         for (int i = 0; i < ennemis.size(); i++) {
