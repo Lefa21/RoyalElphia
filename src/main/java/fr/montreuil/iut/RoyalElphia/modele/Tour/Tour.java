@@ -18,14 +18,15 @@ public  class Tour extends Items {
     private int TempsRecharge;
     private IntegerProperty degat;
 
-    private int ID;
     private ArrayList<CasesDégats> listeCasesDegats;
 
 
 
 
     public Tour(int porteeAttaque, int typeAttaque, int dureeINtervalleAttaque, int nombreAttaqueMax, int tempsRecharge, int degat) {
-        super(0,0,0,0,0);
+
+        super(0,0,0,0,0,0,0);
+
         PorteeAttaque = porteeAttaque;
         TypeAttaque = typeAttaque;
         DureeINtervalleAttaque = dureeINtervalleAttaque;
@@ -43,7 +44,7 @@ public  class Tour extends Items {
     }
 
     public void setDegat() {
-        this.degat.setValue(this.degat.getValue() * 1.5);
+        this.degat.setValue(this.degat.getValue() * 3);
     }
 
 

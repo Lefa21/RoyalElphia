@@ -6,6 +6,8 @@ import fr.montreuil.iut.RoyalElphia.modele.jeu;
 import javafx.collections.ListChangeListener;
 import javafx.scene.layout.Pane;
 
+import java.io.FileNotFoundException;
+
 public class ListObsEnnemis implements ListChangeListener<Ennemis> {
     private Pane panneauJeu;
     private jeu jeu;
@@ -17,13 +19,16 @@ public class ListObsEnnemis implements ListChangeListener<Ennemis> {
 
     @Override
     public void onChanged(Change<? extends Ennemis> c) {
-        System.out.println("changement");
+        // System.out.println("changement");
         while (c.next()) {
             if (c.wasAdded()) {
-                for (Ennemis a : c.getAddedSubList()
-                ) {
+                for (Ennemis a : c.getAddedSubList()) {
                     VueEnnemi vueEnm = new VueEnnemi(panneauJeu);
-                    vueEnm.créerSprite(a);
+                    try {
+                        vueEnm.créerSprite(a);
+                    } catch (FileNotFoundException e) {
+                        throw new RuntimeException(e);
+                    }
                 }
             } else if (c.wasRemoved()) {
                 for (Ennemis a : c.getRemoved()
@@ -36,6 +41,5 @@ public class ListObsEnnemis implements ListChangeListener<Ennemis> {
                 }
             }
         }
-
     }
 }

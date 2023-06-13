@@ -11,6 +11,7 @@ import fr.montreuil.iut.RoyalElphia.modele.Niveau.Facile;
 import fr.montreuil.iut.RoyalElphia.modele.Niveau.Niveau;
 import fr.montreuil.iut.RoyalElphia.modele.Niveau.Normal;
 import fr.montreuil.iut.RoyalElphia.modele.jeu;
+import javafx.application.Platform;
 import javafx.collections.ListChangeListener;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -44,11 +45,11 @@ public class SceneController implements Initializable{
 
 @FXML
     public void LancerJeu(ActionEvent event) throws IOException {
-    fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("Page_Fxml/ChoixMap.fxml"));
-    scene = new Scene(fxmlLoader.load(), 1920,1080);
-    stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-    stage.setScene(scene);
-   // stage.show();
+    Stage newWindow = new Stage();
+    newWindow.setTitle("Paramètres de ma partie");
+    FXMLLoader loader = new FXMLLoader(HelloApplication.class.getResource("Page_Fxml/ChoixMap.fxml"));
+    newWindow.setScene(new Scene(loader.load()));
+    newWindow.show();
     }
 
 
@@ -114,4 +115,7 @@ public class SceneController implements Initializable{
     }
     }
 
+    public void Quitter(ActionEvent actionEvent) {
+        Platform.exit();
+    }
 }

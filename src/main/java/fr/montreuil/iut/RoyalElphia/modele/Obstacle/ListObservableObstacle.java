@@ -9,7 +9,7 @@ import javafx.scene.layout.Pane;
 public class ListObservableObstacle implements  ListChangeListener<Obstacle> {
 
     private Pane panneauJeu;
-    private fr.montreuil.iut.RoyalElphia.modele.jeu jeu;
+    private jeu jeu;
 
     public ListObservableObstacle(jeu jeu,Pane panneauJeu){
         this.panneauJeu = panneauJeu;
