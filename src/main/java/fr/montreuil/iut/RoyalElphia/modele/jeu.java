@@ -53,6 +53,8 @@ public class jeu {
     private int temps, nbTour;
     private Vague vague;
 
+    private boolean vagueS = false;
+
 
     public jeu(Terrain terrain, Niveau niveau, VBox vBox) {
         this.terrain = terrain;
@@ -211,31 +213,24 @@ public class jeu {
 
     public void vagueSuivante() {
 
-        listeEnnemisSpawn.removeAll(listeEnnemisSpawn);
+        listeEnnemisSpawn.clear();
+        ennemis.clear();
         this.nbVague.setValue(this.nbVague.getValue() + 1);
         this.niveau.setNbEnnemis(this.niveau.getNbEnnemis() * 2);
         this.nbEnnemisRestant.setValue(this.niveau.getNbEnnemis());
-        this.vague = new Vague(this.niveau.getNbEnnemis(), terrain);
-
-
-       /* listeEnnemisSpawn.clear();
-        ennemis.clear();
-
-        this.nbVague.setValue(this.nbVague.getValue() + 1);
-        this.niveau.setNbEnnemis(this.niveau.getNbEnnemis() * 2);
-        this.nbEnnemisRestant.setValue(this.niveau.getNbEnnemis());*/
 
 
     }
 
     // permet d'ajouter un ennemi qui a spawn sur le terrain dans la liste de notre modèle
-    public void spwanEnnemi() {
-        for (int i = 0; i < this.niveau.getNbEnnemis(); i++) {
+    public void spwanEnnemi(){
+        //for (int i = 0; i < this.niveau.getNbEnnemis(); i++) {
             //if(nbTour % 2 == 0) {
                 Ennemis enm = new Sorcières(terrain);
                 ennemis.add(enm);
                 this.listeEnnemisSpawn.add(enm);
-            }
+           // }
+
            /* if (nbTour % 4 == 0 && listeEnnemisSpawn.size() <= this.niveau.getNbEnnemis()) {
                 Ennemis enm = new Sorcières(terrain);
                 ennemis.add(enm);
@@ -259,6 +254,7 @@ public class jeu {
                 Ennemis enm = new GéantRoyal(terrain);
                 ennemis.add(enm);
                 this.listeEnnemisSpawn.add(enm);
+<<<<<<< HEAD
 =======
            /* for (int i = 0; i < this.niveau.getNbEnnemis(); i++) {
                 if (nbTour % 2 == 0) {
@@ -275,23 +271,9 @@ public class jeu {
                     Ennemis enm = new gobelins(terrain);
                     ennemis.add(enm);
                     this.listeEnnemisSpawn.add(enm);
-
-                }
-                if (nbTour % 16 == 0 && listeEnnemisSpawn.size() <= this.niveau.getNbEnnemis()) {
-                    Ennemis enm = new Squelette(terrain);
-                    ennemis.add(enm);
-                    this.listeEnnemisSpawn.add(enm);
-
-                }
-                if (nbTour % 32 == 0 && listeEnnemisSpawn.size() <= this.niveau.getNbEnnemis()) {
-                    Ennemis enm = new GéantRoyal(terrain);
-                    ennemis.add(enm);
-                    this.listeEnnemisSpawn.add(enm);
-                }
-
->>>>>>> 2d08813abbee35a32ab98e6d5d0fc14c6199e17c
+=======
             }*/
-       // }
+        //}
     }
 
     //permet de récuperer la liste des ennemis ayant spawn
@@ -371,7 +353,6 @@ public class jeu {
         nbTour++;
     }
 
-
     public void initAnimation() {
         gameLoop = new Timeline();
         temps = 0;
@@ -381,8 +362,7 @@ public class jeu {
         KeyFrame kf = new KeyFrame(
                 // on définit le FPS (nbre de frame par seconde)
 
-
-                Duration.seconds(0.05),
+                Duration.seconds(0.025),
                 // on définit ce qui se passe à chaque frame
                 // c'est un eventHandler d'ou le lambda
                 (ev -> {
@@ -400,17 +380,21 @@ public class jeu {
                     } else if (temps % 3 == 0) {
                         unTour();
                         System.out.println("Un tour");
+
                     } else if (temps % 5 == 0) {
                         if (getEnnemis().size() < this.niveau.getNbEnnemis()) {
                             menuEnnemiS(vBox);
                             spwanEnnemi();
                             menuEnnemiA(vBox);
+                        }
+                        } else if (temps % 20 == 0 && getListeEnnemisSpawn().size() < this.niveau.getNbEnnemis()) {
+                            spwanEnnemi();
+                            temps++;
                             System.out.println("Ennemis spwan");
                         }
-                    }
-                    temps++;
-                })
-        );
+                        temps++;
+                    })
+                );
         gameLoop.getKeyFrames().add(kf);
     }
 
@@ -448,4 +432,5 @@ public class jeu {
 
 
 }
+
 

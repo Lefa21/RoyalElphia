@@ -44,6 +44,7 @@ public class VueEnnemi {
             Image sorciere = new Image(new FileInputStream("src/main/resources/fr/montreuil/iut/RoyalElphia/Page_Fxml/sorcière.png"));
             ImageView sorciereView = new ImageView(sorciere);
             sorciereView.setId(ennemis.getId());
+            int nb = 1 + (int)(Math.random() * ((64 - 0) + 1));
             sorciereView.translateXProperty().bind(ennemis.getxProperty());
             sorciereView.translateYProperty().bind(ennemis.getyProperty().subtract(20));
 
@@ -73,7 +74,7 @@ public class VueEnnemi {
             this.pane.getChildren().add(Squelette);
            // circle.setFill(Color.GREY);
         }
-      //  this.pane.getChildren().add(circle);
+
         this.pane.getChildren().add(label);
     }
 }
