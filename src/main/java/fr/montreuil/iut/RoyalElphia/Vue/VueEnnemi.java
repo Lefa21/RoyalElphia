@@ -17,29 +17,30 @@ public class VueEnnemi {
         this.pane = pane;
     }
 
-    public void créerSprite(Ennemis ennemis) {
+    public void créerSprite(Ennemis en) {
         Circle circle = new Circle(10);
-        circle.setId(ennemis.getId());
-        circle.translateXProperty().bind(ennemis.getxProperty());
-        circle.translateYProperty().bind(ennemis.getyProperty());
+        circle.setId(en.getId());
+        circle.translateXProperty().bind(en.getxProperty());
+        circle.translateYProperty().bind(en.getyProperty());
+        circle.setOnMouseClicked(e -> System.out.println(en.affichageImmunité()));
 
         Label label = new Label();
-        label.textProperty().bind(ennemis.getPvProperty().asString());
-        label.setId(ennemis.getId() + "L");
-        label.translateXProperty().bind(ennemis.getxProperty().add(-8));
-        label.translateYProperty().bind(ennemis.getyProperty().add(-32));
+        label.textProperty().bind(en.getPvProperty().asString());
+        label.setId(en.getId() + "L");
+        label.translateXProperty().bind(en.getxProperty().add(-8));
+        label.translateYProperty().bind(en.getyProperty().add(-32));
         label.setBackground(Background.fill(Color.WHITE));
 
 
-        if (ennemis instanceof gobelins) {
+        if (en instanceof gobelins) {
             circle.setFill(Color.GREEN);
-        } else if (ennemis instanceof Sorcières) {
+        } else if (en instanceof Sorcières) {
             circle.setFill(Color.VIOLET);
-        } else if (ennemis instanceof GéantRoyal) {
+        } else if (en instanceof GéantRoyal) {
             circle.setFill(Color.BLACK);
-        } else if (ennemis instanceof Géant) {
+        } else if (en instanceof Géant) {
             circle.setFill(Color.BROWN);
-        } else if (ennemis instanceof Squelette) {
+        } else if (en instanceof Squelette) {
             circle.setFill(Color.GREY);
         }
         this.pane.getChildren().add(circle);
