@@ -53,9 +53,10 @@ public class jeu {
 
     private VBox vBox;
 
-
     private int temps, nbTour;
     private Vague vague;
+
+    private boolean vagueS = false;
 
 
     public jeu(Terrain terrain, Niveau niveau, VBox vBox) {
@@ -215,62 +216,25 @@ public class jeu {
 
     public void vagueSuivante() {
 
-        listeEnnemisSpawn.removeAll(listeEnnemisSpawn);
+        listeEnnemisSpawn.clear();
+        ennemis.clear();
         this.nbVague.setValue(this.nbVague.getValue() + 1);
         this.niveau.setNbEnnemis(this.niveau.getNbEnnemis() * 2);
         this.nbEnnemisRestant.setValue(this.niveau.getNbEnnemis());
-        this.vague = new Vague(this.niveau.getNbEnnemis(), terrain);
-
-
-       /* listeEnnemisSpawn.clear();
-        ennemis.clear();
-
-        this.nbVague.setValue(this.nbVague.getValue() + 1);
-        this.niveau.setNbEnnemis(this.niveau.getNbEnnemis() * 2);
-        this.nbEnnemisRestant.setValue(this.niveau.getNbEnnemis());*/
+        this.vague = new Vague(this.niveau.getNbEnnemis(),terrain);
 
 
     }
 
     // permet d'ajouter un ennemi qui a spawn sur le terrain dans la liste de notre modèle
-    public void spwanEnnemi() {
-
-        for (int i = 0; i < vague.getListeEnnemis().size(); i++) {
-            Ennemis e = vague.getListeEnnemis().pollLast();
-            ennemis.add(e);
-            this.listeEnnemisSpawn.add(e);
-
-           /* for (int i = 0; i < this.niveau.getNbEnnemis(); i++) {
-                if (nbTour % 2 == 0) {
-                    Ennemis enm = new Sorcières(terrain);
-                    ennemis.add(enm);
-                    this.listeEnnemisSpawn.add(enm);
-                }
-                if (nbTour % 4 == 0 && listeEnnemisSpawn.size() <= this.niveau.getNbEnnemis()) {
-                    Ennemis enm = new Sorcières(terrain);
-                    ennemis.add(enm);
-                    this.listeEnnemisSpawn.add(enm);
-                }
-                if (nbTour % 8 == 0 && listeEnnemisSpawn.size() <= this.niveau.getNbEnnemis()) {
-                    Ennemis enm = new gobelins(terrain);
-                    ennemis.add(enm);
-                    this.listeEnnemisSpawn.add(enm);
-
-                }
-                if (nbTour % 16 == 0 && listeEnnemisSpawn.size() <= this.niveau.getNbEnnemis()) {
-                    Ennemis enm = new Squelette(terrain);
-                    ennemis.add(enm);
-                    this.listeEnnemisSpawn.add(enm);
-
-                }
-                if (nbTour % 32 == 0 && listeEnnemisSpawn.size() <= this.niveau.getNbEnnemis()) {
-                    Ennemis enm = new GéantRoyal(terrain);
-                    ennemis.add(enm);
-                    this.listeEnnemisSpawn.add(enm);
-                }
-
-            }*/
-        }
+    public void spwanEnnemi(){
+                /*Ennemis enm = new Sorcières(terrain);
+                ennemis.add(enm);
+                this.listeEnnemisSpawn.add(enm);
+                */
+        Ennemis e = this.vague.getListeEnnemis().pollLast();
+        ennemis.add(e);
+        this.listeEnnemisSpawn.add(e);
     }
 
     //permet de récuperer la liste des ennemis ayant spawn
@@ -350,7 +314,6 @@ public class jeu {
         nbTour++;
     }
 
-
     public void initAnimation() {
         gameLoop = new Timeline();
         temps = 0;
@@ -360,7 +323,6 @@ public class jeu {
         KeyFrame kf = new KeyFrame(
                 // on définit le FPS (nbre de frame par seconde)
 
-
                 Duration.seconds(0.05),
                 // on définit ce qui se passe à chaque frame
                 // c'est un eventHandler d'ou le lambda
@@ -369,7 +331,7 @@ public class jeu {
                         menuEnnemiS(vBox);
                         System.out.println("Vous avez perdu");
                         gameLoop.stop();
-                    } else if (getEnnemisTué().size() == niveau.getNbEnnemis()) {
+                    } else if (getNbEnnemisRestant()==0) {
                         System.out.println("Vague suivante " + this.getNbVague());
                         vagueSuivante();
                         getEnnemisTué().removeAll(getEnnemisTué());
@@ -379,26 +341,28 @@ public class jeu {
                     } else if (temps % 3 == 0) {
                         unTour();
                         System.out.println("Un tour");
-                    } else if (temps % 5 == 0) {
-                        if (getEnnemis().size() < this.niveau.getNbEnnemis()) {
-                            menuEnnemiS(vBox);
-                            spwanEnnemi();
-                            try {
-                                menuEnnemiA(vBox);
-                            } catch (FileNotFoundException e) {
-                                throw new RuntimeException(e);
-                            }
-                            System.out.println("Ennemis spwan");
+                    } else if (temps % 10 == 0 && getListeEnnemisSpawn().size() < this.niveau.getNbEnnemis()) {
+                        spwanEnnemi();
+                        menuEnnemiS(vBox);
+                        try {
+                            menuEnnemiA(vBox);
+                        } catch (FileNotFoundException e) {
+                            throw new RuntimeException(e);
                         }
-                    }
-                    temps++;
-                })
-        );
+                        temps++;
+                        System.out.println("Ennemis spwan");
+
+                        }
+                        temps++;
+                    })
+                );
         gameLoop.getKeyFrames().add(kf);
     }
 
 
+
     public void menuEnnemiA(VBox vBox) throws FileNotFoundException {
+
         for (int i = 0; i < ennemis.size(); i++) {
             Ennemis en = ennemis.get(i);
             Image im;
@@ -438,4 +402,5 @@ public class jeu {
 
 
 }
+
 

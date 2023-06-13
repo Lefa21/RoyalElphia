@@ -48,6 +48,7 @@ public class VueEnnemi {
             imV.translateXProperty().bind(ennemis.getxProperty().subtract(16));
             imV.translateYProperty().bind(ennemis.getyProperty().subtract(16));
             this.pane.getChildren().add(imV);}
+
         else if (ennemis instanceof GéantRoyal) {
             Image golem = new Image(new FileInputStream("src/main/resources/fr/montreuil/iut/RoyalElphia/Page_Fxml/Golem(1).png"));
             imV = new ImageView(golem);
@@ -73,8 +74,12 @@ public class VueEnnemi {
             this.pane.getChildren().add(imV);
            // circle.setFill(Color.GREY);
         }
+
         imV.setOnMouseClicked(e -> System.out.println(ennemis.affichageImmunité()));
       //  this.pane.getChildren().add(circle);
+
+
+
         this.pane.getChildren().add(label);
     }
 }
