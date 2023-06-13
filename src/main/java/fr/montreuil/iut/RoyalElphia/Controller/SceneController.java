@@ -113,7 +113,7 @@ public class SceneController implements Initializable{
         stage.setScene(scene);
         stage.show();
     }
-    }
+}
 
     public void Quitter(ActionEvent actionEvent) {
         Platform.exit();

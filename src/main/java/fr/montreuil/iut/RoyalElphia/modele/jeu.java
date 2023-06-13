@@ -1,5 +1,6 @@
 package fr.montreuil.iut.RoyalElphia.modele;
 
+import fr.montreuil.iut.RoyalElphia.HelloApplication;
 import fr.montreuil.iut.RoyalElphia.modele.Map.CasesDégats;
 import fr.montreuil.iut.RoyalElphia.modele.Niveau.Niveau;
 import fr.montreuil.iut.RoyalElphia.modele.Obstacle.Obstacle;
@@ -15,6 +16,8 @@ import javafx.animation.Timeline;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -22,6 +25,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 
 import javafx.collections.FXCollections;
@@ -32,6 +36,7 @@ import javafx.util.Duration;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class jeu {
@@ -314,6 +319,22 @@ public class jeu {
         nbTour++;
     }
 
+    public void gagne() throws IOException {
+        Stage newWindow = new Stage();
+        newWindow.setTitle("Bravo !");
+        FXMLLoader loader = new FXMLLoader(HelloApplication.class.getResource("Page_Fxml/Gagne.fxml"));
+        newWindow.setScene(new Scene(loader.load()));
+        newWindow.show();
+    }
+
+    public void perdu() throws IOException {
+        Stage newWindow = new Stage();
+        newWindow.setTitle("T'es vraiment nul !");
+        FXMLLoader loader = new FXMLLoader(HelloApplication.class.getResource("Page_Fxml/Perdu.fxml"));
+        newWindow.setScene(new Scene(loader.load()));
+        newWindow.show();
+    }
+
     public void initAnimation() {
         gameLoop = new Timeline();
         temps = 0;
@@ -323,21 +344,18 @@ public class jeu {
         KeyFrame kf = new KeyFrame(
                 // on définit le FPS (nbre de frame par seconde)
 
-                Duration.seconds(0.05),
+                Duration.seconds(0.005),
                 // on définit ce qui se passe à chaque frame
                 // c'est un eventHandler d'ou le lambda
                 (ev -> {
                     if (this.getPvJoueur() == 0 || (this.nbVague.getValue() == 5 && this.getNbEnnemisRestant()==0)) {
                         menuEnnemiS(vBox);
-                        System.out.println("Vous avez perdu");
                         gameLoop.stop();
                     } else if (getNbEnnemisRestant()==0) {
                         System.out.println("Vague suivante " + this.getNbVague());
                         vagueSuivante();
                         getEnnemisTué().removeAll(getEnnemisTué());
                         System.out.println("nombre d'ennemis spwan:  " + this.listeEnnemisSpawn.size());
-
-
                     } else if (temps % 3 == 0) {
                         unTour();
                         System.out.println("Un tour");
@@ -353,7 +371,23 @@ public class jeu {
                         System.out.println("Ennemis spwan");
 
                         }
-                        temps++;
+                        if (this.getPvJoueur() > 0 && (this.nbVague.getValue() == 5 && getNbEnnemisRestant()==0)) {
+                        try {
+                            gagne();
+                        } catch (IOException e) {
+                            throw new RuntimeException(e);
+                        }
+                        gameLoop.stop();
+                    }
+                        if (this.getPvJoueur() == 0 && getNbEnnemisRestant() > 0){
+                            try {
+                                perdu();
+                            } catch (IOException e) {
+                                throw new RuntimeException(e);
+                            }
+                            gameLoop.stop();
+                        }
+                    temps++;
                     })
                 );
         gameLoop.getKeyFrames().add(kf);
