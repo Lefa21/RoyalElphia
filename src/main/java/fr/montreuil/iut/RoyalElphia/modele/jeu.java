@@ -155,12 +155,15 @@ public class jeu {
         }
 
         */
-        if (nbTour % 2 == 0 && listeEnnemisSpawn.size() <= this.niveau.getNbEnnemis()) {
+        /*
+             if (nbTour % 2 == 0 && listeEnnemisSpawn.size() <= this.niveau.getNbEnnemis()) {
             Ennemis enm = new Squelette(terrain);
             ennemis.add(enm);
             this.listeEnnemisSpawn.add(enm);
 
         }
+
+         */
         if (nbTour % 4 == 0 && listeEnnemisSpawn.size() <= this.niveau.getNbEnnemis()) {
             Ennemis enm = new GéantRoyal(terrain);
             ennemis.add(enm);
@@ -227,19 +230,21 @@ public class jeu {
     public void enleveObstacleDetruit(int [][] tab,Ennemis e) {
         for (int j = 0; j < this.listeObstacle.size(); j++) {
             Obstacle obstacle = this.listeObstacle.get(j);
+            System.out.println("Matériaux obs : " + obstacle.getMateriaux());
+            System.out.println("capacité ennemis " + e.getCapaciteObstacle());
             if(obstacle.getPointDeVie() <=0){
                 tab[obstacle.getPosY()][obstacle.getPosX()] = 9;
                 this.listeObstacle.remove(this.listeObstacle.get(j));
             }
 
-            // e.getCapaciteObstacle() >= obstacle.getMateriaux()
-            if (((e.getX()/32+1 == obstacle.getPosX() && e.getY()/32 == obstacle.getPosY()) || (e.getX()/32 == obstacle.getPosX() && e.getY()/32+1 == obstacle.getPosY()) || (e.getX()/32 == obstacle.getPosX() && e.getY()/32-1 == obstacle.getPosY()) || (e.getX()/32-1 == obstacle.getPosX() && e.getY()/32 == obstacle.getPosY())) ) {
-                int degat = e.getDegatObstacle();
-                int vieObstacle = obstacle.getPointDeVie() - degat;
-                obstacle.setPointDeVie(vieObstacle);
+                if ((e.getCapaciteObstacle() >= obstacle.getMateriaux()) &&((e.getX()/32+1 == obstacle.getPosX() && e.getY()/32 == obstacle.getPosY()) || (e.getX()/32 == obstacle.getPosX() && e.getY()/32+1 == obstacle.getPosY()) || (e.getX()/32 == obstacle.getPosX() && e.getY()/32-1 == obstacle.getPosY()) || (e.getX()/32-1 == obstacle.getPosX() && e.getY()/32 == obstacle.getPosY())) ) {
+                    int degat = e.getDegatObstacle();
+                    int vieObstacle = obstacle.getPointDeVie() - degat;
+                    obstacle.setPointDeVie(vieObstacle);
+                }
             }
         }
-    }
+
 
     public void degatEnnemis(Ennemis e){
         for (int j = 0; j < this.terrain.getCasesDégats().size(); j++) {
@@ -265,21 +270,21 @@ public class jeu {
     }
 
     public void augmentationCapacité(int nbTour,Ennemis e){
-        if(nbTour%64 ==0){
+        if(nbTour%128 ==0){
             System.out.println("augmentation capacité");
             if(e.getCapaciteDegatObstacle() == 1){
                 System.out.println("degat obs av:" + e.getDegatObstacle());
-                e.setDegatObstacle((int)(e.getDegatObstacle() * 1.5));
+                e.setDegatObstacle((e.getDegatObstacle() + (e.getDegatObstacle() * 50/100)));
                 System.out.println("degat obs ap : " + e.getDegatObstacle());
             }
             if(e.getCapaciteVie() == 1){
                 System.out.println("pv  av :" + e.getPv());
-                e.améliorationPv((int)(e.getPv() * 1.5));
+                e.améliorationPv((e.getPv() + (e.getPv() * 50/100)));
                 System.out.println("pv ap :" + e.getPv() );
             }
             if(e.getCapaciteDegatsBase() == 1){
                 System.out.println("degat base av :" + e.getDegatBase());
-                e.setDegatBase((int)(e.getDegatBase() * 1.5));
+                e.setDegatBase((e.getDegatBase() + (e.getDegatBase() * 50/100)));
                 System.out.println("degat base ap: " + e.getDegatBase());
 
             }
