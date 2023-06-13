@@ -9,9 +9,9 @@ import java.io.IOException;
 
 public class HelloApplication extends Application {
     @Override
-    public void start(Stage stage) throws IOException {
+    public void start(Stage newWindow) throws IOException {
 
-        Stage newWindow = new Stage();
+        //Stage newWindow = new Stage();
         newWindow.setTitle("Acceuil");
         FXMLLoader loader = new FXMLLoader(HelloApplication.class.getResource("Page_Fxml/Acceuil.fxml"));
         newWindow.setScene(new Scene(loader.load()));
