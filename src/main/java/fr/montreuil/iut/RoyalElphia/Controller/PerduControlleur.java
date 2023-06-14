@@ -1,6 +1,6 @@
 package fr.montreuil.iut.RoyalElphia.Controller;
 
-import fr.montreuil.iut.RoyalElphia.modele.HelloApplication;
+import fr.montreuil.iut.RoyalElphia.HelloApplication;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;

@@ -1,8 +1,10 @@
 package fr.montreuil.iut.RoyalElphia.Controller;
 
+import fr.montreuil.iut.RoyalElphia.HelloApplication;
 import fr.montreuil.iut.RoyalElphia.Vue.*;
 import fr.montreuil.iut.RoyalElphia.modele.*;
 import fr.montreuil.iut.RoyalElphia.modele.Ennemis.Ennemis;
+import fr.montreuil.iut.RoyalElphia.modele.Ennemis.ListObsEnnemis;
 import fr.montreuil.iut.RoyalElphia.modele.Map.Map2;
 import fr.montreuil.iut.RoyalElphia.modele.Map.Map_1;
 import fr.montreuil.iut.RoyalElphia.modele.Map.Terrain;
@@ -50,6 +52,9 @@ public class HelloController implements Initializable {
     private TilePane map;
 
     @FXML
+    public  Button ButtonRejouer;
+
+    @FXML
     private VBox menuEnnemi;
 
     private jeu jeu;
@@ -57,9 +62,6 @@ public class HelloController implements Initializable {
 
 
     private FXMLLoader fxmlLoader;
-    @FXML
-    private Button Buttonrejouer,Buttonquitter;
-
 
     @FXML
     private Label LabelPV, LabelnbEnnemisRestant, LabelArgent, LabelVague, LabelMort;
@@ -78,14 +80,11 @@ public class HelloController implements Initializable {
     private VueTour vt = new VueTour();
     private VueObstacle vo = new VueObstacle();
 
-    public jeu getJeu() {
-        return jeu;
-    }
 
 
-    public Button getButtonquitter() {
-        return Buttonquitter;
-    }
+public  Button getMonBouton(){
+    return ButtonRejouer;
+}
 
     @FXML
     public void cliqueObstacle(MouseEvent mouseEvent) throws FileNotFoundException {
@@ -182,7 +181,7 @@ public class HelloController implements Initializable {
 
 
     public void créerNiveau(){
-        int niveau = SceneController.getNiveau();
+        int niveau = ChoixMapController.getNiveau();
         if (niveau == 1) {
             this.niveau = new Facile();
         } else if (niveau == 2) {
@@ -193,7 +192,7 @@ public class HelloController implements Initializable {
     }
 
     public void créerTerrain() {
-        int terrain = SceneController.getTerrain();
+        int terrain = ChoixMapController.getTerrain();
         if (terrain == 1) {
             this.terrain = new Map_1();
         } else if (terrain == 2) {

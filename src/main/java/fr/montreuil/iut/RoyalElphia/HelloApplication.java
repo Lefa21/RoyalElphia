@@ -1,4 +1,4 @@
-package fr.montreuil.iut.RoyalElphia.modele;
+package fr.montreuil.iut.RoyalElphia;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -10,7 +10,6 @@ import java.io.IOException;
 public class HelloApplication extends Application {
     @Override
     public void start(Stage newWindow) throws IOException {
-
         //Stage newWindow = new Stage();
         newWindow.setTitle("Acceuil");
         FXMLLoader loader = new FXMLLoader(HelloApplication.class.getResource("Page_Fxml/Acceuil.fxml"));

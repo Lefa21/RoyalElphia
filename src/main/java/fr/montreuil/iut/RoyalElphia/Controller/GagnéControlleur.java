@@ -1,6 +1,6 @@
 package fr.montreuil.iut.RoyalElphia.Controller;
 
-import fr.montreuil.iut.RoyalElphia.modele.HelloApplication;
+import fr.montreuil.iut.RoyalElphia.HelloApplication;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -16,23 +16,28 @@ import java.util.ResourceBundle;
 public class GagnéControlleur implements Initializable {
 
     @FXML
-    private Button Buttonquitter,Buttonrejouer;
+    private Button Buttonrejouer;
 
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {}
 
+
+    @FXML
     public void Quitter(ActionEvent actionEvent) throws IOException {
+        System.out.println("Quitter la partie ");
         Stage newWindow = new Stage();
         newWindow.setTitle("Royale Elphia");
-        FXMLLoader loader = new FXMLLoader(HelloApplication.class.getResource("Page_Fxml/Accueil.fxml"));
+        FXMLLoader loader = new FXMLLoader(HelloApplication.class.getResource("Page_Fxml/Acceuil.fxml"));
         newWindow.setScene(new Scene(loader.load()));
-
         newWindow.show();
-        ((Stage)  Buttonquitter.getScene().getWindow()).close();
-      // ((Stage) HelloController.getLabelPV().getScene().getWindow()).close();
+        //HelloController helloController = new HelloController();
+        //Button boutonRecuperer = helloController.getMonBouton();
+        //((Stage) boutonRecuperer.getScene().getWindow()).close();
+        ((Stage)  Buttonrejouer.getScene().getWindow()).close();
     }
 
+    @FXML
     public void rejoue(ActionEvent actionEvent) throws IOException {
 
         // Stage stage =  SceneController.fermetureStage();

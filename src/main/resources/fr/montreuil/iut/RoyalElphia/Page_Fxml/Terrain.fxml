@@ -24,7 +24,7 @@
         <VBox>
             <Button onAction="#Demarrer" text="Demarrer">
             </Button>
-            <Button onAction="#Rejouer" text="Rejouer">
+            <Button onAction="#Rejouer"  fx:id="ButtonRejouer" text="Rejouer">
             </Button>
             <Button onAction="#Pause" text="Pause">
             </Button>
