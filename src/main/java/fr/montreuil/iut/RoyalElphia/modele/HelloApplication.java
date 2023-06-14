@@ -1,4 +1,4 @@
-package fr.montreuil.iut.RoyalElphia;
+package fr.montreuil.iut.RoyalElphia.modele;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -16,7 +16,6 @@ public class HelloApplication extends Application {
         FXMLLoader loader = new FXMLLoader(HelloApplication.class.getResource("Page_Fxml/Acceuil.fxml"));
         newWindow.setScene(new Scene(loader.load()));
         newWindow.show();
-
     }
 
     public static void main(String[] args) {

@@ -1,6 +1,5 @@
 package fr.montreuil.iut.RoyalElphia.modele;
 
-import fr.montreuil.iut.RoyalElphia.HelloApplication;
 import fr.montreuil.iut.RoyalElphia.modele.Map.CasesDégats;
 import fr.montreuil.iut.RoyalElphia.modele.Niveau.Niveau;
 import fr.montreuil.iut.RoyalElphia.modele.Obstacle.Obstacle;
@@ -21,21 +20,13 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
-import javafx.util.Duration;
-
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.util.Duration;
 
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -342,6 +333,7 @@ public class jeu {
         FXMLLoader loader = new FXMLLoader(HelloApplication.class.getResource("Page_Fxml/Perdu.fxml"));
         newWindow.setScene(new Scene(loader.load()));
         newWindow.show();
+        //((Stage) HelloController.getLabelPV().getScene().getWindow()).close();
     }
 
     public void initAnimation() {
@@ -381,6 +373,7 @@ public class jeu {
                         System.out.println("Ennemis spwan");
                         }
                         if (this.getPvJoueur() > 0 && (this.nbVague.getValue() == 5 && getNbEnnemisRestant()==0)) {
+                          //  Platform.exit();
                         try {
                             gagne();
                         } catch (IOException e) {
@@ -389,6 +382,7 @@ public class jeu {
                         gameLoop.stop();
                     }
                         if (this.getPvJoueur() == 0 && getNbEnnemisRestant() > 0){
+                           // Platform.exit();
                             try {
                                 perdu();
                             } catch (IOException e) {

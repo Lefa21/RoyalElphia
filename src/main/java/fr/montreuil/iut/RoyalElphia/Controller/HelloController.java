@@ -1,6 +1,5 @@
 package fr.montreuil.iut.RoyalElphia.Controller;
 
-import fr.montreuil.iut.RoyalElphia.HelloApplication;
 import fr.montreuil.iut.RoyalElphia.Vue.*;
 import fr.montreuil.iut.RoyalElphia.modele.*;
 import fr.montreuil.iut.RoyalElphia.modele.Ennemis.Ennemis;
@@ -21,6 +20,7 @@ import javafx.event.Event;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 
 import javafx.scene.image.ImageView;
@@ -33,10 +33,6 @@ import javafx.scene.layout.TilePane;
 
 
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
-
-import javafx.scene.shape.Circle;
 
 import javafx.stage.Stage;
 
@@ -61,10 +57,12 @@ public class HelloController implements Initializable {
 
 
     private FXMLLoader fxmlLoader;
+    @FXML
+    private Button Buttonrejouer,Buttonquitter;
 
 
     @FXML
-    public Label LabelPV, LabelnbEnnemisRestant, LabelArgent, LabelVague, LabelMort;
+    private Label LabelPV, LabelnbEnnemisRestant, LabelArgent, LabelVague, LabelMort;
     @FXML
     private Pane panneauJeu;
     private VueEnnemi vueEnnemi;
@@ -79,6 +77,15 @@ public class HelloController implements Initializable {
     private boolean ObstaclePose = true;
     private VueTour vt = new VueTour();
     private VueObstacle vo = new VueObstacle();
+
+    public jeu getJeu() {
+        return jeu;
+    }
+
+
+    public Button getButtonquitter() {
+        return Buttonquitter;
+    }
 
     @FXML
     public void cliqueObstacle(MouseEvent mouseEvent) throws FileNotFoundException {
@@ -277,9 +284,9 @@ public class HelloController implements Initializable {
         newWindow.setTitle("Paramètres de ma partie");
         FXMLLoader loader = new FXMLLoader(HelloApplication.class.getResource("Page_Fxml/ChoixMap.fxml"));
         newWindow.setScene(new Scene(loader.load()));
-
         newWindow.show();
         ((Stage)  LabelPV.getScene().getWindow()).close();
     }
+
 }
 

@@ -1,31 +1,15 @@
 package fr.montreuil.iut.RoyalElphia.Controller;
 
-import fr.montreuil.iut.RoyalElphia.HelloApplication;
-import fr.montreuil.iut.RoyalElphia.Vue.TerrainVue;
-import fr.montreuil.iut.RoyalElphia.modele.Ennemis.Ennemis;
-import fr.montreuil.iut.RoyalElphia.modele.Map.Map2;
-import fr.montreuil.iut.RoyalElphia.modele.Map.Map_1;
-import fr.montreuil.iut.RoyalElphia.modele.Map.Terrain;
-import fr.montreuil.iut.RoyalElphia.modele.Niveau.Difficile;
-import fr.montreuil.iut.RoyalElphia.modele.Niveau.Facile;
-import fr.montreuil.iut.RoyalElphia.modele.Niveau.Niveau;
-import fr.montreuil.iut.RoyalElphia.modele.Niveau.Normal;
-import fr.montreuil.iut.RoyalElphia.modele.jeu;
-import javafx.application.Platform;
-import javafx.collections.ListChangeListener;
+import fr.montreuil.iut.RoyalElphia.modele.HelloApplication;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.RadioButton;
-import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -40,21 +24,7 @@ public class SceneController implements Initializable{
     private static  int terrain;
 
     @FXML
-    private Button lancer;
-
-    @FXML
     private RadioButton buttonFacile,buttonNormal,buttonDifficile,buttonMap1,buttonMap2;
-
-
-@FXML
-    public void LancerJeu(ActionEvent event) throws IOException {
-    Stage newWindow =    (Stage) this.lancer.getScene().getWindow();
-    newWindow.setTitle("Paramètres de ma partie");
-    FXMLLoader loader = new FXMLLoader(HelloApplication.class.getResource("Page_Fxml/ChoixMap.fxml"));
-    newWindow.setScene(new Scene(loader.load()));
-    //newWindow.show();
-    }
-
 
 
     public int choixNiveau(){
@@ -127,7 +97,4 @@ public class SceneController implements Initializable{
     }
 }
 
-    public void Quitter(ActionEvent actionEvent) {
-        Platform.exit();
-    }
 }
