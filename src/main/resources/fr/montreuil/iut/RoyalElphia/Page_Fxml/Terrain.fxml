@@ -8,8 +8,8 @@
 <?import javafx.scene.layout.VBox?>
 
 <?import javafx.scene.layout.TilePane?>
-<?import javafx.scene.text.Font?>
 <?import javafx.scene.image.ImageView?>
+<?import javafx.scene.text.Font?>
 <?import javafx.scene.image.Image?>
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.montreuil.iut.RoyalElphia.Controller.HelloController">
     <right>
@@ -74,20 +74,6 @@
                             </ImageView>
                         </children>
                     </HBox>
-                    <children>
-                        <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#BoutonCaracteristiques" prefHeight="50.0" prefWidth="232.0" text="Caractéristiques Tours" textOverrun="CENTER_ELLIPSIS">
-                            <font>
-                                <Font size="17.0" />
-                            </font>
-                        </Button>
-                    </children>
-                    <children>
-                        <Label alignment="TOP_LEFT" contentDisplay="LEFT" prefHeight="62.0" prefWidth="239.0" text="Menu obstacles" textAlignment="LEFT">
-                            <font>
-                                <Font size="30.0" />
-                            </font>
-                        </Label>
-                    </children>
 
                     <HBox>
                         <children>
@@ -121,6 +107,22 @@
                             </ImageView>
                         </children>
                     </HBox>
+                    <Label text="Double clic pour vendre une tour" textFill="red" />
+                    <Label text="Alt+Clic pour améliorer une tour" textFill="red" />
+                    <children>
+                        <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#BoutonCaracteristiques" prefHeight="50.0" prefWidth="232.0" text="Caractéristiques Tours" textOverrun="CENTER_ELLIPSIS">
+                            <font>
+                                <Font size="17.0" />
+                            </font>
+                        </Button>
+                    </children>
+                    <children>
+                        <Label alignment="TOP_LEFT" contentDisplay="LEFT" prefHeight="62.0" prefWidth="239.0" text="Menu obstacles" textAlignment="LEFT">
+                            <font>
+                                <Font size="30.0" />
+                            </font>
+                        </Label>
+                    </children>
                     <children>
                         <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#caracteristiqueObstacle" prefHeight="50.0" prefWidth="300.0" text="Caractéristiques Obstacle" textOverrun="CENTER_ELLIPSIS">
                             <font>
@@ -128,8 +130,6 @@
                             </font>
                         </Button>
                     </children>
-                    <Label text="Double clic pour vendre une tour" textFill="red" />
-                    <Label text="Alt+Clic pour améliorer une tour" textFill="red" />
                 </VBox>
             </children>
 
@@ -170,25 +170,25 @@
                 </VBox>
             </HBox>
 
-               <HBox layoutX="989.0" layoutY="2.0" prefHeight="0.0" prefWidth="268.0">
-                <children>
-                    <VBox>
-                        <children>
-                            <Button fx:id="ButtonPortée" onAction="#Portee" onMouseClicked="#Annul" text="Portée">
-                            </Button>
-                        </children>
-
+               <HBox layoutX="897.0" layoutY="2.0" prefHeight="24.0" prefWidth="360.0">
+                   <children>
+                       <VBox>
+                           <children>
+                               <Button fx:id="ButtonQuitter" onAction="#Quitter" text="Quitter">
+                               </Button>
+                           </children>
                        </VBox>
-                </children>
+                   </children>
 
                    <children>
-                    <VBox>
-                        <children>
-                            <Button fx:id="ButtonPause" onAction="#Pause" text="Pause">
-                            </Button>
-                        </children>
-                    </VBox>
-                </children>
+                       <VBox>
+                           <children>
+                               <Button fx:id="ButtonPause" onAction="#Pause" text="Pause">
+                               </Button>
+                           </children>
+                       </VBox>
+                   </children>
+
 
                    <children>
                     <VBox>
@@ -200,6 +200,16 @@
                 </children>
 
                    <children>
+                       <VBox>
+                           <children>
+                               <Button fx:id="ButtonPortée" onAction="#Portee" onMouseClicked="#Annul" text="Portée">
+                               </Button>
+                           </children>
+
+                       </VBox>
+                   </children>
+
+                   <children>
                     <VBox>
                         <children>
                             <Button fx:id="ButtonRejouer" onAction="#Rejouer" text="Rejouer">
@@ -207,6 +217,7 @@
                         </children>
                     </VBox>
                 </children>
+
             </HBox>
         </Pane>
     </center>

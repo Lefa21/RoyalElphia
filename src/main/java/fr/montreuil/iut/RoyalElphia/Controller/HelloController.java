@@ -308,5 +308,15 @@ public static Button getMonBouton(){
         newWindow.setScene(new Scene(loader.load()));
         newWindow.show();
     }
+
+    public void Quitter(ActionEvent actionEvent) throws IOException {
+        System.out.println("Quitter la partie");
+        Stage newWindow = new Stage();
+        newWindow.setTitle("Paramètres de ma parti");
+        FXMLLoader loader = new FXMLLoader(HelloApplication.class.getResource("Page_Fxml/Acceuil.fxml"));
+        newWindow.setScene(new Scene(loader.load()));
+        newWindow.show();
+        ((Stage)  LabelPV.getScene().getWindow()).close();
+    }
 }
 
