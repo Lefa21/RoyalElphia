@@ -4,7 +4,7 @@ public class BarricadeFer extends Obstacle{
     public BarricadeFer() {
 
         super(2, 100);
-        this.setCoutAchat(24);
+        this.setCoutAchat(20);
         this.setCoutVente(10);
         this.setCoutAmelioration(8);
         this.setNiveauMaxAmelioration(5);

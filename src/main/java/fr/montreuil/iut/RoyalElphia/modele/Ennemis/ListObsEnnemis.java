@@ -1,4 +1,4 @@
-package fr.montreuil.iut.RoyalElphia.Controller;
+package fr.montreuil.iut.RoyalElphia.modele.Ennemis;
 
 import fr.montreuil.iut.RoyalElphia.Vue.VueEnnemi;
 import fr.montreuil.iut.RoyalElphia.modele.Ennemis.Ennemis;

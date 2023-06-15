@@ -4,6 +4,8 @@ import fr.montreuil.iut.RoyalElphia.HelloApplication;
 import fr.montreuil.iut.RoyalElphia.Vue.*;
 import fr.montreuil.iut.RoyalElphia.modele.*;
 import fr.montreuil.iut.RoyalElphia.modele.Ennemis.Ennemis;
+import fr.montreuil.iut.RoyalElphia.modele.Ennemis.ListObsEnnemis;
+import fr.montreuil.iut.RoyalElphia.modele.Items.Items;
 import fr.montreuil.iut.RoyalElphia.modele.Map.Map2;
 import fr.montreuil.iut.RoyalElphia.modele.Map.Map_1;
 import fr.montreuil.iut.RoyalElphia.modele.Map.Terrain;
@@ -21,6 +23,7 @@ import javafx.event.Event;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 
 import javafx.scene.image.ImageView;
@@ -33,10 +36,6 @@ import javafx.scene.layout.TilePane;
 
 
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
-
-import javafx.scene.shape.Circle;
 
 import javafx.stage.Stage;
 
@@ -53,6 +52,16 @@ public class HelloController implements Initializable {
     @FXML
     private TilePane map;
 
+public static Stage stage;
+    @FXML
+    public static Button ButtonRejouer;
+    @FXML
+    public Button ButtonQuitter;
+    @FXML
+    public Button ButtonPause;
+    @FXML
+    public Button ButtonPortée;
+
     @FXML
     private VBox menuEnnemi;
 
@@ -60,17 +69,20 @@ public class HelloController implements Initializable {
     private Niveau niveau;
 
 
+
     private FXMLLoader fxmlLoader;
 
 
     @FXML
-    public Label LabelPV, LabelnbEnnemisRestant, LabelArgent, LabelVague, LabelMort;
+    private Label LabelPV, LabelnbEnnemisRestant, LabelArgent, LabelVague, LabelMort;
     @FXML
     private Pane panneauJeu;
     private VueEnnemi vueEnnemi;
 
     private Tour tour;
     private Obstacle obstacle;
+
+    private Items items;
     private boolean TourPose = true;
    // private Boolean ItemPose = true;
 
@@ -80,12 +92,18 @@ public class HelloController implements Initializable {
     private VueTour vt = new VueTour();
     private VueObstacle vo = new VueObstacle();
 
+
+
+public static Button getMonBouton(){
+    return ButtonRejouer;
+}
+
     @FXML
     public void cliqueObstacle(MouseEvent mouseEvent) throws FileNotFoundException {
         if (this.ObstaclePose && obstacle == null && mouseEvent.getClickCount() == 2) {
             System.out.println("clique obstacle ");
             String imageId = ((ImageView) mouseEvent.getSource()).getId();
-            fr.montreuil.iut.RoyalElphia.modele.Obstacle.Obstacle obstacle = null;
+            Obstacle obstacle = null;
 
             switch (imageId) {
                 case "bois":
@@ -143,9 +161,9 @@ public class HelloController implements Initializable {
     }
     @FXML
     public void poserItem(MouseEvent mouseEvent) throws FileNotFoundException {
+        double cliqueX = mouseEvent.getX();
+        double cliqueY = mouseEvent.getY();
         if(this.obstacle != null){
-            double cliqueX = mouseEvent.getX();
-            double cliqueY = mouseEvent.getY();
             System.out.println("obstacle poser ");
             VueObstacle vueObstacle = new VueObstacle(panneauJeu, obstacle, cliqueX, cliqueY, terrain,jeu);
             vueObstacle.PoserObstacle();
@@ -154,8 +172,6 @@ public class HelloController implements Initializable {
         }
         if(this.tour != null){
             System.out.println("tour poser");
-            double cliqueX = mouseEvent.getX();
-            double cliqueY = mouseEvent.getY();
             VueTour vueTour = new VueTour(panneauJeu, tour, cliqueX, cliqueY, terrain, jeu);
             vueTour.PoserTour();
             this.TourPose = true;
@@ -163,6 +179,7 @@ public class HelloController implements Initializable {
         }
         }
 
+        /*
 
     public void PoserTour(MouseEvent mouseEvent) throws FileNotFoundException {
         double cliqueX = mouseEvent.getX();
@@ -174,8 +191,10 @@ public class HelloController implements Initializable {
     }
 
 
+         */
+
     public void créerNiveau(){
-        int niveau = SceneController.getNiveau();
+        int niveau = ChoixMapController.getNiveau();
         if (niveau == 1) {
             this.niveau = new Facile();
         } else if (niveau == 2) {
@@ -186,11 +205,11 @@ public class HelloController implements Initializable {
     }
 
     public void créerTerrain() {
-        int terrain = SceneController.getTerrain();
+        int terrain = ChoixMapController.getTerrain();
         if (terrain == 1) {
-            this.terrain = new Map_1();
-        } else if (terrain == 2) {
             this.terrain = new Map2();
+        } else if (terrain == 2) {
+            this.terrain = new Map_1();
         }
     }
 
@@ -209,10 +228,11 @@ public class HelloController implements Initializable {
         newWindow.show();
     }
 
+
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try {
-
             créationPartie();
 
             //demarre l'animation
@@ -234,6 +254,7 @@ public class HelloController implements Initializable {
             jeu.getListeDeTour().addListener(listenerTour);
 
 
+
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }
@@ -241,33 +262,13 @@ public class HelloController implements Initializable {
 
     @FXML
     public void Demarrer(Event event) {
+        stage = (Stage)this.panneauJeu.getScene().getWindow();
         jeu.lancementLoop();
     }
 
     @FXML
     public void Pause(Event event) {
         jeu.arretLoop();
-    }
-
-
-    @FXML
-    public void Portee(ActionEvent actionEvent){
-        int c = 0;
-        while (panneauJeu.lookup("#"+"A"+c)!=null) {
-            panneauJeu.lookup("#" + "A" + c).setVisible(true);
-            c++;
-        }
-    }
-
-    @FXML
-    public void Annul(MouseEvent mouseEvent) {
-        if (mouseEvent.getClickCount() == 2) {
-            int c = 0;
-            while (panneauJeu.lookup("#" + "A" + c) != null) {
-                panneauJeu.lookup("#" + "A" + c).setVisible(false);
-                c++;
-            }
-        }
     }
 
     public void Rejouer(ActionEvent actionEvent) throws IOException{
@@ -277,7 +278,24 @@ public class HelloController implements Initializable {
         newWindow.setTitle("Paramètres de ma partie");
         FXMLLoader loader = new FXMLLoader(HelloApplication.class.getResource("Page_Fxml/ChoixMap.fxml"));
         newWindow.setScene(new Scene(loader.load()));
+        newWindow.show();
+        ((Stage)  LabelPV.getScene().getWindow()).close();
+    }
 
+    public void caracteristiqueObstacle(ActionEvent actionEvent) throws IOException {
+        Stage newWindow = new Stage();
+        newWindow.setTitle("Caractéristiques des obstacles");
+        FXMLLoader loader = new FXMLLoader(HelloApplication.class.getResource("Page_Fxml/CaracteristiquesObstacles.fxml"));
+        newWindow.setScene(new Scene(loader.load()));
+        newWindow.show();
+    }
+
+    public void Quitter(ActionEvent actionEvent) throws IOException {
+        System.out.println("Quitter la partie");
+        Stage newWindow = new Stage();
+        newWindow.setTitle("Paramètres de ma parti");
+        FXMLLoader loader = new FXMLLoader(HelloApplication.class.getResource("Page_Fxml/Acceuil.fxml"));
+        newWindow.setScene(new Scene(loader.load()));
         newWindow.show();
         ((Stage)  LabelPV.getScene().getWindow()).close();
     }

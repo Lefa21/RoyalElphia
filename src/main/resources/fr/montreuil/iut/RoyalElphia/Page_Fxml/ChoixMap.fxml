@@ -4,16 +4,15 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 
-
 <?import javafx.scene.text.Font?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.image.Image?>
-<BorderPane prefHeight="500" prefWidth="800" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.montreuil.iut.RoyalElphia.Controller.SceneController">
+<BorderPane prefHeight="500" prefWidth="800" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.montreuil.iut.RoyalElphia.Controller.ChoixMapController">
 
 
 
@@ -22,43 +21,52 @@
             <children>
                 <ImageView fitHeight="800.0" fitWidth="950.0" pickOnBounds="true" preserveRatio="true">
                     <image>
-                        <Image url="@fond-parametrage.jpeg" />
+                        <Image url="@../ImageFond/fond-parametrage.jpeg" />
                     </image>
                 </ImageView>
             </children>
             <children>
-                <Label textFill="ghostwhite" alignment="CENTER" contentDisplay="CENTER" layoutX="15.0" layoutY="0.0" prefHeight="225.0" prefWidth="801.0" text="Choisissez votre map et votre niveau : ">
+                <Label alignment="CENTER" contentDisplay="CENTER" layoutX="15.0" layoutY="0.0" prefHeight="50" prefWidth="801.0" text="Choisissez votre map et votre niveau : " textFill="ghostwhite">
                     <font>
                         <Font size="20.0" />
                     </font>
                 </Label>
             </children>
-            <VBox layoutX="250.0" layoutY="162.0" prefHeight="270.0" prefWidth="361.0">
-                <children>
-                    <Label textFill="ghostwhite" prefHeight="28.0" prefWidth="102.0" text="Maps : " />
-                    <RadioButton textFill="ghostwhite" fx:id="buttonMap1" mnemonicParsing="false" prefHeight="20.0" prefWidth="200.0" selected="true" styleClass="label-bright" text="Map Simple">
-                        <toggleGroup>
-                            <ToggleGroup fx:id="groupeMap"/>
-                        </toggleGroup>
+             <ImageView fitHeight="163.0" fitWidth="206.0" layoutX="170.0" layoutY="78.0" pickOnBounds="true" preserveRatio="true">
+                 <image>
+                     <Image url="@../ImageMap/map.png" />
+                 </image>
+             </ImageView>
+            <ImageView fitHeight="154.0" fitWidth="218.0" layoutX="429.0" layoutY="78.0" pickOnBounds="true" preserveRatio="true">
+                <image>
+                    <Image url="@../ImageMap/Map1.png" />
+                </image>
+            </ImageView>
+         <HBox layoutX="239.0" layoutY="276.0" prefHeight="22.0" prefWidth="542.0">
+            <children>
+                    <RadioButton fx:id="buttonMap1" mnemonicParsing="false" prefHeight="20.0" prefWidth="198.0" selected="true" styleClass="label-bright" text="Map Simple" textFill="ghostwhite">
+                  <toggleGroup>
+                            <ToggleGroup fx:id="groupeMap" />
+                  </toggleGroup>
                     </RadioButton>
-                    <RadioButton textFill="ghostwhite" fx:id="buttonMap2" mnemonicParsing="false" prefHeight="20.0" prefWidth="200.0" styleClass="label-bright" text="Map évoluée" toggleGroup="$groupeMap" />
-                </children>
-            </VBox>
-            <VBox layoutX="250.0" layoutY="232.0" prefHeight="100.0" prefWidth="122.0">
+                    <RadioButton fx:id="buttonMap2" mnemonicParsing="false" prefHeight="20.0" prefWidth="212.0" styleClass="label-bright" text="Map évoluée" textFill="ghostwhite" toggleGroup="$groupeMap" />
+            </children>
+         </HBox>
+            <VBox layoutX="368.0" layoutY="315.0" prefHeight="100.0" prefWidth="122.0">
                 <children>
-                    <Label textFill="ghostwhite" prefHeight="28.0" prefWidth="102.0" text="Niveau : " />
-                    <RadioButton textFill="rosybrown" fx:id="buttonFacile" mnemonicParsing="false" prefHeight="20.0" prefWidth="295.0" selected="true" styleClass="label-bright" text="Facile">
+                    <Label prefHeight="28.0" prefWidth="102.0" text="Niveau : " textFill="ghostwhite" />
+                    <RadioButton fx:id="buttonFacile" mnemonicParsing="false" prefHeight="20.0" prefWidth="295.0" selected="true" styleClass="label-bright" text="Facile" textFill="rosybrown">
                         <toggleGroup>
                             <ToggleGroup fx:id="groupeNiveau" />
                         </toggleGroup>
                     </RadioButton>
-                    <RadioButton textFill="orange" fx:id="buttonNormal" mnemonicParsing="false" prefHeight="20.0" prefWidth="398.0" styleClass="label-bright" text="Moyen" toggleGroup="$groupeNiveau" />
-                    <RadioButton textFill="red" fx:id="buttonDifficile" mnemonicParsing="false" prefHeight="20.0" prefWidth="298.0" styleClass="label-bright" text="Difficile" toggleGroup="$groupeNiveau" />
+                    <RadioButton fx:id="buttonNormal" mnemonicParsing="false" prefHeight="20.0" prefWidth="398.0" styleClass="label-bright" text="Moyen" textFill="orange" toggleGroup="$groupeNiveau" />
+                    <RadioButton fx:id="buttonDifficile" mnemonicParsing="false" prefHeight="20.0" prefWidth="298.0" styleClass="label-bright" text="Difficile" textFill="red" toggleGroup="$groupeNiveau" />
                 </children>
             </VBox>
-            <HBox layoutX="340.0" layoutY="415.0" prefHeight="100.0" prefWidth="200.0">
+            <HBox layoutX="368.0" layoutY="430.0" prefHeight="56.0" prefWidth="142.0">
                 <children>
-                    <Button onAction="#Jouer" mnemonicParsing="false" prefHeight="50.0" prefWidth="85.0" text="Lancer" />
+                    <Button mnemonicParsing="false" onAction="#Jouer" prefHeight="50.0" prefWidth="85.0" text="Lancer" />
                 </children>
             </HBox>
         </Pane>
