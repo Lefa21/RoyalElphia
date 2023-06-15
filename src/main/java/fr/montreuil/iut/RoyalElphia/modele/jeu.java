@@ -63,8 +63,6 @@ public class jeu {
     private int temps, nbTour;
     private Vague vague;
 
-    private boolean vagueS = false;
-
 
     public jeu(Terrain terrain, Niveau niveau, VBox vBox) {
         this.terrain = terrain;
@@ -203,7 +201,6 @@ public class jeu {
         return listeEnnemisTuée;
     }
 
-
     public final void setNbVague(int nbVague) {
         this.nbVague.set(nbVague);
     }
@@ -228,8 +225,6 @@ public class jeu {
         this.niveau.setNbEnnemis(this.niveau.getNbEnnemis() * 2);
         this.nbEnnemisRestant.setValue(this.niveau.getNbEnnemis());
         this.vague = new Vague(this.niveau.getNbEnnemis(),terrain);
-
-
     }
 
     // permet d'ajouter un ennemi qui a spawn sur le terrain dans la liste de notre modèle

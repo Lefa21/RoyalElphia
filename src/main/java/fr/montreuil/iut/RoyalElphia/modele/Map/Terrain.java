@@ -90,7 +90,7 @@ public class Terrain {
         boolean verif = false;
 
         // Méthode qui permet de vérifier si l'ennemi est arrivé à la base du joueur
-        if (x == pointArv.getX() * 32 + 16 && y == pointArv.getY() * 32 + 16)
+        if (x >= pointArv.getX() * 32 + 16 && y >= pointArv.getY() * 32 + 16)
             verif = true;
         return verif;
     }

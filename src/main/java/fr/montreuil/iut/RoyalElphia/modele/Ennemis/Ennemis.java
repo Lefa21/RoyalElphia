@@ -231,6 +231,10 @@ public abstract class Ennemis {
         }
         return affichage;
     }
+
+    public void setPvZero(){
+        this.pv.setValue(0);
+    }
 }
 
 
