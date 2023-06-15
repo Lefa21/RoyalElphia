@@ -35,14 +35,14 @@ public class VueEnnemi {
 
         if (ennemis instanceof gobelins) {
 
-            Image gobelin = new Image(new FileInputStream("src/main/resources/fr/montreuil/iut/RoyalElphia/Page_Fxml/gobelin.jpg"));
+            Image gobelin = new Image(new FileInputStream("src/main/resources/fr/montreuil/iut/RoyalElphia/ImageEnnemis/gobelin.jpg"));
             imV = new ImageView(gobelin);
             imV.setId(ennemis.getId());
             imV.translateXProperty().bind(ennemis.getxProperty().subtract(16));
             imV.translateYProperty().bind(ennemis.getyProperty().subtract(16));
             this.pane.getChildren().add(imV);
         } else if (ennemis instanceof Sorcières) {
-            Image sorciere = new Image(new FileInputStream("src/main/resources/fr/montreuil/iut/RoyalElphia/Page_Fxml/sorcière.png"));
+            Image sorciere = new Image(new FileInputStream("src/main/resources/fr/montreuil/iut/RoyalElphia/ImageEnnemis/sorcière.png"));
             imV = new ImageView(sorciere);
             imV.setId(ennemis.getId());
             imV.translateXProperty().bind(ennemis.getxProperty().subtract(16));
@@ -50,7 +50,7 @@ public class VueEnnemi {
             this.pane.getChildren().add(imV);}
 
         else if (ennemis instanceof GéantRoyal) {
-            Image golem = new Image(new FileInputStream("src/main/resources/fr/montreuil/iut/RoyalElphia/Page_Fxml/Golem(1).png"));
+            Image golem = new Image(new FileInputStream("src/main/resources/fr/montreuil/iut/RoyalElphia/ImageEnnemis/Golem(1).png"));
             imV = new ImageView(golem);
             imV.setId(ennemis.getId());
             imV.translateXProperty().bind(ennemis.getxProperty().subtract(16));
@@ -58,14 +58,14 @@ public class VueEnnemi {
             //circle.setFill(Color.BLACK);
             this.pane.getChildren().add(imV);
         } else if (ennemis instanceof Géant) {
-            Image Geant = new Image(new FileInputStream("src/main/resources/fr/montreuil/iut/RoyalElphia/Page_Fxml/Geant.jpg"));
+            Image Geant = new Image(new FileInputStream("src/main/resources/fr/montreuil/iut/RoyalElphia/ImageEnnemis/Geant.jpg"));
             imV = new ImageView(Geant);
             imV.setId(ennemis.getId());
             imV.translateXProperty().bind(ennemis.getxProperty().subtract(16));
             imV.translateYProperty().bind(ennemis.getyProperty().subtract(16));
             this.pane.getChildren().add(imV);
         } else if (ennemis instanceof Squelette) {
-            Image squelette = new Image(new FileInputStream("src/main/resources/fr/montreuil/iut/RoyalElphia/Page_Fxml/squelette.png"));
+            Image squelette = new Image(new FileInputStream("src/main/resources/fr/montreuil/iut/RoyalElphia/ImageEnnemis/squelette.png"));
             imV = new ImageView(squelette);
             imV.setId(ennemis.getId());
             imV.translateXProperty().bind(ennemis.getxProperty().subtract(16));

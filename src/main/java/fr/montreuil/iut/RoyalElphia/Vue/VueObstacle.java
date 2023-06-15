@@ -55,16 +55,18 @@ public class VueObstacle {
 
             switch (obstacle.getClass().getSimpleName()) {
                 case "BarricadeBois":
-                    obstacleImage = new Image(new FileInputStream("src/main/resources/fr/montreuil/iut/RoyalElphia/ImageTuile/pont.png"));
+
+                    obstacleImage = new Image(new FileInputStream("src/main/resources/fr/montreuil/iut/RoyalElphia/ImageObstacle/pont.png"));
                     break;
                 case "BarricadeFer":
-                    obstacleImage = new Image(new FileInputStream("src/main/resources/fr/montreuil/iut/RoyalElphia/ImageTuile/mur.png"));
+                    obstacleImage = new Image(new FileInputStream("src/main/resources/fr/montreuil/iut/RoyalElphia/ImageObstacle/mur.png"));
+
                     break;
                 case "BarricadeMetal":
-                    obstacleImage = new Image(new FileInputStream("src/main/resources/fr/montreuil/iut/RoyalElphia/Page_Fxml/départ.png"));
+                    obstacleImage = new Image(new FileInputStream("src/main/resources/fr/montreuil/iut/RoyalElphia/ImageObstacle/départ.png"));
                     break;
                 case "BarricadePierre":
-                    obstacleImage = new Image(new FileInputStream("src/main/resources/fr/montreuil/iut/RoyalElphia/Page_Fxml/rocher.png"));
+                    obstacleImage = new Image(new FileInputStream("src/main/resources/fr/montreuil/iut/RoyalElphia/ImageObstacle/rocher.png"));
                     break;
             }
 

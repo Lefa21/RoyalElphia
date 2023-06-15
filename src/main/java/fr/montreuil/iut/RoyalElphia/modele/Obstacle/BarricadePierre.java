@@ -6,7 +6,7 @@ public class BarricadePierre extends Obstacle {
 
         super(4,100);
 
-        this.setCoutAchat(10);
+        this.setCoutAchat(50);
         this.setCoutVente(4);
         this.setCoutAmelioration(2);
         this.setNiveauMaxAmelioration(4);

@@ -5,7 +5,7 @@ public class BarricadeMetal extends Obstacle{
 
         super(3, 100);
 
-        this.setCoutAchat(32);
+        this.setCoutAchat(30);
         this.setCoutVente(15);
         this.setCoutAmelioration(10);
         this.setNiveauMaxAmelioration(8);

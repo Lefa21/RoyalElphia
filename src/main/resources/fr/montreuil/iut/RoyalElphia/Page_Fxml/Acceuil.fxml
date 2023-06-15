@@ -8,21 +8,21 @@
 
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.image.Image?>
-<BorderPane prefHeight="500" prefWidth="800" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.montreuil.iut.RoyalElphia.Controller.SceneController">
+<BorderPane prefHeight="500" prefWidth="800" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.montreuil.iut.RoyalElphia.Controller.AccueilController">
 
     <center>
         <Pane>
             <children>
             <ImageView fitHeight="800.0" fitWidth="800.0" pickOnBounds="true" preserveRatio="true">
                 <image>
-                    <Image url="@fond-acceuil.jpg" />
+                    <Image url="@../ImageFond/fond-acceuil.jpg" />
                 </image>
             </ImageView>
             </children>
             <children>
                 <ImageView layoutX="260.0" fitHeight="200.0" fitWidth="600.0" pickOnBounds="true" preserveRatio="true">
                     <image>
-                        <Image url="@bienvenue.png" />
+                        <Image url="@../ImageFond/bienvenue.png" />
                     </image>
                 </ImageView>
             </children>
