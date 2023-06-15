@@ -55,10 +55,12 @@ public class VueObstacle {
 
             switch (obstacle.getClass().getSimpleName()) {
                 case "BarricadeBois":
+
                     obstacleImage = new Image(new FileInputStream("src/main/resources/fr/montreuil/iut/RoyalElphia/ImageObstacle/pont.png"));
                     break;
                 case "BarricadeFer":
                     obstacleImage = new Image(new FileInputStream("src/main/resources/fr/montreuil/iut/RoyalElphia/ImageObstacle/mur.png"));
+
                     break;
                 case "BarricadeMetal":
                     obstacleImage = new Image(new FileInputStream("src/main/resources/fr/montreuil/iut/RoyalElphia/ImageObstacle/départ.png"));

@@ -69,7 +69,9 @@ public static Stage stage;
     private Niveau niveau;
 
 
+
     private FXMLLoader fxmlLoader;
+
 
     @FXML
     private Label LabelPV, LabelnbEnnemisRestant, LabelArgent, LabelVague, LabelMort;
@@ -267,27 +269,6 @@ public static Button getMonBouton(){
     @FXML
     public void Pause(Event event) {
         jeu.arretLoop();
-    }
-
-
-    @FXML
-    public void Portee(ActionEvent actionEvent){
-        int c = 0;
-        while (panneauJeu.lookup("#"+"A"+c)!=null) {
-            panneauJeu.lookup("#" + "A" + c).setVisible(true);
-            c++;
-        }
-    }
-
-    @FXML
-    public void Annul(MouseEvent mouseEvent) {
-        if (mouseEvent.getClickCount() == 2) {
-            int c = 0;
-            while (panneauJeu.lookup("#" + "A" + c) != null) {
-                panneauJeu.lookup("#" + "A" + c).setVisible(false);
-                c++;
-            }
-        }
     }
 
     public void Rejouer(ActionEvent actionEvent) throws IOException{

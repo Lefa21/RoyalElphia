@@ -35,4 +35,11 @@ public class AccueilController implements Initializable {
         Platform.exit();
     }
 
+    public void Regle(ActionEvent actionEvent) throws IOException {
+        Stage newWindow = new Stage();
+        newWindow.setTitle("Les règles");
+        FXMLLoader loader = new FXMLLoader(HelloApplication.class.getResource("Page_Fxml/RegleDeJeu.fxml"));
+        newWindow.setScene(new Scene(loader.load()));
+        newWindow.show();
+    }
 }

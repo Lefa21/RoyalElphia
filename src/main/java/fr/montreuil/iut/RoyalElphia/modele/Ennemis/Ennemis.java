@@ -13,7 +13,7 @@ public abstract class Ennemis {
     protected Terrain terrain;
     public static int compteur = 0;
     private String id;
-    private int ptsDefense, Immunite, degatBase, butin,capaciteObstacle,capaciteDegatObstacle,capaciteVie,capaciteDegatsBase;
+    private int ptsDefense, Immunite, degatBase, butin, capaciteObstacle, capaciteDegatObstacle, capaciteVie, capaciteDegatsBase;
     private IntegerProperty pv;
 
 
@@ -23,9 +23,7 @@ public abstract class Ennemis {
     private int degatObstacle;
 
 
-
-
-    public Ennemis(Terrain terrain, int pv, int ptsDefense, int immunite, int degatBase, int butin,int capaciteObstacle,int capaciteDegatObstacle,int capaciteVie,int capaciteDegatsBase) {
+    public Ennemis(Terrain terrain, int pv, int ptsDefense, int immunite, int degatBase, int butin, int capaciteObstacle, int capaciteDegatObstacle, int capaciteVie, int capaciteDegatsBase) {
         this.id = "" + compteur;
         this.casesParcourues = new CasesParcourues();
         this.Immunite = immunite;
@@ -62,7 +60,7 @@ public abstract class Ennemis {
             this.pv.setValue(this.getPv() - x);
     }
 
-    public void améliorationPv(int pv){
+    public void améliorationPv(int pv) {
         this.pv.setValue(pv);
     }
 
@@ -205,13 +203,13 @@ public abstract class Ennemis {
 
     public int tabDirection(String s) {
         int retour = 0;
-        if (s.equals("DROITE"))
+        if (s.equals("DROITE") && ((this.getX() / 32) + 1) < 40)
             retour = terrain.getTabTerrain()[this.getY() / 32][(this.getX() / 32) + 1];
-        else if (s.equals("BAS"))
+        else if (s.equals("BAS") && ((this.getY() / 32) + 1) < 30)
             retour = terrain.getTabTerrain()[(this.getY() / 32) + 1][this.getX() / 32];
-        else if (s.equals("GAUCHE"))
+        else if (s.equals("GAUCHE") && ((this.getX() / 32) - 1) > -1)
             retour = terrain.getTabTerrain()[this.getY() / 32][(this.getX() / 32) - 1];
-        else if (s.equals("HAUT"))
+        else if (s.equals("HAUT") && ((this.getY() / 32) - 1) > -1)
             retour = terrain.getTabTerrain()[(this.getY() / 32) - 1][this.getX() / 32];
         return retour;
     }
@@ -230,6 +228,10 @@ public abstract class Ennemis {
             affichage = affichage + " laser";
         }
         return affichage;
+    }
+
+    public void setPvZero(){
+        this.pv.setValue(0);
     }
 }
 

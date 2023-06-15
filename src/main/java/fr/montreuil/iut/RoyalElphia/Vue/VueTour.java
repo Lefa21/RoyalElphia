@@ -88,12 +88,13 @@ public class VueTour {
                 tourImageView.setId(Integer.toString(IDImage));
                 Label label = new Label();
                 label.textProperty().bind(tour.getDegatProperty().asString());
-                label.translateXProperty().bind(tour.getPosXProperty().multiply(32).add(10));
-                label.translateYProperty().bind(tour.getPosYProperty().multiply(32).add(40));
+                label.translateXProperty().bind(tour.getPosXProperty().multiply(32).add(46));
+                label.translateYProperty().bind(tour.getPosYProperty().multiply(32).add(-32));
                 label.setBackground(Background.fill(Color.RED));
                 System.out.println();
                 label.setId(tour.getID() + "Lt");
                 IDImage++;
+                new VueProjectile(tour,panneauJeu);
                 panneauJeu.getChildren().add(tourImageView);
                 this.panneauJeu.getChildren().add(label);
                 this.tour = null;
@@ -232,6 +233,7 @@ public class VueTour {
                                 panneauJeu.getChildren().remove(x);
                                 this.jeu.getListeDeTour().remove(t);
                                 this.jeu.setArgent(-t.getCoutVente());
+
                                 t.TourDevientInoffensif(terrain, t.getListeCasesDegats());
                                 trouve = true;
                             }

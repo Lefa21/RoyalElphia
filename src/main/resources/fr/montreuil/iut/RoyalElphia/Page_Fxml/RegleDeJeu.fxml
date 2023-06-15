@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<Pane prefHeight="500.0" prefWidth="575.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+        <ImageView fitHeight="900.0" fitWidth="900.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@imageSombre.png" />
+            </image>
+        </ImageView>
+    </children>
+    <children>
+        <Text style="-fx-font-weight: bold" fill="ghostwhite" layoutX="225.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Les règles :" wrappingWidth="490.7294921875">
+                            <font>
+                                <Font size="19.0" />
+                            </font>
+                        </Text>
+            <Text style="-fx-font-weight: bold" fill="whitesmoke" layoutX="15.0" layoutY="65.0" text="Bienvenue sur RoyalElphia, pour commencer une partie cliquez sur jouer. Choisissez ensuite vos paramètres de partie, une map et un niveau puis lancez votre partie. Votre map s'affiche désormais. Vous avez un menu de tours ainsi que d'obstacles que vous pouvez acheter, vendre ou améliorer selon une mécanique expliquée sur la fenêtre de jeu. Lorsque vous cliquerez sur démarrer les vagues se lançeront jusqu'à votre victoire ou votre défaite, elles sont au nombre de 5. Les tours peuvent être posées seulement sur les cases qui entourent le chemin. Un ennemi tué rapporte de l'argent, un ennemi qui arrive au bout apporte de l'argent mais fait perdre des pv. Un menu des ennemis présents dans la vague actuelle ainsi que leurs pv est affiché à votre gauche. Vous avez à votre disposition des boutons vous permettant de mettre le jeu en pause ou de rejouer. A la fin d'une partie, une fenêtre vous annonçant si vous avez gagné ou perdu vous permet de rejouer ou quitter." wrappingWidth="490.7294921875">
+                <font>
+                    <Font size="16.0" />
+                </font>
+            </Text>
+    </children>
+</Pane>

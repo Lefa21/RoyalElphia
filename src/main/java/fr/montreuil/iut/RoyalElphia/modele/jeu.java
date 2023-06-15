@@ -1,6 +1,5 @@
 package fr.montreuil.iut.RoyalElphia.modele;
 
-import fr.montreuil.iut.RoyalElphia.Controller.HelloController;
 import fr.montreuil.iut.RoyalElphia.HelloApplication;
 import fr.montreuil.iut.RoyalElphia.modele.Map.CasesDégats;
 import fr.montreuil.iut.RoyalElphia.modele.Niveau.Niveau;
@@ -22,13 +21,21 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
+import javafx.util.Duration;
+
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.util.Duration;
 
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -55,8 +62,6 @@ public class jeu {
 
     private int temps, nbTour;
     private Vague vague;
-
-    private boolean vagueS = false;
 
 
     public jeu(Terrain terrain, Niveau niveau, VBox vBox) {
@@ -196,7 +201,6 @@ public class jeu {
         return listeEnnemisTuée;
     }
 
-
     public final void setNbVague(int nbVague) {
         this.nbVague.set(nbVague);
     }
@@ -221,8 +225,6 @@ public class jeu {
         this.niveau.setNbEnnemis(this.niveau.getNbEnnemis() * 2);
         this.nbEnnemisRestant.setValue(this.niveau.getNbEnnemis());
         this.vague = new Vague(this.niveau.getNbEnnemis(),terrain);
-
-
     }
 
     // permet d'ajouter un ennemi qui a spawn sur le terrain dans la liste de notre modèle
@@ -335,7 +337,6 @@ public class jeu {
         FXMLLoader loader = new FXMLLoader(HelloApplication.class.getResource("Page_Fxml/Perdu.fxml"));
         newWindow.setScene(new Scene(loader.load()));
         newWindow.show();
-        //((Stage) HelloController.getLabelPV().getScene().getWindow()).close();
     }
 
     public void initAnimation() {
@@ -346,8 +347,7 @@ public class jeu {
 
         KeyFrame kf = new KeyFrame(
 // on définit le FPS (nbre de frame par seconde)
-
-                Duration.seconds(0.005),
+                Duration.seconds(0.015),
                 // on définit ce qui se passe à chaque frame
                 // c'est un eventHandler d'ou le lambda
 
@@ -373,9 +373,8 @@ public class jeu {
                         }
                         temps++;
                         System.out.println("Ennemis spwan");
-                        }
-                        if (this.getPvJoueur() > 0 && (this.nbVague.getValue() == 5 && getNbEnnemisRestant()==0)) {
-                          //  Platform.exit();
+                    }
+                    if (this.getPvJoueur() > 0 && (this.nbVague.getValue() == 5 && getNbEnnemisRestant()==0)) {
                         try {
                             gagne();
                         } catch (IOException e) {
@@ -383,18 +382,17 @@ public class jeu {
                         }
                         gameLoop.stop();
                     }
-                        if (this.getPvJoueur() == 0 && getNbEnnemisRestant() > 0){
-                           // Platform.exit();
-                            try {
-                                perdu();
-                            } catch (IOException e) {
-                                throw new RuntimeException(e);
-                            }
-                            gameLoop.stop();
+                    if (this.getPvJoueur() == 0 && getNbEnnemisRestant() > 0){
+                        try {
+                            perdu();
+                        } catch (IOException e) {
+                            throw new RuntimeException(e);
                         }
+                        gameLoop.stop();
+                    }
                     temps++;
-                    })
-                );
+                })
+        );
         gameLoop.getKeyFrames().add(kf);
     }
 

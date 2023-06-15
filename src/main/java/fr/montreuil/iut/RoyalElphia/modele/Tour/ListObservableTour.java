@@ -24,6 +24,9 @@ public class ListObservableTour implements ListChangeListener<Tour> {
                 ) {
                     panneauJeu.getChildren().remove(panneauJeu.lookup("#" + a.getID()));
                     panneauJeu.getChildren().remove(panneauJeu.lookup("#"+a.getID()+"Lt"));
+                    for (int i = 0; i < a.getListeCasesDegats().size(); i++) {
+                        panneauJeu.getChildren().remove(panneauJeu.lookup("#"+i+"P"+a.getID()));
+                    }
                 }
             }
         }
