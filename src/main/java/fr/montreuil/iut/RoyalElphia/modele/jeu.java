@@ -408,23 +408,23 @@ public class jeu {
             ImageView imV = null;
 
             if (en instanceof gobelins) {
-                im = new Image(new FileInputStream("src/main/resources/fr/montreuil/iut/RoyalElphia/Page_Fxml/gobelin.jpg"));
+                im = new Image(new FileInputStream("src/main/resources/fr/montreuil/iut/RoyalElphia/ImageEnnemis/gobelin.jpg"));
                 imV = new ImageView(im);
                 vBox.getChildren().add(imV);
             } else if (en instanceof Sorcières) {
-                im = new Image(new FileInputStream("src/main/resources/fr/montreuil/iut/RoyalElphia/Page_Fxml/sorcière.png"));
+                im = new Image(new FileInputStream("src/main/resources/fr/montreuil/iut/RoyalElphia/ImageEnnemis/sorcière.png"));
                 imV = new ImageView(im);
                 vBox.getChildren().add(imV);
             } else if (en instanceof GéantRoyal) {
-                im = new Image(new FileInputStream("src/main/resources/fr/montreuil/iut/RoyalElphia/Page_Fxml/Golem(1).png"));
+                im = new Image(new FileInputStream("src/main/resources/fr/montreuil/iut/RoyalElphia/ImageEnnemis/Golem(1).png"));
                 imV = new ImageView(im);
                 vBox.getChildren().add(imV);
             } else if (en instanceof Géant) {
-                im = new Image(new FileInputStream("src/main/resources/fr/montreuil/iut/RoyalElphia/Page_Fxml/Geant.jpg"));
+                im = new Image(new FileInputStream("src/main/resources/fr/montreuil/iut/RoyalElphia/ImageEnnemis/Geant.jpg"));
                 imV = new ImageView(im);
                 vBox.getChildren().add(imV);
             } else if (en instanceof Squelette) {
-                im = new Image(new FileInputStream("src/main/resources/fr/montreuil/iut/RoyalElphia/Page_Fxml/squelette.png"));
+                im = new Image(new FileInputStream("src/main/resources/fr/montreuil/iut/RoyalElphia/ImageEnnemis/squelette.png"));
                 imV = new ImageView(im);
                 vBox.getChildren().add(imV);
             }
