@@ -120,7 +120,7 @@
                             <ImageView fx:id="bois" onMouseClicked="#cliqueObstacle" fitHeight="80" fitWidth="80.0"
                                        pickOnBounds="true" preserveRatio="true">
                                 <image>
-                                    <Image url="@pont.png"/>
+                                    <Image url="@../ImageTuile/pont.png"/>
                                 </image>
                             </ImageView>
                         </children>
@@ -146,7 +146,7 @@
                             <ImageView fx:id="fer" onMouseClicked="#cliqueObstacle" fitHeight="80.0" fitWidth="80.0"
                                        pickOnBounds="true" preserveRatio="true">
                                 <image>
-                                    <Image url="@mur.png"/>
+                                    <Image url="@../ImageTuile/mur.png"/>
                                 </image>
                             </ImageView>
                         </children>

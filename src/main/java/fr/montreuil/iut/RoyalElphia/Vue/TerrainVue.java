@@ -16,7 +16,7 @@ public class TerrainVue {
         for (int i = 0; i < tab.length; i++) {
             for (int j = 0; j < tab[i].length; j++) {
                 if (tab[i][j] == 4) {
-                    Image herbe = new Image(new FileInputStream("src/main/resources/fr/montreuil/iut/RoyalElphia/ImageTuile/herbe2.png"));
+                    Image herbe = new Image(new FileInputStream("src/main/resources/fr/montreuil/iut/RoyalElphia/ImageTuile/herbe3.png"));
                     ImageView herbe2 = new ImageView(herbe);
                     map.getChildren().add(herbe2);
                 } else if (tab[i][j] == 1) {
@@ -40,7 +40,7 @@ public class TerrainVue {
                     ImageView eau2 = new ImageView(eau);
                     map.getChildren().add(eau2);
                 } else if (tab[i][j] == 8) {
-                    Image pont = new Image(new FileInputStream("src/main/resources/fr/montreuil/iut/RoyalElphia/Page_Fxml/pont.png"));
+                    Image pont = new Image(new FileInputStream("src/main/resources/fr/montreuil/iut/RoyalElphia/ImageTuile/pont.png"));
                     ImageView pont2 = new ImageView(pont);
                     map.getChildren().add(pont2);
                 } else if (tab[i][j] == 10) {
@@ -48,15 +48,11 @@ public class TerrainVue {
                     ImageView rocher2 = new ImageView(rocher);
                     map.getChildren().add(rocher2);
                 } else if (tab[i][j] == 5) {
-                    Image mur = new Image(new FileInputStream("src/main/resources/fr/montreuil/iut/RoyalElphia/Page_Fxml/mur.png"));
+                    Image mur = new Image(new FileInputStream("src/main/resources/fr/montreuil/iut/RoyalElphia/ImageTuile/mur.png"));
                     ImageView mur2 = new ImageView(mur);
                     map.getChildren().add(mur2);
-                } else if (tab[i][j] == 15) {
-                    Image départ = new Image(new FileInputStream("src/main/resources/fr/montreuil/iut/RoyalElphia/Page_Fxml/départ.png"));
-                    ImageView départ2 = new ImageView(départ);
-                    map.getChildren().add(départ2);
                 } else if (tab[i][j] == 88) {
-                    Image t = new Image(new FileInputStream("src/main/resources/fr/montreuil/iut/RoyalElphia/TEST.png"));
+                    Image t = new Image(new FileInputStream("src/main/resources/fr/montreuil/iut/RoyalElphia/ImageTuile/lave.png"));
                     ImageView t2 = new ImageView(t);
                     map.getChildren().add(t2);
                 }
