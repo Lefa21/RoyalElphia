@@ -59,10 +59,6 @@ public class HelloController implements Initializable {
     private jeu jeu;
     private Niveau niveau;
 
-
-    private FXMLLoader fxmlLoader;
-
-
     @FXML
     public Label LabelPV, LabelnbEnnemisRestant, LabelArgent, LabelVague, LabelMort;
     @FXML
@@ -247,27 +243,6 @@ public class HelloController implements Initializable {
     @FXML
     public void Pause(Event event) {
         jeu.arretLoop();
-    }
-
-
-    @FXML
-    public void Portee(ActionEvent actionEvent){
-        int c = 0;
-        while (panneauJeu.lookup("#"+"A"+c)!=null) {
-            panneauJeu.lookup("#" + "A" + c).setVisible(true);
-            c++;
-        }
-    }
-
-    @FXML
-    public void Annul(MouseEvent mouseEvent) {
-        if (mouseEvent.getClickCount() == 2) {
-            int c = 0;
-            while (panneauJeu.lookup("#" + "A" + c) != null) {
-                panneauJeu.lookup("#" + "A" + c).setVisible(false);
-                c++;
-            }
-        }
     }
 
     public void Rejouer(ActionEvent actionEvent) throws IOException{

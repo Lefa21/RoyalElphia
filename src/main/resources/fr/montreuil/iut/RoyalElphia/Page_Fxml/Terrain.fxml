@@ -28,8 +28,6 @@
             </Button>
             <Button onAction="#Pause" text="Pause">
             </Button>
-            <Button onAction="#Portee" onMouseClicked="#Annul" text="Portée">
-            </Button>
         </VBox>
     </right>
     <left>
