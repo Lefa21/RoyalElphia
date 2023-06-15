@@ -20,7 +20,7 @@
                 </ImageView>
             </children>
             <children>
-                <ImageView layoutX="235.0" layoutY="50.0" fitHeight="100.0" fitWidth="350.0" pickOnBounds="true" preserveRatio="true">
+                <ImageView layoutX="130.0" layoutY="15.0" fitHeight="250.0" fitWidth="450.0" pickOnBounds="true" preserveRatio="true">
                     <image>
                         <Image url="@perdu.png" />
                     </image>

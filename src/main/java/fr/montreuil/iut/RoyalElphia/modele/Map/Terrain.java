@@ -2,7 +2,7 @@ package fr.montreuil.iut.RoyalElphia.modele.Map;
 
 import java.util.ArrayList;
 
-public abstract class Terrain {
+public class Terrain {
     private int hauteur;
     private int largeur;
     private int[][] Tabterrain;

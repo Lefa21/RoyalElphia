@@ -32,7 +32,12 @@
                   <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" fx:id="lancer" onAction="#LancerJeu" prefHeight="65.0" prefWidth="200.0" text="Jouer" />
                </children>
             </VBox>
-            <VBox layoutX="300.0" layoutY="250.0" prefHeight="200.0" prefWidth="379.0">
+             <VBox layoutX="300.0" layoutY="250.0" prefHeight="200.0" prefWidth="379.0">
+                 <children>
+                     <Button mnemonicParsing="false" prefHeight="65.0" prefWidth="200.0" onAction="#Regle" text="Règles" />
+                 </children>
+             </VBox>
+            <VBox layoutX="300.0" layoutY="320.0" prefHeight="200.0" prefWidth="379.0">
                <children>
                   <Button mnemonicParsing="false" prefHeight="65.0" prefWidth="200.0" onAction="#Quitter" text="Quitter" />
                </children>

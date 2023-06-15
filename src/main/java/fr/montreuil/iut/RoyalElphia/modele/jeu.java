@@ -379,8 +379,8 @@ public class jeu {
                         }
                         temps++;
                         System.out.println("Ennemis spwan");
-                        }
-                        if (this.getPvJoueur() > 0 && (this.nbVague.getValue() == 5 && getNbEnnemisRestant()==0)) {
+                    }
+                    if (this.getPvJoueur() > 0 && (this.nbVague.getValue() == 5 && getNbEnnemisRestant()==0)) {
                         try {
                             gagne();
                         } catch (IOException e) {
@@ -388,17 +388,17 @@ public class jeu {
                         }
                         gameLoop.stop();
                     }
-                        if (this.getPvJoueur() == 0 && getNbEnnemisRestant() > 0){
-                            try {
-                                perdu();
-                            } catch (IOException e) {
-                                throw new RuntimeException(e);
-                            }
-                            gameLoop.stop();
+                    if (this.getPvJoueur() == 0 && getNbEnnemisRestant() > 0){
+                        try {
+                            perdu();
+                        } catch (IOException e) {
+                            throw new RuntimeException(e);
                         }
+                        gameLoop.stop();
+                    }
                     temps++;
-                    })
-                );
+                })
+        );
         gameLoop.getKeyFrames().add(kf);
     }
 
