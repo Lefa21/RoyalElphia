@@ -347,7 +347,7 @@ public class jeu {
 
         KeyFrame kf = new KeyFrame(
 // on définit le FPS (nbre de frame par seconde)
-                Duration.seconds(0.015),
+                Duration.seconds(0.05),
                 // on définit ce qui se passe à chaque frame
                 // c'est un eventHandler d'ou le lambda
 
