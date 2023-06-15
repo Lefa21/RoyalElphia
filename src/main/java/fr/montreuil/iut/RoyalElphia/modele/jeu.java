@@ -21,11 +21,15 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Background;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
+import javafx.stage.Popup;
 import javafx.stage.Stage;
+import javafx.stage.Window;
 import javafx.util.Duration;
 
 import javafx.collections.FXCollections;
@@ -402,31 +406,33 @@ public class jeu {
 
         for (int i = 0; i < ennemis.size(); i++) {
             Ennemis en = ennemis.get(i);
-            Image im;
-            ImageView imV = null;
+            Image im = null;
 
             if (en instanceof gobelins) {
                 im = new Image(new FileInputStream("src/main/resources/fr/montreuil/iut/RoyalElphia/ImageEnnemis/gobelin.jpg"));
-                imV = new ImageView(im);
-                vBox.getChildren().add(imV);
             } else if (en instanceof Sorcières) {
                 im = new Image(new FileInputStream("src/main/resources/fr/montreuil/iut/RoyalElphia/ImageEnnemis/sorcière.png"));
-                imV = new ImageView(im);
-                vBox.getChildren().add(imV);
             } else if (en instanceof GéantRoyal) {
                 im = new Image(new FileInputStream("src/main/resources/fr/montreuil/iut/RoyalElphia/ImageEnnemis/Golem(1).png"));
-                imV = new ImageView(im);
-                vBox.getChildren().add(imV);
             } else if (en instanceof Géant) {
                 im = new Image(new FileInputStream("src/main/resources/fr/montreuil/iut/RoyalElphia/ImageEnnemis/Geant.jpg"));
-                imV = new ImageView(im);
-                vBox.getChildren().add(imV);
             } else if (en instanceof Squelette) {
                 im = new Image(new FileInputStream("src/main/resources/fr/montreuil/iut/RoyalElphia/ImageEnnemis/squelette.png"));
-                imV = new ImageView(im);
-                vBox.getChildren().add(imV);
+
             }
-            imV.setOnMouseClicked(e -> System.out.println(en.affichageImmunité()));
+            ImageView imV = new ImageView(im);
+            vBox.getChildren().add(imV);
+            Popup popup = new Popup();
+            Label label = new Label(""+en.affichageImmunité());
+            label.minHeight(180);
+            label.minWidth(180);
+            label.setBackground(Background.fill(Color.WHITE));
+            popup.getContent().add(label);
+            Stage stage = (Stage) vBox.getScene().getWindow();
+
+
+            imV.setOnMousePressed(e -> popup.show(stage));
+            imV.setOnMouseReleased(e -> popup.hide());
             Label l = new Label();
             l.textProperty().bind(en.getPvProperty().asString());
             vBox.getChildren().add(l);
