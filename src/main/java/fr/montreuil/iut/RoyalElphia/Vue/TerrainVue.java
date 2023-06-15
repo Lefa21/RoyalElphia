@@ -40,7 +40,7 @@ public class TerrainVue {
                     ImageView eau2 = new ImageView(eau);
                     map.getChildren().add(eau2);
                 } else if (tab[i][j] == 8) {
-                    Image pont = new Image(new FileInputStream("src/main/resources/fr/montreuil/iut/RoyalElphia/Page_Fxml/pont.png"));
+                    Image pont = new Image(new FileInputStream("src/main/resources/fr/montreuil/iut/RoyalElphia/ImageObstacle/pont.png"));
                     ImageView pont2 = new ImageView(pont);
                     map.getChildren().add(pont2);
                 } else if (tab[i][j] == 10) {
@@ -48,11 +48,11 @@ public class TerrainVue {
                     ImageView rocher2 = new ImageView(rocher);
                     map.getChildren().add(rocher2);
                 } else if (tab[i][j] == 5) {
-                    Image mur = new Image(new FileInputStream("src/main/resources/fr/montreuil/iut/RoyalElphia/Page_Fxml/mur.png"));
+                    Image mur = new Image(new FileInputStream("src/main/resources/fr/montreuil/iut/RoyalElphia/ImageObstacle/mur.png"));
                     ImageView mur2 = new ImageView(mur);
                     map.getChildren().add(mur2);
                 } else if (tab[i][j] == 15) {
-                    Image départ = new Image(new FileInputStream("src/main/resources/fr/montreuil/iut/RoyalElphia/Page_Fxml/départ.png"));
+                    Image départ = new Image(new FileInputStream("src/main/resources/fr/montreuil/iut/RoyalElphia/ImageObstacle/départ.png"));
                     ImageView départ2 = new ImageView(départ);
                     map.getChildren().add(départ2);
                 } else if (tab[i][j] == 88) {

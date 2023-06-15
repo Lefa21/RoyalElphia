@@ -12,7 +12,7 @@
             <children>
                 <ImageView fitHeight="800.0" fitWidth="800.0" pickOnBounds="true" preserveRatio="true">
                     <image>
-                        <Image url="@fond-acceuil.jpg" />
+                        <Image url="@../ImageFond/fond-acceuil.jpg" />
                     </image>
                 </ImageView>
             </children>
@@ -21,7 +21,7 @@
                 <Button layoutX="95.0" layoutY="198.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="90.0"  onAction="#rejoue" fx:id="Buttonrejouer" text="Rejouer" />
                 <ImageView fitHeight="100.0" fitWidth="350.0" layoutX="140.0" layoutY="50.0" pickOnBounds="true" preserveRatio="true">
                     <image>
-                        <Image url="@bravo.png" />
+                        <Image url="@../ImageFond/bravo.png" />
                     </image>
                 </ImageView>
             </children>

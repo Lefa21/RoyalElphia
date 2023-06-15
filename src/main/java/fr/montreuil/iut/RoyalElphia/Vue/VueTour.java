@@ -49,9 +49,7 @@ public class VueTour {
 
 
     public void PoserTour() throws FileNotFoundException {
-        for (int i = 0; i < this.jeu.getListeDeTour().size(); i++) {
-            System.out.println(this.jeu.getListeDeTour().size());
-        }
+
         int[][] tab = terrain.getTabTerrain();
         int posX = (int) this.x / 32;
         int posY = (int) this.y / 32;
@@ -59,19 +57,19 @@ public class VueTour {
             Image tourImage = null;
             switch (tour.getClass().getSimpleName()) {
                 case "TourABombe":
-                    tourImage = new Image(new FileInputStream("src/main/resources/fr/montreuil/iut/RoyalElphia/Page_Fxml/tt-PhotoRoom.png-PhotoRoom(2).png"));
+                    tourImage = new Image(new FileInputStream("src/main/resources/fr/montreuil/iut/RoyalElphia/ImageTour/tt-PhotoRoom.png-PhotoRoom(2).png"));
                     break;
                 case "TourBouleDeFeu":
-                    tourImage = new Image(new FileInputStream("src/main/resources/fr/montreuil/iut/RoyalElphia/Page_Fxml/TourFeuTerrain.png"));
+                    tourImage = new Image(new FileInputStream("src/main/resources/fr/montreuil/iut/RoyalElphia/ImageTour/TourFeuTerrain.png"));
                     break;
                 case "TourFleche":
-                    tourImage = new Image(new FileInputStream("src/main/resources/fr/montreuil/iut/RoyalElphia/Page_Fxml/TourFlecheM.png"));
+                    tourImage = new Image(new FileInputStream("src/main/resources/fr/montreuil/iut/RoyalElphia/ImageTour/TourFlecheM.png"));
                     break;
                 case "TourElectrique":
-                    tourImage = new Image(new FileInputStream("src/main/resources/fr/montreuil/iut/RoyalElphia/Page_Fxml/TourEclairM.png"));
+                    tourImage = new Image(new FileInputStream("src/main/resources/fr/montreuil/iut/RoyalElphia/ImageTour/TourEclairM.png"));
                     break;
                 case "TourLaser":
-                    tourImage = new Image(new FileInputStream("src/main/resources/fr/montreuil/iut/RoyalElphia/Page_Fxml/TourLaserView.png"));
+                    tourImage = new Image(new FileInputStream("src/main/resources/fr/montreuil/iut/RoyalElphia/ImageTour/TourLaserView.png"));
                     break;
             }
             if (tourImage != null) {

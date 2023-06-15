@@ -52,7 +52,7 @@ public class HelloController implements Initializable {
     private TilePane map;
 
     @FXML
-    public  Button ButtonRejouer;
+    public  Button ButtonRejouer,ButtonQuitter,ButtonPause,ButtonPortée;
 
     @FXML
     private VBox menuEnnemi;
@@ -91,7 +91,7 @@ public  Button getMonBouton(){
         if (this.ObstaclePose && obstacle == null && mouseEvent.getClickCount() == 2) {
             System.out.println("clique obstacle ");
             String imageId = ((ImageView) mouseEvent.getSource()).getId();
-            fr.montreuil.iut.RoyalElphia.modele.Obstacle.Obstacle obstacle = null;
+            Obstacle obstacle = null;
 
             switch (imageId) {
                 case "bois":
@@ -149,9 +149,9 @@ public  Button getMonBouton(){
     }
     @FXML
     public void poserItem(MouseEvent mouseEvent) throws FileNotFoundException {
+        double cliqueX = mouseEvent.getX();
+        double cliqueY = mouseEvent.getY();
         if(this.obstacle != null){
-            double cliqueX = mouseEvent.getX();
-            double cliqueY = mouseEvent.getY();
             System.out.println("obstacle poser ");
             VueObstacle vueObstacle = new VueObstacle(panneauJeu, obstacle, cliqueX, cliqueY, terrain,jeu);
             vueObstacle.PoserObstacle();
@@ -160,8 +160,6 @@ public  Button getMonBouton(){
         }
         if(this.tour != null){
             System.out.println("tour poser");
-            double cliqueX = mouseEvent.getX();
-            double cliqueY = mouseEvent.getY();
             VueTour vueTour = new VueTour(panneauJeu, tour, cliqueX, cliqueY, terrain, jeu);
             vueTour.PoserTour();
             this.TourPose = true;
@@ -169,6 +167,7 @@ public  Button getMonBouton(){
         }
         }
 
+        /*
 
     public void PoserTour(MouseEvent mouseEvent) throws FileNotFoundException {
         double cliqueX = mouseEvent.getX();
@@ -179,6 +178,8 @@ public  Button getMonBouton(){
         this.tour = vueTour.getTour();
     }
 
+
+         */
 
     public void créerNiveau(){
         int niveau = ChoixMapController.getNiveau();

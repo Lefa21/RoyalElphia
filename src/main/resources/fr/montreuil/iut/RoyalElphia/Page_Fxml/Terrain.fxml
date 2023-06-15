@@ -1,160 +1,127 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.image.*?>
-<?import java.lang.*?>
-<?import javafx.scene.layout.*?>
-
-
-<?import javafx.scene.image.*?>
-<?import java.lang.*?>
-<?import javafx.scene.layout.*?>
-
-
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.shape.Circle?>
-
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.text.Text?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+
+<?import javafx.scene.layout.TilePane?>
 <?import javafx.scene.text.Font?>
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
-            xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="fr.montreuil.iut.RoyalElphia.Controller.HelloController">
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.montreuil.iut.RoyalElphia.Controller.HelloController">
     <right>
-        <VBox>
-            <Button onAction="#Demarrer" text="Demarrer">
-            </Button>
-            <Button onAction="#Rejouer"  fx:id="ButtonRejouer" text="Rejouer">
-            </Button>
-            <Button onAction="#Pause" text="Pause">
-            </Button>
-            <Button onAction="#Portee" onMouseClicked="#Annul" text="Portée">
-            </Button>
-        </VBox>
-    </right>
-    <left>
         <VBox>
             <Label text="Menu ennemi">
             </Label>
             <VBox fx:id="menuEnnemi">
             </VBox>
         </VBox>
-    </left>
+    </right>
     <center>
-        <Pane prefHeight="960" prefWidth="1280" BorderPane.alignment="CENTER" fx:id="panneauJeu">
+        <Pane fx:id="panneauJeu" prefHeight="960" prefWidth="1280" BorderPane.alignment="CENTER">
             <children>
-                <TilePane onMouseClicked="#poserItem" fx:id="map" prefHeight="960" prefWidth="1280"/>
+                <TilePane fx:id="map" onMouseClicked="#poserItem" prefHeight="960" prefWidth="1280" />
                 <VBox layoutX="1280" prefHeight="90" prefWidth="90">
                     <children>
-                        <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="62.0" prefWidth="239.0"
-                               text="Menu tour" textAlignment="CENTER">
+                        <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="62.0" prefWidth="239.0" text="Menu tour" textAlignment="CENTER">
                             <font>
-                                <Font size="30.0"/>
+                                <Font size="30.0" />
                             </font>
                         </Label>
                     </children>
                     <HBox>
                         <children>
-                            <ImageView fx:id="bombe" onMouseClicked="#TourClique" fitHeight="150.0" fitWidth="138.0"
-                                       pickOnBounds="true" preserveRatio="true">
+                            <ImageView fx:id="bombe" fitHeight="150.0" fitWidth="138.0" onMouseClicked="#TourClique" pickOnBounds="true" preserveRatio="true">
                                 <image>
 
-                                    <Image fx:id="TourABombe" url="@../ImageTour/TirTourBombe.gif"/>
-                                    <Image url="@TourBombe.png"/>
+                                    <Image fx:id="TourABombe" url="@../ImageTour/TirTourBombe.gif" />
+                                    <Image url="@../ImageTour/TourBombe.png" />
                                 </image>
                             </ImageView>
                         </children>
                         <children>
-                            <ImageView fx:id="feu" onMouseClicked="#TourClique" fitHeight="150.0" fitWidth="138.0"
-                                       pickOnBounds="true" preserveRatio="true">
+                            <ImageView fx:id="feu" fitHeight="150.0" fitWidth="138.0" onMouseClicked="#TourClique" pickOnBounds="true" preserveRatio="true">
                                 <image>
-                                    <Image url="@TourFeu.png"/>
+                                    <Image url="@../ImageTour/TourFeu.png" />
                                 </image>
                             </ImageView>
                         </children>
                     </HBox>
                     <HBox>
                         <children>
-                            <ImageView fx:id="eclair" onMouseClicked="#TourClique" fitHeight="150.0" fitWidth="138.0"
-                                       pickOnBounds="true" preserveRatio="true">
+                            <ImageView fx:id="eclair" fitHeight="150.0" fitWidth="138.0" onMouseClicked="#TourClique" pickOnBounds="true" preserveRatio="true">
                                 <image>
-                                    <Image url="@TourEclair.png"/>
+                                    <Image url="@../ImageTour/TourEclair.png" />
                                 </image>
                             </ImageView>
                         </children>
                         <children>
-                            <ImageView fx:id="fleche" onMouseClicked="#TourClique" fitHeight="150.0" fitWidth="138.0"
-                                       pickOnBounds="true" preserveRatio="true">
+                            <ImageView fx:id="fleche" fitHeight="150.0" fitWidth="138.0" onMouseClicked="#TourClique" pickOnBounds="true" preserveRatio="true">
                                 <image>
-                                    <Image url="@TourFleche.png"/>
+                                    <Image url="@../ImageTour/TourFleche.png" />
                                 </image>
                             </ImageView>
                         </children>
                     </HBox>
+
+                    <HBox>
+                        <children>
+                            <ImageView fx:id="bois" fitHeight="80" fitWidth="80.0" onMouseClicked="#cliqueObstacle" pickOnBounds="true" preserveRatio="true">
+                                <image>
+                                    <Image url="@../ImageObstacle/pont.png" />
+                                </image>
+                            </ImageView>
+                        </children>
+                        <children>
+                            <ImageView fx:id="pierre" fitHeight="80.0" fitWidth="80.0" onMouseClicked="#cliqueObstacle" pickOnBounds="true" preserveRatio="true">
+                                <image>
+                                    <Image url="@../ImageObstacle/rocher.png" />
+                                </image>
+                            </ImageView>
+                        </children>
+                    </HBox>
+                    <HBox>
+                        <children>
+                            <ImageView fx:id="metal" fitHeight="80.0" fitWidth="80.0" onMouseClicked="#cliqueObstacle" pickOnBounds="true" preserveRatio="true">
+                                <image>
+                                    <Image url="@../ImageObstacle/départ.png" />
+                                </image>
+                            </ImageView>
+                        </children>
+                        <children>
+                            <ImageView fx:id="fer" fitHeight="80.0" fitWidth="80.0" onMouseClicked="#cliqueObstacle" pickOnBounds="true" preserveRatio="true">
+                                <image>
+                                    <Image url="@../ImageObstacle/mur.png" />
+                                </image>
+                            </ImageView>
+                        </children>
+                    </HBox>
+                    <Label text="Double clic pour vendre une tour" textFill="red" />
+                    <Label text="Alt+Clic pour améliorer une tour" textFill="red" />
                     <children>
-                        <ImageView fx:id="laser" onMouseClicked="#TourClique" fitHeight="110.0" fitWidth="108.0"
-                                   pickOnBounds="true" preserveRatio="true">
+                        <ImageView fx:id="laser" fitHeight="110.0" fitWidth="108.0" onMouseClicked="#TourClique" pickOnBounds="true" preserveRatio="true">
                             <image>
-                                <Image url="@TourLaser.png"/>
+                                <Image url="@../ImageTour/TourLaser.png" />
                             </image>
                         </ImageView>
                     </children>
                     <children>
-                        <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="50.0"
-                                prefWidth="232.0" text="Caractéristiques Tours" textOverrun="CENTER_ELLIPSIS"
-                                onAction="#BoutonCaracteristiques">
+                        <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#BoutonCaracteristiques" prefHeight="50.0" prefWidth="232.0" text="Caractéristiques Tours" textOverrun="CENTER_ELLIPSIS">
                             <font>
-                                <Font size="17.0"/>
+                                <Font size="17.0" />
                             </font>
                         </Button>
                     </children>
                     <children>
-                        <Label alignment="TOP_LEFT" contentDisplay="LEFT" prefHeight="62.0" prefWidth="239.0"
-                               text="Menu obstacles" textAlignment="LEFT">
+                        <Label alignment="TOP_LEFT" contentDisplay="LEFT" prefHeight="62.0" prefWidth="239.0" text="Menu obstacles" textAlignment="LEFT">
                             <font>
-                                <Font size="30.0"/>
+                                <Font size="30.0" />
                             </font>
                         </Label>
                     </children>
-
-                    <HBox>
-                        <children>
-                            <ImageView fx:id="bois" onMouseClicked="#cliqueObstacle" fitHeight="80" fitWidth="80.0"
-                                       pickOnBounds="true" preserveRatio="true">
-                                <image>
-                                    <Image url="@pont.png"/>
-                                </image>
-                            </ImageView>
-                        </children>
-                        <children>
-                            <ImageView fx:id="pierre" onMouseClicked="#cliqueObstacle" fitHeight="80.0" fitWidth="80.0"
-                                       pickOnBounds="true" preserveRatio="true">
-                                <image>
-                                    <Image url="@rocher.png"/>
-                                </image>
-                            </ImageView>
-                        </children>
-                    </HBox>
-                    <HBox>
-                        <children>
-                            <ImageView fx:id="metal" onMouseClicked="#cliqueObstacle" fitHeight="80.0" fitWidth="80.0"
-                                       pickOnBounds="true" preserveRatio="true">
-                                <image>
-                                    <Image url="@départ.png"/>
-                                </image>
-                            </ImageView>
-                        </children>
-                        <children>
-                            <ImageView fx:id="fer" onMouseClicked="#cliqueObstacle" fitHeight="80.0" fitWidth="80.0"
-                                       pickOnBounds="true" preserveRatio="true">
-                                <image>
-                                    <Image url="@mur.png"/>
-                                </image>
-                            </ImageView>
-                        </children>
-                    </HBox>
-                    <Label text="Double clic pour vendre une tour" textFill="red"/>
-                    <Label text="Alt+Clic pour améliorer une tour" textFill="red"/>
                 </VBox>
             </children>
 
@@ -162,42 +129,76 @@
                 <children>
                     <VBox prefHeight="200.0" prefWidth="100.0">
                         <children>
-                            <Label text="Point de vie :" textFill="#726943"/>
-                            <Label fx:id="LabelPV" prefHeight="31.0" prefWidth="93.0" style="-fx-border-color: blue;"
-                                   text=""/>
+                            <Label text="Point de vie :" textFill="#726943" />
+                            <Label fx:id="LabelPV" prefHeight="31.0" prefWidth="93.0" style="-fx-border-color: blue;" text="" />
                         </children>
                     </VBox>
                 </children>
                 <VBox prefHeight="200.0" prefWidth="100.0">
                     <children>
-                        <Label text="Argent :" textFill="#726943"/>
-                        <Label fx:id="LabelArgent" prefHeight="31.0" prefWidth="93.0" style="-fx-border-color: blue;"
-                               text="150 $"/>
+                        <Label text="Argent :" textFill="#726943" />
+                        <Label fx:id="LabelArgent" prefHeight="31.0" prefWidth="93.0" style="-fx-border-color: blue;" text="150 $" />
                     </children>
                 </VBox>
 
                 <VBox prefHeight="200.0" prefWidth="100.0">
                     <children>
-                        <Label text="Vague :" textFill="#726943"/>
-                        <Label fx:id="LabelVague" prefHeight="31.0" prefWidth="93.0" style="-fx-border-color: blue;"
-                               text="1"/>
+                        <Label text="Vague :" textFill="#726943" />
+                        <Label fx:id="LabelVague" prefHeight="31.0" prefWidth="93.0" style="-fx-border-color: blue;" text="1" />
                     </children>
                 </VBox>
 
                 <VBox prefHeight="200.0" prefWidth="100.0">
                     <children>
-                        <Label text="Ennemis restant :" textFill="#726943"/>
-                        <Label fx:id="LabelnbEnnemisRestant" prefHeight="31.0" prefWidth="93.0"
-                               style="-fx-border-color: blue;" text="1"/>
+                        <Label text="Ennemis restant :" textFill="#726943" />
+                        <Label fx:id="LabelnbEnnemisRestant" prefHeight="31.0" prefWidth="93.0" style="-fx-border-color: blue;" text="1" />
                     </children>
                 </VBox>
                 <VBox>
                     <children>
-                        <Label text="Morts :" textFill="#726943"/>
-                        <Label fx:id="LabelMort" prefHeight="31.0" prefWidth="93.0"
-                               style="-fx-border-color: blue;"/>
+                        <Label text="Morts :" textFill="#726943" />
+                        <Label fx:id="LabelMort" prefHeight="31.0" prefWidth="93.0" style="-fx-border-color: blue;" />
                     </children>
                 </VBox>
+            </HBox>
+
+               <HBox layoutX="989.0" layoutY="2.0" prefHeight="0.0" prefWidth="268.0">
+                <children>
+                    <VBox>
+                        <children>
+                            <Button fx:id="ButtonPortée" onAction="#Portee" onMouseClicked="#Annul" text="Portée">
+                            </Button>
+                        </children>
+
+                       </VBox>
+                </children>
+
+                   <children>
+                    <VBox>
+                        <children>
+                            <Button fx:id="ButtonPause" onAction="#Pause" text="Pause">
+                            </Button>
+                        </children>
+                    </VBox>
+                </children>
+
+                   <children>
+                    <VBox>
+                        <children>
+                            <Button fx:id="ButtonDemarrer" onAction="#Demarrer" text="Demarrer">
+                            </Button>
+                        </children>
+                    </VBox>
+                </children>
+
+                   <children>
+                    <VBox>
+                        <children>
+                            <Button fx:id="ButtonRejouer" onAction="#Rejouer" text="Rejouer">
+                            </Button>
+                        </children>
+                    </VBox>
+                </children>
             </HBox>
         </Pane>
     </center>
