@@ -5,6 +5,7 @@ import fr.montreuil.iut.RoyalElphia.Vue.*;
 import fr.montreuil.iut.RoyalElphia.modele.*;
 import fr.montreuil.iut.RoyalElphia.modele.Ennemis.Ennemis;
 import fr.montreuil.iut.RoyalElphia.modele.Ennemis.ListObsEnnemis;
+import fr.montreuil.iut.RoyalElphia.modele.Items.Items;
 import fr.montreuil.iut.RoyalElphia.modele.Map.Map2;
 import fr.montreuil.iut.RoyalElphia.modele.Map.Map_1;
 import fr.montreuil.iut.RoyalElphia.modele.Map.Terrain;
@@ -51,8 +52,15 @@ public class HelloController implements Initializable {
     @FXML
     private TilePane map;
 
+public static Stage stage;
     @FXML
-    public  Button ButtonRejouer,ButtonQuitter,ButtonPause,ButtonPortée;
+    public static Button ButtonRejouer;
+    @FXML
+    public Button ButtonQuitter;
+    @FXML
+    public Button ButtonPause;
+    @FXML
+    public Button ButtonPortée;
 
     @FXML
     private VBox menuEnnemi;
@@ -71,6 +79,8 @@ public class HelloController implements Initializable {
 
     private Tour tour;
     private Obstacle obstacle;
+
+    private Items items;
     private boolean TourPose = true;
    // private Boolean ItemPose = true;
 
@@ -82,7 +92,7 @@ public class HelloController implements Initializable {
 
 
 
-public  Button getMonBouton(){
+public static Button getMonBouton(){
     return ButtonRejouer;
 }
 
@@ -216,10 +226,11 @@ public  Button getMonBouton(){
         newWindow.show();
     }
 
+
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try {
-
             créationPartie();
 
             //demarre l'animation
@@ -241,6 +252,7 @@ public  Button getMonBouton(){
             jeu.getListeDeTour().addListener(listenerTour);
 
 
+
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }
@@ -248,6 +260,7 @@ public  Button getMonBouton(){
 
     @FXML
     public void Demarrer(Event event) {
+        stage = (Stage)this.panneauJeu.getScene().getWindow();
         jeu.lancementLoop();
     }
 
@@ -288,5 +301,12 @@ public  Button getMonBouton(){
         ((Stage)  LabelPV.getScene().getWindow()).close();
     }
 
+    public void caracteristiqueObstacle(ActionEvent actionEvent) throws IOException {
+        Stage newWindow = new Stage();
+        newWindow.setTitle("Caractéristiques des obstacles");
+        FXMLLoader loader = new FXMLLoader(HelloApplication.class.getResource("Page_Fxml/CaracteristiquesObstacles.fxml"));
+        newWindow.setScene(new Scene(loader.load()));
+        newWindow.show();
+    }
 }
 

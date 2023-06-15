@@ -49,7 +49,15 @@
                                 </image>
                             </ImageView>
                         </children>
+                        <children>
+                            <ImageView fx:id="laser" fitHeight="110.0" fitWidth="108.0" onMouseClicked="#TourClique" pickOnBounds="true" preserveRatio="true">
+                                <image>
+                                    <Image url="@../ImageTour/TourLaser.png" />
+                                </image>
+                            </ImageView>
+                        </children>
                     </HBox>
+
                     <HBox>
                         <children>
                             <ImageView fx:id="eclair" fitHeight="150.0" fitWidth="138.0" onMouseClicked="#TourClique" pickOnBounds="true" preserveRatio="true">
@@ -66,6 +74,20 @@
                             </ImageView>
                         </children>
                     </HBox>
+                    <children>
+                        <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#BoutonCaracteristiques" prefHeight="50.0" prefWidth="232.0" text="Caractéristiques Tours" textOverrun="CENTER_ELLIPSIS">
+                            <font>
+                                <Font size="17.0" />
+                            </font>
+                        </Button>
+                    </children>
+                    <children>
+                        <Label alignment="TOP_LEFT" contentDisplay="LEFT" prefHeight="62.0" prefWidth="239.0" text="Menu obstacles" textAlignment="LEFT">
+                            <font>
+                                <Font size="30.0" />
+                            </font>
+                        </Label>
+                    </children>
 
                     <HBox>
                         <children>
@@ -99,29 +121,15 @@
                             </ImageView>
                         </children>
                     </HBox>
-                    <Label text="Double clic pour vendre une tour" textFill="red" />
-                    <Label text="Alt+Clic pour améliorer une tour" textFill="red" />
                     <children>
-                        <ImageView fx:id="laser" fitHeight="110.0" fitWidth="108.0" onMouseClicked="#TourClique" pickOnBounds="true" preserveRatio="true">
-                            <image>
-                                <Image url="@../ImageTour/TourLaser.png" />
-                            </image>
-                        </ImageView>
-                    </children>
-                    <children>
-                        <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#BoutonCaracteristiques" prefHeight="50.0" prefWidth="232.0" text="Caractéristiques Tours" textOverrun="CENTER_ELLIPSIS">
+                        <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#caracteristiqueObstacle" prefHeight="50.0" prefWidth="300.0" text="Caractéristiques Obstacle" textOverrun="CENTER_ELLIPSIS">
                             <font>
                                 <Font size="17.0" />
                             </font>
                         </Button>
                     </children>
-                    <children>
-                        <Label alignment="TOP_LEFT" contentDisplay="LEFT" prefHeight="62.0" prefWidth="239.0" text="Menu obstacles" textAlignment="LEFT">
-                            <font>
-                                <Font size="30.0" />
-                            </font>
-                        </Label>
-                    </children>
+                    <Label text="Double clic pour vendre une tour" textFill="red" />
+                    <Label text="Alt+Clic pour améliorer une tour" textFill="red" />
                 </VBox>
             </children>
 

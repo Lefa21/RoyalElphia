@@ -35,6 +35,9 @@ public class GagnéControlleur implements Initializable {
         //Button boutonRecuperer = helloController.getMonBouton();
         //((Stage) boutonRecuperer.getScene().getWindow()).close();
         ((Stage)  Buttonrejouer.getScene().getWindow()).close();
+        HelloController.stage.close();
+
+
     }
 
     @FXML
@@ -48,6 +51,7 @@ public class GagnéControlleur implements Initializable {
         newWindow.setScene(new Scene(loader.load()));
         newWindow.show();
         ((Stage)  Buttonrejouer.getScene().getWindow()).close();
+        HelloController.stage.close();
         //((Stage) HelloController.().getScene().getWindow()).close();
     }
 }

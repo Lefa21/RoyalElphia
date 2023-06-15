@@ -1,5 +1,6 @@
 package fr.montreuil.iut.RoyalElphia.modele;
 
+import fr.montreuil.iut.RoyalElphia.Controller.HelloController;
 import fr.montreuil.iut.RoyalElphia.HelloApplication;
 import fr.montreuil.iut.RoyalElphia.modele.Map.CasesDégats;
 import fr.montreuil.iut.RoyalElphia.modele.Niveau.Niveau;

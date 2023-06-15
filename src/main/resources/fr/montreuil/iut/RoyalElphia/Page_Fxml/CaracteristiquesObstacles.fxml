@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="493.0" prefWidth="675.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+        <VBox layoutX="14.0" layoutY="14.0" prefHeight="476.0" prefWidth="570.0">
+            <children>
+                <HBox prefHeight="100.0" prefWidth="200.0">
+                    <children>
+                        <ImageView fitHeight="117.0" fitWidth="79.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@../ImageObstacle/mur.png" />
+                            </image>
+                        </ImageView>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Barricade en bois coûtant 10 $, et ayant comme point de vie 40." wrappingWidth="490.7294921875">
+                            <font>
+                                <Font size="19.0" />
+                            </font>
+                        </Text>
+                    </children>
+                </HBox>
+                <HBox prefHeight="104.0" prefWidth="644.0">
+                    <children>
+                        <ImageView fitHeight="103.0" fitWidth="61.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@../ImageObstacle/pont.png" />
+                            </image>
+                        </ImageView>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Barricade en fer coûtant 20 $. Il peut bloquer les gobelin ainsi que les squellette." wrappingWidth="577.9755859375">
+                            <font>
+                                <Font size="19.0" />
+                            </font>
+                        </Text>
+                    </children>
+                </HBox>
+                <HBox prefHeight="85.0" prefWidth="650.0">
+                    <children>
+                        <ImageView fitHeight="93.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@../ImageObstacle/départ.png" />
+                            </image>
+                        </ImageView>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Barricade en métal coûtant 30 $. Il peut bloquer les ennemis de type gobelins,sorcières,squellette." wrappingWidth="526.7294921875">
+                            <font>
+                                <Font size="19.0" />
+                            </font>
+                        </Text>
+                    </children>
+                </HBox>
+                <HBox prefHeight="100.0" prefWidth="200.0">
+                    <children>
+                        <ImageView fitHeight="150.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@../ImageObstacle/rocher.png" />
+                            </image>
+                        </ImageView>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Barricades en pierre coûtant 50 $. Il peut bloquer tout les types d'ennemis sauf le géant Royale" wrappingWidth="591.1962890625">
+                            <font>
+                                <Font size="19.0" />
+                            </font>
+                        </Text>
+                    </children>
+                </HBox>
+            </children>
+        </VBox>
+    </children>
+</Pane>
