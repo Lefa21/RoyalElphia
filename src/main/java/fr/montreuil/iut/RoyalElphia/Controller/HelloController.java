@@ -205,9 +205,9 @@ public static Button getMonBouton(){
     public void créerTerrain() {
         int terrain = ChoixMapController.getTerrain();
         if (terrain == 1) {
-            this.terrain = new Map_1();
-        } else if (terrain == 2) {
             this.terrain = new Map2();
+        } else if (terrain == 2) {
+            this.terrain = new Map_1();
         }
     }
 
