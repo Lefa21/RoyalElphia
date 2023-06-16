@@ -57,7 +57,7 @@ public class VueTour {
             Image tourImage = null;
             switch (tour.getClass().getSimpleName()) {
                 case "TourABombe":
-                    tourImage = new Image(new FileInputStream("src/main/resources/fr/montreuil/iut/RoyalElphia/ImageTour/tt-PhotoRoom.png-PhotoRoom(2).png"));
+                    tourImage = new Image(new FileInputStream("src/main/resources/fr/montreuil/iut/RoyalElphia/ImageTour/TourBombeM.png"));
                     break;
                 case "TourBouleDeFeu":
                     tourImage = new Image(new FileInputStream("src/main/resources/fr/montreuil/iut/RoyalElphia/ImageTour/TourFeuTerrain.png"));
@@ -137,72 +137,6 @@ public class VueTour {
     public Tour getTour() {
         return tour;
     }
-
-   /* public void VendreTour(ImageView i) {
-        i.setOnMouseClicked(event -> {
-            if (event.getClickCount() == 2 && !trouve) {
-                for (int j = 0; j < this.jeu.getListeDeTour().size(); j++) {
-                    Tour t = this.jeu.getListeDeTour().get(j);
-
-                    if (Integer.toString(t.getID()).equals(i.getId())) {
-                        panneauJeu.getChildren().remove(i);
-                        this.jeu.getListeDeTour().remove(t);
-                        this.jeu.setArgent(-t.getCoutVente());
-                        t.TourDevientInoffensif(terrain, t.getListeCasesDegats());
-                        trouve = true;
-                    }
-                }
-            }
-        });
-    }
-
-
-    public void AmeliorationTour(ImageView i) {
-        i.setOnMouseClicked(KeyEvent -> {
-            if (KeyEvent.isAltDown() && !trouve) {
-                for (int j = 0; j < this.jeu.getListeDeTour().size(); j++) {
-                    Tour t = this.jeu.getListeDeTour().get(j);
-                    if (Integer.toString(t.getID()).equals(i.getId())) {
-                        for (int k = 0; k < t.getListeCasesDegats().size(); k++) {
-                            t.getListeCasesDegats().get(k).setDegat(15);
-                        }
-                        this.jeu.setArgent(-t.getCoutAmelioration());
-                        System.out.println("amelioré");
-                        trouve = true;
-                    }
-                }
-            }
-        });
-    }*/
-
-    /*
-    public void AmeliorationEtVente(ImageView x) {
-        x.setOnMouseClicked(KeyEvent -> {
-            if (KeyEvent.isAltDown()) {
-                for (int i = 0; i < jeu.getListeDeTour().size(); i++) {
-                    Tour t = jeu.getListeDeTour().get(i);
-<<<<<<< HEAD
-                    if (t.getNiveauAmelioration() != t.getNiveauMaxAmelioration()) {
-                        if (t.getCoutAmelioration() <= jeu.getArgent()) {
-                            jeu.setArgent(t.getCoutAmelioration());
-                            t.setNiveauAmelioration(t.getNiveauAmelioration() + 1);
-                            t.setDegat();
-                            for (int j = 0; j < this.jeu.getListeDeTour().size(); j++) {
-                                t = this.jeu.getListeDeTour().get(j);
-                                if (Integer.toString(t.getID()).equals(x.getId())) {
-                                    for (int k = 0; k < t.getListeCasesDegats().size(); k++) {
-<<<<<<< HEAD
-                                        t.getListeCasesDegats().get(k).setDegat(15);
-                                    }}}
-                            t.setCoutAmelioration((int) (t.getCoutAmelioration() * 1.5));
-                            System.out.println("NIV " + t.getNiveauAmelioration() + " DEGAT " + t.getDegat());
-                        }
-                    } else
-                        System.out.println("niv MAX");
-                }
-            }
-     */
-
 
     public void AmeliorationEtVente(ImageView x) {
         x.setOnMouseClicked(KeyEvent -> {

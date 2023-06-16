@@ -18,7 +18,7 @@ public abstract class Ennemis {
     private int degatObstacle;
 
 
-    public Ennemis(Terrain terrain, int pv, int ptsDefense, int immunite, int degatBase, int butin, int capaciteObstacle,int degatObstacle) {
+    public Ennemis(Terrain terrain, int pv, int ptsDefense, int immunite, int degatBase, int butin, int capaciteObstacle, int degatObstacle) {
         this.id = "" + compteur;
         this.casesParcourues = new CasesParcourues();
         this.Immunite = immunite;
@@ -46,13 +46,25 @@ public abstract class Ennemis {
         return pv.getValue();
     }
 
-    public  void setPv(int x) {
+    public int getPtsDefense() {
+        return ptsDefense;
+    }
+
+    public void setPv(int degat) {
+
+        // Variable permettant de gérer le taux de dégat que l'ennemi va subir
+        double multiplicateur = 1;
+
+        // Si l'attaque de la tour est inférieur à la défense de l'ennemi il subit la moitié des dégats de la tour
+        if (degat < this.getPtsDefense())
+            multiplicateur = 0.5;
 
         // On vérifie si les pv de l'ennemi après avoir subit une attaque sont inférieurs à 0
-        if (getPv() - x < 0)
+        if (getPv() - (degat * multiplicateur) < 0) {
             this.pv.setValue(0);
-        else
-            this.pv.setValue(this.getPv() - x);
+        } else {
+            this.pv.setValue(this.getPv() - (degat * multiplicateur));
+        }
     }
 
     public void améliorationPv(int pv) {
