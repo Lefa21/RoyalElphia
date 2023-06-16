@@ -12,10 +12,9 @@ import fr.montreuil.iut.RoyalElphia.modele.Obstacle.BarricadeBois;
 import fr.montreuil.iut.RoyalElphia.modele.Obstacle.Obstacle;
 import fr.montreuil.iut.RoyalElphia.modele.Tour.Tour;
 import fr.montreuil.iut.RoyalElphia.modele.Tour.TourLaser;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.scene.layout.VBox;
 import org.junit.jupiter.api.Test;
+
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -24,7 +23,6 @@ class jeuTest {
     private Terrain t = new Map_1();
     private Niveau n = new Facile();
     private VBox v = new VBox();
-
     private jeu j = new jeu(t,n,v);
 
     @Test

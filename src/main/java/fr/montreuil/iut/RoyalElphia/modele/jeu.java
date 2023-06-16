@@ -113,7 +113,7 @@ public class jeu {
     public void degatBase(Ennemis e) {
         if (this.terrain.verifPArv(e.getX(), e.getY())) {
             System.out.println("-1 PV");
-            setPvJoueur(this.getPvJoueur() - 1);
+            setPvJoueur(this.getPvJoueur() - e.getDegatBase());
             this.getEnnemis().remove(e);
         }
     }
@@ -126,7 +126,7 @@ public class jeu {
     }
 
     public void augmentationCapacité(int nbTour,Ennemis e){
-        if(nbTour%128 ==0){
+        if(nbTour%128 == 0){
             System.out.println("augmentation capacité");
             if(e.getCapaciteDegatObstacle() == 1){
                 System.out.println("degat obs av:" + e.getDegatObstacle());
@@ -146,10 +146,10 @@ public class jeu {
             }
         }
     }
+
     public void ajouterTour(Tour t) {
         listeDeTour.add(t);
     }
-
 
     public void ajouterObstacle(Obstacle O) {
         listeObstacle.add(O);
@@ -337,7 +337,7 @@ public class jeu {
 
     public void perdu() throws IOException {
         Stage newWindow = new Stage();
-        newWindow.setTitle("T'es vraiment nul !");
+        newWindow.setTitle("Mince !");
         FXMLLoader loader = new FXMLLoader(HelloApplication.class.getResource("Page_Fxml/Perdu.fxml"));
         newWindow.setScene(new Scene(loader.load()));
         newWindow.show();
@@ -351,7 +351,7 @@ public class jeu {
 
         KeyFrame kf = new KeyFrame(
 // on définit le FPS (nbre de frame par seconde)
-                Duration.seconds(0.05),
+                Duration.seconds(0.025),
                 // on définit ce qui se passe à chaque frame
                 // c'est un eventHandler d'ou le lambda
 

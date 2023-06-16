@@ -19,20 +19,18 @@
             <Image url="@background.jpg"/>
         </image>
     </ImageView>
-    <right>
-        <VBox>
-            <Label textFill="white" text="Menu ennemi">
-            </Label>
-            <VBox fx:id="menuEnnemi">
-            </VBox>
-        </VBox>
-    </right>
     <center>
         <Pane fx:id="panneauJeu" prefHeight="960" prefWidth="1280" BorderPane.alignment="CENTER">
             <children>
                 <TilePane fx:id="map" onMouseClicked="#poserItem" prefHeight="960" prefWidth="1280"/>
-                <VBox layoutX="1280" prefHeight="350" prefWidth="90">
-                    <VBox>
+                <VBox layoutX="1730.0">
+                    <Label textFill="white" text="Menu ennemi">
+                    </Label>
+                    <VBox fx:id="menuEnnemi">
+                    </VBox>
+                </VBox>
+                <VBox layoutX="1295" prefHeight="350" prefWidth="90" style="-fx-border-color: red;" >
+                    <VBox style="-fx-background-color: black;">
                     <children>
                         <Label textFill="white" alignment="CENTER" contentDisplay="CENTER" prefHeight="62.0" prefWidth="239.0"
                                text="Menu tour" textAlignment="CENTER">
@@ -100,6 +98,7 @@
                         </children>
                     </VBox>
                     <VBox><Label text=""></Label></VBox>
+                    <VBox style="-fx-background-color: black;">
                     <children>
                         <Label textFill="white" alignment="TOP_LEFT" contentDisplay="LEFT" prefHeight="62.0" prefWidth="239.0"
                                text="Menu obstacles" textAlignment="LEFT">
@@ -153,6 +152,7 @@
                             </font>
                         </Button>
                     </children>
+                    </VBox>
                     <VBox><Label text=""></Label></VBox>
                     <Label textFill="white" text="Double clic pour vendre une tour"><font>
                     <Font size="14.0"/>
