@@ -74,6 +74,7 @@ public class ChoixMapController implements Initializable {
             FXMLLoader loader = new FXMLLoader(LancementJeu.class.getResource("Page_Fxml/Terrain.fxml"));
             newWindow.setScene(new Scene(loader.load(),1920, 1080));
             newWindow.show();
+        ((Stage)  buttonFacile.getScene().getWindow()).close();
     }
 
     // La méthode RetourMenu permet de revenir au menu du jeu
