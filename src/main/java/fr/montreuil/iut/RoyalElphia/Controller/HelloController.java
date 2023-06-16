@@ -52,7 +52,7 @@ public class HelloController implements Initializable {
     @FXML
     private TilePane map;
 
-public static Stage stage;
+    public static Stage stage;
     @FXML
     public static Button ButtonRejouer;
     @FXML
@@ -68,25 +68,16 @@ public static Stage stage;
     private jeu jeu;
     private Niveau niveau;
 
-
-
-    private FXMLLoader fxmlLoader;
-
-
     @FXML
     private Label LabelPV, LabelnbEnnemisRestant, LabelArgent, LabelVague, LabelMort;
     @FXML
     private Pane panneauJeu;
-    private VueEnnemi vueEnnemi;
 
     private Tour tour;
     private Obstacle obstacle;
 
     private Items items;
     private boolean TourPose = true;
-   // private Boolean ItemPose = true;
-
-    // private Boolean ItemPose = true;
 
     private boolean ObstaclePose = true;
     private VueTour vt = new VueTour();
@@ -94,9 +85,9 @@ public static Stage stage;
 
 
 
-public static Button getMonBouton(){
-    return ButtonRejouer;
-}
+    public static Button getMonBouton(){
+        return ButtonRejouer;
+    }
 
     @FXML
     public void cliqueObstacle(MouseEvent mouseEvent) throws FileNotFoundException {
@@ -177,21 +168,7 @@ public static Button getMonBouton(){
             this.TourPose = true;
             this.tour = vueTour.getTour();
         }
-        }
-
-        /*
-
-    public void PoserTour(MouseEvent mouseEvent) throws FileNotFoundException {
-        double cliqueX = mouseEvent.getX();
-        double cliqueY = mouseEvent.getY();
-        VueTour vueTour = new VueTour(panneauJeu, tour, cliqueX, cliqueY, terrain, jeu);
-        vueTour.PoserTour();
-        this.TourPose = true;
-        this.tour = vueTour.getTour();
     }
-
-
-         */
 
     public void créerNiveau(){
         int niveau = ChoixMapController.getNiveau();
@@ -262,7 +239,6 @@ public static Button getMonBouton(){
 
     @FXML
     public void Demarrer(Event event) {
-        //stage = (Stage)this.panneauJeu.getScene().getWindow();
         jeu.lancementLoop();
     }
 
@@ -272,8 +248,6 @@ public static Button getMonBouton(){
     }
 
     public void Rejouer(ActionEvent actionEvent) throws IOException{
-      // Stage stage =  SceneController.fermetureStage();
-        //stage.close();
         Stage newWindow = new Stage();
         newWindow.setTitle("Paramètres de ma partie");
         FXMLLoader loader = new FXMLLoader(HelloApplication.class.getResource("Page_Fxml/ChoixMap.fxml"));

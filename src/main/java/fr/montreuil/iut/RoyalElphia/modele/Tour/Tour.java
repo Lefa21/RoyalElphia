@@ -13,9 +13,7 @@ public class Tour extends Items {
 
     private int PorteeAttaque;
     private int TypeAttaque;
-    private int DureeINtervalleAttaque;
     private int NombreAttaqueMax;
-    private int TempsRecharge;
     private IntegerProperty degat;
 
     private ArrayList<CasesDégats> listeCasesDegats;
@@ -52,23 +50,6 @@ public class Tour extends Items {
         return TypeAttaque;
     }
 
-    public void setTypeAttaque(int typeAttaque) {
-        TypeAttaque = typeAttaque;
-    }
-
-    public void setPorteeAttaque(int porteeAttaque) {
-        PorteeAttaque = porteeAttaque;
-    }
-
-    public int getNombreAttaqueMax() {
-        return NombreAttaqueMax;
-    }
-
-    public void setNombreAttaqueMax(int nombreAttaqueMax) {
-        NombreAttaqueMax = nombreAttaqueMax;
-    }
-
-
 
     public ArrayList<CasesDégats> rayonDegat(Terrain terrain, int x, int y, int degat, Pane pane) throws ArrayIndexOutOfBoundsException{
         this.listeCasesDegats = new ArrayList<>();
@@ -98,26 +79,11 @@ public class Tour extends Items {
                 listeCasesDegats.add(c4);
                 c4.getDegatProperty().bind(this.getDegatProperty());
             }
-           /*CasesDégats c5 = new CasesDégats((x * 32) - (32 * i) + 16, (y * 32) - (32 * i) + 16, degat, this.getTypeAttaque());
-           terrain.ajouterCaseDegat(c5);
-           listeCasesDegats.add(c5);
-
-           CasesDégats c6 = new CasesDégats((x * 32) - (32 * i) + 16, (y * 32) + (32 * i) + 16, degat, this.getTypeAttaque());
-           terrain.ajouterCaseDegat(c6);
-           listeCasesDegats.add(c6);
-
-           CasesDégats c7 = new CasesDégats((x * 32) + (32 * i) + 16, (y * 32) + (32 * i) + 16, degat, this.getTypeAttaque());
-           terrain.ajouterCaseDegat(c7);
-           listeCasesDegats.add(c7);
-
-           CasesDégats c8 = new CasesDégats((x * 32) + (32 * i) + 16, (y * 32) - (32 * i) + 16, degat, this.getTypeAttaque());
-           terrain.ajouterCaseDegat(c8);
-           listeCasesDegats.add(c8);*/
         }
         return listeCasesDegats;
     }
 
-    public void TourDevientInoffensif(Terrain terrain, ArrayList<CasesDégats> listeCasesDegats) {
+    public void TourDevientInoffensif(Terrain terrain, ArrayList<CasesDégats> listeCasesDegats) {          //Enleve toutes les cases dégats associées à une tour.
         terrain.getCasesDégats().removeAll(listeCasesDegats);
     }
 

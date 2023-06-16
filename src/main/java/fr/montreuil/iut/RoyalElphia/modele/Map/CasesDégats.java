@@ -13,7 +13,6 @@ public class CasesDégats extends Cases {
     private IntegerProperty degat;
     static int compt = 0;
     private int typeAttaque; // Permet de savoir sur quel ennemi la tour va faire des dégâts
-    private String direction; // Permet une construction de la case dégât en fonction de sa direction
 
     public CasesDégats(int x, int y, int degat, int typeAttaque, String direction, int multi, Pane pane) {
         super(x, y);
@@ -71,8 +70,5 @@ public class CasesDégats extends Cases {
         return verif;
     }
 
-    public void setDegat(int degat) {
-        this.degat.setValue(getDegat() + degat);
-    }
 }
 

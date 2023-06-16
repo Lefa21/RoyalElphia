@@ -54,13 +54,6 @@ public class ChoixMapController implements Initializable {
         return ChoixMapController.niveau;
     }
 
-    /*
-    public  Stage fermetureStage(){
-        return this.stage;
-    }
-
-
-     */
     public static int getTerrain() {
         return ChoixMapController.terrain;
     }

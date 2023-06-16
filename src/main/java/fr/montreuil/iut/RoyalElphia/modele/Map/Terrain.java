@@ -3,8 +3,7 @@ package fr.montreuil.iut.RoyalElphia.modele.Map;
 import java.util.ArrayList;
 
 public class Terrain {
-    private int hauteur;
-    private int largeur;
+
     private int[][] Tabterrain;
     private Cases pointDep, pointArv;
 
@@ -28,14 +27,6 @@ public class Terrain {
         return this.Tabterrain;
     }
 
-    public int getWidth() {
-        return largeur;
-    }
-
-    public int getHeight() {
-        return hauteur;
-    }
-
     public Cases getPointDep() {
         return this.pointDep;
     }
@@ -46,10 +37,6 @@ public class Terrain {
 
     public void setTabterrain(int[][] tabterrain) {
         Tabterrain = tabterrain;
-    }
-
-    public Cases getPointArv() {
-        return this.pointArv;
     }
 
     public void setPointArv(Cases pointArv) {

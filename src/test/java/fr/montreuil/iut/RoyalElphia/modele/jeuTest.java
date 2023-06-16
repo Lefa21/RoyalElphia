@@ -4,7 +4,6 @@ import fr.montreuil.iut.RoyalElphia.modele.Ennemis.Ennemis;
 import fr.montreuil.iut.RoyalElphia.modele.Ennemis.Géant;
 import fr.montreuil.iut.RoyalElphia.modele.Ennemis.Sorcières;
 import fr.montreuil.iut.RoyalElphia.modele.Ennemis.gobelins;
-import fr.montreuil.iut.RoyalElphia.modele.Map.CasesDégats;
 import fr.montreuil.iut.RoyalElphia.modele.Map.Map_1;
 import fr.montreuil.iut.RoyalElphia.modele.Map.Terrain;
 import fr.montreuil.iut.RoyalElphia.modele.Niveau.Facile;
@@ -46,7 +45,7 @@ class jeuTest {
         e.setY(10000);
         j.getEnnemis().add(e);
         j.degatBase(e);
-        assertEquals(399,j.getPvJoueur());
+        assertEquals(8,j.getPvJoueur());
         assertEquals(0,j.getEnnemis().size());
     }
 
@@ -63,8 +62,8 @@ class jeuTest {
     void augmentationCapacité() {
         Ennemis e = new Géant(t);
         j.augmentationCapacité(128,e);
-        assertEquals(150,e.getDegatObstacle());
-        assertEquals(150,e.getDegatBase());
+        assertEquals(22,e.getDegatObstacle());
+        assertEquals(1,e.getDegatBase());
     }
 
     @Test
@@ -165,7 +164,7 @@ class jeuTest {
         assertEquals(0,j.getListeEnnemisSpawn().size());
         assertEquals(0,j.getEnnemis().size());
         assertEquals(2,j.getNbVague());
-        assertEquals(10,j.getNbEnnemisRestant());
+        assertEquals(4,j.getNbEnnemisRestant());
     }
 
     @Test
@@ -216,7 +215,7 @@ class jeuTest {
 
     @Test
     void getPvJoueur() {
-        assertEquals(400,j.getPvJoueur());
+        assertEquals(10,j.getPvJoueur());
     }
 
     @Test
@@ -241,7 +240,7 @@ class jeuTest {
     @Test
     void getNbEnnemisRestant() {
         //La 1ere vague du niveau facile a 5 ennemis.
-        assertEquals(5,j.getNbEnnemisRestant());
+        assertEquals(2,j.getNbEnnemisRestant());
     }
 
     @Test

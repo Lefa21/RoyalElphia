@@ -9,16 +9,12 @@ import javafx.beans.property.SimpleIntegerProperty;
 public abstract class Ennemis {
 
     private IntegerProperty xProperty, yProperty;
-    // private int vitesse; // vitesse de deplacement
+
     protected Terrain terrain;
     public static int compteur = 0;
     private String id;
     private int ptsDefense, Immunite, degatBase, butin, capaciteObstacle, capaciteDegatObstacle, capaciteVie, capaciteDegatsBase;
     private IntegerProperty pv;
-
-
-    //private Capacite capacite;
-
     private CasesParcourues casesParcourues;
     private int degatObstacle;
 
@@ -67,10 +63,6 @@ public abstract class Ennemis {
 
     public IntegerProperty getPvProperty() {
         return this.pv;
-    }
-
-    public int getPtsDefense() {
-        return ptsDefense;
     }
 
     public int getImmunite() {
