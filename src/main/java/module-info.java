@@ -19,4 +19,6 @@ module jeu.royalelphia {
     opens fr.montreuil.iut.RoyalElphia.modele.Map to javafx.fxml;
     exports fr.montreuil.iut.RoyalElphia.modele.Tour;
     opens fr.montreuil.iut.RoyalElphia.modele.Tour to javafx.fxml;
+    exports fr.montreuil.iut.RoyalElphia.modele.Niveau;
+    opens fr.montreuil.iut.RoyalElphia.modele.Niveau to javafx.fxml;
 }

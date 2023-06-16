@@ -8,17 +8,12 @@ import javafx.beans.property.SimpleIntegerProperty;
 
 public abstract class Ennemis {
 
-    private IntegerProperty xProperty, yProperty;
-    // private int vitesse; // vitesse de deplacement
     protected Terrain terrain;
+    private IntegerProperty xProperty, yProperty;
     public static int compteur = 0;
     private String id;
-    private int ptsDefense, Immunite, degatBase, butin, capaciteObstacle, capaciteDegatObstacle, capaciteVie, capaciteDegatsBase;
+    private int ptsDefense, Immunite, degatBase, butin, capaciteObstacle;
     private IntegerProperty pv;
-
-
-    //private Capacite capacite;
-
     private CasesParcourues casesParcourues;
     private int degatObstacle;
 
@@ -35,6 +30,7 @@ public abstract class Ennemis {
         this.degatObstacle = degatObstacle;
         compteur++;
         this.terrain = terrain;
+
         /* On multiplie par 32 la case de départ du terrain, pour adapter les dimensions du tableau aux dimensions du
          terrains et on ajoute 16 pour mettre l'ennemi au centre de la case*/
         this.xProperty = new SimpleIntegerProperty(terrain.getPointDep().getX() * 32 + 16);
@@ -50,7 +46,9 @@ public abstract class Ennemis {
         return pv.getValue();
     }
 
-    public final void setPv(int x) {
+    public  void setPv(int x) {
+
+        // On vérifie si les pv de l'ennemi après avoir subit une attaque sont inférieurs à 0
         if (getPv() - x < 0)
             this.pv.setValue(0);
         else
@@ -67,10 +65,6 @@ public abstract class Ennemis {
 
     public IntegerProperty getPvProperty() {
         return this.pv;
-    }
-
-    public int getPtsDefense() {
-        return ptsDefense;
     }
 
     public int getImmunite() {
@@ -93,7 +87,6 @@ public abstract class Ennemis {
         return xProperty;
     }
 
-
     public final void setX(int n) {
         xProperty.setValue(n);
     }
@@ -109,7 +102,6 @@ public abstract class Ennemis {
     public int getCapaciteObstacle() {
         return capaciteObstacle;
     }
-
 
     public final void setY(int n) {
         yProperty.setValue(n);

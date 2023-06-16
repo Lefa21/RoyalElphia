@@ -1,7 +1,6 @@
 package fr.montreuil.iut.RoyalElphia.modele.Ennemis;
 
 import fr.montreuil.iut.RoyalElphia.Vue.VueEnnemi;
-import fr.montreuil.iut.RoyalElphia.modele.Ennemis.Ennemis;
 import fr.montreuil.iut.RoyalElphia.modele.jeu;
 import javafx.collections.ListChangeListener;
 import javafx.scene.layout.Pane;
@@ -19,8 +18,9 @@ public class ListObsEnnemis implements ListChangeListener<Ennemis> {
 
     @Override
     public void onChanged(Change<? extends Ennemis> c) {
-        // System.out.println("changement");
+
         while (c.next()) {
+
             if (c.wasAdded()) {
                 for (Ennemis a : c.getAddedSubList()) {
                     VueEnnemi vueEnm = new VueEnnemi(panneauJeu);
@@ -34,11 +34,22 @@ public class ListObsEnnemis implements ListChangeListener<Ennemis> {
             } else if (c.wasRemoved()) {
                 for (Ennemis a : c.getRemoved()
                 ) {
+                    // On augmente le compteur de mort
                     jeu.setComptEnnemiTue();
+
+                    // On récupère le butin de l'ennemi et on l'ajoute à la cagnotte
                     jeu.setArgent(-a.getButin());
+
+                    // On ajoute un ennemi à la liste des morts du jeu
                     jeu.ajoutEnnemisMort(a);
-                    this.jeu.setNbEnnemisRestant(this.jeu.getNbEnnemisRestant() - 1);
+
+                    // On retire l'ennemi du nombre d'ennemi restant
+                    jeu.setNbEnnemisRestant(jeu.getNbEnnemisRestant() - 1);
+
+                    // On supprime l'image de l'ennemi dans la map
                     panneauJeu.getChildren().remove(panneauJeu.lookup("#" + a.getId()));
+
+                    // On supprime le label (indiquant les pv) de l'ennemi dans la map
                     panneauJeu.getChildren().remove(panneauJeu.lookup("#"+a.getId()+"L"));
                 }
             }

@@ -19,6 +19,8 @@ public class VueProjectile {
         // On crée un projectile pour chaque case dégât de la tour
         for (int i = 0; i < tour.getListeCasesDegats().size(); i++) {
             Image im = null;
+
+            // Cette variable permet de récuperer la position de la case dégât pour placer l'image
             CasesDégats c = tour.getListeCasesDegats().get(i);
             if (tour instanceof TourABombe) {
                 im = new Image(new FileInputStream("src/main/resources/fr/montreuil/iut/RoyalElphia/ImageProjectile/Bombe.gif"));

@@ -75,44 +75,29 @@ public class Tour extends Items {
 
         for (int i = 1; i <= this.getPorteeAttaque(); i++) {
             if ((y-i) > -1 && (terrain.getTabTerrain()[y - i][x] == 9 || terrain.getTabTerrain()[y - i][x] == 8)) {
-                CasesDégats c1 = new CasesDégats(x, y, degat, this.getTypeAttaque(), "H", i, pane);
+                CasesDégats c1 = new CasesDégats(x, y, degat, this.getTypeAttaque(), "H", i);
                 terrain.ajouterCaseDegat(c1);
                 listeCasesDegats.add(c1);
                 c1.getDegatProperty().bind(this.getDegatProperty());
             }
             if ((x+i) < 40  && (terrain.getTabTerrain()[y][x + i] == 9 || terrain.getTabTerrain()[y][x + i] == 8)) {
-                CasesDégats c2 = new CasesDégats(x, y, degat, this.getTypeAttaque(), "D", i, pane);
+                CasesDégats c2 = new CasesDégats(x, y, degat, this.getTypeAttaque(), "D", i);
                 terrain.ajouterCaseDegat(c2);
                 listeCasesDegats.add(c2);
                 c2.getDegatProperty().bind(this.getDegatProperty());
             }
             if ((y+i) < 30 &&  (terrain.getTabTerrain()[y + i][x] == 9 || terrain.getTabTerrain()[y + i][x] == 8)) {
-                CasesDégats c3 = new CasesDégats(x, y, degat, this.getTypeAttaque(), "B", i, pane);
+                CasesDégats c3 = new CasesDégats(x, y, degat, this.getTypeAttaque(), "B", i);
                 terrain.ajouterCaseDegat(c3);
                 listeCasesDegats.add(c3);
                 c3.getDegatProperty().bind(this.getDegatProperty());
             }
             if ((x-i) > -1 &&  (terrain.getTabTerrain()[y][x - i] == 9 || terrain.getTabTerrain()[y][x - i] == 8)) {
-                CasesDégats c4 = new CasesDégats(x, y, degat, this.getTypeAttaque(), "G", i, pane);
+                CasesDégats c4 = new CasesDégats(x, y, degat, this.getTypeAttaque(), "G", i);
                 terrain.ajouterCaseDegat(c4);
                 listeCasesDegats.add(c4);
                 c4.getDegatProperty().bind(this.getDegatProperty());
             }
-           /*CasesDégats c5 = new CasesDégats((x * 32) - (32 * i) + 16, (y * 32) - (32 * i) + 16, degat, this.getTypeAttaque());
-           terrain.ajouterCaseDegat(c5);
-           listeCasesDegats.add(c5);
-
-           CasesDégats c6 = new CasesDégats((x * 32) - (32 * i) + 16, (y * 32) + (32 * i) + 16, degat, this.getTypeAttaque());
-           terrain.ajouterCaseDegat(c6);
-           listeCasesDegats.add(c6);
-
-           CasesDégats c7 = new CasesDégats((x * 32) + (32 * i) + 16, (y * 32) + (32 * i) + 16, degat, this.getTypeAttaque());
-           terrain.ajouterCaseDegat(c7);
-           listeCasesDegats.add(c7);
-
-           CasesDégats c8 = new CasesDégats((x * 32) + (32 * i) + 16, (y * 32) - (32 * i) + 16, degat, this.getTypeAttaque());
-           terrain.ajouterCaseDegat(c8);
-           listeCasesDegats.add(c8);*/
         }
         return listeCasesDegats;
     }

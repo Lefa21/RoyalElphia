@@ -1,20 +1,16 @@
-package fr.montreuil.iut.RoyalElphia.modele;
+package fr.montreuil.iut.RoyalElphia.modele.Niveau;
 
 import fr.montreuil.iut.RoyalElphia.modele.Ennemis.*;
 import fr.montreuil.iut.RoyalElphia.modele.Map.Terrain;
-
-import java.util.ArrayList;
 import java.util.LinkedList;
 
 
 public class Vague {
 
     private LinkedList<Ennemis> listeEnnemis;
-    private Terrain terrain;
 
     public Vague(int nbEnnemi, Terrain terrain) {
-        this.listeEnnemis = new LinkedList<Ennemis>();
-        this.terrain = terrain;
+        this.listeEnnemis = new LinkedList<>();
         for (int i = 0; i < nbEnnemi; i++) {
             int ran = ((int) (Math.random() * 101));
             Ennemis ennemis;
