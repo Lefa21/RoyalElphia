@@ -37,9 +37,6 @@ public class Map2 extends Terrain {
                 {4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 3, 3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4}};
 
 
-
-
-
         this.setTabterrain(t);
         this.setPointDep(this.calculPointDep());
         this.setPointArv(this.calculPointArv());
