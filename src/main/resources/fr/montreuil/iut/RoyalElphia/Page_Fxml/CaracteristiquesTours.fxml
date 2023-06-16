@@ -19,7 +19,7 @@
                                 <Image url="@../ImageTour/TourBombe.png" />
                             </image>
                         </ImageView>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Tour à bombe, portée moyenne, coûte 40$. Dégat de 25." wrappingWidth="490.7294921875">
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Tour à bombe, portée moyenne, coûte 100$. Dégat de 25." wrappingWidth="490.7294921875">
                             <font>
                                 <Font size="19.0" />
                             </font>
@@ -33,7 +33,7 @@
                                 <Image url="@../ImageTour/TourFeu.png" />
                             </image>
                         </ImageView>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Tour Boule de feu, moyenne portée, coût de 22$. Dégat de 10." wrappingWidth="577.9755859375">
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Tour Boule de feu, moyenne portée, coût de 30$. Dégat de 10." wrappingWidth="577.9755859375">
                             <font>
                                 <Font size="19.0" />
                             </font>
@@ -47,7 +47,7 @@
                                 <Image url="@../ImageTour/TourEclair.png" />
                             </image>
                         </ImageView>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Tour eclair, courte portée, coût de 60$. Dégat de 15." wrappingWidth="526.7294921875">
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Tour eclair, courte portée, coût de 40$. Dégat de 15." wrappingWidth="526.7294921875">
                             <font>
                                 <Font size="19.0" />
                             </font>
@@ -75,7 +75,7 @@
                                 <Image url="@../ImageTour/TourLaser.png" />
                             </image>
                         </ImageView>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Tour Laser, courte portée, coût de 60$. Dégat de 18." wrappingWidth="591.1962890625">
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Tour Laser, courte portée, coût de 80$. Dégat de 18." wrappingWidth="591.1962890625">
                             <font>
                                 <Font size="19.0" />
                             </font>

@@ -19,7 +19,7 @@
                                 <Image url="@../ImageObstacle/mur.png" />
                             </image>
                         </ImageView>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Barricade en bois coûtant 10 $, et ayant comme point de vie 40." wrappingWidth="490.7294921875">
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Barricade en bois coûtant 15 $, et ayant comme point de vie 40. Il peut bloquer les squelette" wrappingWidth="490.7294921875">
                             <font>
                                 <Font size="19.0" />
                             </font>
@@ -30,10 +30,10 @@
                     <children>
                         <ImageView fitHeight="103.0" fitWidth="61.0" pickOnBounds="true" preserveRatio="true">
                             <image>
-                                <Image url="@../ImageObstacle/pont.png" />
+                                <Image url="@../ImageObstacle/fer.png" />
                             </image>
                         </ImageView>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Barricade en fer coûtant 20 $. Il peut bloquer les gobelin ainsi que les squellette." wrappingWidth="577.9755859375">
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Barricade en fer coûtant 30 $. Il peut bloquer les ennemis de type gobelins,squellette et sorcières." wrappingWidth="577.9755859375">
                             <font>
                                 <Font size="19.0" />
                             </font>
@@ -44,10 +44,10 @@
                     <children>
                         <ImageView fitHeight="93.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
                             <image>
-                                <Image url="@../ImageObstacle/départ.png" />
+                                <Image url="@../ImageObstacle/metal.png" />
                             </image>
                         </ImageView>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Barricade en métal coûtant 30 $. Il peut bloquer les ennemis de type gobelins,sorcières,squellette." wrappingWidth="526.7294921875">
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Barricade en métal coûtant 60 $. Il peut bloquer les ennemis de type gobelins,sorcières,squellette." wrappingWidth="526.7294921875">
                             <font>
                                 <Font size="19.0" />
                             </font>
@@ -61,7 +61,7 @@
                                 <Image url="@../ImageObstacle/rocher.png" />
                             </image>
                         </ImageView>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Barricades en pierre coûtant 50 $. Il peut bloquer tout les types d'ennemis sauf le géant Royale" wrappingWidth="591.1962890625">
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Barricades en pierre coûtant 100 $. Il peut bloquer tout les types d'ennemis sauf le géant Royale" wrappingWidth="591.1962890625">
                             <font>
                                 <Font size="19.0" />
                             </font>

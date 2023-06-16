@@ -34,12 +34,12 @@
             </children>
              <ImageView fitHeight="163.0" fitWidth="206.0" layoutX="170.0" layoutY="78.0" pickOnBounds="true" preserveRatio="true">
                  <image>
-                     <Image url="@../ImageMap/map.png" />
+                     <Image url="@../ImageMap/Map1.png" />
                  </image>
              </ImageView>
             <ImageView fitHeight="154.0" fitWidth="218.0" layoutX="429.0" layoutY="78.0" pickOnBounds="true" preserveRatio="true">
                 <image>
-                    <Image url="@../ImageMap/Map1.png" />
+                    <Image url="@../ImageMap/Map2.png" />
                 </image>
             </ImageView>
          <HBox layoutX="239.0" layoutY="276.0" prefHeight="22.0" prefWidth="542.0">
