@@ -176,10 +176,18 @@ public abstract class Ennemis {
         }
     }
 
+
+    /*
+    On vérifie avec cette méthode si l'ennemi peut se déplacer sur le terrain
+    */
     public boolean peutSeDeplacer(int i, String s) {
         boolean retour = false;
         if (i == 1) {
-            if ((!casesParcourues.verif(CasesDirection(s)) && tabDirection(s) == 9))
+            /*
+            On vérifie d'abord que la case qu'on le souhaite visitée n'a pas déja été parcourue,
+            puis si la case du tableau contient une valeur sur laquelle le déplacement est autorisé
+            */
+            if (!casesParcourues.verif(CasesDirection(s)) && tabDirection(s) == 9)
                 retour = true;
         } else if (i == 2) {
             if (!casesParcourues.verif(CasesDirection(s)) && tabDirection(s) == 2)
@@ -188,9 +196,13 @@ public abstract class Ennemis {
         return retour;
     }
 
+    /*
+    Cette méthode permet de créer une case qui se situe autour de l'ennemi en fonction d'un paramètre de type String
+    */
     public Cases CasesDirection(String s) {
         Cases c = null;
         if (s.equals("DROITE"))
+            // On ajoute ou soustrait 32 pour vérifier les cases autour de l'ennemi sur la carte
             c = new Cases(this.getX() + 32, this.getY());
         else if (s.equals("BAS"))
             c = new Cases(this.getX(), this.getY() + 32);
@@ -201,8 +213,19 @@ public abstract class Ennemis {
         return c;
     }
 
+
+    /*
+    Cette méthode permet de renvoyer un entier représentant la valeur des cases du tableau terrain se situant
+    autour de la position de l'ennemi sur le tableau ,en fonction d'un paramètre de type String
+    */
     public int tabDirection(String s) {
         int retour = 0;
+
+        /*
+        On vérifie avec la deuxième condition si on ne sort pas du tableau terrain et on divise les positions par
+        32 car la position récuperer est celle de la map, et on doit la faire correspondre avec les cases du
+        tableau terrain
+        */
         if (s.equals("DROITE") && ((this.getX() / 32) + 1) < 40)
             retour = terrain.getTabTerrain()[this.getY() / 32][(this.getX() / 32) + 1];
         else if (s.equals("BAS") && ((this.getY() / 32) + 1) < 30)
@@ -214,6 +237,8 @@ public abstract class Ennemis {
         return retour;
     }
 
+
+    // Méthode permettant de gérer l'affichage de l'immunité aux tours de l'ennemi
     public String affichageImmunité() {
         String affichage = "Cet ennemi est immunisé face aux tours";
         if (this.Immunite == 1) {
@@ -230,7 +255,7 @@ public abstract class Ennemis {
         return affichage;
     }
 
-    public void setPvZero(){
+    public void setPvZero() {
         this.pv.setValue(0);
     }
 }
