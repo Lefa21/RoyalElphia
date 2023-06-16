@@ -2,9 +2,7 @@
 
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
-<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
@@ -22,7 +20,7 @@
                                 <Font size="19.0" />
                             </font>
                         </Text>
-            <Text style="-fx-font-weight: bold" fill="whitesmoke" layoutX="15.0" layoutY="65.0" text="Bienvenue sur RoyalElphia, pour commencer une partie cliquez sur jouer. Choisissez ensuite vos paramètres de partie, une map et un niveau puis lancez votre partie. Votre map s'affiche désormais. Vous avez un menu de tours ainsi que d'obstacles que vous pouvez acheter, vendre ou améliorer selon une mécanique expliquée sur la fenêtre de jeu. Lorsque vous cliquerez sur démarrer les vagues se lançeront jusqu'à votre victoire ou votre défaite, elles sont au nombre de 5. Les tours peuvent être posées seulement sur les cases qui entourent le chemin. Un ennemi tué rapporte de l'argent, un ennemi qui arrive au bout apporte de l'argent mais fait perdre des pv. Un menu des ennemis présents dans la vague actuelle ainsi que leurs pv est affiché à votre gauche. Vous avez à votre disposition des boutons vous permettant de mettre le jeu en pause ou de rejouer. A la fin d'une partie, une fenêtre vous annonçant si vous avez gagné ou perdu vous permet de rejouer ou quitter." wrappingWidth="490.7294921875">
+            <Text style="-fx-font-weight: bold" fill="whitesmoke" layoutX="15.0" layoutY="65.0" text="Bienvenue sur RoyalElphia, pour commencer une partie cliquez sur jouer. Choisissez ensuite vos paramètres de partie, une map et un niveau puis lancez votre partie. Votre map s'affiche désormais. Vous avez un menu de tours ainsi que d'obstacles que vous pouvez acheter, vendre ou améliorer selon une mécanique expliquée sur la fenêtre de jeu. Lorsque vous cliquerez sur démarrer les vagues se lanceront jusqu'à votre victoire ou votre défaite, elles sont au nombre de 5. Les tours peuvent être posées seulement sur les cases qui entourent le chemin. Un ennemi tué rapporte de l'argent, un ennemi qui arrive au bout apporte de l'argent mais fait perdre des pv. Un menu des ennemis présents dans la vague actuelle ainsi que leurs pv est affiché à votre droite. Si vous passez votre souris sur un ennemi du menu, une popup s’affichera pour vous indiquer sont immunités. Vous avez à votre disposition des boutons vous permettant de mettre le jeu en pause ou de rejouer. A la fin d'une partie, une fenêtre vous annonçant si vous avez gagné ou perdu vous permet de rejouer ou quitter." wrappingWidth="490.7294921875">
                 <font>
                     <Font size="16.0" />
                 </font>
