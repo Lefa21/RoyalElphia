@@ -22,8 +22,11 @@
         <Pane fx:id="panneauJeu" prefHeight="960" prefWidth="1280" BorderPane.alignment="CENTER">
             <children>
                 <TilePane fx:id="map" onMouseClicked="#poserItem" prefHeight="960" prefWidth="1280"/>
-                <VBox layoutX="1730.0">
+                <VBox layoutX="1690.0">
                     <Label textFill="white" text="Menu ennemi">
+                        <font>
+                            <Font size="20.0"/>
+                        </font>
                     </Label>
                     <VBox fx:id="menuEnnemi">
                     </VBox>

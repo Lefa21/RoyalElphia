@@ -66,7 +66,7 @@
             </VBox>
             <HBox layoutX="297.0" layoutY="430.0" prefHeight="56.0" prefWidth="142.0">
                 <children>
-                    <Button mnemonicParsing="false" onAction="#Jouer" prefHeight="50.0" prefWidth="85.0" text="Lancer" />
+                    <Button style="-fx-background-color: red;" textFill="white" mnemonicParsing="false" onAction="#Jouer" prefHeight="50.0" prefWidth="85.0" text="Lancer" />
                 </children>
             </HBox>
          <HBox layoutX="532.0" layoutY="434.0" prefHeight="48.0" prefWidth="92.0" />

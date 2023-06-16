@@ -30,7 +30,6 @@ import javafx.stage.Popup;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
-
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -91,6 +90,7 @@ public class jeu {
             }
 
 // Si l'ennemi à la capacité de détruire l'obstacle et qu'il est à hauteur de l'obstacle alors il lui attribue des dégâts.
+
 
             if ((e.getCapaciteObstacle() >= obstacle.getMateriaux() && (e.getX() / 32 + 1 == obstacle.getPosX() && e.getY() / 32 == obstacle.getPosY()) || (e.getX() / 32 == obstacle.getPosX() && e.getY() / 32 + 1 == obstacle.getPosY()) || (e.getX() / 32 == obstacle.getPosX() && e.getY() / 32 - 1 == obstacle.getPosY()) || (e.getX() / 32 - 1 == obstacle.getPosX() && e.getY() / 32 == obstacle.getPosY()))) {
                 int degat = e.getDegatObstacle();
@@ -349,7 +349,7 @@ public class jeu {
         KeyFrame kf = new KeyFrame(
 // on définit le FPS (nbre de frame par seconde)
 
-                Duration.seconds(0.0005),
+                Duration.seconds(0.08),
 
                 // on définit ce qui se passe à chaque frame
                 // c'est un eventHandler d'ou le lambda

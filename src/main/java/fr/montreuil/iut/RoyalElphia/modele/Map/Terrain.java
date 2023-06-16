@@ -36,7 +36,6 @@ public class Terrain {
         Tabterrain = tabterrain;
     }
 
-
     public void setPointArv(Cases pointArv) {
         this.pointArv = pointArv;
     }

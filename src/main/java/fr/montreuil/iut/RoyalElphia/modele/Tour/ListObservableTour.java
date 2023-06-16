@@ -1,6 +1,6 @@
 package fr.montreuil.iut.RoyalElphia.modele.Tour;
 
-import fr.montreuil.iut.RoyalElphia.modele.Obstacle.Obstacle;
+
 import fr.montreuil.iut.RoyalElphia.modele.jeu;
 import javafx.collections.ListChangeListener;
 import javafx.scene.layout.Pane;

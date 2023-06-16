@@ -56,7 +56,7 @@ public class JeuController implements Initializable {
     @FXML
     private TilePane map;
 
-public static Stage stage;
+    public static Stage stage;
     @FXML
     public static Button ButtonRejouer;
     @FXML
@@ -72,29 +72,26 @@ public static Stage stage;
     private jeu jeu;
     private Niveau niveau;
 
-    private FXMLLoader fxmlLoader;
-
     @FXML
     private Label LabelPV, LabelnbEnnemisRestant, LabelArgent, LabelVague, LabelMort;
     @FXML
     private Pane panneauJeu;
-    private VueEnnemi vueEnnemi;
 
     private Tour tour;
     private Obstacle obstacle;
 
     private Items items;
     private boolean TourPose = true;
-   // private Boolean ItemPose = true;
-
-    // private Boolean ItemPose = true;
 
     private boolean ObstaclePose = true;
     private VueTour vt = new VueTour();
     private VueObstacle vo = new VueObstacle();
-
+    public static Button getMonBouton(){
+        return ButtonRejouer;
+    }
 
     // La méthode cliqueObstacle permet de récuperer l'obstacle choisi par le joueur et le créer.
+
 
     @FXML
     public void cliqueObstacle(MouseEvent mouseEvent) throws FileNotFoundException {
@@ -179,6 +176,7 @@ public static Stage stage;
             this.TourPose = true;
             this.tour = vueTour.getTour();
         }
+
         }
 
         // La méthode créerNiveau récupère  le choix du joueur entrer sur la page ChoixMap et créer le niveau associé.
@@ -272,8 +270,6 @@ public static Stage stage;
 
     //La méthode rejouer permet de charger la page ChoixMap afin que le joueur puisse rejouer une partie
     public void Rejouer(ActionEvent actionEvent) throws IOException{
-      // Stage stage =  SceneController.fermetureStage();
-        //stage.close();
         Stage newWindow = new Stage();
         newWindow.setTitle("Paramètres de ma partie");
         FXMLLoader loader = new FXMLLoader(LancementJeu.class.getResource("Page_Fxml/ChoixMap.fxml"));

@@ -8,8 +8,9 @@ import javafx.beans.property.SimpleIntegerProperty;
 
 public abstract class Ennemis {
 
-    protected Terrain terrain;
     private IntegerProperty xProperty, yProperty;
+
+    protected Terrain terrain;
     public static int compteur = 0;
     private String id;
     private int ptsDefense, Immunite, degatBase, butin, capaciteObstacle;

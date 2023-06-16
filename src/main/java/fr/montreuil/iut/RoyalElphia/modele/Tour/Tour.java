@@ -13,9 +13,7 @@ public class Tour extends Items {
 
     private int PorteeAttaque;
     private int TypeAttaque;
-    private int DureeINtervalleAttaque;
     private int NombreAttaqueMax;
-    private int TempsRecharge;
     private IntegerProperty degat;
 
     private ArrayList<CasesDégats> listeCasesDegats;
@@ -52,23 +50,6 @@ public class Tour extends Items {
         return TypeAttaque;
     }
 
-    public void setTypeAttaque(int typeAttaque) {
-        TypeAttaque = typeAttaque;
-    }
-
-    public void setPorteeAttaque(int porteeAttaque) {
-        PorteeAttaque = porteeAttaque;
-    }
-
-    public int getNombreAttaqueMax() {
-        return NombreAttaqueMax;
-    }
-
-    public void setNombreAttaqueMax(int nombreAttaqueMax) {
-        NombreAttaqueMax = nombreAttaqueMax;
-    }
-
-
 
     public ArrayList<CasesDégats> rayonDegat(Terrain terrain, int x, int y, int degat, Pane pane) throws ArrayIndexOutOfBoundsException{
         this.listeCasesDegats = new ArrayList<>();
@@ -102,7 +83,7 @@ public class Tour extends Items {
         return listeCasesDegats;
     }
 
-    public void TourDevientInoffensif(Terrain terrain, ArrayList<CasesDégats> listeCasesDegats) {
+    public void TourDevientInoffensif(Terrain terrain, ArrayList<CasesDégats> listeCasesDegats) {          //Enleve toutes les cases dégats associées à une tour.
         terrain.getCasesDégats().removeAll(listeCasesDegats);
     }
 

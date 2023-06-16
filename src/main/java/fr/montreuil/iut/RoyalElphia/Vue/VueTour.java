@@ -98,7 +98,6 @@ public class VueTour {
                 panneauJeu.getChildren().add(tourImageView);
                 this.panneauJeu.getChildren().add(label);
                 this.tour = null;
-                //VendreTour(tourImageView);
                 AmeliorationEtVente(tourImageView);
             }
         }
