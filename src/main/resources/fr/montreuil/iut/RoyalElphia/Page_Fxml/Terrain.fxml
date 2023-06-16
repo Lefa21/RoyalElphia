@@ -13,7 +13,7 @@
 <?import javafx.scene.image.Image?>
 <BorderPane  maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
             xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="fr.montreuil.iut.RoyalElphia.Controller.HelloController">
+            fx:controller="fr.montreuil.iut.RoyalElphia.Controller.JeuController">
     <ImageView fitHeight="1750.0" pickOnBounds="true" preserveRatio="true">
         <image>
             <Image url="@background.jpg"/>
@@ -115,7 +115,7 @@
                             <ImageView fx:id="bois" fitHeight="80" fitWidth="80.0" onMouseClicked="#cliqueObstacle"
                                        pickOnBounds="true" preserveRatio="true">
                                 <image>
-                                    <Image url="@../ImageObstacle/pont.png"/>
+                                    <Image url="@../ImageObstacle/mur.png"/>
                                 </image>
                             </ImageView>
                         </children>
@@ -133,7 +133,7 @@
                             <ImageView fx:id="metal" fitHeight="80.0" fitWidth="80.0" onMouseClicked="#cliqueObstacle"
                                        pickOnBounds="true" preserveRatio="true">
                                 <image>
-                                    <Image url="@../ImageObstacle/départ.png"/>
+                                    <Image url="@../ImageObstacle/metal.png"/>
                                 </image>
                             </ImageView>
                         </children>
@@ -141,7 +141,7 @@
                             <ImageView fx:id="fer" fitHeight="80.0" fitWidth="80.0" onMouseClicked="#cliqueObstacle"
                                        pickOnBounds="true" preserveRatio="true">
                                 <image>
-                                    <Image url="@../ImageObstacle/mur.png"/>
+                                    <Image url="@../ImageObstacle/fer.png"/>
                                 </image>
                             </ImageView>
                         </children>

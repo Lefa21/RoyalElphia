@@ -2,7 +2,6 @@ package fr.montreuil.iut.RoyalElphia.Vue;
 
 import fr.montreuil.iut.RoyalElphia.modele.Map.Terrain;
 import fr.montreuil.iut.RoyalElphia.modele.Obstacle.*;
-import fr.montreuil.iut.RoyalElphia.modele.Tour.*;
 import fr.montreuil.iut.RoyalElphia.modele.jeu;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -13,6 +12,9 @@ import javafx.scene.paint.Color;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+
+
+//La classe vueObstacle permet de créer la vue de l'obstacle qui a été créer lors du clique sur lui.
 
 public class VueObstacle {
 
@@ -42,6 +44,7 @@ public class VueObstacle {
     public VueObstacle() {
     }
 
+    // La méthode pose obstacle récupère la position de l'obstacle et vérifie si celui-ci a été poser sur le chemin ou se déplace les ennemis
     public void PoserObstacle() throws FileNotFoundException {
         int[][] tab = terrain.getTabTerrain();
         System.out.println("position X obstacle " + this.x);
@@ -56,19 +59,20 @@ public class VueObstacle {
             switch (obstacle.getClass().getSimpleName()) {
                 case "BarricadeBois":
 
-                    obstacleImage = new Image(new FileInputStream("src/main/resources/fr/montreuil/iut/RoyalElphia/ImageObstacle/pont.png"));
+                    obstacleImage = new Image(new FileInputStream("src/main/resources/fr/montreuil/iut/RoyalElphia/ImageObstacle/mur.png"));
                     break;
                 case "BarricadeFer":
-                    obstacleImage = new Image(new FileInputStream("src/main/resources/fr/montreuil/iut/RoyalElphia/ImageObstacle/mur.png"));
+                    obstacleImage = new Image(new FileInputStream("src/main/resources/fr/montreuil/iut/RoyalElphia/ImageObstacle/fer.png"));
 
                     break;
                 case "BarricadeMetal":
-                    obstacleImage = new Image(new FileInputStream("src/main/resources/fr/montreuil/iut/RoyalElphia/ImageObstacle/départ.png"));
+                    obstacleImage = new Image(new FileInputStream("src/main/resources/fr/montreuil/iut/RoyalElphia/ImageObstacle/metal.png"));
                     break;
                 case "BarricadePierre":
                     obstacleImage = new Image(new FileInputStream("src/main/resources/fr/montreuil/iut/RoyalElphia/ImageObstacle/rocher.png"));
                     break;
             }
+//Lorsque l'image de l'obstacle a été créer alors on modifie la valeur du terrain dans le tableau à cette emplacement puis ajoute l'obstacle à la vue.
 
             if (obstacleImage != null) {
                 ImageView obstacleImageView = new ImageView(obstacleImage);
@@ -77,16 +81,11 @@ public class VueObstacle {
                 obstacle.setPosy(posY);
                 obstacleImageView.setX(x - 20);
                 obstacleImageView.setY(y - 15);
-                System.out.println("pos x image " + obstacleImageView.getX());
-                System.out.println("pos Y image " + obstacleImageView.getX());
                 obstacleImageView.setId(Integer.toString(idImage));
                 Label label = new Label();
                 label.textProperty().bind(obstacle.getPvProperty().asString());
                 label.translateXProperty().bind(obstacle.getPosXProperty().multiply(32).add(10));
                 label.translateYProperty().bind(obstacle.getPosYProperty().multiply(32).add(40));
-
-                System.out.println("pos x label" + label.getTranslateX());
-                System.out.println("pos y label" + label.getTranslateY());
 
                 label.setBackground(Background.fill(Color.WHITE));
                 label.setId(obstacle.getID() + "L");
@@ -100,6 +99,8 @@ public class VueObstacle {
             }
     }
 
+    // Lors du clique sur l'obstacle on créer l'obstacle.
+    //On l'ajoute à notre liste d'obstacle.
     public void CliqueObstacle(jeu jeu, String typeObstacle) throws FileNotFoundException {
         Obstacle obstacle = null;
         switch (typeObstacle) {
@@ -133,6 +134,10 @@ public class VueObstacle {
     }
 
 
+    // La méthode améliorationEtVente, améliore un obstacle lors d'un alt clique droit et augmente les points de vie ainsi que le niveau d'amélioration.
+    // Le cout d'amélioration augmente à son tour.
+
+
     public void AmeliorationEtVente(ImageView x) {
         int[][] tab = terrain.getTabTerrain();
         x.setOnMouseClicked(KeyEvent -> {
@@ -151,7 +156,11 @@ public class VueObstacle {
                             System.out.println("niv MAX");
                 }
                 }
-            } else {
+            }
+            // si l'utilisateur double click sur l'obstacle afin de l'enlever du chemin, alors on parcours la liste d'obstacle afin de chercher l'obstacle correspondant
+            //On l'enlève par la suite du panneau, puis la case où il était placé redeviens une case chemin
+            //L'obstacle est enlever de la liste d'obstacle par la même occasion
+            else {
                 x.setOnMouseClicked(event -> {
                     if (event.getClickCount() == 2 && !trouve) {
                         for (int j = 0; j < this.jeu.getListeObstacle().size(); j++) {

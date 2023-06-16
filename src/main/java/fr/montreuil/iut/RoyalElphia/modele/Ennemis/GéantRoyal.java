@@ -1,6 +1,5 @@
 package fr.montreuil.iut.RoyalElphia.modele.Ennemis;
 
-import fr.montreuil.iut.RoyalElphia.modele.Capacite.Capacite;
 import fr.montreuil.iut.RoyalElphia.modele.Map.Terrain;
 
 public class GéantRoyal extends Ennemis {

@@ -7,11 +7,15 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class HelloApplication extends Application {
+
+/*
+Cette classe à pour but de lancer la page d'accueil.
+ */
+public class LancementJeu extends Application {
     @Override
     public void start(Stage newWindow) throws IOException {
         newWindow.setTitle("Acceuil");
-        FXMLLoader loader = new FXMLLoader(HelloApplication.class.getResource("Page_Fxml/Acceuil.fxml"));
+        FXMLLoader loader = new FXMLLoader(LancementJeu.class.getResource("Page_Fxml/Acceuil.fxml"));
         newWindow.setScene(new Scene(loader.load()));
         newWindow.show();
     }

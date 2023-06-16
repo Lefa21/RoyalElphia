@@ -1,6 +1,6 @@
 package fr.montreuil.iut.RoyalElphia.Controller;
 
-import fr.montreuil.iut.RoyalElphia.HelloApplication;
+import fr.montreuil.iut.RoyalElphia.LancementJeu;
 import fr.montreuil.iut.RoyalElphia.Vue.*;
 import fr.montreuil.iut.RoyalElphia.modele.*;
 import fr.montreuil.iut.RoyalElphia.modele.Ennemis.Ennemis;
@@ -46,7 +46,11 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class HelloController implements Initializable {
+/*
+La classe JeuController à pour but de récuperer les données choisis par le joueur est créer le jeu.
+ */
+
+public class JeuController implements Initializable {
 
     private Terrain terrain;
     @FXML
@@ -82,12 +86,12 @@ public class HelloController implements Initializable {
     private boolean ObstaclePose = true;
     private VueTour vt = new VueTour();
     private VueObstacle vo = new VueObstacle();
-
-
-
     public static Button getMonBouton(){
         return ButtonRejouer;
     }
+
+    // La méthode cliqueObstacle permet de récuperer l'obstacle choisi par le joueur et le créer.
+
 
     @FXML
     public void cliqueObstacle(MouseEvent mouseEvent) throws FileNotFoundException {
@@ -117,6 +121,8 @@ public class HelloController implements Initializable {
             }
         }
     }
+
+    // La méthode TourClique permet de récuperer la tour  choisi par le joueur et la créer.
 
     @FXML
     public void TourClique(MouseEvent mouseEvent) {
@@ -150,6 +156,8 @@ public class HelloController implements Initializable {
             }
         }
     }
+
+    // la méthode poser Item récupère le clique sur la map du joueur afin de créer la vue de l'obstacle et le poser sur la map
     @FXML
     public void poserItem(MouseEvent mouseEvent) throws FileNotFoundException {
         double cliqueX = mouseEvent.getX();
@@ -168,7 +176,10 @@ public class HelloController implements Initializable {
             this.TourPose = true;
             this.tour = vueTour.getTour();
         }
-    }
+
+        }
+
+        // La méthode créerNiveau récupère  le choix du joueur entrer sur la page ChoixMap et créer le niveau associé.
 
     public void créerNiveau(){
         int niveau = ChoixMapController.getNiveau();
@@ -181,6 +192,8 @@ public class HelloController implements Initializable {
         }
     }
 
+    // La méthode créerTerrain récupère le choix de map du joueur entrer sur la page ChoixMap et créer le terrain associé.
+
     public void créerTerrain() {
         int terrain = ChoixMapController.getTerrain();
         if (terrain == 1) {
@@ -190,23 +203,28 @@ public class HelloController implements Initializable {
         }
     }
 
+    // La méthode création Partie permet de créer le niveau et le terrain et l'affecter à la nouvelle partie
+
     public void créationPartie() {
         créerNiveau();
         créerTerrain();
         this.jeu = new jeu(this.terrain, this.niveau,this.menuEnnemi);
     }
 
+
+    // La méthode boutonCaractéristique permet charge la page Caractéristiques des tours.
     @FXML
     public void BoutonCaracteristiques(ActionEvent actionEvent) throws IOException {
         Stage newWindow = new Stage();
         newWindow.setTitle("Caractéristiques des tours");
-        FXMLLoader loader = new FXMLLoader(HelloApplication.class.getResource("Page_Fxml/CaracteristiquesTours.fxml"));
+        FXMLLoader loader = new FXMLLoader(LancementJeu.class.getResource("Page_Fxml/CaracteristiquesTours.fxml"));
         newWindow.setScene(new Scene(loader.load()));
         newWindow.show();
     }
 
 
 
+    // La méthode permet de gérer les écouteur entre le modèle et la vue et de lancer le jeu.
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try {
@@ -237,38 +255,44 @@ public class HelloController implements Initializable {
         }
     }
 
+    // La méthode démarrer permet de lancer la gameloop lors du click sur le bouton démarrer
     @FXML
     public void Demarrer(Event event) {
+        stage = (Stage)this.panneauJeu.getScene().getWindow();
         jeu.lancementLoop();
     }
 
+    // La méthode pause permet d'arrêter la gameloop
     @FXML
     public void Pause(Event event) {
         jeu.arretLoop();
     }
 
+    //La méthode rejouer permet de charger la page ChoixMap afin que le joueur puisse rejouer une partie
     public void Rejouer(ActionEvent actionEvent) throws IOException{
         Stage newWindow = new Stage();
         newWindow.setTitle("Paramètres de ma partie");
-        FXMLLoader loader = new FXMLLoader(HelloApplication.class.getResource("Page_Fxml/ChoixMap.fxml"));
+        FXMLLoader loader = new FXMLLoader(LancementJeu.class.getResource("Page_Fxml/ChoixMap.fxml"));
         newWindow.setScene(new Scene(loader.load()));
         newWindow.show();
         ((Stage)  LabelPV.getScene().getWindow()).close();
     }
 
+    // La méthode  caracteristiqueObstacle permet charger la page Caractéristiques des obstacles.
     public void caracteristiqueObstacle(ActionEvent actionEvent) throws IOException {
         Stage newWindow = new Stage();
         newWindow.setTitle("Caractéristiques des obstacles");
-        FXMLLoader loader = new FXMLLoader(HelloApplication.class.getResource("Page_Fxml/CaracteristiquesObstacles.fxml"));
+        FXMLLoader loader = new FXMLLoader(LancementJeu.class.getResource("Page_Fxml/CaracteristiquesObstacles.fxml"));
         newWindow.setScene(new Scene(loader.load()));
         newWindow.show();
     }
 
+    // La méthode Quitter permet au clique sur le bouton quitter de revenir à la page d'accueil.
     public void Quitter(ActionEvent actionEvent) throws IOException {
         System.out.println("Quitter la partie");
         Stage newWindow = new Stage();
         newWindow.setTitle("Paramètres de ma parti");
-        FXMLLoader loader = new FXMLLoader(HelloApplication.class.getResource("Page_Fxml/Acceuil.fxml"));
+        FXMLLoader loader = new FXMLLoader(LancementJeu.class.getResource("Page_Fxml/Acceuil.fxml"));
         newWindow.setScene(new Scene(loader.load()));
         newWindow.show();
         ((Stage)  LabelPV.getScene().getWindow()).close();

@@ -1,6 +1,7 @@
 package fr.montreuil.iut.RoyalElphia.modele;
 
-import fr.montreuil.iut.RoyalElphia.HelloApplication;
+import fr.montreuil.iut.RoyalElphia.Controller.JeuController;
+import fr.montreuil.iut.RoyalElphia.LancementJeu;
 import fr.montreuil.iut.RoyalElphia.modele.Map.CasesDégats;
 import fr.montreuil.iut.RoyalElphia.modele.Niveau.Niveau;
 import fr.montreuil.iut.RoyalElphia.modele.Obstacle.Obstacle;
@@ -28,12 +29,12 @@ import javafx.stage.Popup;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
-
-
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
+
+// La classe jeu est notre environnement.
 
 public class jeu {
     private Terrain terrain;
@@ -77,6 +78,8 @@ public class jeu {
         this.vBox = vBox;
     }
 
+    // La méthode enleveObstacleDetruit permet à un ennemi de détruire un obstacle présent sur le chemin.
+
     public void enleveObstacleDetruit(int[][] tab, Ennemis e) {
         for (int j = 0; j < this.listeObstacle.size(); j++) {
             Obstacle obstacle = this.listeObstacle.get(j);
@@ -84,6 +87,10 @@ public class jeu {
                 tab[obstacle.getPosY()][obstacle.getPosX()] = 9;
                 this.listeObstacle.remove(this.listeObstacle.get(j));
             }
+
+// Si l'ennemi à la capacité de détruire l'obstacle et qu'il est à hauteur de l'obstacle alors il lui attribue des dégâts.
+
+
             if ((e.getCapaciteObstacle() >= obstacle.getMateriaux() && (e.getX() / 32 + 1 == obstacle.getPosX() && e.getY() / 32 == obstacle.getPosY()) || (e.getX() / 32 == obstacle.getPosX() && e.getY() / 32 + 1 == obstacle.getPosY()) || (e.getX() / 32 == obstacle.getPosX() && e.getY() / 32 - 1 == obstacle.getPosY()) || (e.getX() / 32 - 1 == obstacle.getPosX() && e.getY() / 32 == obstacle.getPosY()))) {
                 int degat = e.getDegatObstacle();
                 int vieObstacle = obstacle.getPointDeVie() - degat;
@@ -92,6 +99,7 @@ public class jeu {
         }
     }
 
+    // La méthode dégâtsEnnemis permet de vérifier si l'ennemis s'est déplacé sur une case dégats et de lui attribuer les dégats de la tour à qui la case dégâts est attribuer.
     public void degatEnnemis(Ennemis e) {
         for (int j = 0; j < this.terrain.getCasesDégats().size(); j++) {
             CasesDégats c = this.terrain.getCasesDégats().get(j);
@@ -100,6 +108,7 @@ public class jeu {
         }
     }
 
+    // La méthode dégatBase permet que lorsque l'ennemi arrive à la base il inflige ces dégâts de base et meurt.
     public void degatBase(Ennemis e) {
         if (this.terrain.verifPArv(e.getX(), e.getY())) {
             System.out.println("-1 PV");
@@ -108,6 +117,7 @@ public class jeu {
         }
     }
 
+    //Cette méthode enlève les ennemis mort de la liste d'ennemis
     public void enleveEnnemisMort() {
         for (int i = this.ennemis.size() - 1; i >= 0; i--) {
             if (this.ennemis.get(i).getPv() == 0)
@@ -115,6 +125,7 @@ public class jeu {
         }
     }
 
+    //Cette méthode augment aléatoire les capacité d'un ennemis durant un tour
     public void augmentationCapacité(int nbTour,Ennemis e){
 
         if(nbTour%128 ==0){
@@ -199,6 +210,8 @@ public class jeu {
         this.ennemis.add(e);
     }
 
+
+    // Cette méthode permet de passer à la vague suivante et en même temps d'augmenter la difficulté du jeu.
     public void vagueSuivante() {
 
         listeEnnemisSpawn.clear();
@@ -283,6 +296,7 @@ public class jeu {
         return this.nbEnnemisRestant.getValue();
     }
 
+    // La méthode un tour permet de de faire déplacer les ennemis et les faire agir avec leurs environnement.
     public void unTour() {
         int[][] tab = terrain.getTabTerrain();
         for (int i = 0; i < this.ennemis.size(); i++) {
@@ -305,22 +319,26 @@ public class jeu {
         nbTour++;
     }
 
+    //Lorsque le joueur gagne on lui affiche cette page.
     public void gagne() throws IOException {
         Stage newWindow = new Stage();
         newWindow.setTitle("Bravo !");
-        FXMLLoader loader = new FXMLLoader(HelloApplication.class.getResource("Page_Fxml/Gagne.fxml"));
+        FXMLLoader loader = new FXMLLoader(LancementJeu.class.getResource("Page_Fxml/Gagne.fxml"));
         newWindow.setScene(new Scene(loader.load()));
         newWindow.show();
+        JeuController.stage.close();
     }
 
     public void perdu() throws IOException {
         Stage newWindow = new Stage();
         newWindow.setTitle("Mince !");
-        FXMLLoader loader = new FXMLLoader(HelloApplication.class.getResource("Page_Fxml/Perdu.fxml"));
+        FXMLLoader loader = new FXMLLoader(LancementJeu.class.getResource("Page_Fxml/Perdu.fxml"));
         newWindow.setScene(new Scene(loader.load()));
         newWindow.show();
+        JeuController.stage.close();
     }
 
+    // La méthode initAnimation permet de faire tourner la gameloop et le jeu par la même occasion.
     public void initAnimation() {
         gameLoop = new Timeline();
         temps = 0;
@@ -330,23 +348,21 @@ public class jeu {
         KeyFrame kf = new KeyFrame(
 // on définit le FPS (nbre de frame par seconde)
 
-                Duration.seconds(0.05),
+                Duration.seconds(0.025),
 
                 // on définit ce qui se passe à chaque frame
                 // c'est un eventHandler d'ou le lambda
 
+                //Si le joueur à gagner ou à perdu la gameloop s'arrête
                 (ev -> {
                     if (this.getPvJoueur() == 0 || (this.nbVague.getValue() == 5 && this.getNbEnnemisRestant()==0)) {
                         menuEnnemiS(vBox);
                         gameLoop.stop();
                     } else if (getNbEnnemisRestant()==0) {
-                        System.out.println("Vague suivante " + this.getNbVague());
                         vagueSuivante();
                         getEnnemisTué().removeAll(getEnnemisTué());
-                        System.out.println("nombre d'ennemis spwan:  " + this.listeEnnemisSpawn.size());
                     } else if (temps % 3 == 0) {
                         unTour();
-                        System.out.println("Un tour");
                     } else if (temps % 10 == 0 && getListeEnnemisSpawn().size() < this.niveau.getNbEnnemis()) {
                         spwanEnnemi();
                         menuEnnemiS(vBox);
@@ -356,7 +372,6 @@ public class jeu {
                             throw new RuntimeException(e);
                         }
                         temps++;
-                        System.out.println("Ennemis spwan");
                     }
                     if (this.getPvJoueur() > 0 && (this.nbVague.getValue() == 5 && getNbEnnemisRestant()==0)) {
                         try {
@@ -366,7 +381,7 @@ public class jeu {
                         }
                         gameLoop.stop();
                     }
-                    if (this.getPvJoueur() == 0 && getNbEnnemisRestant() >= 0){
+                    else if (this.getPvJoueur() == 0 && getNbEnnemisRestant() >= 0){
                         try {
                             perdu();
                         } catch (IOException e) {
@@ -381,6 +396,7 @@ public class jeu {
     }
 
 
+    // Les ennemis présent sur la map sont ajouté aux menus des ennemis.
 
     public void menuEnnemiA(VBox vBox) throws FileNotFoundException {
 
