@@ -25,15 +25,11 @@ public class GagnéControlleur implements Initializable {
 
     @FXML
     public void Quitter(ActionEvent actionEvent) throws IOException {
-        System.out.println("Quitter la partie ");
         Stage newWindow = new Stage();
         newWindow.setTitle("Royale Elphia");
         FXMLLoader loader = new FXMLLoader(HelloApplication.class.getResource("Page_Fxml/Acceuil.fxml"));
         newWindow.setScene(new Scene(loader.load()));
         newWindow.show();
-        //HelloController helloController = new HelloController();
-        //Button boutonRecuperer = helloController.getMonBouton();
-        //((Stage) boutonRecuperer.getScene().getWindow()).close();
         ((Stage)  Buttonrejouer.getScene().getWindow()).close();
         HelloController.stage.close();
 
@@ -42,9 +38,6 @@ public class GagnéControlleur implements Initializable {
 
     @FXML
     public void rejoue(ActionEvent actionEvent) throws IOException {
-
-        // Stage stage =  SceneController.fermetureStage();
-        //stage.close();
         Stage newWindow = new Stage();
         newWindow.setTitle("Paramètres de ma partie");
         FXMLLoader loader = new FXMLLoader(HelloApplication.class.getResource("Page_Fxml/ChoixMap.fxml"));
@@ -52,6 +45,5 @@ public class GagnéControlleur implements Initializable {
         newWindow.show();
         ((Stage)  Buttonrejouer.getScene().getWindow()).close();
         HelloController.stage.close();
-        //((Stage) HelloController.().getScene().getWindow()).close();
     }
 }
