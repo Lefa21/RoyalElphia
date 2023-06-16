@@ -23,15 +23,13 @@ public class PerduControlleur implements Initializable {
 
 @FXML
     public void rejoue(ActionEvent actionEvent) throws IOException {
-        // Stage stage =  SceneController.fermetureStage();
-        //stage.close();
         Stage newWindow = new Stage();
         newWindow.setTitle("Paramètres de ma partie");
         FXMLLoader loader = new FXMLLoader(HelloApplication.class.getResource("Page_Fxml/ChoixMap.fxml"));
         newWindow.setScene(new Scene(loader.load()));
         newWindow.show();
         ((Stage)  Buttonrejouer.getScene().getWindow()).close();
-    //((Stage)
+        HelloController.stage.close();
     }
 @FXML
     public void Quitter(ActionEvent actionEvent)  throws IOException {
@@ -39,9 +37,9 @@ public class PerduControlleur implements Initializable {
         newWindow.setTitle("Paramètres de ma partie");
         FXMLLoader loader = new FXMLLoader(HelloApplication.class.getResource("Page_Fxml/Accueil.fxml"));
         newWindow.setScene(new Scene(loader.load()));
-
         newWindow.show();
         ((Stage)  Buttonquitter.getScene().getWindow()).close();
+        HelloController.stage.close();
     }
 
 

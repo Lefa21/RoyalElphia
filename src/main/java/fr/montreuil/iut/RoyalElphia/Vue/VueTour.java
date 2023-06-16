@@ -216,6 +216,7 @@ public class VueTour {
                                 t.setNiveauAmelioration(t.getNiveauAmelioration() + 1);
                                 t.setDegat();
                                 t.setCoutAmelioration((int) (t.getCoutAmelioration() * 1.5));
+                                t.setCoutVente((int) (t.getCoutVente() * 1.5));
                                 System.out.println("NIV " + t.getNiveauAmelioration() + " DEGAT " + t.getDegat());
                             }
                         }

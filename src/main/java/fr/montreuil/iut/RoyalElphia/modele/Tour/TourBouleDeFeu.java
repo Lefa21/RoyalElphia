@@ -4,10 +4,10 @@ package fr.montreuil.iut.RoyalElphia.modele.Tour;
 public class TourBouleDeFeu extends Tour {
 
     public TourBouleDeFeu() {
-        super(4,0,3,4,7,50);
-        setCoutAchat(22);
-        setCoutVente(10);
-        setCoutAmelioration(7);
-        setNiveauMaxAmelioration(6);
+        super(3,2,10);
+        setCoutAchat(30);
+        setCoutVente(35);
+        setCoutAmelioration(25);
+        setNiveauMaxAmelioration(4);
     }
 }
