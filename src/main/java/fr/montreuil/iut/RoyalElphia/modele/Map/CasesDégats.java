@@ -24,7 +24,6 @@ public class CasesDégats extends Cases {
             this.setY((y * 32) - (32 * multi) + 16);
             c.setTranslateX(x * 32 + 16);
             c.setTranslateY(y * 32 + 16 - 32 * multi);
-
         } else if (direction.equals("D")) {
             this.setX((x * 32) + (32 * multi) + 16);
             this.setY((y * 32) + 16);

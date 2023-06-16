@@ -23,7 +23,7 @@ public abstract class Ennemis {
     private int degatObstacle;
 
 
-    public Ennemis(Terrain terrain, int pv, int ptsDefense, int immunite, int degatBase, int butin, int capaciteObstacle, int capaciteDegatObstacle, int capaciteVie, int capaciteDegatsBase) {
+    public Ennemis(Terrain terrain, int pv, int ptsDefense, int immunite, int degatBase, int butin, int capaciteObstacle,int degatObstacle) {
         this.id = "" + compteur;
         this.casesParcourues = new CasesParcourues();
         this.Immunite = immunite;
@@ -32,10 +32,7 @@ public abstract class Ennemis {
         this.pv = new SimpleIntegerProperty(pv);
         this.butin = butin;
         this.capaciteObstacle = capaciteObstacle;
-        this.capaciteDegatObstacle = capaciteDegatObstacle;
-        this.capaciteVie = capaciteVie;
-        this.capaciteDegatsBase = capaciteDegatsBase;
-        this.degatObstacle = 100;
+        this.degatObstacle = degatObstacle;
         compteur++;
         this.terrain = terrain;
         /* On multiplie par 32 la case de départ du terrain, pour adapter les dimensions du tableau aux dimensions du
@@ -111,18 +108,6 @@ public abstract class Ennemis {
 
     public int getCapaciteObstacle() {
         return capaciteObstacle;
-    }
-
-    public int getCapaciteDegatObstacle() {
-        return capaciteDegatObstacle;
-    }
-
-    public int getCapaciteDegatsBase() {
-        return capaciteDegatsBase;
-    }
-
-    public int getCapaciteVie() {
-        return capaciteVie;
     }
 
 

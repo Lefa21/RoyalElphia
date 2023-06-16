@@ -262,7 +262,7 @@ public static Button getMonBouton(){
 
     @FXML
     public void Demarrer(Event event) {
-        stage = (Stage)this.panneauJeu.getScene().getWindow();
+        //stage = (Stage)this.panneauJeu.getScene().getWindow();
         jeu.lancementLoop();
     }
 

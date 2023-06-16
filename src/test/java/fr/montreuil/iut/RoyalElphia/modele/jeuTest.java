@@ -4,6 +4,7 @@ import fr.montreuil.iut.RoyalElphia.modele.Ennemis.Ennemis;
 import fr.montreuil.iut.RoyalElphia.modele.Ennemis.Géant;
 import fr.montreuil.iut.RoyalElphia.modele.Ennemis.Sorcières;
 import fr.montreuil.iut.RoyalElphia.modele.Ennemis.gobelins;
+import fr.montreuil.iut.RoyalElphia.modele.Map.CasesDégats;
 import fr.montreuil.iut.RoyalElphia.modele.Map.Map_1;
 import fr.montreuil.iut.RoyalElphia.modele.Map.Terrain;
 import fr.montreuil.iut.RoyalElphia.modele.Niveau.Facile;
