@@ -20,11 +20,11 @@ public class Vague {
             Ennemis ennemis;
             if (ran < 21) {
                 ennemis = new Sorcières(terrain);
-            } else if (ran < 41) {
+            } else if (ran < 49) {
                 ennemis = new Géant(terrain);
             } else if (ran < 61) {
                 ennemis = new gobelins(terrain);
-            } else if (ran < 81) {
+            } else if (ran < 71) {
                 ennemis = new GéantRoyal(terrain);
             } else {
                 ennemis = new Squelette(terrain);
