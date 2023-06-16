@@ -7,6 +7,11 @@ import javafx.beans.property.SimpleIntegerProperty;
 
 import java.util.ArrayList;
 
+/*
+La classe Items regroupe les différents item tel que obstacle.
+Elle regroupe comme attribut, les attributs communs aux différents items.
+Cette classe a pour responsabilité  de récuperer le niveau d'amélioration des items, de les améliorer etcc.
+ */
 public abstract class Items {
 
     private int CoutAchat;

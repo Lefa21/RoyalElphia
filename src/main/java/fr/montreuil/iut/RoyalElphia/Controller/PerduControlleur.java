@@ -1,6 +1,7 @@
 package fr.montreuil.iut.RoyalElphia.Controller;
 
-import fr.montreuil.iut.RoyalElphia.HelloApplication;
+import fr.montreuil.iut.RoyalElphia.LancementJeu;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -16,31 +17,22 @@ import java.util.ResourceBundle;
 public class PerduControlleur implements Initializable {
 
     @FXML
-    private Button Buttonquitter,Buttonrejouer;
+    private Button Buttonrejouer;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {}
 
 @FXML
     public void rejoue(ActionEvent actionEvent) throws IOException {
-        Stage newWindow = new Stage();
-        newWindow.setTitle("Paramètres de ma partie");
-        FXMLLoader loader = new FXMLLoader(HelloApplication.class.getResource("Page_Fxml/ChoixMap.fxml"));
-        newWindow.setScene(new Scene(loader.load()));
-        newWindow.show();
+        Stage NewWindow = new Stage();
+        NewWindow.setTitle("Paramètres de ma partie");
+        FXMLLoader loader = new FXMLLoader(LancementJeu.class.getResource("Page_Fxml/Acceuil.fxml"));
+        NewWindow.setScene(new Scene(loader.load()));
+        NewWindow.show();
         ((Stage)  Buttonrejouer.getScene().getWindow()).close();
-        HelloController.stage.close();
-    }
-@FXML
-    public void Quitter(ActionEvent actionEvent)  throws IOException {
-        Stage newWindow = new Stage();
-        newWindow.setTitle("Paramètres de ma partie");
-        FXMLLoader loader = new FXMLLoader(HelloApplication.class.getResource("Page_Fxml/Accueil.fxml"));
-        newWindow.setScene(new Scene(loader.load()));
-        newWindow.show();
-        ((Stage)  Buttonquitter.getScene().getWindow()).close();
-        HelloController.stage.close();
     }
 
-
+    public void Quitter(ActionEvent actionEvent) {
+        Platform.exit();
+    }
 }

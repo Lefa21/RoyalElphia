@@ -1,6 +1,6 @@
 package fr.montreuil.iut.RoyalElphia.Controller;
 
-import fr.montreuil.iut.RoyalElphia.HelloApplication;
+import fr.montreuil.iut.RoyalElphia.LancementJeu;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -14,6 +14,9 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+/*
+Cette classe est le controller de la page d'accueil et a pour but de lancer la page ChoixMap où bien la page règle du jeu à partir de la page d'accueil.
+ */
 public class AccueilController implements Initializable {
     @FXML
     private Button lancer;
@@ -26,9 +29,8 @@ public class AccueilController implements Initializable {
     public void LancerJeu(ActionEvent event) throws IOException {
         Stage newWindow =    (Stage) this.lancer.getScene().getWindow();
         newWindow.setTitle("Paramètres de ma partie");
-        FXMLLoader loader = new FXMLLoader(HelloApplication.class.getResource("Page_Fxml/ChoixMap.fxml"));
+        FXMLLoader loader = new FXMLLoader(LancementJeu.class.getResource("Page_Fxml/ChoixMap.fxml"));
         newWindow.setScene(new Scene(loader.load()));
-        //newWindow.show();
     }
 
     public void Quitter(ActionEvent actionEvent) {
@@ -38,7 +40,7 @@ public class AccueilController implements Initializable {
     public void Regle(ActionEvent actionEvent) throws IOException {
         Stage newWindow = new Stage();
         newWindow.setTitle("Les règles");
-        FXMLLoader loader = new FXMLLoader(HelloApplication.class.getResource("Page_Fxml/RegleDeJeu.fxml"));
+        FXMLLoader loader = new FXMLLoader(LancementJeu.class.getResource("Page_Fxml/RegleDeJeu.fxml"));
         newWindow.setScene(new Scene(loader.load()));
         newWindow.show();
     }
