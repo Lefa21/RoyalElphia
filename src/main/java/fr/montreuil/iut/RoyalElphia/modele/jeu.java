@@ -351,7 +351,7 @@ public class jeu {
 
         KeyFrame kf = new KeyFrame(
 // on définit le FPS (nbre de frame par seconde)
-                Duration.seconds(0.05),
+                Duration.seconds(0.005),
                 // on définit ce qui se passe à chaque frame
                 // c'est un eventHandler d'ou le lambda
 
@@ -431,8 +431,8 @@ public class jeu {
             Stage stage = (Stage) vBox.getScene().getWindow();
 
 
-            imV.setOnMousePressed(e -> popup.show(stage));
-            imV.setOnMouseReleased(e -> popup.hide());
+            imV.setOnMouseEntered(e -> popup.show(stage));
+            imV.setOnMouseExited(e -> popup.hide());
             Label l = new Label();
             l.textProperty().bind(en.getPvProperty().asString());
             vBox.getChildren().add(l);

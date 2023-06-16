@@ -21,7 +21,6 @@ public class VueEnnemi {
     public VueEnnemi(Pane pane) {
         this.pane = pane;
     }
-    //circle.setOnMouseClicked(e -> System.out.println(en.affichageImmunité()));
 
     public void créerSprite(Ennemis ennemis) throws FileNotFoundException {
 
@@ -31,53 +30,26 @@ public class VueEnnemi {
         label.translateXProperty().bind(ennemis.getxProperty().add(-8));
         label.translateYProperty().bind(ennemis.getyProperty().add(-32));
         label.setBackground(Background.fill(Color.WHITE));
-        ImageView imV = null;
+        Image image = null;
+
+
 
         if (ennemis instanceof gobelins) {
-
-            Image gobelin = new Image(new FileInputStream("src/main/resources/fr/montreuil/iut/RoyalElphia/ImageEnnemis/gobelin.png"));
-            imV = new ImageView(gobelin);
-            imV.setId(ennemis.getId());
-            imV.translateXProperty().bind(ennemis.getxProperty().subtract(16));
-            imV.translateYProperty().bind(ennemis.getyProperty().subtract(16));
-            this.pane.getChildren().add(imV);
+            image = new Image(new FileInputStream("src/main/resources/fr/montreuil/iut/RoyalElphia/ImageEnnemis/gobelin.png"));
         } else if (ennemis instanceof Sorcières) {
-            Image sorciere = new Image(new FileInputStream("src/main/resources/fr/montreuil/iut/RoyalElphia/ImageEnnemis/sorcière.png"));
-            imV = new ImageView(sorciere);
-            imV.setId(ennemis.getId());
-            imV.translateXProperty().bind(ennemis.getxProperty().subtract(16));
-            imV.translateYProperty().bind(ennemis.getyProperty().subtract(16));
-            this.pane.getChildren().add(imV);}
-
-        else if (ennemis instanceof GéantRoyal) {
-            Image golem = new Image(new FileInputStream("src/main/resources/fr/montreuil/iut/RoyalElphia/ImageEnnemis/Golem(1).png"));
-            imV = new ImageView(golem);
-            imV.setId(ennemis.getId());
-            imV.translateXProperty().bind(ennemis.getxProperty().subtract(16));
-            imV.translateYProperty().bind(ennemis.getyProperty().subtract(16));
-            //circle.setFill(Color.BLACK);
-            this.pane.getChildren().add(imV);
+            image = new Image(new FileInputStream("src/main/resources/fr/montreuil/iut/RoyalElphia/ImageEnnemis/sorcière.png"));
+        } else if (ennemis instanceof GéantRoyal) {
+            image = new Image(new FileInputStream("src/main/resources/fr/montreuil/iut/RoyalElphia/ImageEnnemis/Golem(1).png"));
         } else if (ennemis instanceof Géant) {
-            Image Geant = new Image(new FileInputStream("src/main/resources/fr/montreuil/iut/RoyalElphia/ImageEnnemis/Geant.png"));
-            imV = new ImageView(Geant);
-            imV.setId(ennemis.getId());
-            imV.translateXProperty().bind(ennemis.getxProperty().subtract(16));
-            imV.translateYProperty().bind(ennemis.getyProperty().subtract(16));
-            this.pane.getChildren().add(imV);
+            image = new Image(new FileInputStream("src/main/resources/fr/montreuil/iut/RoyalElphia/ImageEnnemis/Geant.png"));
         } else if (ennemis instanceof Squelette) {
-            Image squelette = new Image(new FileInputStream("src/main/resources/fr/montreuil/iut/RoyalElphia/ImageEnnemis/squelette.png"));
-            imV = new ImageView(squelette);
-            imV.setId(ennemis.getId());
-            imV.translateXProperty().bind(ennemis.getxProperty().subtract(16));
-            imV.translateYProperty().bind(ennemis.getyProperty().subtract(16));
-            //circle.setFill(Color.BLACK);
-            this.pane.getChildren().add(imV);
-           // circle.setFill(Color.GREY);
+            image = new Image(new FileInputStream("src/main/resources/fr/montreuil/iut/RoyalElphia/ImageEnnemis/squelette.png"));
         }
-
-        imV.setOnMouseClicked(e -> System.out.println(ennemis.affichageImmunité()));
-      //  this.pane.getChildren().add(circle);
-
+        ImageView imV = new ImageView(image);
+        imV.setId(ennemis.getId());
+        imV.translateXProperty().bind(ennemis.getxProperty().subtract(16));
+        imV.translateYProperty().bind(ennemis.getyProperty().subtract(16));
+        this.pane.getChildren().add(imV);
 
 
         this.pane.getChildren().add(label);
