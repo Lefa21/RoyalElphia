@@ -3,6 +3,7 @@ module jeu.royalelphia {
     requires javafx.fxml;
 
     requires org.controlsfx.controls;
+    requires junit;
 
     opens fr.montreuil.iut.RoyalElphia to javafx.fxml;
     exports fr.montreuil.iut.RoyalElphia;
