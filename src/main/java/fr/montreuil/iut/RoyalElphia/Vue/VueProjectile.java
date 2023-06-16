@@ -11,41 +11,34 @@ import java.io.FileNotFoundException;
 
 public class VueProjectile {
 
-    private Tour tour;
-    private Pane pane;
-    private int compteur;
+    public VueProjectile(Tour tour, Pane pane) throws FileNotFoundException {
 
-    public VueProjectile (Tour tour, Pane pane) throws FileNotFoundException {
-        this.tour = tour;
-        this.pane = pane;
-        this.compteur = 0;
-        for (int i = 0; i < this.tour.getListeCasesDegats().size(); i++) {
-            ImageView imV = null;
-            CasesDégats c = this.tour.getListeCasesDegats().get(i);
-            if (this.tour instanceof TourABombe) {
-                Image im = new Image(new FileInputStream("src/main/resources/fr/montreuil/iut/RoyalElphia/TEST.png"));
-                imV = new ImageView(im);
+        // Variable permettant de donner un ID aux projectiles afin de les supprimer
+        int compteur = 0;
+
+        // On crée un projectile pour chaque case dégât de la tour
+        for (int i = 0; i < tour.getListeCasesDegats().size(); i++) {
+            Image im = null;
+            CasesDégats c = tour.getListeCasesDegats().get(i);
+            if (tour instanceof TourABombe) {
+                im = new Image(new FileInputStream("src/main/resources/fr/montreuil/iut/RoyalElphia/ImageProjectile/Bombe.gif"));
+            } else if (tour instanceof TourBouleDeFeu) {
+                im = new Image(new FileInputStream("src/main/resources/fr/montreuil/iut/RoyalElphia/ImageProjectile/BouleDeFeu.gif"));
+            } else if (tour instanceof TourElectrique) {
+                im = new Image(new FileInputStream("src/main/resources/fr/montreuil/iut/RoyalElphia/ImageProjectile/Electricité.gif"));
+            } else if (tour instanceof TourFleche) {
+                im = new Image(new FileInputStream("src/main/resources/fr/montreuil/iut/RoyalElphia/ImageProjectile/Flèche.gif"));
+            } else if (tour instanceof TourLaser) {
+                im = new Image(new FileInputStream("src/main/resources/fr/montreuil/iut/RoyalElphia/ImageProjectile/Laser.gif"));
             }
-            else if (this.tour instanceof TourBouleDeFeu) {
-                Image im = new Image(new FileInputStream("src/main/resources/fr/montreuil/iut/RoyalElphia/TEST1.png"));
-                imV = new ImageView(im);
-            }
-            else if (this.tour instanceof TourElectrique) {
-                Image im = new Image(new FileInputStream("src/main/resources/fr/montreuil/iut/RoyalElphia/TEST2.png"));
-                imV = new ImageView(im);
-            }
-            else if (this.tour instanceof TourFleche) {
-                Image im = new Image(new FileInputStream("src/main/resources/fr/montreuil/iut/RoyalElphia/TEST3.png"));
-                imV = new ImageView(im);
-            }
-            else if (this.tour instanceof TourLaser) {
-                Image im = new Image(new FileInputStream("src/main/resources/fr/montreuil/iut/RoyalElphia/TEST4.png"));
-                imV = new ImageView(im);
-            }
-            imV.setX(c.getX()-16);
-            imV.setY(c.getY()-16);
-            imV.setId(compteur+"P"+this.tour.getID());
-            this.pane.getChildren().add(imV);
+            ImageView imV = new ImageView(im);
+
+            // On soustrait 16 pour que le projectile prenne toute la tuile sur laquelle la case dégât se trouve
+            imV.setX(c.getX() - 16);
+            imV.setY(c.getY() - 16);
+
+            imV.setId(compteur + "P" + tour.getID());
+            pane.getChildren().add(imV);
             compteur++;
         }
     }

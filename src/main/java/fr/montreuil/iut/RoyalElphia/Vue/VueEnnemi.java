@@ -35,7 +35,7 @@ public class VueEnnemi {
 
         if (ennemis instanceof gobelins) {
 
-            Image gobelin = new Image(new FileInputStream("src/main/resources/fr/montreuil/iut/RoyalElphia/ImageEnnemis/gobelin.jpg"));
+            Image gobelin = new Image(new FileInputStream("src/main/resources/fr/montreuil/iut/RoyalElphia/ImageEnnemis/gobelin.png"));
             imV = new ImageView(gobelin);
             imV.setId(ennemis.getId());
             imV.translateXProperty().bind(ennemis.getxProperty().subtract(16));
@@ -58,7 +58,7 @@ public class VueEnnemi {
             //circle.setFill(Color.BLACK);
             this.pane.getChildren().add(imV);
         } else if (ennemis instanceof Géant) {
-            Image Geant = new Image(new FileInputStream("src/main/resources/fr/montreuil/iut/RoyalElphia/ImageEnnemis/Geant.jpg"));
+            Image Geant = new Image(new FileInputStream("src/main/resources/fr/montreuil/iut/RoyalElphia/ImageEnnemis/Geant.png"));
             imV = new ImageView(Geant);
             imV.setId(ennemis.getId());
             imV.translateXProperty().bind(ennemis.getxProperty().subtract(16));
