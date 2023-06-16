@@ -14,13 +14,13 @@ public class Vague {
         for (int i = 0; i < nbEnnemi; i++) {
             int ran = ((int) (Math.random() * 101));
             Ennemis ennemis;
-            if (ran < 21) {
+            if (ran < 30) {
                 ennemis = new Sorcières(terrain);
             } else if (ran < 49) {
                 ennemis = new Géant(terrain);
-            } else if (ran < 61) {
+            } else if (ran < 81) {
                 ennemis = new gobelins(terrain);
-            } else if (ran < 71) {
+            } else if (ran < 84) {
                 ennemis = new GéantRoyal(terrain);
             } else {
                 ennemis = new Squelette(terrain);

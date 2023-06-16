@@ -6,8 +6,8 @@ public class TourBouleDeFeu extends Tour {
     public TourBouleDeFeu() {
         super(3,2,10);
         setCoutAchat(30);
-        setCoutVente(35);
-        setCoutAmelioration(25);
+        setCoutVente(20);
+        setCoutAmelioration(15);
         setNiveauMaxAmelioration(4);
     }
 }
