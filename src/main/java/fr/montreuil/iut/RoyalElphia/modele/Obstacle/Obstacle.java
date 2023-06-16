@@ -4,14 +4,12 @@ import fr.montreuil.iut.RoyalElphia.modele.Items.Items;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 
+// La classe obstacle permet de donner une position ainsi que des points aux obstacles qui vont être créer.
+// Les obstacles peuvent seulement être posé sur le chemin des ennemis.
 public class Obstacle extends Items {
 
     private int Materiaux;
     private IntegerProperty  PointDeVie;
-    private int ID;
-
-    private IntegerProperty posX,posY;
-
     public Obstacle(int materiaux,int PointDeVie) {
         super(0,0,0,0,0,0,0);
         this.Materiaux = materiaux;
@@ -20,10 +18,6 @@ public class Obstacle extends Items {
 
     public int getMateriaux() {
         return Materiaux;
-    }
-
-    public void setMateriaux(int materiaux) {
-        Materiaux = materiaux;
     }
 
     public int getPointDeVie() {

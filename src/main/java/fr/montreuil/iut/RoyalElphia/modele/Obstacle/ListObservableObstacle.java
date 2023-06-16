@@ -6,6 +6,8 @@ import fr.montreuil.iut.RoyalElphia.modele.jeu;
 import javafx.collections.ListChangeListener;
 import javafx.scene.layout.Pane;
 
+// Cette classe permet d'écouter notre liste observable d'obstacles.
+// lorsque les pv d'un obstacle tombe à zéro alors on le supprime de la vue, ainsi que son label.
 public class ListObservableObstacle implements  ListChangeListener<Obstacle> {
 
     private Pane panneauJeu;
@@ -18,7 +20,6 @@ public class ListObservableObstacle implements  ListChangeListener<Obstacle> {
 
     @Override
     public void onChanged(ListChangeListener.Change<? extends Obstacle> c) {
-        System.out.println("changement");
         while (c.next()) {
             if (c.wasRemoved()) {
                 for (Obstacle a : c.getRemoved()
