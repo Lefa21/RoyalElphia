@@ -77,7 +77,7 @@ public class jeu {
         this.nbTour = 0;
         this.nbEnnemisRestant = new SimpleIntegerProperty(this.niveau.getNbEnnemis());
         this.nbVague = new SimpleIntegerProperty(1);
-        this.pvJoueur = new SimpleIntegerProperty(400);
+        this.pvJoueur = new SimpleIntegerProperty(10);
         this.listeDeTour = FXCollections.observableArrayList();
         this.listeObstacle = FXCollections.observableArrayList();
         this.argent = new SimpleIntegerProperty(200);
@@ -113,7 +113,7 @@ public class jeu {
     public void degatBase(Ennemis e) {
         if (this.terrain.verifPArv(e.getX(), e.getY())) {
             System.out.println("-1 PV");
-            setPvJoueur(this.getPvJoueur() - 1);
+            setPvJoueur(this.getPvJoueur() - e.getDegatBase());
             this.getEnnemis().remove(e);
         }
     }
@@ -127,25 +127,12 @@ public class jeu {
 
     public void augmentationCapacité(int nbTour,Ennemis e){
         if(nbTour%128 ==0){
-            System.out.println("augmentation capacité");
-            if(e.getCapaciteDegatObstacle() == 1){
-                System.out.println("degat obs av:" + e.getDegatObstacle());
                 e.setDegatObstacle((e.getDegatObstacle() + (e.getDegatObstacle() * 50/100)));
-                System.out.println("degat obs ap : " + e.getDegatObstacle());
-            }
-            if(e.getCapaciteVie() == 1){
-                System.out.println("pv  av :" + e.getPv());
                 e.améliorationPv((e.getPv() + (e.getPv() * 50/100)));
-                System.out.println("pv ap :" + e.getPv() );
-            }
-            if(e.getCapaciteDegatsBase() == 1){
-                System.out.println("degat base av :" + e.getDegatBase());
                 e.setDegatBase((e.getDegatBase() + (e.getDegatBase() * 50/100)));
-                System.out.println("degat base ap: " + e.getDegatBase());
 
             }
         }
-    }
     public void ajouterTour(Tour t) {
         listeDeTour.add(t);
     }
@@ -386,7 +373,7 @@ public class jeu {
                         }
                         gameLoop.stop();
                     }
-                    if (this.getPvJoueur() == 0 && getNbEnnemisRestant() > 0){
+                    if (this.getPvJoueur() == 0 && getNbEnnemisRestant() >= 0){
                         try {
                             perdu();
                         } catch (IOException e) {

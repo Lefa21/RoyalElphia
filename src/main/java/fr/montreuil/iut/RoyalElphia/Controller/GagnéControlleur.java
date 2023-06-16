@@ -33,7 +33,6 @@ public class GagnéControlleur implements Initializable {
         ((Stage)  Buttonrejouer.getScene().getWindow()).close();
         HelloController.stage.close();
 
-
     }
 
     @FXML

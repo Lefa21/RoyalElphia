@@ -21,15 +21,12 @@ public class Tour extends Items {
     private ArrayList<CasesDégats> listeCasesDegats;
 
 
-    public Tour(int porteeAttaque, int typeAttaque, int dureeINtervalleAttaque, int nombreAttaqueMax, int tempsRecharge, int degat) {
+    public Tour(int porteeAttaque, int typeAttaque, int degat) {
 
         super(0, 0, 0, 0, 0, 0, 0);
 
         PorteeAttaque = porteeAttaque;
         TypeAttaque = typeAttaque;
-        DureeINtervalleAttaque = dureeINtervalleAttaque;
-        NombreAttaqueMax = nombreAttaqueMax;
-        TempsRecharge = tempsRecharge;
         this.degat = new SimpleIntegerProperty(degat);
     }
 
@@ -59,15 +56,6 @@ public class Tour extends Items {
         TypeAttaque = typeAttaque;
     }
 
-
-    public int getDureeINtervalleAttaque() {
-        return DureeINtervalleAttaque;
-    }
-
-    public void setDureeINtervalleAttaque(int dureeINtervalleAttaque) {
-        DureeINtervalleAttaque = dureeINtervalleAttaque;
-    }
-
     public void setPorteeAttaque(int porteeAttaque) {
         PorteeAttaque = porteeAttaque;
     }
@@ -80,13 +68,6 @@ public class Tour extends Items {
         NombreAttaqueMax = nombreAttaqueMax;
     }
 
-    public int getTempsRecharge() {
-        return TempsRecharge;
-    }
-
-    public void setTempsRecharge(int tempsRecharge) {
-        TempsRecharge = tempsRecharge;
-    }
 
 
     public ArrayList<CasesDégats> rayonDegat(Terrain terrain, int x, int y, int degat, Pane pane) throws ArrayIndexOutOfBoundsException{
