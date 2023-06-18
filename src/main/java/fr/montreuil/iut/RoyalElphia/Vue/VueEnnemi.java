@@ -50,8 +50,6 @@ public class VueEnnemi {
         imV.translateXProperty().bind(ennemis.getxProperty().subtract(16));
         imV.translateYProperty().bind(ennemis.getyProperty().subtract(16));
         this.pane.getChildren().add(imV);
-
-
         this.pane.getChildren().add(label);
     }
 }

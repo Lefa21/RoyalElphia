@@ -32,11 +32,9 @@ public class CasesDégats extends Cases {
         } else if (direction.equals("B")) {
             this.setX(transitionFormat(x));
             this.setY(transitionFormatCaseSuivante(y,multi,1));
-
         } else if (direction.equals("G")) {
             this.setX(transitionFormatCaseSuivante(x,multi,2));
             this.setY(transitionFormat(y));
-
         }
         this.degat = new SimpleIntegerProperty(degat);
         this.typeAttaque = typeAttaque;
@@ -80,6 +78,13 @@ public class CasesDégats extends Cases {
         if (e.getX() == this.getX() && e.getY() == this.getY() && e.getImmunite() != this.getTypeAttaque())
             verif = true;
         return verif;
+    }
+
+    @Override
+    public String toString() {
+        return super.toString() +
+                " ,degat = " + this.getDegat() +
+                ", typeAttaque = " + typeAttaque;
     }
 }
 
