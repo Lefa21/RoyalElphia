@@ -33,7 +33,6 @@ public class VueEnnemi {
         Image image = null;
 
 
-
         if (ennemis instanceof gobelins) {
             image = new Image(new FileInputStream("src/main/resources/fr/montreuil/iut/RoyalElphia/ImageEnnemis/gobelin.png"));
         } else if (ennemis instanceof Sorcières) {
@@ -45,10 +44,12 @@ public class VueEnnemi {
         } else if (ennemis instanceof Squelette) {
             image = new Image(new FileInputStream("src/main/resources/fr/montreuil/iut/RoyalElphia/ImageEnnemis/squelette.png"));
         }
+
         ImageView imV = new ImageView(image);
         imV.setId(ennemis.getId());
         imV.translateXProperty().bind(ennemis.getxProperty().subtract(16));
         imV.translateYProperty().bind(ennemis.getyProperty().subtract(16));
+
         this.pane.getChildren().add(imV);
         this.pane.getChildren().add(label);
     }
