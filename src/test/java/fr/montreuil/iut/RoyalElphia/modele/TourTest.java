@@ -42,21 +42,21 @@ private    ArrayList<CasesDégats> listeVide = new ArrayList<>();
 
         //Vérification sur la map simple ayant comme classe Map2
 
-        CaseDegatBombe();
+        rayonDegatTourBombe();
         tourBombeInnoffensif();
 
-        CaseDegatLaser();
+        rayonDegatTourLaser();
         tourLaserInnoffensif();
 
-        CaseDegatElectrique();
+        rayonDegatTourElectrique();
         tourElectInnoffensif();
 
         // vérification pour la map évoluer qui correspond à la classe map1
 
-        CaseDegatFeu();
+        rayonDegatTourFeu();
         tourFeuInnofensif();
 
-        CaseDegatFleche();
+        RayonDegatTourFleche();
         tourFlecheInnoffensif();
     }
 
@@ -65,7 +65,8 @@ private    ArrayList<CasesDégats> listeVide = new ArrayList<>();
     // Lorsque une tour est vendu, alors on retire la tour de la vue et de la liste des tours dans le modèle ainsi que ses cases dégats.
 
 
-    public void CaseDegatBombe(){
+    @Test
+     void rayonDegatTourBombe(){
         tourBombe.setPosX(12);
         tourBombe.setPosy(23);
 
@@ -84,15 +85,17 @@ private    ArrayList<CasesDégats> listeVide = new ArrayList<>();
 
     }
 
-    public void tourBombeInnoffensif(){
+    @Test
+    void tourBombeInnoffensif(){
+        rayonDegatTourBombe();
         System.out.println("Tour bombe devient Innoffensif : ");
         tourBombe.TourDevientInoffensif(Map2,tourBombe.getListeCasesDegats());
         System.out.println("liste case degat map2 après suppression : " + Map2.getCasesDégats().toString() + '\n');
 
         assertArrayEquals(listeVide.size(),Map2.getCasesDégats().size());
     }
-
-    public void CaseDegatLaser(){
+@Test
+    void rayonDegatTourLaser(){
         tourLaser.setPosX(23);
         tourLaser.setPosy(8);
         tourLaser.rayonDegat(Map2,tourLaser.getPosX(),tourLaser.getPosY(),tourLaser.getDegat(),pane);
@@ -110,8 +113,9 @@ private    ArrayList<CasesDégats> listeVide = new ArrayList<>();
 
         System.out.println("Liste de case dégats de la Map2 : " + Map2.getCasesDégats().toString() + "\n");
     }
-
-    public void tourLaserInnoffensif(){
+    @Test
+     void tourLaserInnoffensif(){
+        rayonDegatTourLaser();
         System.out.println("Tour laser devient Innoffensif : ");
 
         tourLaser.TourDevientInoffensif(Map2,tourLaser.getListeCasesDegats());
@@ -119,8 +123,8 @@ private    ArrayList<CasesDégats> listeVide = new ArrayList<>();
         System.out.println("liste case degat map2 après suppression :  " + Map2.getCasesDégats().toString() + '\n');
     }
 
-
-    public void CaseDegatElectrique(){
+@Test
+     void rayonDegatTourElectrique(){
         tourElectrique.setPosX(10);
         tourElectrique.setPosy(24);
         tourElectrique.rayonDegat(Map2,tourElectrique.getPosX(),tourElectrique.getPosY(),tourElectrique.getDegat(),pane);
@@ -140,7 +144,9 @@ private    ArrayList<CasesDégats> listeVide = new ArrayList<>();
         System.out.println("Liste de case dégats de la Map2 : " + Map2.getCasesDégats().toString() + "\n");
     }
 
-    public void tourElectInnoffensif(){
+    @Test
+     void tourElectInnoffensif(){
+        rayonDegatTourElectrique();
         System.out.println("Tour electrique devient Innoffensif : ");
 
         tourElectrique.TourDevientInoffensif(Map2,tourElectrique.getListeCasesDegats());
@@ -148,7 +154,8 @@ private    ArrayList<CasesDégats> listeVide = new ArrayList<>();
         System.out.println("liste case degat terrain après suppression : " +Map2.getCasesDégats().toString() + '\n');
     }
 
-    public void CaseDegatFeu(){
+    @Test
+     void rayonDegatTourFeu(){
         tourFeu.setPosX(33);
         tourFeu.setPosy(26);
         tourFeu.rayonDegat(map1,tourFeu.getPosX(),tourFeu.getPosY(),tourFeu.getDegat(),pane);
@@ -170,14 +177,17 @@ private    ArrayList<CasesDégats> listeVide = new ArrayList<>();
         System.out.println("Liste de case dégats de la Map1 : " + map1.getCasesDégats().toString() + "\n");
     }
 
-    public void tourFeuInnofensif(){
+    @Test
+    void tourFeuInnofensif(){
+        rayonDegatTourFeu();
         System.out.println("Tour feu devient Innoffensif : ");
         tourFeu.TourDevientInoffensif(map1,tourFeu.getListeCasesDegats());
         assertArrayEquals(listeVide.size(),map1.getCasesDégats().size());
         System.out.println("liste case degat map1 après suppression :  " + map1.getCasesDégats().toString() + '\n');
     }
 
-    public void CaseDegatFleche(){
+    @Test
+    void RayonDegatTourFleche(){
         tourFleche.setPosX(31);
         tourFleche.setPosy(4);
         tourFleche.rayonDegat(map1,tourFleche.getPosX(),tourFleche.getPosY(),tourFleche.getDegat(),pane);
@@ -199,7 +209,9 @@ private    ArrayList<CasesDégats> listeVide = new ArrayList<>();
 
     }
 
-    public void tourFlecheInnoffensif(){
+    @Test
+     void tourFlecheInnoffensif(){
+        RayonDegatTourFleche();
         System.out.println("Tour flèche devient Innoffensif : ");
 
         tourFleche.TourDevientInoffensif(map1,tourFleche.getListeCasesDegats());
