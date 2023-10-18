@@ -89,11 +89,9 @@ public class jeu {
                 this.listeObstacle.remove(this.listeObstacle.get(j));
             }
 // Si l'ennemi à la capacité de détruire l'obstacle et qu'il est à hauteur de l'obstacle alors il lui attribue des dégâts.
-            if ((e.getCapaciteObstacle() >= obstacle.getMateriaux() && (e.getX() / 32 + 1 == obstacle.getPosX() && e.getY() / 32 == obstacle.getPosY()) || (e.getX() / 32 == obstacle.getPosX() && e.getY() / 32 + 1 == obstacle.getPosY()) || (e.getX() / 32 == obstacle.getPosX() && e.getY() / 32 - 1 == obstacle.getPosY()) || (e.getX() / 32 - 1 == obstacle.getPosX() && e.getY() / 32 == obstacle.getPosY()))) {
-                int degat = e.getDegatObstacle();
-                int vieObstacle = obstacle.getPointDeVie() - degat;
-                obstacle.setPointDeVie(vieObstacle);
-            }
+
+            //e.attaqueEnnemi(obstacle);
+            e.strategieAttaque(obstacle);
         }
     }
     // La méthode dégâtsEnnemis permet de vérifier si l'ennemis s'est déplacé sur une case dégats et de lui attribuer les dégats de la tour à qui la case dégâts est attribuer.

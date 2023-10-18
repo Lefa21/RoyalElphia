@@ -3,6 +3,7 @@ package fr.montreuil.iut.RoyalElphia.modele.Ennemis;
 import fr.montreuil.iut.RoyalElphia.modele.Map.Cases;
 import fr.montreuil.iut.RoyalElphia.modele.Map.CasesParcourues;
 import fr.montreuil.iut.RoyalElphia.modele.Map.Terrain;
+import fr.montreuil.iut.RoyalElphia.modele.Obstacle.Obstacle;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 
@@ -250,7 +251,9 @@ public abstract class Ennemis {
         this.pv.setValue(0);
     }
 
-    //public abstract void AttaqueEnnemi();
+    //public abstract void attaqueEnnemi(Obstacle obstacle);
+    public abstract void strategieAttaque(Obstacle o);
+
 
 }
 

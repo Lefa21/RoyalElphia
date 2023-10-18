@@ -23,4 +23,6 @@ module jeu.royalelphia {
     opens fr.montreuil.iut.RoyalElphia.modele.Niveau to javafx.fxml;
     exports fr.montreuil.iut.RoyalElphia.modele.FabriqueEnnemis;
     opens fr.montreuil.iut.RoyalElphia.modele.FabriqueEnnemis to javafx.fxml;
+    exports fr.montreuil.iut.RoyalElphia.modele.Ennemis.StrategieAttaque;
+    opens fr.montreuil.iut.RoyalElphia.modele.Ennemis.StrategieAttaque to javafx.fxml;
 }
