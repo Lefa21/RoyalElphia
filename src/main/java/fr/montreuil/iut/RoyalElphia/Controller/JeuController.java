@@ -8,35 +8,24 @@ import fr.montreuil.iut.RoyalElphia.modele.Ennemis.ListObsEnnemis;
 import fr.montreuil.iut.RoyalElphia.modele.Items.Items;
 import fr.montreuil.iut.RoyalElphia.modele.Map.Maps;
 import fr.montreuil.iut.RoyalElphia.modele.Map.Terrain;
-
 import fr.montreuil.iut.RoyalElphia.modele.Niveau.Niveau;
 import fr.montreuil.iut.RoyalElphia.modele.Obstacle.*;
 import fr.montreuil.iut.RoyalElphia.modele.Tour.*;
-
 import javafx.collections.ListChangeListener;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
-
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-
 import javafx.scene.layout.Pane;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.layout.TilePane;
-
-
 import javafx.scene.layout.VBox;
-
 import javafx.stage.Stage;
-
-
-
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;

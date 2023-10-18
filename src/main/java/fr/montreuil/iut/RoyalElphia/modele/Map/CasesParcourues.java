@@ -1,6 +1,7 @@
 package fr.montreuil.iut.RoyalElphia.modele.Map;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 public class CasesParcourues {
 
@@ -8,14 +9,14 @@ public class CasesParcourues {
     Classe permettant d'utiliser des méthodes sur une liste de Case pour simplifier le code
      */
 
-    private ArrayList<Cases> casesParcourues;
+    private LinkedList<Cases> casesParcourues;
 
     public CasesParcourues() {
-        this.casesParcourues = new ArrayList<>();
+        this.casesParcourues = new LinkedList<>();
     }
 
     public void ajouterCase(Cases cases) {
-        this.casesParcourues.add(cases);
+        this.casesParcourues.addFirst(cases);
     }
 
     // Méthode qui vérifie si une case c est contenue dans la liste de cases parcourues et renvoie un boolean
@@ -28,5 +29,13 @@ public class CasesParcourues {
             }
         }
         return verif;
+    }
+
+    public LinkedList<Cases> getCasesParcourues() {
+        return casesParcourues;
+    }
+
+    public void setCasesParcourues(LinkedList<Cases> casesParcourues) {
+        this.casesParcourues = casesParcourues;
     }
 }
