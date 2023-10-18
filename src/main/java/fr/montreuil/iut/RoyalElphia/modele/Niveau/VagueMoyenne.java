@@ -8,8 +8,7 @@ import java.util.LinkedList;
 public class VagueMoyenne extends Vague {
 
     public VagueMoyenne(int nbEnnemi, Terrain terrain) {
-        super(nbEnnemi, terrain);
-        this.listeEnnemis = new LinkedList<>();
+        super();
         for (int i = 0; i < nbEnnemi; i++) {
             FabriqueEnnemis fabriqueEnnemis = new FabriqueSorcieres();
             Ennemis e = fabriqueEnnemis.creerEnnemi(terrain);
