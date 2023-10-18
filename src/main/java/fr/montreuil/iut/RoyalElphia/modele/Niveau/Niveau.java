@@ -5,14 +5,8 @@ package fr.montreuil.iut.RoyalElphia.modele.Niveau;
 public class Niveau {
     private int nbEnnemis;
 
-    public Niveau(int diff){
-        // 1 -> Facile , 2 -> Normal, 3 -> Difficile
-        if (diff == 1) {
-            setNbEnnemis(1);
-        } else if (diff==2) {
-            setNbEnnemis(5);
-        } else
-            setNbEnnemis(10);
+    public Niveau(int nbEnnemis){
+       this.nbEnnemis = nbEnnemis;
     }
 
     public int getNbEnnemis() {

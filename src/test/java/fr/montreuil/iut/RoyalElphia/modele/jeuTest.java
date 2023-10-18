@@ -4,7 +4,7 @@ import fr.montreuil.iut.RoyalElphia.modele.Ennemis.Ennemis;
 import fr.montreuil.iut.RoyalElphia.modele.Ennemis.Géant;
 import fr.montreuil.iut.RoyalElphia.modele.Ennemis.Sorcières;
 import fr.montreuil.iut.RoyalElphia.modele.Ennemis.gobelins;
-import fr.montreuil.iut.RoyalElphia.modele.Map.Map_1;
+import fr.montreuil.iut.RoyalElphia.modele.Map.CasesDégats;
 import fr.montreuil.iut.RoyalElphia.modele.Map.Terrain;
 import fr.montreuil.iut.RoyalElphia.modele.Niveau.Niveau;
 import fr.montreuil.iut.RoyalElphia.modele.Obstacle.BarricadeBois;
@@ -24,6 +24,8 @@ class jeuTest {
     private VBox v = new VBox();
     private jeu j = new jeu(t,n,v);
 
+
+
     @Test
     void enleveObstacleDetruit() {
         int[][] tab = t.getTabTerrain();
@@ -34,16 +36,17 @@ class jeuTest {
         o.setPointDeVie(0);
         j.enleveObstacleDetruit(tab,e);
         assertEquals(0,j.getListeObstacle().size());
-
     }
 
     @Test
     void degatBase() {
+
         Ennemis e = new Sorcières(t);
-        e.setX(10000);
+        e.setX(10000); // position de notre base
         e.setY(10000);
         j.getEnnemis().add(e);
-        j.degatBase(e);
+        j.degatBase(e); // verifie si la position de l'ennemi et égale à la postion de la base
+        // dans ce cas on enlève des pv à la base et on retire l'ennemis du terrain
         assertEquals(8,j.getPvJoueur());
         assertEquals(0,j.getEnnemis().size());
     }
@@ -160,10 +163,17 @@ class jeuTest {
     @Test
     void vagueSuivante() {
         j.vagueSuivante();
+<<<<<<< HEAD
         assertEquals(0,j.getListeEnnemisSpawn().size());
         assertEquals(0,j.getEnnemis().size());
         assertEquals(2,j.getNbVague());
         assertEquals(2,j.getNbEnnemisRestant());
+=======
+        assertEquals(0,j.getListeEnnemisSpawn().size()); // lorsque l'on passe à la vague suivante liste des ennemis spawn repasse à zéro
+        assertEquals(0,j.getEnnemis().size()); // la liste d'ennemis aussi
+        assertEquals(2,j.getNbVague()); // le numéro de la vague passe à deux
+        assertEquals(2,j.getNbEnnemisRestant()); // le nombre d'ennemis est multiplié par deux
+>>>>>>> 1b1c5cbf6437daba6a9d4b700f7f8a45850029d2
     }
 
     @Test
@@ -251,9 +261,19 @@ class jeuTest {
 
     @Test
     void degatEnnemis() {
+        //On créer une case dégats et on l'ajoute à notre liste de case dégats de notre terrain
+        // on attribue la même position à notre ennemi et on voit si les point de de défense sont enlevé
+        CasesDégats casesDégats = new CasesDégats(784,304,95,2,"D",1);
+        t.ajouterCaseDegat(casesDégats);
+        Ennemis e = new gobelins(t);
+        e.setX(784);
+        e.setY(304);
+        j.degatEnnemis(e);
+        assertEquals(75,e.getPv());
     }
 
-    @Test
-    void unTour() {
-    }
+
+
+
+
 }

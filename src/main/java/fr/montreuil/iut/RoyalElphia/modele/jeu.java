@@ -3,8 +3,7 @@ package fr.montreuil.iut.RoyalElphia.modele;
 import fr.montreuil.iut.RoyalElphia.Controller.JeuController;
 import fr.montreuil.iut.RoyalElphia.LancementJeu;
 import fr.montreuil.iut.RoyalElphia.modele.Map.CasesDégats;
-import fr.montreuil.iut.RoyalElphia.modele.Niveau.Niveau;
-import fr.montreuil.iut.RoyalElphia.modele.Niveau.Vague;
+import fr.montreuil.iut.RoyalElphia.modele.Niveau.*;
 import fr.montreuil.iut.RoyalElphia.modele.Obstacle.Obstacle;
 import fr.montreuil.iut.RoyalElphia.modele.Tour.Tour;
 import javafx.beans.property.IntegerProperty;
@@ -72,7 +71,8 @@ public class jeu {
         this.listeDeTour = FXCollections.observableArrayList();
         this.listeObstacle = FXCollections.observableArrayList();
         this.argent = new SimpleIntegerProperty(200);
-        this.vague = new Vague(this.niveau.getNbEnnemis(), this.terrain);
+        //this.vague = new Vague(this.niveau.getNbEnnemis(), this.terrain);
+        this.vague = new VagueFacile(this.niveau.getNbEnnemis(), this.terrain);
         this.vBox = vBox;
     }
 
@@ -87,10 +87,7 @@ public class jeu {
                 tab[obstacle.getPosY()][obstacle.getPosX()] = 9;
                 this.listeObstacle.remove(this.listeObstacle.get(j));
             }
-
 // Si l'ennemi à la capacité de détruire l'obstacle et qu'il est à hauteur de l'obstacle alors il lui attribue des dégâts.
-
-
             if ((e.getCapaciteObstacle() >= obstacle.getMateriaux() && (e.getX() / 32 + 1 == obstacle.getPosX() && e.getY() / 32 == obstacle.getPosY()) || (e.getX() / 32 == obstacle.getPosX() && e.getY() / 32 + 1 == obstacle.getPosY()) || (e.getX() / 32 == obstacle.getPosX() && e.getY() / 32 - 1 == obstacle.getPosY()) || (e.getX() / 32 - 1 == obstacle.getPosX() && e.getY() / 32 == obstacle.getPosY()))) {
                 int degat = e.getDegatObstacle();
                 int vieObstacle = obstacle.getPointDeVie() - degat;
@@ -98,7 +95,6 @@ public class jeu {
             }
         }
     }
-
     // La méthode dégâtsEnnemis permet de vérifier si l'ennemis s'est déplacé sur une case dégats et de lui attribuer les dégats de la tour à qui la case dégâts est attribuer.
     public void degatEnnemis(Ennemis e) {
         for (int j = 0; j < this.terrain.getCasesDégats().size(); j++) {
@@ -107,7 +103,6 @@ public class jeu {
                 e.setPv(this.terrain.getCasesDégats().get(j).getDegat());
         }
     }
-
     // La méthode dégatBase permet que lorsque l'ennemi arrive à la base il inflige ces dégâts de base et meurt.
     public void degatBase(Ennemis e) {
         if (this.terrain.verifPArv(e.getX(), e.getY())) {
@@ -116,7 +111,6 @@ public class jeu {
             this.getEnnemis().remove(e);
         }
     }
-
     //Cette méthode enlève les ennemis mort de la liste d'ennemis
     public void enleveEnnemisMort() {
         for (int i = this.ennemis.size() - 1; i >= 0; i--) {
@@ -124,8 +118,8 @@ public class jeu {
                 this.ennemis.remove(i);
         }
     }
-
     //Cette méthode augment aléatoire les capacité d'un ennemis durant un tour
+
     public void augmentationCapacité(int nbTour, Ennemis e) {
 
         if (nbTour % 128 == 0) {
@@ -135,6 +129,7 @@ public class jeu {
             e.setDegatBase((e.getDegatBase() + (e.getDegatBase() * 50 / 100)));
         }
     }
+
 
     public void ajouterTour(Tour t) {
         listeDeTour.add(t);
@@ -219,7 +214,12 @@ public class jeu {
         this.nbVague.setValue(this.nbVague.getValue() + 1);
         this.niveau.setNbEnnemis(this.niveau.getNbEnnemis() * 2);
         this.nbEnnemisRestant.setValue(this.niveau.getNbEnnemis());
-        this.vague = new Vague(this.niveau.getNbEnnemis(), terrain);
+        //this.vague = new Vague(this.niveau.getNbEnnemis(),terrain);
+        this.vague = new VagueMoyenne(this.niveau.getNbEnnemis(), this.terrain);
+        if (this.nbVague.getValue() > 2){
+            this.vague = new VagueDifficile(this.niveau.getNbEnnemis(), this.terrain);
+        }
+
     }
 
     // permet d'ajouter un ennemi qui a spawn sur le terrain dans la liste de notre modèle

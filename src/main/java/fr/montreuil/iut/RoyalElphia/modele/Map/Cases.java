@@ -29,4 +29,11 @@ public class Cases {
     public void setY(int y) {
         this.y.set(y);
     }
+
+    @Override
+    public String toString() {
+        return "Cases " +
+                " x = " + getX() +
+                ", y = " + getY();
+    }
 }

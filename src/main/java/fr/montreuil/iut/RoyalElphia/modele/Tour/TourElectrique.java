@@ -9,5 +9,4 @@ public class TourElectrique extends Tour {
         setCoutAmelioration(15);
         setNiveauMaxAmelioration(3);
     }
-
 }

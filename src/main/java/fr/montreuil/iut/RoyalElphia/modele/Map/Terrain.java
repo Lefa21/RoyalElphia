@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 
 public class Terrain {
-    private int[][] Tabterrain;
+    protected int[][] Tabterrain;
     private Cases pointDep, pointArv;
 
     private ArrayList<CasesDégats> casesDégats;

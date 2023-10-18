@@ -44,6 +44,7 @@ public abstract class Ennemis {
     }
 
 
+
     public String getId() {
         return id;
     }
@@ -273,6 +274,9 @@ public abstract class Ennemis {
     public void setPvZero() {
         this.pv.setValue(0);
     }
+
+    //public abstract void AttaqueEnnemi();
+
 }
 
 
