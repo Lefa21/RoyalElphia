@@ -7,6 +7,8 @@ import fr.montreuil.iut.RoyalElphia.modele.Obstacle.Obstacle;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 
+import java.util.LinkedList;
+
 public abstract class Ennemis {
 
     private IntegerProperty xProperty, yProperty;
@@ -18,6 +20,8 @@ public abstract class Ennemis {
     private IntegerProperty pv;
     private CasesParcourues casesParcourues;
     private int degatObstacle;
+
+    private LinkedList<Cases> chemin;
 
 
     public Ennemis(Terrain terrain, int pv, int ptsDefense, int immunite, int degatBase, int butin, int capaciteObstacle, int degatObstacle) {
@@ -32,6 +36,7 @@ public abstract class Ennemis {
         this.degatObstacle = degatObstacle;
         compteur++;
         this.terrain = terrain;
+        this.chemin  = new LinkedList<Cases>(this.terrain.getChemin());
 
         /* On multiplie par 32 la case de départ du terrain, pour adapter les dimensions du tableau aux dimensions du
          terrains et on ajoute 16 pour mettre l'ennemi au centre de la case*/
@@ -130,6 +135,25 @@ public abstract class Ennemis {
         this.degatObstacle = degatObstacle;
     }
 
+    /*
+    public void testCheminE() {
+        for (int i = 0; i < chemin.size(); i++) {
+            System.out.println("Case :" + (i + 1));
+            System.out.println("X = " + chemin.get(i).getX());
+            System.out.println("Y = " + chemin.get(i).getY() + "\n");
+        }
+    }
+    */
+
+
+    public void deplacementV2() {
+
+        Cases cases = chemin.pollLast();
+        this.setX((cases.getY() * 32) + 16);
+        this.setY((cases.getX() * 32) + 16);
+
+    }
+
     public void seDeplace() {
         // On récupère le tableau du terrain
         int tab[][] = terrain.getTabTerrain();
@@ -204,6 +228,7 @@ public abstract class Ennemis {
             c = new Cases(this.getX(), this.getY() - 32);
         return c;
     }
+    // Tour qui fait changer la strat
 
 
     /*

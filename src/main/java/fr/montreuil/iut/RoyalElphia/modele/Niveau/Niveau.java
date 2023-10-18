@@ -6,7 +6,7 @@ public class Niveau {
     private int nbEnnemis;
 
     public Niveau(int nbEnnemis){
-        this.nbEnnemis = nbEnnemis;
+       this.nbEnnemis = nbEnnemis;
     }
 
     public int getNbEnnemis() {

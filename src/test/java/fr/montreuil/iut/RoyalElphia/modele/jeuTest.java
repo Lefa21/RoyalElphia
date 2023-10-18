@@ -20,7 +20,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class jeuTest {
 
     private Terrain t = new Map_1();
-    private Niveau n = new Facile();
+    private Niveau n = new Niveau(1);
     private VBox v = new VBox();
     private jeu j = new jeu(t,n,v);
 
@@ -163,10 +163,17 @@ class jeuTest {
     @Test
     void vagueSuivante() {
         j.vagueSuivante();
+<<<<<<< HEAD
+        assertEquals(0,j.getListeEnnemisSpawn().size());
+        assertEquals(0,j.getEnnemis().size());
+        assertEquals(2,j.getNbVague());
+        assertEquals(2,j.getNbEnnemisRestant());
+=======
         assertEquals(0,j.getListeEnnemisSpawn().size()); // lorsque l'on passe à la vague suivante liste des ennemis spawn repasse à zéro
         assertEquals(0,j.getEnnemis().size()); // la liste d'ennemis aussi
         assertEquals(2,j.getNbVague()); // le numéro de la vague passe à deux
         assertEquals(2,j.getNbEnnemisRestant()); // le nombre d'ennemis est multiplié par deux
+>>>>>>> 1b1c5cbf6437daba6a9d4b700f7f8a45850029d2
     }
 
     @Test

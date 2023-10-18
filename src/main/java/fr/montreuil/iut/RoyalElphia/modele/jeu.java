@@ -8,13 +8,10 @@ import fr.montreuil.iut.RoyalElphia.modele.Obstacle.Obstacle;
 import fr.montreuil.iut.RoyalElphia.modele.Tour.Tour;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
-
 import fr.montreuil.iut.RoyalElphia.modele.Ennemis.*;
 import fr.montreuil.iut.RoyalElphia.modele.Map.Terrain;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
@@ -85,6 +82,8 @@ public class jeu {
         for (int j = 0; j < this.listeObstacle.size(); j++) {
             Obstacle obstacle = this.listeObstacle.get(j);
             if (obstacle.getPointDeVie() <= 0) {
+
+                // méthode est vivant pour obstacle
                 tab[obstacle.getPosY()][obstacle.getPosX()] = 9;
                 this.listeObstacle.remove(this.listeObstacle.get(j));
             }
@@ -118,13 +117,18 @@ public class jeu {
         }
     }
     //Cette méthode augment aléatoire les capacité d'un ennemis durant un tour
-    public void augmentationCapacité(int nbTour,Ennemis e){
-        if(nbTour%128 ==0){
-                e.setDegatObstacle((e.getDegatObstacle() + (e.getDegatObstacle() * 50/100)));
-                e.améliorationPv((e.getPv() + (e.getPv() * 50/100)));
-                e.setDegatBase((e.getDegatBase() + (e.getDegatBase() * 50/100)));
-            }
+
+    public void augmentationCapacité(int nbTour, Ennemis e) {
+
+        if (nbTour % 128 == 0) {
+
+            e.setDegatObstacle((e.getDegatObstacle() + (e.getDegatObstacle() * 50 / 100)));
+            e.améliorationPv((e.getPv() + (e.getPv() * 50 / 100)));
+            e.setDegatBase((e.getDegatBase() + (e.getDegatBase() * 50 / 100)));
         }
+    }
+
+
     public void ajouterTour(Tour t) {
         listeDeTour.add(t);
     }
@@ -213,10 +217,11 @@ public class jeu {
         if (this.nbVague.getValue() > 2){
             this.vague = new VagueDifficile(this.niveau.getNbEnnemis(), this.terrain);
         }
+
     }
 
     // permet d'ajouter un ennemi qui a spawn sur le terrain dans la liste de notre modèle
-    public void spwanEnnemi(){
+    public void spwanEnnemi() {
         Ennemis e = this.vague.getListeEnnemis().pollLast();
         ennemis.add(e);
         this.listeEnnemisSpawn.add(e);
@@ -253,12 +258,12 @@ public class jeu {
         return comptEnnemiTue;
     }
 
-    public int getComptEnnemiTue(){
+    public int getComptEnnemiTue() {
         return this.comptEnnemiTue.getValue();
     }
 
     public void setComptEnnemiTue() {
-        this.comptEnnemiTue.setValue(getComptEnnemiTue()+1);
+        this.comptEnnemiTue.setValue(getComptEnnemiTue() + 1);
     }
 
     public IntegerProperty getPvJoueurProperty() {
@@ -295,7 +300,7 @@ public class jeu {
         for (int i = 0; i < this.ennemis.size(); i++) {
             Ennemis e = this.ennemis.get(i);
             augmentationCapacité(this.nbTour, e);
-            e.seDeplace();
+            e.deplacementV2();
             degatBase(e);
             enleveObstacleDetruit(tab, e);
             degatEnnemis(e);
@@ -341,17 +346,17 @@ public class jeu {
         KeyFrame kf = new KeyFrame(
 // on définit le FPS (nbre de frame par seconde)
 
-                Duration.seconds(0.2),
+                Duration.seconds(0.09),
 
                 // on définit ce qui se passe à chaque frame
                 // c'est un eventHandler d'ou le lambda
 
                 //Si le joueur à gagner ou à perdu la gameloop s'arrête
                 (ev -> {
-                    if (this.getPvJoueur() == 0 || (this.nbVague.getValue() == 5 && this.getNbEnnemisRestant()==0)) {
+                    if (this.getPvJoueur() == 0 || (this.nbVague.getValue() == 5 && this.getNbEnnemisRestant() == 0)) {
                         menuEnnemiS(vBox);
                         gameLoop.stop();
-                    } else if (getNbEnnemisRestant()==0) {
+                    } else if (getNbEnnemisRestant() == 0) {
                         vagueSuivante();
                         getEnnemisTué().removeAll(getEnnemisTué());
                     } else if (temps % 3 == 0) {
@@ -366,15 +371,14 @@ public class jeu {
                         }
                         temps++;
                     }
-                    if (this.getPvJoueur() > 0 && (this.nbVague.getValue() == 5 && getNbEnnemisRestant()==0)) {
+                    if (this.getPvJoueur() > 0 && (this.nbVague.getValue() == 5 && getNbEnnemisRestant() == 0)) {
                         try {
                             gagne();
                         } catch (IOException e) {
                             throw new RuntimeException(e);
                         }
                         gameLoop.stop();
-                    }
-                    else if (this.getPvJoueur() == 0 && getNbEnnemisRestant() >= 0){
+                    } else if (this.getPvJoueur() == 0 && getNbEnnemisRestant() >= 0) {
                         try {
                             perdu();
                         } catch (IOException e) {
@@ -412,7 +416,7 @@ public class jeu {
             ImageView imV = new ImageView(im);
             vBox.getChildren().add(imV);
             Popup popup = new Popup();
-            Label label = new Label(""+en.affichageImmunité());
+            Label label = new Label("" + en.affichageImmunité());
             label.minHeight(180);
             label.minWidth(180);
             label.setBackground(Background.fill(Color.WHITE));

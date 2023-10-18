@@ -14,6 +14,7 @@ public class Maps extends Terrain {
         }
         this.setPointDep(this.calculPointDep());
         this.setPointArv(this.calculPointArv());
+        this.setChemin(this.calculChemin());
     }
 
     public int[][] getTab1() {
