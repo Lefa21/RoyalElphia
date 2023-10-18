@@ -9,38 +9,24 @@ import fr.montreuil.iut.RoyalElphia.modele.Items.Items;
 import fr.montreuil.iut.RoyalElphia.modele.Map.Map2;
 import fr.montreuil.iut.RoyalElphia.modele.Map.Map_1;
 import fr.montreuil.iut.RoyalElphia.modele.Map.Terrain;
-
-import fr.montreuil.iut.RoyalElphia.modele.Niveau.Difficile;
-import fr.montreuil.iut.RoyalElphia.modele.Niveau.Facile;
 import fr.montreuil.iut.RoyalElphia.modele.Niveau.Niveau;
-import fr.montreuil.iut.RoyalElphia.modele.Niveau.Normal;
 import fr.montreuil.iut.RoyalElphia.modele.Obstacle.*;
 import fr.montreuil.iut.RoyalElphia.modele.Tour.*;
-
 import javafx.collections.ListChangeListener;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
-
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-
 import javafx.scene.layout.Pane;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.layout.TilePane;
-
-
 import javafx.scene.layout.VBox;
-
 import javafx.stage.Stage;
-
-
-
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
@@ -183,13 +169,7 @@ public class JeuController implements Initializable {
 
     public void créerNiveau(){
         int niveau = ChoixMapController.getNiveau();
-        if (niveau == 1) {
-            this.niveau = new Facile();
-        } else if (niveau == 2) {
-            this.niveau = new Normal();
-        } else if (niveau == 3) {
-            this.niveau = new Difficile();
-        }
+        this.niveau = new Niveau(niveau);
     }
 
     // La méthode créerTerrain récupère le choix de map du joueur entrer sur la page ChoixMap et créer le terrain associé.

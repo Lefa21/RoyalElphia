@@ -6,7 +6,6 @@ import fr.montreuil.iut.RoyalElphia.modele.Ennemis.Sorcières;
 import fr.montreuil.iut.RoyalElphia.modele.Ennemis.gobelins;
 import fr.montreuil.iut.RoyalElphia.modele.Map.Map_1;
 import fr.montreuil.iut.RoyalElphia.modele.Map.Terrain;
-import fr.montreuil.iut.RoyalElphia.modele.Niveau.Facile;
 import fr.montreuil.iut.RoyalElphia.modele.Niveau.Niveau;
 import fr.montreuil.iut.RoyalElphia.modele.Obstacle.BarricadeBois;
 import fr.montreuil.iut.RoyalElphia.modele.Obstacle.Obstacle;
@@ -21,7 +20,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class jeuTest {
 
     private Terrain t = new Map_1();
-    private Niveau n = new Facile();
+    private Niveau n = new Niveau(1);
     private VBox v = new VBox();
     private jeu j = new jeu(t,n,v);
 
@@ -164,7 +163,7 @@ class jeuTest {
         assertEquals(0,j.getListeEnnemisSpawn().size());
         assertEquals(0,j.getEnnemis().size());
         assertEquals(2,j.getNbVague());
-        assertEquals(4,j.getNbEnnemisRestant());
+        assertEquals(2,j.getNbEnnemisRestant());
     }
 
     @Test
@@ -240,7 +239,7 @@ class jeuTest {
     @Test
     void getNbEnnemisRestant() {
         //La 1ere vague du niveau facile a 5 ennemis.
-        assertEquals(2,j.getNbEnnemisRestant());
+        assertEquals(1,j.getNbEnnemisRestant());
     }
 
     @Test

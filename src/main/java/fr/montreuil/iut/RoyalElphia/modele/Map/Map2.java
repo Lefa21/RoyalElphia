@@ -40,6 +40,7 @@ public class Map2 extends Terrain {
         this.setTabterrain(t);
         this.setPointDep(this.calculPointDep());
         this.setPointArv(this.calculPointArv());
+        this.setChemin(this.calculChemin());
     }
 
 }
