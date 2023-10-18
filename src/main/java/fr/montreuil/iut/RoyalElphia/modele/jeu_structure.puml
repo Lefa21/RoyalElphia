@@ -153,9 +153,10 @@ CasesDégats331915373[
 <TR><TD ALIGN="LEFT" >(C)CasesDégats</TD></TR>
 <HR/>
 <TR><TD ALIGN="LEFT" >-   degat: IntegerProperty [0..1]</TD></TR>
-<TR><TD ALIGN="LEFT" >-   direction: String [0..1]</TD></TR>
 <TR><TD ALIGN="LEFT" >-   typeAttaque: int [1]</TD></TR>
 <HR/>
+<TR><TD ALIGN="LEFT" >+ transitionFormat(i: int): int</TD></TR>
+<TR><TD ALIGN="LEFT" >+ transitionFormatCaseSuivante(position: int, multi: int, choix: int): int</TD></TR>
 <TR><TD ALIGN="LEFT" >+ verifDegat(e: Ennemis): boolean</TD></TR>
 </TABLE>>
 	style=filled
@@ -195,10 +196,7 @@ Ennemis1432886034[
 <HR/>
 <TR><TD ALIGN="LEFT" >-   Immunite: int [1]</TD></TR>
 <TR><TD ALIGN="LEFT" >-   butin: int [1]</TD></TR>
-<TR><TD ALIGN="LEFT" >-   capaciteDegatObstacle: int [1]</TD></TR>
-<TR><TD ALIGN="LEFT" >-   capaciteDegatsBase: int [1]</TD></TR>
 <TR><TD ALIGN="LEFT" >-   capaciteObstacle: int [1]</TD></TR>
-<TR><TD ALIGN="LEFT" >-   capaciteVie: int [1]</TD></TR>
 <TR><TD ALIGN="LEFT" >-   casesParcourues: CasesParcourues [0..1]</TD></TR>
 <TR><TD ALIGN="LEFT" >-   degatBase: int [1]</TD></TR>
 <TR><TD ALIGN="LEFT" >-   degatObstacle: int [1]</TD></TR>
@@ -252,51 +250,6 @@ GéantRoyal1432886034[
 	fillcolor="#FFFFFF"
 ];
 
-HelloController190491813[
-	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
-<TR><TD ALIGN="LEFT" >(C)HelloController</TD></TR>
-<HR/>
-<TR><TD ALIGN="LEFT" >+   LabelArgent: Label [0..1]</TD></TR>
-<TR><TD ALIGN="LEFT" >+   LabelMort: Label [0..1]</TD></TR>
-<TR><TD ALIGN="LEFT" >+   LabelPV: Label [0..1]</TD></TR>
-<TR><TD ALIGN="LEFT" >+   LabelVague: Label [0..1]</TD></TR>
-<TR><TD ALIGN="LEFT" >+   LabelnbEnnemisRestant: Label [0..1]</TD></TR>
-<TR><TD ALIGN="LEFT" >-   ObstaclePose: boolean [1]</TD></TR>
-<TR><TD ALIGN="LEFT" >-   TourPose: boolean [1]</TD></TR>
-<TR><TD ALIGN="LEFT" >-   fxmlLoader: FXMLLoader [0..1]</TD></TR>
-<TR><TD ALIGN="LEFT" >-   jeu: jeu [0..1]</TD></TR>
-<TR><TD ALIGN="LEFT" >-   map: TilePane [0..1]</TD></TR>
-<TR><TD ALIGN="LEFT" >-   menuEnnemi: VBox [0..1]</TD></TR>
-<TR><TD ALIGN="LEFT" >-   niveau: Niveau [0..1]</TD></TR>
-<TR><TD ALIGN="LEFT" >-   obstacle: Obstacle [0..1]</TD></TR>
-<TR><TD ALIGN="LEFT" >-   panneauJeu: Pane [0..1]</TD></TR>
-<TR><TD ALIGN="LEFT" >-   terrain: Terrain [0..1]</TD></TR>
-<TR><TD ALIGN="LEFT" >-   tour: Tour [0..1]</TD></TR>
-<TR><TD ALIGN="LEFT" >-   vo: VueObstacle [0..1]</TD></TR>
-<TR><TD ALIGN="LEFT" >-   vt: VueTour [0..1]</TD></TR>
-<TR><TD ALIGN="LEFT" >-   vueEnnemi: VueEnnemi [0..1]</TD></TR>
-<HR/>
-<TR><TD ALIGN="LEFT" >+ Annul(mouseEvent: MouseEvent)</TD></TR>
-<TR><TD ALIGN="LEFT" >+ BoutonCaracteristiques(actionEvent: ActionEvent)</TD></TR>
-<TR><TD ALIGN="LEFT" >+ Demarrer(event: Event)</TD></TR>
-<TR><TD ALIGN="LEFT" >+ Pause(event: Event)</TD></TR>
-<TR><TD ALIGN="LEFT" >+ Portee(actionEvent: ActionEvent)</TD></TR>
-<TR><TD ALIGN="LEFT" >+ PoserTour(mouseEvent: MouseEvent)</TD></TR>
-<TR><TD ALIGN="LEFT" >+ Rejouer(actionEvent: ActionEvent)</TD></TR>
-<TR><TD ALIGN="LEFT" >+ TourClique(mouseEvent: MouseEvent)</TD></TR>
-<TR><TD ALIGN="LEFT" >+ cliqueObstacle(mouseEvent: MouseEvent)</TD></TR>
-<TR><TD ALIGN="LEFT" >+ créationPartie()</TD></TR>
-<TR><TD ALIGN="LEFT" >+ créerNiveau()</TD></TR>
-<TR><TD ALIGN="LEFT" >+ créerTerrain()</TD></TR>
-<TR><TD ALIGN="LEFT" >+ initialize(url: URL, resourceBundle: ResourceBundle)</TD></TR>
-<TR><TD ALIGN="LEFT" >+ poserItem(mouseEvent: MouseEvent)</TD></TR>
-</TABLE>>
-	style=filled
-	margin=0
-	shape=plaintext
-	fillcolor="#FFFFFF"
-];
-
 Items1146228681[
 	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
 <TR><TD ALIGN="LEFT" >(C)Items</TD></TR>
@@ -316,7 +269,53 @@ Items1146228681[
 	fillcolor="#FFFFFF"
 ];
 
-ListObsEnnemis190491813[
+JeuController190491813[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)JeuController</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+   ButtonPause: Button [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >+   ButtonPortée: Button [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >+   ButtonQuitter: Button [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   LabelArgent: Label [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   LabelMort: Label [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   LabelPV: Label [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   LabelVague: Label [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   LabelnbEnnemisRestant: Label [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   ObstaclePose: boolean [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   TourPose: boolean [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   items: Items [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   jeu: jeu [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   map: TilePane [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   menuEnnemi: VBox [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   niveau: Niveau [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   obstacle: Obstacle [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   panneauJeu: Pane [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   terrain: Terrain [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   tour: Tour [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   vo: VueObstacle [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   vt: VueTour [0..1]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ BoutonCaracteristiques(actionEvent: ActionEvent)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ Demarrer(event: Event)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ Pause(event: Event)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ Quitter(actionEvent: ActionEvent)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ Rejouer(actionEvent: ActionEvent)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ TourClique(mouseEvent: MouseEvent)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ caracteristiqueObstacle(actionEvent: ActionEvent)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ cliqueObstacle(mouseEvent: MouseEvent)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ créationPartie()</TD></TR>
+<TR><TD ALIGN="LEFT" >+ créerNiveau()</TD></TR>
+<TR><TD ALIGN="LEFT" >+ créerTerrain()</TD></TR>
+<TR><TD ALIGN="LEFT" >+ initialize(url: URL, resourceBundle: ResourceBundle)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ poserItem(mouseEvent: MouseEvent)</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+ListObsEnnemis1432886034[
 	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
 <TR><TD ALIGN="LEFT" >(C)ListObsEnnemis</TD></TR>
 <HR/>
@@ -407,11 +406,8 @@ Obstacle1169932984[
 	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
 <TR><TD ALIGN="LEFT" >(C)Obstacle</TD></TR>
 <HR/>
-<TR><TD ALIGN="LEFT" >-   ID: int [1]</TD></TR>
 <TR><TD ALIGN="LEFT" >-   Materiaux: int [1]</TD></TR>
 <TR><TD ALIGN="LEFT" >-   PointDeVie: IntegerProperty [0..1]</TD></TR>
-<TR><TD ALIGN="LEFT" >-   posX: IntegerProperty [0..1]</TD></TR>
-<TR><TD ALIGN="LEFT" >-   posY: IntegerProperty [0..1]</TD></TR>
 </TABLE>>
 	style=filled
 	margin=0
@@ -445,8 +441,6 @@ Terrain331915373[
 <HR/>
 <TR><TD ALIGN="LEFT" >-   Tabterrain: int[][] [0..*]</TD></TR>
 <TR><TD ALIGN="LEFT" >-   casesDégats: ArrayList&lt;CasesDégats&gt; [0..*]</TD></TR>
-<TR><TD ALIGN="LEFT" >-   hauteur: int [1]</TD></TR>
-<TR><TD ALIGN="LEFT" >-   largeur: int [1]</TD></TR>
 <TR><TD ALIGN="LEFT" >-   pointArv: Cases [0..1]</TD></TR>
 <TR><TD ALIGN="LEFT" >-   pointDep: Cases [0..1]</TD></TR>
 <HR/>
@@ -465,10 +459,8 @@ Tour1699219711[
 	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
 <TR><TD ALIGN="LEFT" >(C)Tour</TD></TR>
 <HR/>
-<TR><TD ALIGN="LEFT" >-   DureeINtervalleAttaque: int [1]</TD></TR>
 <TR><TD ALIGN="LEFT" >-   NombreAttaqueMax: int [1]</TD></TR>
 <TR><TD ALIGN="LEFT" >-   PorteeAttaque: int [1]</TD></TR>
-<TR><TD ALIGN="LEFT" >-   TempsRecharge: int [1]</TD></TR>
 <TR><TD ALIGN="LEFT" >-   TypeAttaque: int [1]</TD></TR>
 <TR><TD ALIGN="LEFT" >-   degat: IntegerProperty [0..1]</TD></TR>
 <TR><TD ALIGN="LEFT" >-   listeCasesDegats: ArrayList&lt;CasesDégats&gt; [0..*]</TD></TR>
@@ -532,29 +524,11 @@ TourLaser1699219711[
 	fillcolor="#FFFFFF"
 ];
 
-Vague2082819131[
+Vague1039865401[
 	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
 <TR><TD ALIGN="LEFT" >(C)Vague</TD></TR>
 <HR/>
 <TR><TD ALIGN="LEFT" >-   listeEnnemis: LinkedList&lt;Ennemis&gt; [0..*]</TD></TR>
-<TR><TD ALIGN="LEFT" >-   terrain: Terrain [0..1]</TD></TR>
-</TABLE>>
-	style=filled
-	margin=0
-	shape=plaintext
-	fillcolor="#FFFFFF"
-];
-
-VueItems61364067[
-	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
-<TR><TD ALIGN="LEFT" >(C)VueItems</TD></TR>
-<HR/>
-<TR><TD ALIGN="LEFT" >-   Obstacle: Obstacle [0..1]</TD></TR>
-<TR><TD ALIGN="LEFT" >-   jeu: jeu [0..1]</TD></TR>
-<TR><TD ALIGN="LEFT" >-   panneauJeu: Pane [0..1]</TD></TR>
-<TR><TD ALIGN="LEFT" >-   terrain: Terrain [0..1]</TD></TR>
-<TR><TD ALIGN="LEFT" >-   x: double [1]</TD></TR>
-<TR><TD ALIGN="LEFT" >-   y: double [1]</TD></TR>
 </TABLE>>
 	style=filled
 	margin=0
@@ -637,7 +611,6 @@ jeu2082819131[
 <TR><TD ALIGN="LEFT" >-   terrain: Terrain [0..1]</TD></TR>
 <TR><TD ALIGN="LEFT" >-   vBox: VBox [0..1]</TD></TR>
 <TR><TD ALIGN="LEFT" >-   vague: Vague [0..1]</TD></TR>
-<TR><TD ALIGN="LEFT" >-   vagueS: boolean [1]</TD></TR>
 <HR/>
 <TR><TD ALIGN="LEFT" >+ ComptEnnemiTueProperty(): IntegerProperty</TD></TR>
 <TR><TD ALIGN="LEFT" >+ ajoutEnnemisMort(enm: Ennemis)</TD></TR>
@@ -684,15 +657,15 @@ Ennemis1432886034 -> Squelette1432886034[arrowhead=none, arrowtail=empty, dir=bo
 Ennemis1432886034 -> Terrain331915373[label="terrain
 [0..1]"];
 Ennemis1432886034 -> gobelins1432886034[arrowhead=none, arrowtail=empty, dir=both];
-HelloController190491813 -> VueObstacle61364067[label="vo
-[0..1]"];
-HelloController190491813 -> VueTour61364067[label="vt
-[0..1]"];
-HelloController190491813 -> jeu2082819131[label="jeu
-[0..1]"];
 Items1146228681 -> Obstacle1169932984[arrowhead=none, arrowtail=empty, dir=both];
 Items1146228681 -> Tour1699219711[arrowhead=none, arrowtail=empty, dir=both];
-ListObsEnnemis190491813 -> jeu2082819131[label="jeu
+JeuController190491813 -> VueObstacle61364067[label="vo
+[0..1]"];
+JeuController190491813 -> VueTour61364067[label="vt
+[0..1]"];
+JeuController190491813 -> jeu2082819131[label="jeu
+[0..1]"];
+ListObsEnnemis1432886034 -> jeu2082819131[label="jeu
 [0..1]"];
 ListObservableObstacle1169932984 -> jeu2082819131[label="jeu
 [0..1]"];
@@ -720,12 +693,8 @@ Tour1699219711 -> TourBouleDeFeu1699219711[arrowhead=none, arrowtail=empty, dir=
 Tour1699219711 -> TourElectrique1699219711[arrowhead=none, arrowtail=empty, dir=both];
 Tour1699219711 -> TourFleche1699219711[arrowhead=none, arrowtail=empty, dir=both];
 Tour1699219711 -> TourLaser1699219711[arrowhead=none, arrowtail=empty, dir=both];
-Vague2082819131 -> Ennemis1432886034[label="listeEnnemis
+Vague1039865401 -> Ennemis1432886034[label="listeEnnemis
 [0..*]"];
-Vague2082819131 -> Terrain331915373[label="terrain
-[0..1]"];
-VueItems61364067 -> jeu2082819131[label="jeu
-[0..1]"];
 VueObstacle61364067 -> jeu2082819131[label="jeu
 [0..1]"];
 VueTour61364067 -> jeu2082819131[label="jeu
@@ -745,7 +714,7 @@ jeu2082819131 -> Terrain331915373[label="terrain
 [0..1]"];
 jeu2082819131 -> Tour1699219711[label="listeDeTour
 [0..*]"];
-jeu2082819131 -> Vague2082819131[label="vague
+jeu2082819131 -> Vague1039865401[label="vague
 [0..1]"];
     
 }

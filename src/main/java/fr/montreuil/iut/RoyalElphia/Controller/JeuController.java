@@ -6,14 +6,10 @@ import fr.montreuil.iut.RoyalElphia.modele.*;
 import fr.montreuil.iut.RoyalElphia.modele.Ennemis.Ennemis;
 import fr.montreuil.iut.RoyalElphia.modele.Ennemis.ListObsEnnemis;
 import fr.montreuil.iut.RoyalElphia.modele.Items.Items;
-import fr.montreuil.iut.RoyalElphia.modele.Map.Map2;
-import fr.montreuil.iut.RoyalElphia.modele.Map.Map_1;
+import fr.montreuil.iut.RoyalElphia.modele.Map.Maps;
 import fr.montreuil.iut.RoyalElphia.modele.Map.Terrain;
 
-import fr.montreuil.iut.RoyalElphia.modele.Niveau.Difficile;
-import fr.montreuil.iut.RoyalElphia.modele.Niveau.Facile;
 import fr.montreuil.iut.RoyalElphia.modele.Niveau.Niveau;
-import fr.montreuil.iut.RoyalElphia.modele.Niveau.Normal;
 import fr.montreuil.iut.RoyalElphia.modele.Obstacle.*;
 import fr.montreuil.iut.RoyalElphia.modele.Tour.*;
 
@@ -163,14 +159,14 @@ public class JeuController implements Initializable {
         double cliqueX = mouseEvent.getX();
         double cliqueY = mouseEvent.getY();
         if(this.obstacle != null){
-            System.out.println("obstacle poser ");
+            System.out.println("obstacle posé ");
             VueObstacle vueObstacle = new VueObstacle(panneauJeu, obstacle, cliqueX, cliqueY, terrain,jeu);
             vueObstacle.PoserObstacle();
             this.ObstaclePose = true;
             this.obstacle = vueObstacle.getObstacle();
         }
         if(this.tour != null){
-            System.out.println("tour poser");
+            System.out.println("tour posée");
             VueTour vueTour = new VueTour(panneauJeu, tour, cliqueX, cliqueY, terrain, jeu);
             vueTour.PoserTour();
             this.TourPose = true;
@@ -184,11 +180,11 @@ public class JeuController implements Initializable {
     public void créerNiveau(){
         int niveau = ChoixMapController.getNiveau();
         if (niveau == 1) {
-            this.niveau = new Facile();
+            this.niveau = new Niveau(1);
         } else if (niveau == 2) {
-            this.niveau = new Normal();
+            this.niveau = new Niveau(5);
         } else if (niveau == 3) {
-            this.niveau = new Difficile();
+            this.niveau = new Niveau(10);
         }
     }
 
@@ -197,9 +193,9 @@ public class JeuController implements Initializable {
     public void créerTerrain() {
         int terrain = ChoixMapController.getTerrain();
         if (terrain == 1) {
-            this.terrain = new Map2();
+            this.terrain = new Maps(1);
         } else if (terrain == 2) {
-            this.terrain = new Map_1();
+            this.terrain = new Maps(2);
         }
     }
 

@@ -1,8 +1,6 @@
 package fr.montreuil.iut.RoyalElphia.modele;
 
 import fr.montreuil.iut.RoyalElphia.modele.Map.CasesDégats;
-import fr.montreuil.iut.RoyalElphia.modele.Map.Map2;
-import fr.montreuil.iut.RoyalElphia.modele.Map.Map_1;
 import fr.montreuil.iut.RoyalElphia.modele.Map.Terrain;
 import fr.montreuil.iut.RoyalElphia.modele.Tour.*;
 import javafx.scene.layout.Pane;
@@ -119,7 +117,7 @@ private    ArrayList<CasesDégats> listeVide = new ArrayList<>();
         System.out.println("liste case degat map2 après suppression :  " + Map2.getCasesDégats().toString() + '\n');
     }
 
-
+@Test
     public void CaseDegatElectrique(){
         tourElectrique.setPosX(10);
         tourElectrique.setPosy(24);
@@ -169,7 +167,7 @@ private    ArrayList<CasesDégats> listeVide = new ArrayList<>();
 
         System.out.println("Liste de case dégats de la Map1 : " + map1.getCasesDégats().toString() + "\n");
     }
-
+@Test
     public void tourFeuInnofensif(){
         System.out.println("Tour feu devient Innoffensif : ");
         tourFeu.TourDevientInoffensif(map1,tourFeu.getListeCasesDegats());

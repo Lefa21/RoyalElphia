@@ -3,7 +3,7 @@ package fr.montreuil.iut.RoyalElphia.modele.Map;
 import java.util.ArrayList;
 
 public class Terrain {
-    private int[][] Tabterrain;
+    protected int[][] Tabterrain;
     private Cases pointDep, pointArv;
 
     private ArrayList<CasesDégats> casesDégats;
