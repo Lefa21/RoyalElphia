@@ -3,6 +3,7 @@ package fr.montreuil.iut.RoyalElphia.modele.Tour;
 import fr.montreuil.iut.RoyalElphia.modele.Items.Items;
 import fr.montreuil.iut.RoyalElphia.modele.Map.CasesDégats;
 import fr.montreuil.iut.RoyalElphia.modele.Map.Terrain;
+import fr.montreuil.iut.RoyalElphia.modele.jeu;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.scene.layout.Pane;
@@ -13,9 +14,7 @@ public class Tour extends Items {
 
     private int PorteeAttaque;
     private int TypeAttaque;
-    private int NombreAttaqueMax;
-    private IntegerProperty degat;
-
+    protected IntegerProperty degat;
     private ArrayList<CasesDégats> listeCasesDegats;
 
 
@@ -26,6 +25,10 @@ public class Tour extends Items {
         PorteeAttaque = porteeAttaque;
         TypeAttaque = typeAttaque;
         this.degat = new SimpleIntegerProperty(degat);
+    }
+
+    public void setDegat(int degat) {
+        this.degat.set(degat);
     }
 
     public int getDegat() {

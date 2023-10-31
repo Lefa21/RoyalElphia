@@ -6,6 +6,7 @@ import fr.montreuil.iut.RoyalElphia.modele.Map.CasesDégats;
 import fr.montreuil.iut.RoyalElphia.modele.Niveau.*;
 import fr.montreuil.iut.RoyalElphia.modele.Obstacle.Obstacle;
 import fr.montreuil.iut.RoyalElphia.modele.Tour.Tour;
+import fr.montreuil.iut.RoyalElphia.modele.Tour.TourABombe;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import fr.montreuil.iut.RoyalElphia.modele.Ennemis.*;
@@ -70,26 +71,24 @@ public class jeu {
         this.pvJoueur = new SimpleIntegerProperty(10);
         this.listeDeTour = FXCollections.observableArrayList();
         this.listeObstacle = FXCollections.observableArrayList();
-        this.argent = new SimpleIntegerProperty(200);
+        this.argent = new SimpleIntegerProperty(20000);
         //this.vague = new Vague(this.niveau.getNbEnnemis(), this.terrain);
         this.vague = new VagueFacile(this.niveau.getNbEnnemis(), this.terrain);
         this.vBox = vBox;
     }
 
+    public int getNbTour() {
+        return nbTour;
+    }
     // La méthode enleveObstacleDetruit permet à un ennemi de détruire un obstacle présent sur le chemin.
 
     public void enleveObstacleDetruit(int[][] tab, Ennemis e) {
         for (int j = 0; j < this.listeObstacle.size(); j++) {
             Obstacle obstacle = this.listeObstacle.get(j);
             if (obstacle.getPointDeVie() <= 0) {
-
-                // méthode est vivant pour obstacle
                 tab[obstacle.getPosY()][obstacle.getPosX()] = 9;
                 this.listeObstacle.remove(this.listeObstacle.get(j));
             }
-// Si l'ennemi à la capacité de détruire l'obstacle et qu'il est à hauteur de l'obstacle alors il lui attribue des dégâts.
-
-            //e.attaqueEnnemi(obstacle);
             e.strategieAttaque(obstacle);
         }
     }
@@ -214,10 +213,9 @@ public class jeu {
         this.nbEnnemisRestant.setValue(this.niveau.getNbEnnemis());
         //this.vague = new Vague(this.niveau.getNbEnnemis(),terrain);
         this.vague = new VagueMoyenne(this.niveau.getNbEnnemis(), this.terrain);
-        if (this.nbVague.getValue() > 2){
+        if (this.nbVague.getValue() > 4) {
             this.vague = new VagueDifficile(this.niveau.getNbEnnemis(), this.terrain);
         }
-
     }
 
     // permet d'ajouter un ennemi qui a spawn sur le terrain dans la liste de notre modèle
@@ -236,7 +234,7 @@ public class jeu {
         listeEnnemisTuée.add(enm);
     }
 
-    public ArrayList<Ennemis> getEnnemisTué() {
+    public ArrayList<Ennemis> getEnnemisTue() {
         return listeEnnemisTuée;
     }
 
@@ -295,26 +293,88 @@ public class jeu {
     }
 
     // La méthode un tour permet de de faire déplacer les ennemis et les faire agir avec leurs environnement.
-    public void unTour() {
+   /* public void unTour() {
         int[][] tab = terrain.getTabTerrain();
+        for (int i = 0; i < this.listeDeTour.size(); i++){
+            Tour t = this.listeDeTour.get(i);
+                ((TourABombe) t).tourTemporaire(getNbTour());
+                if (t.getDegat()==0){
+
+                }
+        }
         for (int i = 0; i < this.ennemis.size(); i++) {
             Ennemis e = this.ennemis.get(i);
+            for (int j = 0; j < this.listeObstacle.size(); j++) {
+                Obstacle obstacle = this.listeObstacle.get(j);
+                for (Ennemis en:
+                        listeEnnemisSpawn) {
+                    if (en.isEstBloque() == true && obstacle.getPointDeVie() <= 0) en.setEstBloque(false);
+                }
+                e.jeSuisBloque(obstacle);
+                if (e.isEstBloque() == true && obstacle.getPointDeVie() <= 0) e.setEstBloque(false);
+            }
             augmentationCapacité(this.nbTour, e);
-            e.deplacementV2();
+            if (e.isEstBloque()==false)  e.deplacementV2();
             degatBase(e);
             enleveObstacleDetruit(tab, e);
             degatEnnemis(e);
         }
         enleveEnnemisMort();
+
+        if (getArgent() < 0) setArgentAZero();
+        if (getPvJoueur() < 0) setPvZero();
+
+        nbTour++;
+    }*/
+
+    public void unTour() {
+        int[][] tab = terrain.getTabTerrain();
+        gererTours();
+        for (int i = 0; i < this.ennemis.size(); i++) {
+            Ennemis e = this.ennemis.get(i);
+            gererObstacles(e);
+            augmentationCapacité(this.nbTour, e);
+            if (!e.isEstBloque()) {
+                e.deplacementV2();
+            }
+            degatBase(e);
+            enleveObstacleDetruit(tab, e);
+            degatEnnemis(e);
+        }
+        enleveEnnemisMort();
+        ajusterArgentEtPv();
+        nbTour++;
+    }
+
+    private void gererTours() {
+        for (Tour tour : this.listeDeTour) {
+            if (tour instanceof TourABombe) {
+                ((TourABombe) tour).tourTemporaire(getNbTour());
+            }
+        }
+    }
+
+    private void gererObstacles(Ennemis e) {
+        for (Obstacle obstacle : this.listeObstacle) {
+            for (Ennemis en : listeEnnemisSpawn) {
+                if (en.isEstBloque() && obstacle.getPointDeVie() <= 0) {
+                    en.setEstBloque(false);
+                }
+            }
+            e.jeSuisBloque(obstacle);
+            if (e.isEstBloque() && obstacle.getPointDeVie() <= 0) {
+                e.setEstBloque(false);
+            }
+        }
+    }
+
+    private void ajusterArgentEtPv() {
         if (getArgent() < 0) {
             setArgentAZero();
         }
-
-
         if (getPvJoueur() < 0) {
             setPvZero();
         }
-        nbTour++;
     }
 
     //Lorsque le joueur gagne on lui affiche cette page.
@@ -337,7 +397,7 @@ public class jeu {
     }
 
     // La méthode initAnimation permet de faire tourner la gameloop et le jeu par la même occasion.
-    public void initAnimation() {
+    /*public void initAnimation() {
         gameLoop = new Timeline();
         temps = 0;
         gameLoop.setCycleCount(Timeline.INDEFINITE);
@@ -390,8 +450,77 @@ public class jeu {
                 })
         );
         gameLoop.getKeyFrames().add(kf);
+    }*/
+
+    public void initAnimation() {
+        gameLoop = new Timeline();
+        temps = 0;
+        gameLoop.setCycleCount(Timeline.INDEFINITE);
+
+        KeyFrame kf = new KeyFrame(
+                Duration.seconds(0.09),
+                (ev -> gererAnimation())
+        );
+
+        gameLoop.getKeyFrames().add(kf);
     }
 
+    private void gererAnimation() {
+        if (this.getPvJoueur() == 0 || (this.nbVague.getValue() == 5 && this.getNbEnnemisRestant() == 0)) {
+            StopJeuEtAfficherMenu();
+        } else if (getNbEnnemisRestant() == 0) {
+            vagueSuivante();
+            effacerEnnemisMorts();
+        } else if (temps % 3 == 0) {
+            unTour();
+        } else if (temps % 10 == 0 && getListeEnnemisSpawn().size() < this.niveau.getNbEnnemis()) {
+            spawnEnnemiEtMenus();
+            temps++;
+        } else if (this.getPvJoueur() > 0 && (this.nbVague.getValue() == 5 && getNbEnnemisRestant() == 0)) {
+            gererVictoire();
+        } else if (this.getPvJoueur() == 0 && getNbEnnemisRestant() >= 0) {
+            gererDéfaite();
+        }
+        temps++;
+    }
+
+    private void StopJeuEtAfficherMenu() {
+        menuEnnemiS(vBox);
+        gameLoop.stop();
+    }
+
+    private void effacerEnnemisMorts() {
+        vagueSuivante();
+        getEnnemisTue().removeAll(getEnnemisTue());
+    }
+
+    private void spawnEnnemiEtMenus() {
+        spwanEnnemi();
+        menuEnnemiS(vBox);
+        try {
+            menuEnnemiA(vBox);
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private void gererVictoire() {
+        try {
+            gagne();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        gameLoop.stop();
+    }
+
+    private void gererDéfaite() {
+        try {
+            perdu();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        gameLoop.stop();
+    }
 
     // Les ennemis présent sur la map sont ajouté aux menus des ennemis.
 

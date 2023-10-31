@@ -1,5 +1,6 @@
 package fr.montreuil.iut.RoyalElphia.modele.Ennemis;
 
+import fr.montreuil.iut.RoyalElphia.modele.Ennemis.StrategieAttaque.StrategieAttaque;
 import fr.montreuil.iut.RoyalElphia.modele.Map.Cases;
 import fr.montreuil.iut.RoyalElphia.modele.Map.CasesParcourues;
 import fr.montreuil.iut.RoyalElphia.modele.Map.Terrain;
@@ -23,8 +24,12 @@ public abstract class Ennemis {
 
     private LinkedList<Cases> chemin;
 
+    protected StrategieAttaque sa;
 
-    public Ennemis(Terrain terrain, int pv, int ptsDefense, int immunite, int degatBase, int butin, int capaciteObstacle, int degatObstacle) {
+    private boolean estBloque = false;
+
+
+    public Ennemis(Terrain terrain, int pv, int ptsDefense, int immunite, int degatBase, int butin, int capaciteObstacle, int degatObstacle, StrategieAttaque s) {
         this.id = "" + compteur;
         this.casesParcourues = new CasesParcourues();
         this.Immunite = immunite;
@@ -37,6 +42,7 @@ public abstract class Ennemis {
         compteur++;
         this.terrain = terrain;
         this.chemin  = new LinkedList<Cases>(this.terrain.getChemin());
+        this.sa = s;
 
         /* On multiplie par 32 la case de départ du terrain, pour adapter les dimensions du tableau aux dimensions du
          terrains et on ajoute 16 pour mettre l'ennemi au centre de la case*/
@@ -258,28 +264,51 @@ public abstract class Ennemis {
     // Méthode permettant de gérer l'affichage de l'immunité aux tours de l'ennemi
     public String affichageImmunité() {
         String affichage = "Cet ennemi est immunisé face aux tours";
-        if (this.Immunite == 1) {
-            affichage = affichage + " à bombes";
-        } else if (this.Immunite == 2) {
-            affichage = affichage + " boule de feu";
-        } else if (this.Immunite == 3) {
-            affichage = affichage + " électriques";
-        } else if (this.Immunite == 4) {
-            affichage = affichage + " à flèches";
-        } else if (this.Immunite == 5) {
-            affichage = affichage + " laser";
+        switch (this.Immunite) {
+            case 1:
+                affichage += " à bombes";
+                break;
+            case 2:
+                affichage += " boule de feu";
+                break;
+            case 3:
+                affichage += " électriques";
+                break;
+            case 4:
+                affichage += " à flèches";
+                break;
+            case 5:
+                affichage += " laser";
+                break;
         }
         return affichage;
     }
+
 
     public void setPvZero() {
         this.pv.setValue(0);
     }
 
-    //public abstract void attaqueEnnemi(Obstacle obstacle);
     public abstract void strategieAttaque(Obstacle o);
 
+    //faire un composite deplacement avec par exemple la teleportation et le fait que l'ennemi est bloque par les obstacles (voir méthode en bas :)
+    public void jeSuisBloque(Obstacle obstacle) {
+        int x = getX() / 32;
+        int y = getY() / 32;
+        int obX = obstacle.getPosX();
+        int obY = obstacle.getPosY();
 
+            if (obstacle.getPointDeVie() > 0 && (x + 1 == obX && y == obY) || (x == obX && y + 1 == obY) || (x == obX && y - 1 == obY) || (x - 1 == obX && y == obY)) {
+                this.estBloque = true;
+        }
+    }
+
+    public boolean isEstBloque(){
+        return estBloque;
+    }
+    public void setEstBloque(boolean b){
+        this.estBloque = b;
+    }
 }
 
 

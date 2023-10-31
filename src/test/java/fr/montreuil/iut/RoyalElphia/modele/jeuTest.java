@@ -189,15 +189,15 @@ class jeuTest {
     void ajoutEnnemisMort() {
         Ennemis e = new Géant(t);
         j.ajoutEnnemisMort(e);
-        assertEquals(1,j.getEnnemisTué().size());
+        assertEquals(1,j.getEnnemisTue().size());
 
     }
 
     @Test
     void getEnnemisTué() {
         Ennemis e = new Sorcières(t);
-        j.getEnnemisTué().add(e);
-        assertEquals(1,j.getEnnemisTué().size());
+        j.getEnnemisTue().add(e);
+        assertEquals(1,j.getEnnemisTue().size());
     }
 
     @Test
