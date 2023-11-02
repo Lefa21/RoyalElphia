@@ -5,7 +5,7 @@ import fr.montreuil.iut.RoyalElphia.modele.Obstacle.Obstacle;
 
 public class AttaqueDistance implements StrategieAttaque{
 
-    public void AttaqueEnnemi(int capacite, int dx, int dy, Obstacle obstacle, Ennemis e) {
+    public void AttaqueEnnemi(int capacite, int dx, int dy, Obstacle obstacle) {
         int capObstacle = capacite;
         int x = dx / 32;
         int y = dy / 32;

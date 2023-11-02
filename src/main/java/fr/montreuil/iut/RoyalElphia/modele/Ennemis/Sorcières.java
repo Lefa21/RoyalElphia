@@ -15,6 +15,11 @@ public class Sorcières extends Ennemis {
     }
 
     public void strategieAttaque(Obstacle o) {
-        sa.AttaqueEnnemi(getCapaciteObstacle(),getX(),getY(),o,(this));
+        sa.AttaqueEnnemi(getCapaciteObstacle(),getX(),getY(),o);
     }
+
+    public String getChemin() {
+        return "src/main/resources/fr/montreuil/iut/RoyalElphia/ImageEnnemis/sorcière.png";
+    }
+
 }

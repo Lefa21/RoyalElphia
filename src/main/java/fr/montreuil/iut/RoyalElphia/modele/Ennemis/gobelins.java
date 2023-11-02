@@ -16,7 +16,11 @@ public class gobelins extends Ennemis {
     // Immunité 3 -->  Immunisé face au tour électrique
     @Override
     public void strategieAttaque(Obstacle o) {
-        sa.AttaqueEnnemi(getCapaciteObstacle(),getX(),getY(),o, (this));
+        sa.AttaqueEnnemi(getCapaciteObstacle(),getX(),getY(),o);
+    }
+
+    public String getChemin() {
+        return "src/main/resources/fr/montreuil/iut/RoyalElphia/ImageEnnemis/gobelin.png";
     }
 
 

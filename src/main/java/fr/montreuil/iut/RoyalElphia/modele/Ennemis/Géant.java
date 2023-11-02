@@ -14,6 +14,10 @@ public class Géant extends Ennemis {
 
     // Immunité 2 -->  Immunisé face au tour boule de feu
     public void strategieAttaque(Obstacle o) {
-        sa.AttaqueEnnemi(getCapaciteObstacle(),getX(),getY(),o, (this));
+        sa.AttaqueEnnemi(getCapaciteObstacle(),getX(),getY(),o);
+    }
+
+    public String getChemin() {
+        return "src/main/resources/fr/montreuil/iut/RoyalElphia/ImageEnnemis/Geant.png";
     }
 }

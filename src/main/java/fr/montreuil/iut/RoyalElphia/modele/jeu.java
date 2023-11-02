@@ -5,8 +5,13 @@ import fr.montreuil.iut.RoyalElphia.LancementJeu;
 import fr.montreuil.iut.RoyalElphia.modele.Map.CasesDégats;
 import fr.montreuil.iut.RoyalElphia.modele.Niveau.*;
 import fr.montreuil.iut.RoyalElphia.modele.Obstacle.Obstacle;
+import fr.montreuil.iut.RoyalElphia.modele.Tour.StrategieTour.AttaqueEvolutive;
+import fr.montreuil.iut.RoyalElphia.modele.Tour.StrategieTour.AttaqueRecharge;
+import fr.montreuil.iut.RoyalElphia.modele.Tour.StrategieTour.StrategieTour;
 import fr.montreuil.iut.RoyalElphia.modele.Tour.Tour;
 import fr.montreuil.iut.RoyalElphia.modele.Tour.TourABombe;
+import fr.montreuil.iut.RoyalElphia.modele.Tour.TourBouleDeFeu;
+import fr.montreuil.iut.RoyalElphia.modele.Tour.TourElectrique;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import fr.montreuil.iut.RoyalElphia.modele.Ennemis.*;
@@ -292,6 +297,7 @@ public class jeu {
         return this.nbEnnemisRestant.getValue();
     }
 
+
     // La méthode un tour permet de de faire déplacer les ennemis et les faire agir avec leurs environnement.
    /* public void unTour() {
         int[][] tab = terrain.getTabTerrain();
@@ -348,11 +354,14 @@ public class jeu {
 
     private void gererTours() {
         for (Tour tour : this.listeDeTour) {
-            if (tour instanceof TourABombe) {
-                ((TourABombe) tour).tourTemporaire(getNbTour());
+            if (tour.getSt() instanceof AttaqueRecharge) {
+                tour.getSt().attaqueRecharge(tour);
+            } else if (tour.getSt() instanceof AttaqueEvolutive) {
+                tour.getSt().attaqueEvolutive(tour, getComptEnnemiTue(), terrain);
             }
         }
     }
+
 
     private void gererObstacles(Ennemis e) {
         for (Obstacle obstacle : this.listeObstacle) {
@@ -367,7 +376,6 @@ public class jeu {
             }
         }
     }
-
     private void ajusterArgentEtPv() {
         if (getArgent() < 0) {
             setArgentAZero();
@@ -397,7 +405,7 @@ public class jeu {
     }
 
     // La méthode initAnimation permet de faire tourner la gameloop et le jeu par la même occasion.
-    /*public void initAnimation() {
+    public void initAnimation() {
         gameLoop = new Timeline();
         temps = 0;
         gameLoop.setCycleCount(Timeline.INDEFINITE);
@@ -418,7 +426,7 @@ public class jeu {
                         gameLoop.stop();
                     } else if (getNbEnnemisRestant() == 0) {
                         vagueSuivante();
-                        getEnnemisTué().removeAll(getEnnemisTué());
+                        getEnnemisTue().removeAll(getEnnemisTue());
                     } else if (temps % 3 == 0) {
                         unTour();
                     } else if (temps % 10 == 0 && getListeEnnemisSpawn().size() < this.niveau.getNbEnnemis()) {
@@ -450,98 +458,15 @@ public class jeu {
                 })
         );
         gameLoop.getKeyFrames().add(kf);
-    }*/
-
-    public void initAnimation() {
-        gameLoop = new Timeline();
-        temps = 0;
-        gameLoop.setCycleCount(Timeline.INDEFINITE);
-
-        KeyFrame kf = new KeyFrame(
-                Duration.seconds(0.09),
-                (ev -> gererAnimation())
-        );
-
-        gameLoop.getKeyFrames().add(kf);
-    }
-
-    private void gererAnimation() {
-        if (this.getPvJoueur() == 0 || (this.nbVague.getValue() == 5 && this.getNbEnnemisRestant() == 0)) {
-            StopJeuEtAfficherMenu();
-        } else if (getNbEnnemisRestant() == 0) {
-            vagueSuivante();
-            effacerEnnemisMorts();
-        } else if (temps % 3 == 0) {
-            unTour();
-        } else if (temps % 10 == 0 && getListeEnnemisSpawn().size() < this.niveau.getNbEnnemis()) {
-            spawnEnnemiEtMenus();
-            temps++;
-        } else if (this.getPvJoueur() > 0 && (this.nbVague.getValue() == 5 && getNbEnnemisRestant() == 0)) {
-            gererVictoire();
-        } else if (this.getPvJoueur() == 0 && getNbEnnemisRestant() >= 0) {
-            gererDéfaite();
-        }
-        temps++;
-    }
-
-    private void StopJeuEtAfficherMenu() {
-        menuEnnemiS(vBox);
-        gameLoop.stop();
-    }
-
-    private void effacerEnnemisMorts() {
-        vagueSuivante();
-        getEnnemisTue().removeAll(getEnnemisTue());
-    }
-
-    private void spawnEnnemiEtMenus() {
-        spwanEnnemi();
-        menuEnnemiS(vBox);
-        try {
-            menuEnnemiA(vBox);
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    private void gererVictoire() {
-        try {
-            gagne();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        gameLoop.stop();
-    }
-
-    private void gererDéfaite() {
-        try {
-            perdu();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        gameLoop.stop();
     }
 
     // Les ennemis présent sur la map sont ajouté aux menus des ennemis.
-
     public void menuEnnemiA(VBox vBox) throws FileNotFoundException {
 
         for (int i = 0; i < ennemis.size(); i++) {
             Ennemis en = ennemis.get(i);
-            Image im = null;
+            Image im = new Image(new FileInputStream(en.getChemin()));
 
-            if (en instanceof gobelins) {
-                im = new Image(new FileInputStream("src/main/resources/fr/montreuil/iut/RoyalElphia/ImageEnnemis/gobelin.png"));
-            } else if (en instanceof Sorcières) {
-                im = new Image(new FileInputStream("src/main/resources/fr/montreuil/iut/RoyalElphia/ImageEnnemis/sorcière.png"));
-            } else if (en instanceof GéantRoyal) {
-                im = new Image(new FileInputStream("src/main/resources/fr/montreuil/iut/RoyalElphia/ImageEnnemis/Golem(1).png"));
-            } else if (en instanceof Géant) {
-                im = new Image(new FileInputStream("src/main/resources/fr/montreuil/iut/RoyalElphia/ImageEnnemis/Geant.png"));
-            } else if (en instanceof Squelette) {
-                im = new Image(new FileInputStream("src/main/resources/fr/montreuil/iut/RoyalElphia/ImageEnnemis/squelette.png"));
-
-            }
             ImageView imV = new ImageView(im);
             vBox.getChildren().add(imV);
             Popup popup = new Popup();

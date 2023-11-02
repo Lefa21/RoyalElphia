@@ -309,6 +309,8 @@ public abstract class Ennemis {
     public void setEstBloque(boolean b){
         this.estBloque = b;
     }
+
+    public abstract String getChemin();
 }
 
 

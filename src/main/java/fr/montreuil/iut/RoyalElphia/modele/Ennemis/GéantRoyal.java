@@ -12,6 +12,10 @@ public class GéantRoyal extends Ennemis {
     // Immunité 5 -->  Immunisé face au tour laser
 
     public void strategieAttaque(Obstacle o) {
-        sa.AttaqueEnnemi(getCapaciteObstacle(),getX(),getY(),o,(this));
+        sa.AttaqueEnnemi(getCapaciteObstacle(),getX(),getY(),o);
+    }
+
+    public String getChemin() {
+        return "src/main/resources/fr/montreuil/iut/RoyalElphia/ImageEnnemis/Golem(1).png";
     }
 }

@@ -5,13 +5,13 @@ import fr.montreuil.iut.RoyalElphia.modele.Obstacle.Obstacle;
 
 public class AttaqueEnFonctionDeLaBase implements StrategieAttaque{
 
-        public void AttaqueEnnemi(int capacite, int dx, int dy, Obstacle obstacle, Ennemis e) {
+        public void AttaqueEnnemi(int capacite, int dx, int dy, Obstacle obstacle) {
             int capObstacle = capacite;
             int x = dx / 32;
             int y = dy / 32;
             int obX = obstacle.getPosX();
             int obY = obstacle.getPosY();
-            // Calculer la distance entre l'ennemi et la base
+            //Coordonnes base
             int baseX = 39;
             int baseY = 3;
 
