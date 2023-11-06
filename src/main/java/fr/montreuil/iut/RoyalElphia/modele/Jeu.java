@@ -25,7 +25,6 @@ import javafx.scene.paint.Color;
 import javafx.stage.Popup;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -33,7 +32,8 @@ import java.util.ArrayList;
 
 // La classe jeu est notre environnement.
 
-public class jeu {
+public class Jeu {
+    private static Jeu uniqueInstance=null;
     private Terrain terrain;
     private ObservableList<Ennemis> ennemis;
     private ArrayList<Ennemis> listeEnnemisTuée;
@@ -58,7 +58,7 @@ public class jeu {
     private Vague vague;
 
 
-    public jeu(Terrain terrain, Niveau niveau, VBox vBox) {
+    private Jeu(Terrain terrain, Niveau niveau, VBox vBox) {
         this.terrain = terrain;
         this.ennemis = FXCollections.observableArrayList();
         this.listeEnnemisTuée = new ArrayList<>();
@@ -74,6 +74,13 @@ public class jeu {
         //this.vague = new Vague(this.niveau.getNbEnnemis(), this.terrain);
         this.vague = new VagueFacile(this.niveau.getNbEnnemis(), this.terrain);
         this.vBox = vBox;
+    }
+
+    public static Jeu getInstance(Terrain terrain, Niveau niveau, VBox vBox) {
+        if (uniqueInstance==null) {
+            uniqueInstance=new Jeu(terrain,niveau,vBox);
+        }
+        return uniqueInstance;
     }
 
     // La méthode enleveObstacleDetruit permet à un ennemi de détruire un obstacle présent sur le chemin.
@@ -106,7 +113,6 @@ public class jeu {
     // La méthode dégatBase permet que lorsque l'ennemi arrive à la base il inflige ces dégâts de base et meurt.
     public void degatBase(Ennemis e) {
         if (this.terrain.verifPArv(e.getX(), e.getY())) {
-            System.out.println("-1 PV");
             setPvJoueur(this.getPvJoueur() - e.getDegatBase());
             this.getEnnemis().remove(e);
         }

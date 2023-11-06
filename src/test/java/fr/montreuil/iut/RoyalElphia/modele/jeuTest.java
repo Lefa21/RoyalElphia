@@ -22,7 +22,7 @@ class jeuTest {
     private Terrain t = new Map_1();
     private Niveau n = new Niveau(1);
     private VBox v = new VBox();
-    private jeu j = new jeu(t,n,v);
+    private Jeu j = new Jeu(t,n,v);
 
 
 

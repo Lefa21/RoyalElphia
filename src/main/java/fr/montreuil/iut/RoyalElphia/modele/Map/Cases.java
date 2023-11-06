@@ -8,10 +8,21 @@ public class Cases {
     Classe permettant de gérer les positions en fontion du tableau terrain ou de la map
     */
     private IntegerProperty x, y;
+    private int valeur;
 
     public Cases(int x, int y) {
         this.x = new SimpleIntegerProperty(x);
         this.y = new SimpleIntegerProperty(y);
+    }
+
+    public Cases(int x, int y,int valeur) {
+        this.x = new SimpleIntegerProperty(x);
+        this.y = new SimpleIntegerProperty(y);
+        this.valeur = valeur;
+    }
+
+    public boolean compare(Cases c) {
+        return this.getX()==c.getX() && this.getY()==c.getY();
     }
 
     public int getX() {
@@ -30,7 +41,9 @@ public class Cases {
         this.y.set(y);
     }
 
-    @Override
+    public int getValeur() {return this.valeur;}
+
+    //@Override
     public String toString() {
         return "Cases " +
                 " x = " + getX() +

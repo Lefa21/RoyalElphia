@@ -1,16 +1,16 @@
 package fr.montreuil.iut.RoyalElphia.modele.Tour;
 
 
-import fr.montreuil.iut.RoyalElphia.modele.jeu;
+import fr.montreuil.iut.RoyalElphia.modele.Jeu;
 import javafx.collections.ListChangeListener;
 import javafx.scene.layout.Pane;
 
 public class ListObservableTour implements ListChangeListener<Tour> {
 
     private Pane panneauJeu;
-    private  jeu jeu;
+    private Jeu jeu;
 
-    public ListObservableTour(jeu jeu, Pane panneauJeu){
+    public ListObservableTour(Jeu jeu, Pane panneauJeu){
         this.panneauJeu = panneauJeu;
         this.jeu = jeu;
     }

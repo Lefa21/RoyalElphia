@@ -2,7 +2,7 @@ package fr.montreuil.iut.RoyalElphia.Vue;
 
 import fr.montreuil.iut.RoyalElphia.modele.Map.Terrain;
 import fr.montreuil.iut.RoyalElphia.modele.Obstacle.*;
-import fr.montreuil.iut.RoyalElphia.modele.jeu;
+import fr.montreuil.iut.RoyalElphia.modele.Jeu;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -30,9 +30,9 @@ public class VueObstacle {
 
     private boolean trouve = false;
 
-    private jeu jeu;
+    private Jeu jeu;
 
-    public VueObstacle(Pane p, Obstacle T, double x, double y, Terrain terrain, jeu jeu) {
+    public VueObstacle(Pane p, Obstacle T, double x, double y, Terrain terrain, Jeu jeu) {
         this.panneauJeu = p;
         this.obstacle = T;
         this.x = x;
@@ -101,7 +101,7 @@ public class VueObstacle {
 
     // Lors du clique sur l'obstacle on créer l'obstacle.
     //On l'ajoute à notre liste d'obstacle.
-    public void CliqueObstacle(jeu jeu, String typeObstacle) throws FileNotFoundException {
+    public void CliqueObstacle(Jeu jeu, String typeObstacle) throws FileNotFoundException {
         Obstacle obstacle = null;
         switch (typeObstacle) {
             case "bois":

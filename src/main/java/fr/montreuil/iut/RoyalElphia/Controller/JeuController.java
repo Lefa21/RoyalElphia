@@ -49,12 +49,8 @@ public class JeuController implements Initializable {
     @FXML
     public Button ButtonPause;
     @FXML
-    public Button ButtonPortée;
-
-    @FXML
     private VBox menuEnnemi;
-
-    private jeu jeu;
+    private Jeu jeu;
     private Niveau niveau;
 
     @FXML
@@ -81,7 +77,6 @@ public class JeuController implements Initializable {
     @FXML
     public void cliqueObstacle(MouseEvent mouseEvent) throws FileNotFoundException {
         if (this.ObstaclePose && obstacle == null && mouseEvent.getClickCount() == 2) {
-            System.out.println("clique obstacle ");
             String imageId = ((ImageView) mouseEvent.getSource()).getId();
             Obstacle obstacle = null;
 
@@ -112,7 +107,6 @@ public class JeuController implements Initializable {
     @FXML
     public void TourClique(MouseEvent mouseEvent) {
         if (this.TourPose && tour == null && mouseEvent.getClickCount() == 2) {
-            System.out.println("clique tour");
             String imageId = ((ImageView) mouseEvent.getSource()).getId();
             Tour tour = null;
 
@@ -148,14 +142,12 @@ public class JeuController implements Initializable {
         double cliqueX = mouseEvent.getX();
         double cliqueY = mouseEvent.getY();
         if(this.obstacle != null){
-            System.out.println("obstacle posé ");
             VueObstacle vueObstacle = new VueObstacle(panneauJeu, obstacle, cliqueX, cliqueY, terrain,jeu);
             vueObstacle.PoserObstacle();
             this.ObstaclePose = true;
             this.obstacle = vueObstacle.getObstacle();
         }
         if(this.tour != null){
-            System.out.println("tour posée");
             VueTour vueTour = new VueTour(panneauJeu, tour, cliqueX, cliqueY, terrain, jeu);
             vueTour.PoserTour();
             this.TourPose = true;
@@ -193,7 +185,7 @@ public class JeuController implements Initializable {
     public void créationPartie() {
         créerNiveau();
         créerTerrain();
-        this.jeu = new jeu(this.terrain, this.niveau,this.menuEnnemi);
+        this.jeu = Jeu.getInstance(this.terrain,this.niveau,this.menuEnnemi);
     }
 
 
@@ -274,7 +266,6 @@ public class JeuController implements Initializable {
 
     // La méthode Quitter permet au clique sur le bouton quitter de revenir à la page d'accueil.
     public void Quitter(ActionEvent actionEvent) throws IOException {
-        System.out.println("Quitter la partie");
         Stage newWindow = new Stage();
         newWindow.setTitle("Paramètres de ma parti");
         FXMLLoader loader = new FXMLLoader(LancementJeu.class.getResource("Page_Fxml/Acceuil.fxml"));

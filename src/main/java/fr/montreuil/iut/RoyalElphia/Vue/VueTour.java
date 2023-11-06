@@ -1,15 +1,13 @@
 package fr.montreuil.iut.RoyalElphia.Vue;
 
+import fr.montreuil.iut.RoyalElphia.modele.Jeu;
 import fr.montreuil.iut.RoyalElphia.modele.Map.Terrain;
 import fr.montreuil.iut.RoyalElphia.modele.Tour.*;
-import fr.montreuil.iut.RoyalElphia.modele.jeu;
 
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 import javafx.scene.control.Label;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.Background;
 
 import javafx.scene.layout.Pane;
@@ -30,12 +28,12 @@ public class VueTour {
     private static int IDtour = 1000;
     private static int IDImage = 1000;
 
-    private jeu jeu;
+    private Jeu jeu;
 
 
     private boolean trouve = false;
 
-    public VueTour(Pane p, Tour T, double x, double y, Terrain terrain, jeu jeu) {
+    public VueTour(Pane p, Tour T, double x, double y, Terrain terrain, Jeu jeu) {
         this.panneauJeu = p;
         this.tour = T;
         this.x = x;
@@ -103,7 +101,7 @@ public class VueTour {
         }
     }
 
-    public void CliqueTour(jeu jeu, String TypeTour) {
+    public void CliqueTour(Jeu jeu, String TypeTour) {
         Tour tour = null;
         switch (TypeTour) {
             case "bombe":

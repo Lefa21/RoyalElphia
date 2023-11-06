@@ -1,7 +1,7 @@
 package fr.montreuil.iut.RoyalElphia.modele.Ennemis;
 
 import fr.montreuil.iut.RoyalElphia.Vue.VueEnnemi;
-import fr.montreuil.iut.RoyalElphia.modele.jeu;
+import fr.montreuil.iut.RoyalElphia.modele.Jeu;
 import javafx.collections.ListChangeListener;
 import javafx.scene.layout.Pane;
 
@@ -9,9 +9,9 @@ import java.io.FileNotFoundException;
 
 public class ListObsEnnemis implements ListChangeListener<Ennemis> {
     private Pane panneauJeu;
-    private jeu jeu;
+    private Jeu jeu;
 
-    public ListObsEnnemis(jeu jeu,Pane panneauJeu){
+    public ListObsEnnemis(Jeu jeu, Pane panneauJeu){
         this.panneauJeu = panneauJeu;
         this.jeu = jeu;
     }

@@ -1,6 +1,6 @@
 package fr.montreuil.iut.RoyalElphia.modele.Map;
 
-import java.util.ArrayList;
+
 import java.util.LinkedList;
 
 public class CasesParcourues {
@@ -38,4 +38,5 @@ public class CasesParcourues {
     public void setCasesParcourues(LinkedList<Cases> casesParcourues) {
         this.casesParcourues = casesParcourues;
     }
+
 }

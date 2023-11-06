@@ -105,23 +105,23 @@ public class Terrain {
         int i = this.pointDep.getY();
         int j = this.pointDep.getX();
         while (Tabterrain[i][j] != 2) {
-            if (!casesParcourues.verif(new Cases(i+1,j)) && (i + 1 < 30) && ((Tabterrain[i + 1][j] == 9) || (Tabterrain[i + 1][j] == 2))) {
-                Cases c = new Cases(i+1,j);
+            if ((i + 1 < 30) && !casesParcourues.verif(new Cases(i+1,j,Tabterrain[i+1][j])) && ((Tabterrain[i + 1][j] == 9) || (Tabterrain[i + 1][j] == 2))) {
+                Cases c = new Cases(i+1,j,Tabterrain[i+1][j]);
                 chemin.addFirst(c);
                 casesParcourues.ajouterCase(c);
                 i = i + 1;
-            } else if (!casesParcourues.verif(new Cases(i-1,j)) &&(i - 1 > -1) && ((Tabterrain[i - 1][j] == 9) || (Tabterrain[i - 1][j] == 2))) {
-                Cases c = new Cases(i-1,j);
+            } else if ( (i - 1 > -1)  && !casesParcourues.verif(new Cases(i-1,j,Tabterrain[i-1][j])) && ((Tabterrain[i - 1][j] == 9) || (Tabterrain[i - 1][j] == 2))) {
+                Cases c = new Cases(i-1,j,Tabterrain[i-1][j]);
                 chemin.addFirst(c);
                 casesParcourues.ajouterCase(c);
                 i = i - 1;
-            } else if (!casesParcourues.verif(new Cases(i,j+1)) &&(j + 1 < 40) && ((Tabterrain[i][j + 1] == 9) || (Tabterrain[i][j + 1] == 2))) {
-                Cases c = new Cases(i,j+1);
+            } else if ((j + 1 < 40) && !casesParcourues.verif(new Cases(i,j+1,Tabterrain[i][j+1])) && ((Tabterrain[i][j + 1] == 9) || (Tabterrain[i][j + 1] == 2))) {
+                Cases c = new Cases(i,j+1,Tabterrain[i][j+1]);
                 chemin.addFirst(c);
                 casesParcourues.ajouterCase(c);
                 j = j + 1;
-            } else if (!casesParcourues.verif(new Cases(i,j-1)) &&(j - 1 > -1) && ((Tabterrain[i][j - 1] == 9) || ((Tabterrain[i][j - 1] == 2)))) {
-                Cases c = new Cases(i,j-1);
+            } else if ((j - 1 > -1) && !casesParcourues.verif(new Cases(i,j-1,Tabterrain[i][j-1])) && ((Tabterrain[i][j - 1] == 9) || ((Tabterrain[i][j - 1] == 2)))) {
+                Cases c = new Cases(i,j-1,Tabterrain[i][j-1]);
                 chemin.addFirst(c);
                 casesParcourues.ajouterCase(c);
                 j = j - 1;
@@ -153,6 +153,8 @@ public class Terrain {
         return chemin;
     }
 */
+
+    /*
     public boolean peutSeDeplacer(int i, String s, int x, int y) {
         boolean retour = false;
         if (i==1) {
@@ -191,7 +193,7 @@ public class Terrain {
         }
         return retour;
     }
-
+*/
     public LinkedList<Cases> getChemin() {
         return this.casesParcourues.getCasesParcourues();
     }

@@ -1,5 +1,6 @@
 package fr.montreuil.iut.RoyalElphia.modele.Ennemis;
 
+import fr.montreuil.iut.RoyalElphia.modele.Ennemis.StrategieDeplacement.StrategieDeplacement;
 import fr.montreuil.iut.RoyalElphia.modele.Map.Cases;
 import fr.montreuil.iut.RoyalElphia.modele.Map.CasesParcourues;
 import fr.montreuil.iut.RoyalElphia.modele.Map.Terrain;
@@ -21,9 +22,10 @@ public abstract class Ennemis {
     private int degatObstacle;
 
     private LinkedList<Cases> chemin;
+    private StrategieDeplacement strategieDeplacement;
 
 
-    public Ennemis(Terrain terrain, int pv, int ptsDefense, int immunite, int degatBase, int butin, int capaciteObstacle, int degatObstacle) {
+    public Ennemis(Terrain terrain, int pv, int ptsDefense, int immunite, int degatBase, int butin, int capaciteObstacle, int degatObstacle, StrategieDeplacement strategieDeplacement) {
         this.id = "" + compteur;
         this.casesParcourues = new CasesParcourues();
         this.Immunite = immunite;
@@ -36,6 +38,7 @@ public abstract class Ennemis {
         compteur++;
         this.terrain = terrain;
         this.chemin  = new LinkedList<Cases>(this.terrain.getChemin());
+        this.strategieDeplacement = strategieDeplacement;
 
         /* On multiplie par 32 la case de départ du terrain, pour adapter les dimensions du tableau aux dimensions du
          terrains et on ajoute 16 pour mettre l'ennemi au centre de la case*/
@@ -134,23 +137,11 @@ public abstract class Ennemis {
         this.degatObstacle = degatObstacle;
     }
 
-    /*
-    public void testCheminE() {
-        for (int i = 0; i < chemin.size(); i++) {
-            System.out.println("Case :" + (i + 1));
-            System.out.println("X = " + chemin.get(i).getX());
-            System.out.println("Y = " + chemin.get(i).getY() + "\n");
-        }
-    }
-    */
-
-
     public void deplacementV2() {
-
-        Cases cases = chemin.pollLast();
-        this.setX((cases.getY() * 32) + 16);
-        this.setY((cases.getX() * 32) + 16);
-
+        int[] tab = strategieDeplacement.deplacement(this.casesParcourues,this.chemin,this.terrain);
+        this.setX(tab[0]);
+        this.setY(tab[1]);
+        casesParcourues.ajouterCase(new Cases(tab[0],tab[1]));
     }
 
     public void seDeplace() {
@@ -274,9 +265,6 @@ public abstract class Ennemis {
     public void setPvZero() {
         this.pv.setValue(0);
     }
-
-    //public abstract void AttaqueEnnemi();
-
 }
 
 
