@@ -174,9 +174,9 @@ public class JeuController implements Initializable {
     public void créerTerrain() {
         int terrain = ChoixMapController.getTerrain();
         if (terrain == 1) {
-            this.terrain = new Maps(1);
-        } else if (terrain == 2) {
             this.terrain = new Maps(2);
+        } else if (terrain == 2) {
+            this.terrain = new Maps(1);
         }
     }
 

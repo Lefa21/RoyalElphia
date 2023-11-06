@@ -10,7 +10,7 @@ public class VagueFacile extends Vague {
     public VagueFacile(int nbEnnemi, Terrain terrain) {
         super();
         for (int i = 0; i < nbEnnemi; i++) {
-            FabriqueEnnemis fabriqueEnnemis = new FabriqueGobelins();
+            FabriqueEnnemis fabriqueEnnemis = new FabriqueSquelette();
             Ennemis e = fabriqueEnnemis.creerEnnemi(terrain);
             this.listeEnnemis.addFirst(e);
         }

@@ -30,20 +30,8 @@ public class VueEnnemi {
         label.translateXProperty().bind(ennemis.getxProperty().add(-8));
         label.translateYProperty().bind(ennemis.getyProperty().add(-32));
         label.setBackground(Background.fill(Color.WHITE));
-        Image image = null;
 
-
-        if (ennemis instanceof gobelins) {
-            image = new Image(new FileInputStream("src/main/resources/fr/montreuil/iut/RoyalElphia/ImageEnnemis/gobelin.png"));
-        } else if (ennemis instanceof Sorcières) {
-            image = new Image(new FileInputStream("src/main/resources/fr/montreuil/iut/RoyalElphia/ImageEnnemis/sorcière.png"));
-        } else if (ennemis instanceof GéantRoyal) {
-            image = new Image(new FileInputStream("src/main/resources/fr/montreuil/iut/RoyalElphia/ImageEnnemis/Golem(1).png"));
-        } else if (ennemis instanceof Géant) {
-            image = new Image(new FileInputStream("src/main/resources/fr/montreuil/iut/RoyalElphia/ImageEnnemis/Geant.png"));
-        } else if (ennemis instanceof Squelette) {
-            image = new Image(new FileInputStream("src/main/resources/fr/montreuil/iut/RoyalElphia/ImageEnnemis/squelette.png"));
-        }
+        Image image = new Image(new FileInputStream(ennemis.getChemin()));
 
         ImageView imV = new ImageView(image);
         imV.setId(ennemis.getId());

@@ -5,7 +5,13 @@ import fr.montreuil.iut.RoyalElphia.LancementJeu;
 import fr.montreuil.iut.RoyalElphia.modele.Map.CasesDégats;
 import fr.montreuil.iut.RoyalElphia.modele.Niveau.*;
 import fr.montreuil.iut.RoyalElphia.modele.Obstacle.Obstacle;
+import fr.montreuil.iut.RoyalElphia.modele.Tour.StrategieTour.AttaqueEvolutive;
+import fr.montreuil.iut.RoyalElphia.modele.Tour.StrategieTour.AttaqueRecharge;
+import fr.montreuil.iut.RoyalElphia.modele.Tour.StrategieTour.StrategieTour;
 import fr.montreuil.iut.RoyalElphia.modele.Tour.Tour;
+import fr.montreuil.iut.RoyalElphia.modele.Tour.TourABombe;
+import fr.montreuil.iut.RoyalElphia.modele.Tour.TourBouleDeFeu;
+import fr.montreuil.iut.RoyalElphia.modele.Tour.TourElectrique;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import fr.montreuil.iut.RoyalElphia.modele.Ennemis.*;
@@ -70,11 +76,12 @@ public class Jeu {
         this.pvJoueur = new SimpleIntegerProperty(10);
         this.listeDeTour = FXCollections.observableArrayList();
         this.listeObstacle = FXCollections.observableArrayList();
-        this.argent = new SimpleIntegerProperty(200);
+        this.argent = new SimpleIntegerProperty(20000);
         //this.vague = new Vague(this.niveau.getNbEnnemis(), this.terrain);
         this.vague = new VagueFacile(this.niveau.getNbEnnemis(), this.terrain);
         this.vBox = vBox;
     }
+
 
     public static Jeu getInstance(Terrain terrain, Niveau niveau, VBox vBox) {
         if (uniqueInstance==null) {
@@ -83,23 +90,21 @@ public class Jeu {
         return uniqueInstance;
     }
 
+
+    public int getNbTour() {
+        return nbTour;
+    }
+
     // La méthode enleveObstacleDetruit permet à un ennemi de détruire un obstacle présent sur le chemin.
 
     public void enleveObstacleDetruit(int[][] tab, Ennemis e) {
         for (int j = 0; j < this.listeObstacle.size(); j++) {
             Obstacle obstacle = this.listeObstacle.get(j);
             if (obstacle.getPointDeVie() <= 0) {
-
-                // méthode est vivant pour obstacle
                 tab[obstacle.getPosY()][obstacle.getPosX()] = 9;
                 this.listeObstacle.remove(this.listeObstacle.get(j));
             }
-// Si l'ennemi à la capacité de détruire l'obstacle et qu'il est à hauteur de l'obstacle alors il lui attribue des dégâts.
-            if ((e.getCapaciteObstacle() >= obstacle.getMateriaux() && (e.getX() / 32 + 1 == obstacle.getPosX() && e.getY() / 32 == obstacle.getPosY()) || (e.getX() / 32 == obstacle.getPosX() && e.getY() / 32 + 1 == obstacle.getPosY()) || (e.getX() / 32 == obstacle.getPosX() && e.getY() / 32 - 1 == obstacle.getPosY()) || (e.getX() / 32 - 1 == obstacle.getPosX() && e.getY() / 32 == obstacle.getPosY()))) {
-                int degat = e.getDegatObstacle();
-                int vieObstacle = obstacle.getPointDeVie() - degat;
-                obstacle.setPointDeVie(vieObstacle);
-            }
+            e.strategieAttaque(obstacle);
         }
     }
     // La méthode dégâtsEnnemis permet de vérifier si l'ennemis s'est déplacé sur une case dégats et de lui attribuer les dégats de la tour à qui la case dégâts est attribuer.
@@ -222,10 +227,9 @@ public class Jeu {
         this.nbEnnemisRestant.setValue(this.niveau.getNbEnnemis());
         //this.vague = new Vague(this.niveau.getNbEnnemis(),terrain);
         this.vague = new VagueMoyenne(this.niveau.getNbEnnemis(), this.terrain);
-        if (this.nbVague.getValue() > 2){
+        if (this.nbVague.getValue() > 4) {
             this.vague = new VagueDifficile(this.niveau.getNbEnnemis(), this.terrain);
         }
-
     }
 
     // permet d'ajouter un ennemi qui a spawn sur le terrain dans la liste de notre modèle
@@ -244,7 +248,7 @@ public class Jeu {
         listeEnnemisTuée.add(enm);
     }
 
-    public ArrayList<Ennemis> getEnnemisTué() {
+    public ArrayList<Ennemis> getEnnemisTue() {
         return listeEnnemisTuée;
     }
 
@@ -302,27 +306,92 @@ public class Jeu {
         return this.nbEnnemisRestant.getValue();
     }
 
+
     // La méthode un tour permet de de faire déplacer les ennemis et les faire agir avec leurs environnement.
-    public void unTour() {
+   /* public void unTour() {
         int[][] tab = terrain.getTabTerrain();
+        for (int i = 0; i < this.listeDeTour.size(); i++){
+            Tour t = this.listeDeTour.get(i);
+                ((TourABombe) t).tourTemporaire(getNbTour());
+                if (t.getDegat()==0){
+
+                }
+        }
         for (int i = 0; i < this.ennemis.size(); i++) {
             Ennemis e = this.ennemis.get(i);
+            for (int j = 0; j < this.listeObstacle.size(); j++) {
+                Obstacle obstacle = this.listeObstacle.get(j);
+                for (Ennemis en:
+                        listeEnnemisSpawn) {
+                    if (en.isEstBloque() == true && obstacle.getPointDeVie() <= 0) en.setEstBloque(false);
+                }
+                e.jeSuisBloque(obstacle);
+                if (e.isEstBloque() == true && obstacle.getPointDeVie() <= 0) e.setEstBloque(false);
+            }
             augmentationCapacité(this.nbTour, e);
-            e.deplacementV2();
+            if (e.isEstBloque()==false)  e.deplacementV2();
             degatBase(e);
             enleveObstacleDetruit(tab, e);
             degatEnnemis(e);
         }
         enleveEnnemisMort();
+
+        if (getArgent() < 0) setArgentAZero();
+        if (getPvJoueur() < 0) setPvZero();
+
+        nbTour++;
+    }*/
+
+    public void unTour() {
+        int[][] tab = terrain.getTabTerrain();
+        gererTours();
+        for (int i = 0; i < this.ennemis.size(); i++) {
+            Ennemis e = this.ennemis.get(i);
+            gererObstacles(e);
+            augmentationCapacité(this.nbTour, e);
+            if (!e.isEstBloque()) {
+                e.deplacementV2();
+            }
+            degatBase(e);
+            enleveObstacleDetruit(tab, e);
+            degatEnnemis(e);
+        }
+        enleveEnnemisMort();
+        ajusterArgentEtPv();
+        nbTour++;
+    }
+
+    private void gererTours() {
+        for (Tour tour : this.listeDeTour) {
+            if (tour.getSt() instanceof AttaqueRecharge) {
+                tour.getSt().attaqueRecharge(tour);
+            } else if (tour.getSt() instanceof AttaqueEvolutive) {
+                tour.getSt().attaqueEvolutive(tour, getComptEnnemiTue(), terrain);
+            }
+        }
+    }
+
+
+    private void gererObstacles(Ennemis e) {
+        for (Obstacle obstacle : this.listeObstacle) {
+            for (Ennemis en : listeEnnemisSpawn) {
+                if (en.isEstBloque() && obstacle.getPointDeVie() <= 0) {
+                    en.setEstBloque(false);
+                }
+            }
+            e.jeSuisBloque(obstacle);
+            if (e.isEstBloque() && obstacle.getPointDeVie() <= 0) {
+                e.setEstBloque(false);
+            }
+        }
+    }
+    private void ajusterArgentEtPv() {
         if (getArgent() < 0) {
             setArgentAZero();
         }
-
-
         if (getPvJoueur() < 0) {
             setPvZero();
         }
-        nbTour++;
     }
 
     //Lorsque le joueur gagne on lui affiche cette page.
@@ -366,7 +435,7 @@ public class Jeu {
                         gameLoop.stop();
                     } else if (getNbEnnemisRestant() == 0) {
                         vagueSuivante();
-                        getEnnemisTué().removeAll(getEnnemisTué());
+                        getEnnemisTue().removeAll(getEnnemisTue());
                     } else if (temps % 3 == 0) {
                         unTour();
                     } else if (temps % 10 == 0 && getListeEnnemisSpawn().size() < this.niveau.getNbEnnemis()) {
@@ -400,27 +469,13 @@ public class Jeu {
         gameLoop.getKeyFrames().add(kf);
     }
 
-
     // Les ennemis présent sur la map sont ajouté aux menus des ennemis.
-
     public void menuEnnemiA(VBox vBox) throws FileNotFoundException {
 
         for (int i = 0; i < ennemis.size(); i++) {
             Ennemis en = ennemis.get(i);
-            Image im = null;
+            Image im = new Image(new FileInputStream(en.getChemin()));
 
-            if (en instanceof gobelins) {
-                im = new Image(new FileInputStream("src/main/resources/fr/montreuil/iut/RoyalElphia/ImageEnnemis/gobelin.png"));
-            } else if (en instanceof Sorcières) {
-                im = new Image(new FileInputStream("src/main/resources/fr/montreuil/iut/RoyalElphia/ImageEnnemis/sorcière.png"));
-            } else if (en instanceof GéantRoyal) {
-                im = new Image(new FileInputStream("src/main/resources/fr/montreuil/iut/RoyalElphia/ImageEnnemis/Golem(1).png"));
-            } else if (en instanceof Géant) {
-                im = new Image(new FileInputStream("src/main/resources/fr/montreuil/iut/RoyalElphia/ImageEnnemis/Geant.png"));
-            } else if (en instanceof Squelette) {
-                im = new Image(new FileInputStream("src/main/resources/fr/montreuil/iut/RoyalElphia/ImageEnnemis/squelette.png"));
-
-            }
             ImageView imV = new ImageView(im);
             vBox.getChildren().add(imV);
             Popup popup = new Popup();
