@@ -107,7 +107,7 @@ public class VueTour {
         Tour tour = null;
         switch (TypeTour) {
             case "bombe":
-                tour = new TourABombe(jeu.getNbTour());
+                tour = new TourABombe();
                 break;
             case "feu":
                 tour = new TourBouleDeFeu();

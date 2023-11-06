@@ -12,7 +12,7 @@ public class AttaqueEvolutive implements StrategieTour {
 
     @Override
     public void attaqueEvolutive(Tour T, int nbEnnemis, Terrain t) {
-        if (nbEnnemis > 10) {
+        if (nbEnnemis > 2) {
             // Parcourez chaque CasesDégats existante
             for (CasesDégats caseDegat : T.getListeCasesDegats()) {
                 // Obtenez la position actuelle de la case

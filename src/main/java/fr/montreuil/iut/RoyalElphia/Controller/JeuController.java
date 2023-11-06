@@ -118,7 +118,7 @@ public class JeuController implements Initializable {
 
             switch (imageId) {
                 case "bombe":
-                    tour = new TourABombe(jeu.getNbTour());
+                    tour = new TourABombe();
                     break;
                 case "feu":
                     tour = new TourBouleDeFeu();
