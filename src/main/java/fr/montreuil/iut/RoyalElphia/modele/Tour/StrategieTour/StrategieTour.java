@@ -5,7 +5,5 @@ import fr.montreuil.iut.RoyalElphia.modele.Tour.Tour;
 
 public interface StrategieTour {
 
-    void attaqueRecharge(Tour T);
-
-    void attaqueEvolutive(Tour T, int nbEnnemis, Terrain Ter);
+    void attaque(Tour T);
 }

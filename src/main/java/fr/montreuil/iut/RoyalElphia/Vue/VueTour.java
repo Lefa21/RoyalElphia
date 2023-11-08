@@ -52,24 +52,7 @@ public class VueTour {
         int posX = (int) this.x / 32;
         int posY = (int) this.y / 32;
         if (tab[posY][posX] == 7 && tour != null) {
-            Image tourImage = null;
-            switch (tour.getClass().getSimpleName()) {
-                case "TourABombe":
-                    tourImage = new Image(new FileInputStream("src/main/resources/fr/montreuil/iut/RoyalElphia/ImageTour/TourBombeM.png"));
-                    break;
-                case "TourBouleDeFeu":
-                    tourImage = new Image(new FileInputStream("src/main/resources/fr/montreuil/iut/RoyalElphia/ImageTour/TourFeuTerrain.png"));
-                    break;
-                case "TourFleche":
-                    tourImage = new Image(new FileInputStream("src/main/resources/fr/montreuil/iut/RoyalElphia/ImageTour/TourFlecheM.png"));
-                    break;
-                case "TourElectrique":
-                    tourImage = new Image(new FileInputStream("src/main/resources/fr/montreuil/iut/RoyalElphia/ImageTour/TourEclairM.png"));
-                    break;
-                case "TourLaser":
-                    tourImage = new Image(new FileInputStream("src/main/resources/fr/montreuil/iut/RoyalElphia/ImageTour/TourLaserView.png"));
-                    break;
-            }
+            Image tourImage = new Image(new FileInputStream(tour.getChemin()));
             if (tourImage != null) {
                 tour.setPosX(posX);
                 tour.setPosy(posY);

@@ -1,6 +1,7 @@
 package fr.montreuil.iut.RoyalElphia.modele.Ennemis;
 
 
+import fr.montreuil.iut.RoyalElphia.modele.Ennemis.StrategieDeplacement.DeplacementAlterne;
 import fr.montreuil.iut.RoyalElphia.modele.Ennemis.StrategieDeplacement.DeplacementSimple;
 import fr.montreuil.iut.RoyalElphia.modele.Ennemis.StrategieDeplacement.StrategieDeplacement;
 

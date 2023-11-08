@@ -11,7 +11,7 @@ import javafx.scene.layout.Pane;
 
 import java.util.ArrayList;
 
-public class Tour extends Items {
+public abstract class Tour extends Items {
 
     private int PorteeAttaque;
     private int TypeAttaque;
@@ -144,5 +144,7 @@ public class Tour extends Items {
     public StrategieTour getSt() {
         return st;
     }
+
+    public abstract String getChemin();
 }
 

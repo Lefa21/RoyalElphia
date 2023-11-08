@@ -8,11 +8,24 @@ import java.util.ArrayList;
 
 public class AttaqueEvolutive implements StrategieTour {
 
+    private int nbEnnemis;
+    private Terrain t;
+
     private ArrayList<CasesDégats> newCasesDegats = new ArrayList<>();
 
+    public AttaqueEvolutive(){}
+
+    public void setNbEnnemis(int nbEnnemis) {
+        this.nbEnnemis = nbEnnemis;
+    }
+
+    public void setT(Terrain t) {
+        this.t = t;
+    }
+
     @Override
-    public void attaqueEvolutive(Tour T, int nbEnnemis, Terrain t) {
-        if (nbEnnemis > 2) {
+    public void attaque(Tour T) {
+        if (nbEnnemis > 5) {
             // Parcourez chaque CasesDégats existante
             for (CasesDégats caseDegat : T.getListeCasesDegats()) {
                 // Obtenez la position actuelle de la case
@@ -53,8 +66,5 @@ public class AttaqueEvolutive implements StrategieTour {
             T.setDegat(5);
         }
     }
-
-    @Override
-    public void attaqueRecharge(Tour T) {}
 }
 

@@ -11,4 +11,8 @@ public class TourFleche extends Tour {
         setCoutAmelioration(5);
         setNiveauMaxAmelioration(5);
     }
+    public String getChemin() {
+        return "src/main/resources/fr/montreuil/iut/RoyalElphia/ImageTour/TourFlecheM.png";
+    }
+
 }

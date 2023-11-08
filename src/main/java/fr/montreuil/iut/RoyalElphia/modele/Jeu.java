@@ -364,9 +364,11 @@ public class Jeu {
     private void gererTours() {
         for (Tour tour : this.listeDeTour) {
             if (tour.getSt() instanceof AttaqueRecharge) {
-                tour.getSt().attaqueRecharge(tour);
+                tour.getSt().attaque(tour);
             } else if (tour.getSt() instanceof AttaqueEvolutive) {
-                tour.getSt().attaqueEvolutive(tour, getComptEnnemiTue(), terrain);
+                ((AttaqueEvolutive) tour.getSt()).setT(terrain);
+                ((AttaqueEvolutive) tour.getSt()).setNbEnnemis(getComptEnnemiTue());
+                tour.getSt().attaque(tour);
             }
         }
     }

@@ -34,7 +34,7 @@ public class DeplacementAlterne implements StrategieDeplacement {
 
         switch (direction) {
             case Haut: {
-                if (cases.getX() - 5 > -1 )
+                if (cases.getX() - 5 > -1)
                     c = new Cases((cases.getY()*32)+16,((cases.getX() - 5)*32)+16, terrain.getTabTerrain()[cases.getX() - 5][cases.getY()]);
                 break;
             }

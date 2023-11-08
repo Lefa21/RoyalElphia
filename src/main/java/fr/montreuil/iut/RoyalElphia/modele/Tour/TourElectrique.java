@@ -12,5 +12,7 @@ public class TourElectrique extends Tour {
         setCoutAmelioration(15);
         setNiveauMaxAmelioration(3);
     }
-
+    public String getChemin() {
+        return "src/main/resources/fr/montreuil/iut/RoyalElphia/ImageTour/TourEclairM.png";
+    }
 }

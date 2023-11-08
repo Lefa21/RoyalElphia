@@ -12,6 +12,10 @@ public class TourABombe extends Tour {
         setCoutAmelioration(30);
         setNiveauMaxAmelioration(3);
     }
+
+    public String getChemin() {
+        return "src/main/resources/fr/montreuil/iut/RoyalElphia/ImageTour/TourBombeM.png";
+    }
 }
 
 

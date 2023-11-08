@@ -13,4 +13,8 @@ public class TourLaser extends Tour {
         setCoutAmelioration(35);
         setNiveauMaxAmelioration(3);
     }
+
+    public String getChemin() {
+        return "src/main/resources/fr/montreuil/iut/RoyalElphia/ImageTour/TourLaserView.png";
+    }
 }
