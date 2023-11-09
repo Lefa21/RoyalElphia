@@ -9,6 +9,7 @@ import fr.montreuil.iut.RoyalElphia.modele.Map.Cases;
 import fr.montreuil.iut.RoyalElphia.modele.Map.CasesParcourues;
 import fr.montreuil.iut.RoyalElphia.modele.Map.Terrain;
 import fr.montreuil.iut.RoyalElphia.modele.Obstacle.Obstacle;
+import fr.montreuil.iut.RoyalElphia.modele.Tour.StrategieTour.StrategieTour;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 
@@ -311,6 +312,9 @@ public abstract class Ennemis {
         this.estBloque = b;
     }
 
+    public StrategieAttaque getSt() {
+        return sa;
+    }
     public abstract String getChemin();
 
 }

@@ -1,7 +1,6 @@
 package fr.montreuil.iut.RoyalElphia.modele.Tour;
 
 
-import fr.montreuil.iut.RoyalElphia.modele.Map.Terrain;
 import fr.montreuil.iut.RoyalElphia.modele.Tour.StrategieTour.AttaqueEvolutive;
 
 public class TourBouleDeFeu extends Tour {

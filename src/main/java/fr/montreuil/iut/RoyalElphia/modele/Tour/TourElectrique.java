@@ -1,5 +1,6 @@
 package fr.montreuil.iut.RoyalElphia.modele.Tour;
 
+import fr.montreuil.iut.RoyalElphia.modele.Tour.StrategieTour.AttaqueEvolutive;
 import fr.montreuil.iut.RoyalElphia.modele.Tour.StrategieTour.AttaqueRecharge;
 import fr.montreuil.iut.RoyalElphia.modele.Tour.StrategieTour.StrategieTour;
 

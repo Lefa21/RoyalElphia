@@ -2,16 +2,13 @@ package fr.montreuil.iut.RoyalElphia.modele;
 
 import fr.montreuil.iut.RoyalElphia.Controller.JeuController;
 import fr.montreuil.iut.RoyalElphia.LancementJeu;
+import fr.montreuil.iut.RoyalElphia.modele.Ennemis.StrategieAttaque.StrategieChangeante;
 import fr.montreuil.iut.RoyalElphia.modele.Map.CasesDégats;
 import fr.montreuil.iut.RoyalElphia.modele.Niveau.*;
 import fr.montreuil.iut.RoyalElphia.modele.Obstacle.Obstacle;
 import fr.montreuil.iut.RoyalElphia.modele.Tour.StrategieTour.AttaqueEvolutive;
 import fr.montreuil.iut.RoyalElphia.modele.Tour.StrategieTour.AttaqueRecharge;
-import fr.montreuil.iut.RoyalElphia.modele.Tour.StrategieTour.StrategieTour;
 import fr.montreuil.iut.RoyalElphia.modele.Tour.Tour;
-import fr.montreuil.iut.RoyalElphia.modele.Tour.TourABombe;
-import fr.montreuil.iut.RoyalElphia.modele.Tour.TourBouleDeFeu;
-import fr.montreuil.iut.RoyalElphia.modele.Tour.TourElectrique;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import fr.montreuil.iut.RoyalElphia.modele.Ennemis.*;
@@ -77,11 +74,9 @@ public class Jeu {
         this.listeDeTour = FXCollections.observableArrayList();
         this.listeObstacle = FXCollections.observableArrayList();
         this.argent = new SimpleIntegerProperty(20000);
-        //this.vague = new Vague(this.niveau.getNbEnnemis(), this.terrain);
         this.vague = new VagueFacile(this.niveau.getNbEnnemis(), this.terrain);
         this.vBox = vBox;
     }
-
 
     public static Jeu getInstance(Terrain terrain, Niveau niveau, VBox vBox) {
         if (uniqueInstance==null) {
@@ -90,10 +85,6 @@ public class Jeu {
         return uniqueInstance;
     }
 
-
-    public int getNbTour() {
-        return nbTour;
-    }
 
     // La méthode enleveObstacleDetruit permet à un ennemi de détruire un obstacle présent sur le chemin.
 
@@ -212,10 +203,6 @@ public class Jeu {
         return this.nbVague;
     }
 
-    public void ajouter(Ennemis e) {
-        this.ennemis.add(e);
-    }
-
 
     // Cette méthode permet de passer à la vague suivante et en même temps d'augmenter la difficulté du jeu.
     public void vagueSuivante() {
@@ -225,7 +212,6 @@ public class Jeu {
         this.nbVague.setValue(this.nbVague.getValue() + 1);
         this.niveau.setNbEnnemis(this.niveau.getNbEnnemis() * 2);
         this.nbEnnemisRestant.setValue(this.niveau.getNbEnnemis());
-        //this.vague = new Vague(this.niveau.getNbEnnemis(),terrain);
         this.vague = new VagueMoyenne(this.niveau.getNbEnnemis(), this.terrain);
         if (this.nbVague.getValue() > 4) {
             this.vague = new VagueDifficile(this.niveau.getNbEnnemis(), this.terrain);
@@ -384,6 +370,9 @@ public class Jeu {
             e.jeSuisBloque(obstacle);
             if (e.isEstBloque() && obstacle.getPointDeVie() <= 0) {
                 e.setEstBloque(false);
+            }
+            if (e.getSt() instanceof StrategieChangeante){
+                ((StrategieChangeante) e.getSt()).setNbTour(nbTour);
             }
         }
     }
