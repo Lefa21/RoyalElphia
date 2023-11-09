@@ -1,6 +1,7 @@
 package fr.montreuil.iut.RoyalElphia.modele.Obstacle;
 
 import fr.montreuil.iut.RoyalElphia.modele.Items.Items;
+import fr.montreuil.iut.RoyalElphia.modele.Jeu;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 
@@ -32,6 +33,8 @@ public class Obstacle extends Items {
         this.PointDeVie.setValue(pointDeVie);
     }
 
+
+
     @Override
     public String toString() {
         return "Obstacle{" +
@@ -41,5 +44,18 @@ public class Obstacle extends Items {
                 ", posX=" + super.getPosX() +
                 ", posY=" + super.getPosY() +
                 '}';
+    }
+
+    public void ameliotationEtVente(Jeu jeu) {
+        if (getNiveauAmelioration() != getNiveauMaxAmelioration()) {
+            if (getCoutAmelioration() <= jeu.getArgent()) {
+                jeu.setArgent(getCoutAmelioration());
+                setNiveauAmelioration(getNiveauAmelioration() + 1);
+                setPointDeVie((int) (getPointDeVie() * 1.5));
+                setCoutAmelioration((int) (getCoutAmelioration() * 1.5));
+            }
+    }else
+            System.out.println("niv MAX");
+
     }
 }

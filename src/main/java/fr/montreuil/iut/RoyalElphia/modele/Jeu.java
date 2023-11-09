@@ -500,4 +500,12 @@ public class Jeu {
     }
 
 
+    public void ameliorationEtVente(ImageView x) {
+        for (int i = 0; i < this.listeObstacle.size(); i++) {
+            Obstacle o = this.listeObstacle.get(i);
+            if (Integer.toString(o.getID()).equals(x.getId())){
+                o.ameliotationEtVente(this);
+            }
+        }
+    }
 }
