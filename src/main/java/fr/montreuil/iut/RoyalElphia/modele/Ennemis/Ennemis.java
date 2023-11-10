@@ -16,6 +16,7 @@ import java.util.LinkedList;
 
 public abstract class Ennemis {
 
+    private int pvMax;
     private IntegerProperty xProperty, yProperty;
 
     protected Terrain terrain;
@@ -31,12 +32,13 @@ public abstract class Ennemis {
 
     protected StrategieAttaque sa;
 
-
+    private BarreDeVie barreDeVie;
 
     private boolean estBloque = false;
 
 
-    public Ennemis(Terrain terrain, int pv, int ptsDefense, int immunite, int degatBase, int butin, int capaciteObstacle, int degatObstacle, StrategieDeplacement strategieDeplacement,StrategieAttaque s) {
+
+    public Ennemis(Terrain terrain, int pv, int ptsDefense, int immunite, int degatBase, int butin, int capaciteObstacle, int degatObstacle, StrategieDeplacement strategieDeplacement, StrategieAttaque s) {
 
         this.id = "" + compteur;
         this.casesParcourues = new CasesParcourues();
@@ -50,8 +52,10 @@ public abstract class Ennemis {
         compteur++;
         this.terrain = terrain;
         this.chemin  = new LinkedList<Cases>(this.terrain.getChemin());
-
+        this.pvMax = this.pv.getValue();
         this.strategieDeplacement = strategieDeplacement;
+
+
 
         this.sa = s;
 
@@ -60,8 +64,18 @@ public abstract class Ennemis {
          terrains et on ajoute 16 pour mettre l'ennemi au centre de la case*/
         this.xProperty = new SimpleIntegerProperty(terrain.getPointDep().getX() * 32 + 16);
         this.yProperty = new SimpleIntegerProperty(terrain.getPointDep().getY() * 32 + 16);
+        this.barreDeVie = new BarreDeVie(getPv(), getPvMax(), getId(), getX(), getY());
+
     }
 
+    public BarreDeVie getBarreDeVie() {
+        return barreDeVie;
+    }
+
+
+    private int getPvMax() {
+        return this.pvMax;
+    }
 
 
     public String getId() {

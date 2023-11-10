@@ -1,5 +1,6 @@
 package fr.montreuil.iut.RoyalElphia.Vue;
 
+import fr.montreuil.iut.RoyalElphia.LancementJeu;
 import fr.montreuil.iut.RoyalElphia.modele.Map.Terrain;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -7,10 +8,11 @@ import javafx.scene.layout.TilePane;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.net.URL;
 
 
 public class TerrainVue {
-    public TerrainVue(Terrain Terrain, TilePane map) throws FileNotFoundException {
+    public TerrainVue(Terrain Terrain, TilePane map){
         int[][] tab = Terrain.getTabTerrain();
 
         for (int i = 0; i < tab.length; i++) {
@@ -19,25 +21,35 @@ public class TerrainVue {
                 Image image = null;
 
                 if (tab[i][j] == 4) {
-                    image = new Image(new FileInputStream("src/main/resources/fr/montreuil/iut/RoyalElphia/ImageTuile/herbe.png"));
+                    URL urlImageSol = LancementJeu.class.getResource("ImageTuile/herbe.png");
+                    image = new Image(String.valueOf(urlImageSol));
                 } else if (tab[i][j] == 1) {
-                    image = new Image(new FileInputStream("src/main/resources/fr/montreuil/iut/RoyalElphia/ImageTuile/pointDep.jpg"));
+                    URL urlImageSol = LancementJeu.class.getResource("ImageTuile/pointDep.jpg");
+                    image = new Image(String.valueOf(urlImageSol));
                 } else if (tab[i][j] == 2) {
-                    image = new Image(new FileInputStream("src/main/resources/fr/montreuil/iut/RoyalElphia/ImageTuile/pointArv.jpg"));
+                    URL urlImageSol = LancementJeu.class.getResource("ImageTuile/pointArv.jpg");
+                    image = new Image(String.valueOf(urlImageSol));
                 } else if (tab[i][j] == 7) {
-                    image = new Image(new FileInputStream("src/main/resources/fr/montreuil/iut/RoyalElphia/ImageTuile/contour.png"));
+                    URL urlImageSol = LancementJeu.class.getResource("ImageTuile/contour.png");
+                    image = new Image(String.valueOf(urlImageSol));
                 } else if (tab[i][j] == 9) {
-                    image = new Image(new FileInputStream("src/main/resources/fr/montreuil/iut/RoyalElphia/ImageTuile/chemin.png"));
+                    URL urlImageSol = LancementJeu.class.getResource("ImageTuile/chemin.png");
+                    image = new Image(String.valueOf(urlImageSol));
                 } else if (tab[i][j] == 3) {
-                    image = new Image(new FileInputStream("src/main/resources/fr/montreuil/iut/RoyalElphia/ImageTuile/eau.png"));
+                    URL urlImageSol = LancementJeu.class.getResource("ImageTuile/eauu.png");
+                    image = new Image(String.valueOf(urlImageSol));
                 } else if (tab[i][j] == 8) {
-                    image = new Image(new FileInputStream("src/main/resources/fr/montreuil/iut/RoyalElphia/ImageObstacle/pont.png"));
+                    URL urlImageSol = LancementJeu.class.getResource("ImageTuile/pont.png");
+                    image = new Image(String.valueOf(urlImageSol));
                 } else if (tab[i][j] == 10) {
-                    image = new Image(new FileInputStream("src/main/resources/fr/montreuil/iut/RoyalElphia/ImageTuile/rocheEau.png"));
+                    URL urlImageSol = LancementJeu.class.getResource("ImageTuile/rocheEau.png");
+                    image = new Image(String.valueOf(urlImageSol));
                 } else if (tab[i][j] == 5) {
-                    image = new Image(new FileInputStream("src/main/resources/fr/montreuil/iut/RoyalElphia/ImageTuile/mur.png"));
+                    URL urlImageSol = LancementJeu.class.getResource("ImageTuile/mur.png");
+                    image = new Image(String.valueOf(urlImageSol));
                 }  else if (tab[i][j] == 88) {
-                    image = new Image(new FileInputStream("src/main/resources/fr/montreuil/iut/RoyalElphia/ImageTuile/lave.png"));
+                    URL urlImageSol = LancementJeu.class.getResource("ImageTuile/lave.png");
+                    image = new Image(String.valueOf(urlImageSol));
                 }
 
                 ImageView imageView = new ImageView(image);
