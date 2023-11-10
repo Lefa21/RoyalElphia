@@ -60,6 +60,8 @@ public class Jeu {
     private int temps, nbTour;
     private Vague vague;
 
+    private ObservableList<BarreDeVie> barreDeVies;
+
 
     private Jeu(Terrain terrain, Niveau niveau, VBox vBox) {
         this.terrain = terrain;
@@ -76,6 +78,8 @@ public class Jeu {
         this.argent = new SimpleIntegerProperty(20000);
         this.vague = new VagueFacile(this.niveau.getNbEnnemis(), this.terrain);
         this.vBox = vBox;
+        this.barreDeVies = FXCollections.observableArrayList();
+
     }
 
     public static Jeu getInstance(Terrain terrain, Niveau niveau, VBox vBox) {
@@ -203,6 +207,14 @@ public class Jeu {
         return this.nbVague;
     }
 
+    public void ajouter(Ennemis e) {
+        this.ennemis.add(e);
+        ajouterBarreDeVie(e.getBarreDeVie());
+    }
+
+    public ObservableList<BarreDeVie> getBarreDeVies() {
+        return barreDeVies;
+    }
 
     // Cette méthode permet de passer à la vague suivante et en même temps d'augmenter la difficulté du jeu.
     public void vagueSuivante() {
@@ -217,6 +229,11 @@ public class Jeu {
             this.vague = new VagueDifficile(this.niveau.getNbEnnemis(), this.terrain);
         }
     }
+
+    public void ajouterBarreDeVie(BarreDeVie b) {
+        barreDeVies.add(b);
+    }
+
 
     // permet d'ajouter un ennemi qui a spawn sur le terrain dans la liste de notre modèle
     public void spwanEnnemi() {
@@ -341,6 +358,10 @@ public class Jeu {
             degatBase(e);
             enleveObstacleDetruit(tab, e);
             degatEnnemis(e);
+            e.getBarreDeVie().setX(e.getX());
+            e.getBarreDeVie().setY(e.getY());
+            e.getBarreDeVie().setVie(e.getPv());
+            e.getBarreDeVie().miseAJourVieTotale();
         }
         enleveEnnemisMort();
         ajusterArgentEtPv();

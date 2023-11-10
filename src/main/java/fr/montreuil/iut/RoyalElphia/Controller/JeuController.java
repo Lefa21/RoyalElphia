@@ -3,6 +3,7 @@ package fr.montreuil.iut.RoyalElphia.Controller;
 import fr.montreuil.iut.RoyalElphia.LancementJeu;
 import fr.montreuil.iut.RoyalElphia.Vue.*;
 import fr.montreuil.iut.RoyalElphia.modele.*;
+import fr.montreuil.iut.RoyalElphia.modele.Ennemis.BarreDeVie;
 import fr.montreuil.iut.RoyalElphia.modele.Ennemis.Ennemis;
 import fr.montreuil.iut.RoyalElphia.modele.Ennemis.ListObsEnnemis;
 import fr.montreuil.iut.RoyalElphia.modele.Items.Items;
@@ -204,7 +205,6 @@ public class JeuController implements Initializable {
     // La méthode permet de gérer les écouteur entre le modèle et la vue et de lancer le jeu.
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        try {
             créationPartie();
 
             //demarre l'animation
@@ -225,11 +225,9 @@ public class JeuController implements Initializable {
             ListChangeListener<Tour> listenerTour = new ListObservableTour(this.jeu, this.panneauJeu);
             jeu.getListeDeTour().addListener(listenerTour);
 
+            ListChangeListener<BarreDeVie> listenB = new ListObsBarreDeVie(panneauJeu);
+            jeu.getBarreDeVies().addListener(listenB);
 
-
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
-        }
     }
 
     // La méthode démarrer permet de lancer la gameloop lors du click sur le bouton démarrer

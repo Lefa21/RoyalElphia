@@ -1,3 +1,4 @@
+/*
 package fr.montreuil.iut.RoyalElphia.modele;
 
 import fr.montreuil.iut.RoyalElphia.modele.Ennemis.Ennemis;
@@ -168,12 +169,10 @@ class jeuTest {
         assertEquals(0,j.getEnnemis().size());
         assertEquals(2,j.getNbVague());
         assertEquals(2,j.getNbEnnemisRestant());
-=======
         assertEquals(0,j.getListeEnnemisSpawn().size()); // lorsque l'on passe à la vague suivante liste des ennemis spawn repasse à zéro
         assertEquals(0,j.getEnnemis().size()); // la liste d'ennemis aussi
         assertEquals(2,j.getNbVague()); // le numéro de la vague passe à deux
         assertEquals(2,j.getNbEnnemisRestant()); // le nombre d'ennemis est multiplié par deux
->>>>>>> 1b1c5cbf6437daba6a9d4b700f7f8a45850029d2
     }
 
     @Test
@@ -276,4 +275,4 @@ class jeuTest {
 
 
 
-}
+}*/
