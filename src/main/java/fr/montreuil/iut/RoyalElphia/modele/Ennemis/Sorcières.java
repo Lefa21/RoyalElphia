@@ -2,12 +2,8 @@ package fr.montreuil.iut.RoyalElphia.modele.Ennemis;
 
 
 import fr.montreuil.iut.RoyalElphia.modele.Ennemis.StrategieDeplacement.DeplacementSimple;
-import fr.montreuil.iut.RoyalElphia.modele.Ennemis.StrategieDeplacement.StrategieDeplacement;
 
 import fr.montreuil.iut.RoyalElphia.modele.Ennemis.StrategieAttaque.AttaqueDistance;
-import fr.montreuil.iut.RoyalElphia.modele.Ennemis.StrategieAttaque.AttaqueFaible;
-import fr.montreuil.iut.RoyalElphia.modele.Ennemis.StrategieAttaque.AttaqueModeree;
-import fr.montreuil.iut.RoyalElphia.modele.Ennemis.StrategieAttaque.AttaquePuissante;
 
 import fr.montreuil.iut.RoyalElphia.modele.Map.Terrain;
 import fr.montreuil.iut.RoyalElphia.modele.Obstacle.Obstacle;
