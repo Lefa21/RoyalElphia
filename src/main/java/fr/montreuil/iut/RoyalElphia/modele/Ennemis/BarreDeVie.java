@@ -56,7 +56,7 @@ public class BarreDeVie {
     }
 
     public final void setX(int x) {
-        this.xProperty().setValue(x);
+        this.xProperty().setValue(x-15);
     }
 
 
@@ -65,7 +65,7 @@ public class BarreDeVie {
     }
 
     public final void setY(int y) {
-        this.yProperty().setValue(y-10);
+        this.yProperty().setValue(y-40);
     }
 
 

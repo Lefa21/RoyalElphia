@@ -48,7 +48,8 @@ public class ListObsEnnemis implements ListChangeListener<Ennemis> {
 
                     // On supprime l'image de l'ennemi dans la map
                     panneauJeu.getChildren().remove(panneauJeu.lookup("#" + a.getId()));
-
+                    // On supprime la barre de vie sur l'ennemi
+                    panneauJeu.getChildren().remove(panneauJeu.lookup("#" + a.getId()));
                     // On supprime le label (indiquant les pv) de l'ennemi dans la map
                     panneauJeu.getChildren().remove(panneauJeu.lookup("#"+a.getId()+"L"));
                 }

@@ -106,9 +106,7 @@ public class VueTour {
         if (tour != null) {
             tour.setID(IDtour);
             IDtour++;
-            if (jeu.verifArgent(tour)) {
-                jeu.setArgent(tour.getCoutAchat());
-                jeu.ajouterTour(tour);
+            if(jeu.VerifEtAchatTour(tour)){
                 this.tour = tour;
             }
         }
@@ -121,37 +119,13 @@ public class VueTour {
     public void AmeliorationEtVente(ImageView x) {
         x.setOnMouseClicked(KeyEvent -> {
             if (KeyEvent.isAltDown()) {
-                for (int i = 0; i < jeu.getListeDeTour().size(); i++) {
-                    Tour t = jeu.getListeDeTour().get(i);
-                    if (Integer.toString(t.getID()).equals(x.getId())) {
-                        if (t.getNiveauAmelioration() != t.getNiveauMaxAmelioration()) {
-                            if (t.getCoutAmelioration() <= jeu.getArgent()) {
-                                jeu.setArgent(t.getCoutAmelioration());
-                                t.setNiveauAmelioration(t.getNiveauAmelioration() + 1);
-                                t.setDegat();
-                                t.setCoutAmelioration((int) (t.getCoutAmelioration() * 1.5));
-                                t.setCoutVente((int) (t.getCoutVente() * 1.5));
-                                System.out.println("NIV " + t.getNiveauAmelioration() + " DEGAT " + t.getDegat());
-                            }
-                        }
-                        else
-                            System.out.println("niv MAX");
-                    }
-                }
+                this.jeu.ameliorationTour(x);
             } else {
                 x.setOnMouseClicked(event -> {
                     if (event.getClickCount() == 2 && !trouve) {
-                        for (int j = 0; j < this.jeu.getListeDeTour().size(); j++) {
-                            Tour t = this.jeu.getListeDeTour().get(j);
-
-                            if (Integer.toString(t.getID()).equals(x.getId())) {
-                                panneauJeu.getChildren().remove(x);
-                                this.jeu.getListeDeTour().remove(t);
-                                this.jeu.setArgent(-t.getCoutVente());
-
-                                t.TourDevientInoffensif(terrain, t.getListeCasesDegats());
-                                trouve = true;
-                            }
+                        if(jeu.venteTour(x)){
+                            panneauJeu.getChildren().remove(x);
+                            trouve = true;
                         }
                     }
                 });

@@ -121,13 +121,11 @@ public class VueObstacle {
         if (obstacle != null) {
             obstacle.setID(idObstacle);
             idObstacle++;
-            if (jeu.verifArgentObstacle(obstacle)) {
-                jeu.setArgent(obstacle.getCoutAchat());
-                jeu.ajouterObstacle(obstacle);
+            if(jeu.VerifEtAchatObstacle(obstacle)){
                 this.obstacle = obstacle;
             }
         }
-        }
+    }
 
     public Obstacle getObstacle() {
         return obstacle;
@@ -138,10 +136,9 @@ public class VueObstacle {
     // Le cout d'amélioration augmente à son tour.
 
     public void AmeliorationEtVente(ImageView x) {
-        int[][] tab = terrain.getTabTerrain();
         x.setOnMouseClicked(KeyEvent -> {
             if (KeyEvent.isAltDown()) {
-                jeu.ameliorationEtVente(x);
+                jeu.ameliorationObstacle(x);
             }
             // si l'utilisateur double click sur l'obstacle afin de l'enlever du chemin, alors on parcours la liste d'obstacle afin de chercher l'obstacle correspondant
             //On l'enlève par la suite du panneau, puis la case où il était placé redeviens une case chemin
@@ -149,16 +146,9 @@ public class VueObstacle {
             else {
                 x.setOnMouseClicked(event -> {
                     if (event.getClickCount() == 2 && !trouve) {
-                        for (int j = 0; j < this.jeu.getListeObstacle().size(); j++) {
-                            Obstacle o = this.jeu.getListeObstacle().get(j);
-
-                            if (Integer.toString(o.getID()).equals(x.getId())) {
-                                panneauJeu.getChildren().remove(x);
-                                tab[o.getPosY()][o.getPosX()] = 9;
-                                this.jeu.getListeObstacle().remove(o);
-                                this.jeu.setArgent(-o.getCoutVente());
-                                trouve = true;
-                            }
+                        if(jeu.venteObstacle(x)){
+                            panneauJeu.getChildren().remove(x);
+                            trouve = true;
                         }
                     }
                 });

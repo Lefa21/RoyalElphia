@@ -1,7 +1,11 @@
 package fr.montreuil.iut.RoyalElphia.Vue;
 
 import fr.montreuil.iut.RoyalElphia.modele.Ennemis.*;
+import fr.montreuil.iut.RoyalElphia.modele.Items.Items;
+import fr.montreuil.iut.RoyalElphia.modele.Obstacle.Obstacle;
+import fr.montreuil.iut.RoyalElphia.modele.Tour.Tour;
 import javafx.scene.control.Label;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Background;
@@ -41,4 +45,5 @@ public class VueEnnemi {
         this.pane.getChildren().add(imV);
         this.pane.getChildren().add(label);
     }
+
 }
