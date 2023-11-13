@@ -24,7 +24,7 @@ import fr.montreuil.iut.RoyalElphia.modele.Tour.Tour;
 
 public class AttaqueRecharge implements StrategieTour {
     private long derniereAttaque = 0;
-    private static final long DELAI = 1750;
+    private static final long DELAI = 1000;
     private int degat;
     private boolean initialisation = true;
 

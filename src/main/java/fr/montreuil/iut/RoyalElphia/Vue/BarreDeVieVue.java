@@ -13,7 +13,6 @@ public class BarreDeVieVue {
     }
 
     public void afficherBarreVie(BarreDeVie barre){
-        System.out.println("khra");
         ProgressBar barreDeVie = new ProgressBar();
         barreDeVie.setId(barre.getId());
         barreDeVie.setProgress(barre.getVieTotale()); // Ajustez la valeur de progression de la barre de vie
