@@ -214,7 +214,6 @@ public class Jeu {
 
     public void ajouter(Ennemis e) {
         this.ennemis.add(e);
-        ajouterBarreDeVie(e.getBarreDeVie());
     }
 
     public ObservableList<BarreDeVie> getBarreDeVies() {
@@ -245,6 +244,8 @@ public class Jeu {
     public void spwanEnnemi() {
         Ennemis e = this.vague.getListeEnnemis().pollLast();
         ennemis.add(e);
+        assert e != null;
+        ajouterBarreDeVie(e.getBarreDeVie());
         this.listeEnnemisSpawn.add(e);
     }
 
@@ -513,12 +514,70 @@ public class Jeu {
     }
 
 
-    public void ameliorationEtVente(ImageView x) {
+    public void ameliorationObstacle(ImageView x) {
         for (int i = 0; i < this.listeObstacle.size(); i++) {
             Obstacle o = this.listeObstacle.get(i);
             if (Integer.toString(o.getID()).equals(x.getId())){
-                o.ameliotationEtVente(this);
+                o.ameliotation(this);
             }
         }
+    }
+
+    public boolean venteObstacle(ImageView x) {
+        for (int j = 0; j < getListeObstacle().size(); j++) {
+            Obstacle o = getListeObstacle().get(j);
+            if (Integer.toString(o.getID()).equals(x.getId())) {
+                terrain.getTabTerrain()[o.getPosY()][o.getPosX()] = 9;
+                getListeObstacle().remove(o);
+                setArgent(-o.getCoutVente());
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void ameliorationTour(ImageView x) {
+        for (int i = 0; i < getListeDeTour().size(); i++) {
+            Tour t = getListeDeTour().get(i);
+            if (Integer.toString(t.getID()).equals(x.getId())) {
+                if (t.getNiveauAmelioration() != t.getNiveauMaxAmelioration()) {
+                    t.ameliorationTour(this);
+                }
+                else
+                    System.out.println("niv MAX");
+            }
+        }
+    }
+
+    public boolean venteTour(ImageView x) {
+        for (int j = 0; j < getListeDeTour().size(); j++) {
+            Tour t = getListeDeTour().get(j);
+
+            if (Integer.toString(t.getID()).equals(x.getId())) {
+                getListeDeTour().remove(t);
+                setArgent(-t.getCoutVente());
+                t.TourDevientInoffensif(terrain, t.getListeCasesDegats());
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean VerifEtAchatTour(Tour tour) {
+        if (verifArgent(tour)) {
+            setArgent(tour.getCoutAchat());
+            ajouterTour(tour);
+            return true;
+        }
+        return false;
+    }
+
+    public boolean VerifEtAchatObstacle(Obstacle obstacle) {
+        if (verifArgentObstacle(obstacle)) {
+            setArgent(obstacle.getCoutAchat());
+            ajouterObstacle(obstacle);
+            return true;
+        }
+        return false;
     }
 }

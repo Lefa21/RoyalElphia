@@ -3,6 +3,7 @@ package fr.montreuil.iut.RoyalElphia.Vue;
 import fr.montreuil.iut.RoyalElphia.modele.Ennemis.BarreDeVie;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.layout.Pane;
+import org.controlsfx.control.tableview2.filter.filtereditor.SouthFilter;
 
 public class BarreDeVieVue {
     private Pane panneauJeu;
@@ -12,13 +13,14 @@ public class BarreDeVieVue {
     }
 
     public void afficherBarreVie(BarreDeVie barre){
+        System.out.println("khra");
         ProgressBar barreDeVie = new ProgressBar();
         barreDeVie.setId(barre.getId());
         barreDeVie.setProgress(barre.getVieTotale()); // Ajustez la valeur de progression de la barre de vie
         barreDeVie.setTranslateX(barre.getX());
         barreDeVie.setTranslateY(barre.getY());
-        barreDeVie.setMaxHeight(50);
-        barreDeVie.setMaxWidth(80);
+        barreDeVie.setMaxHeight(10);
+        barreDeVie.setMaxWidth(30);
         barreDeVie.setStyle("-fx-accent: green"); // Utilisez la couleur appropriée en fonction de la vie
         this.panneauJeu.getChildren().add(barreDeVie);
         System.out.println(barre.getVieTotale());

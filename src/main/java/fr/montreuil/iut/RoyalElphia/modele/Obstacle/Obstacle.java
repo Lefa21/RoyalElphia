@@ -46,7 +46,7 @@ public class Obstacle extends Items {
                 '}';
     }
 
-    public void ameliotationEtVente(Jeu jeu) {
+    public void ameliotation(Jeu jeu) {
         if (getNiveauAmelioration() != getNiveauMaxAmelioration()) {
             if (getCoutAmelioration() <= jeu.getArgent()) {
                 jeu.setArgent(getCoutAmelioration());

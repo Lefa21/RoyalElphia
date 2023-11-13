@@ -64,6 +64,7 @@ public abstract class Ennemis {
          terrains et on ajoute 16 pour mettre l'ennemi au centre de la case*/
         this.xProperty = new SimpleIntegerProperty(terrain.getPointDep().getX() * 32 + 16);
         this.yProperty = new SimpleIntegerProperty(terrain.getPointDep().getY() * 32 + 16);
+
         this.barreDeVie = new BarreDeVie(getPv(), getPvMax(), getId(), getX(), getY());
 
     }
