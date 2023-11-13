@@ -60,6 +60,8 @@ public class Jeu {
     private int temps, nbTour;
     private Vague vague;
 
+    private ObservableList<BarreDeVie> barreDeVies;
+
 
     private Jeu(Terrain terrain, Niveau niveau, VBox vBox) {
         this.terrain = terrain;
@@ -76,6 +78,8 @@ public class Jeu {
         this.argent = new SimpleIntegerProperty(20000);
         this.vague = new VagueFacile(this.niveau.getNbEnnemis(), this.terrain);
         this.vBox = vBox;
+        this.barreDeVies = FXCollections.observableArrayList();
+
     }
 
     public static Jeu getInstance(Terrain terrain, Niveau niveau, VBox vBox) {
@@ -203,6 +207,13 @@ public class Jeu {
         return this.nbVague;
     }
 
+    public void ajouter(Ennemis e) {
+        this.ennemis.add(e);
+    }
+
+    public ObservableList<BarreDeVie> getBarreDeVies() {
+        return barreDeVies;
+    }
 
     // Cette méthode permet de passer à la vague suivante et en même temps d'augmenter la difficulté du jeu.
     public void vagueSuivante() {
@@ -218,10 +229,17 @@ public class Jeu {
         }
     }
 
+    public void ajouterBarreDeVie(BarreDeVie b) {
+        barreDeVies.add(b);
+    }
+
+
     // permet d'ajouter un ennemi qui a spawn sur le terrain dans la liste de notre modèle
     public void spwanEnnemi() {
         Ennemis e = this.vague.getListeEnnemis().pollLast();
         ennemis.add(e);
+        assert e != null;
+        ajouterBarreDeVie(e.getBarreDeVie());
         this.listeEnnemisSpawn.add(e);
     }
 
@@ -341,6 +359,10 @@ public class Jeu {
             degatBase(e);
             enleveObstacleDetruit(tab, e);
             degatEnnemis(e);
+            e.getBarreDeVie().setX(e.getX());
+            e.getBarreDeVie().setY(e.getY());
+            e.getBarreDeVie().setVie(e.getPv());
+            e.getBarreDeVie().miseAJourVieTotale();
         }
         enleveEnnemisMort();
         ajusterArgentEtPv();
@@ -491,12 +513,70 @@ public class Jeu {
     }
 
 
-    public void ameliorationEtVente(ImageView x) {
+    public void ameliorationObstacle(ImageView x) {
         for (int i = 0; i < this.listeObstacle.size(); i++) {
             Obstacle o = this.listeObstacle.get(i);
             if (Integer.toString(o.getID()).equals(x.getId())){
-                o.ameliotationEtVente(this);
+                o.ameliotation(this);
             }
         }
+    }
+
+    public boolean venteObstacle(ImageView x) {
+        for (int j = 0; j < getListeObstacle().size(); j++) {
+            Obstacle o = getListeObstacle().get(j);
+            if (Integer.toString(o.getID()).equals(x.getId())) {
+                terrain.getTabTerrain()[o.getPosY()][o.getPosX()] = 9;
+                getListeObstacle().remove(o);
+                setArgent(-o.getCoutVente());
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void ameliorationTour(ImageView x) {
+        for (int i = 0; i < getListeDeTour().size(); i++) {
+            Tour t = getListeDeTour().get(i);
+            if (Integer.toString(t.getID()).equals(x.getId())) {
+                if (t.getNiveauAmelioration() != t.getNiveauMaxAmelioration()) {
+                    t.ameliorationTour(this);
+                }
+                else
+                    System.out.println("niv MAX");
+            }
+        }
+    }
+
+    public boolean venteTour(ImageView x) {
+        for (int j = 0; j < getListeDeTour().size(); j++) {
+            Tour t = getListeDeTour().get(j);
+
+            if (Integer.toString(t.getID()).equals(x.getId())) {
+                getListeDeTour().remove(t);
+                setArgent(-t.getCoutVente());
+                t.TourDevientInoffensif(terrain, t.getListeCasesDegats());
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean VerifEtAchatTour(Tour tour) {
+        if (verifArgent(tour)) {
+            setArgent(tour.getCoutAchat());
+            ajouterTour(tour);
+            return true;
+        }
+        return false;
+    }
+
+    public boolean VerifEtAchatObstacle(Obstacle obstacle) {
+        if (verifArgentObstacle(obstacle)) {
+            setArgent(obstacle.getCoutAchat());
+            ajouterObstacle(obstacle);
+            return true;
+        }
+        return false;
     }
 }

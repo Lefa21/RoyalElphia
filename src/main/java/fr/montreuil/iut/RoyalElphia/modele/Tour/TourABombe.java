@@ -1,6 +1,5 @@
 package fr.montreuil.iut.RoyalElphia.modele.Tour;
 
-
 public class TourABombe extends Tour {
 
     public TourABombe(){
