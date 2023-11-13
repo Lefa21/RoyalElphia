@@ -137,25 +137,11 @@ public class VueObstacle {
     // La méthode améliorationEtVente, améliore un obstacle lors d'un alt clique droit et augmente les points de vie ainsi que le niveau d'amélioration.
     // Le cout d'amélioration augmente à son tour.
 
-
     public void AmeliorationEtVente(ImageView x) {
         int[][] tab = terrain.getTabTerrain();
         x.setOnMouseClicked(KeyEvent -> {
             if (KeyEvent.isAltDown()) {
-                for (int i = 0; i < jeu.getListeObstacle().size(); i++) {
-                    Obstacle o = jeu.getListeObstacle().get(i);
-                    if (Integer.toString(o.getID()).equals(x.getId())){
-                        if (o.getNiveauAmelioration() != o.getNiveauMaxAmelioration()) {
-                            if (o.getCoutAmelioration() <= jeu.getArgent()) {
-                                jeu.setArgent(o.getCoutAmelioration());
-                                o.setNiveauAmelioration(o.getNiveauAmelioration() + 1);
-                                o.setPointDeVie((int) (o.getPointDeVie() * 1.5));
-                                o.setCoutAmelioration((int) (o.getCoutAmelioration() * 1.5));
-                            }
-                        } else
-                            System.out.println("niv MAX");
-                }
-                }
+                jeu.ameliorationEtVente(x);
             }
             // si l'utilisateur double click sur l'obstacle afin de l'enlever du chemin, alors on parcours la liste d'obstacle afin de chercher l'obstacle correspondant
             //On l'enlève par la suite du panneau, puis la case où il était placé redeviens une case chemin
