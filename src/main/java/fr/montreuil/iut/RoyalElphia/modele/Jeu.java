@@ -2,6 +2,7 @@ package fr.montreuil.iut.RoyalElphia.modele;
 
 import fr.montreuil.iut.RoyalElphia.Controller.JeuController;
 import fr.montreuil.iut.RoyalElphia.LancementJeu;
+import fr.montreuil.iut.RoyalElphia.modele.Ennemis.StrategieAttaque.AttaqueEnFonctionDeLaBase;
 import fr.montreuil.iut.RoyalElphia.modele.Ennemis.StrategieAttaque.StrategieChangeante;
 import fr.montreuil.iut.RoyalElphia.modele.Map.CasesDégats;
 import fr.montreuil.iut.RoyalElphia.modele.Niveau.*;
@@ -395,6 +396,9 @@ public class Jeu {
             }
             if (e.getSt() instanceof StrategieChangeante){
                 ((StrategieChangeante) e.getSt()).setNbTour(nbTour);
+            }
+            if (e.getSt() instanceof AttaqueEnFonctionDeLaBase){
+                ((AttaqueEnFonctionDeLaBase) e.getSt()).setBase(terrain.getPointArv());
             }
         }
     }

@@ -44,6 +44,10 @@ public class Terrain {
         this.pointArv = pointArv;
     }
 
+    public Cases getPointArv() {
+        return pointArv;
+    }
+
     public Cases calculPointDep() {
         // On créé une première case pour faire fonctionner la boucle
         Cases c = new Cases(0, 0);

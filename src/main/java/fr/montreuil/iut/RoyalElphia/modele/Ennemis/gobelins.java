@@ -1,6 +1,7 @@
 package fr.montreuil.iut.RoyalElphia.modele.Ennemis;
 
 
+import fr.montreuil.iut.RoyalElphia.modele.Ennemis.StrategieAttaque.AttaqueEnFonctionDeLaBase;
 import fr.montreuil.iut.RoyalElphia.modele.Ennemis.StrategieAttaque.AttaqueFaible;
 
 import fr.montreuil.iut.RoyalElphia.modele.Ennemis.StrategieDeplacement.DeplacementSimple;
@@ -11,7 +12,7 @@ public class gobelins extends Ennemis {
 
 
     public gobelins(Terrain terrain) {
-        super(terrain, 75, 20, 3, 3, 35,1,5, new DeplacementSimple(),new AttaqueFaible());
+        super(terrain, 75, 20, 3, 3, 35,1,5, new DeplacementSimple(),new AttaqueEnFonctionDeLaBase());
 
     }
     // Immunité 3 -->  Immunisé face au tour électrique
