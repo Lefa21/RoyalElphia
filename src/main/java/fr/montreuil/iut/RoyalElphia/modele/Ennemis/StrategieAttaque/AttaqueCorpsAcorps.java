@@ -18,4 +18,4 @@ public class AttaqueCorpsAcorps implements StrategieAttaque{
             obstacle.setPointDeVie(vieObstacle);
         }
     }
-}
+    }

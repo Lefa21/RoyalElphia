@@ -299,11 +299,16 @@ public class Jeu {
         gererTours();
         for (int i = 0; i < this.ennemis.size(); i++) {
             Ennemis e = this.ennemis.get(i);
-            gererObstacles(e);
+
             augmentationCapacité(this.nbTour, e);
-            if (!e.EstBloque()) {
+            if (e.EstBloque()==false) {
                 e.seDeplace();
             }
+            else if (e.EstBloque()==true){
+                gererObstacles(e);
+            }
+            gererObstacles(e);
+            e.setEstBloque(false);
             degatBase(e);
             enleveObstacleDetruit(tab, e);
             degatEnnemis(e);
@@ -320,9 +325,7 @@ public class Jeu {
     private void gererTours() {
         for (Tour tour : this.listeDeTour) {
             tour.strategieAttaque(tour);
-            /*if (tour.getSt() instanceof AttaqueRecharge) {
-                tour.getSt().attaque(tour);
-            } else */if (tour.getSt() instanceof AttaqueEvolutive) {
+            if (tour.getSt() instanceof AttaqueEvolutive) {
                 ((AttaqueEvolutive) tour.getSt()).setT(terrain);
                 ((AttaqueEvolutive) tour.getSt()).setNbEnnemis(getComptEnnemiTue());
                 tour.strategieAttaque(tour);
@@ -333,13 +336,8 @@ public class Jeu {
 
     private void gererObstacles(Ennemis e) {
         for (Obstacle obstacle : this.listeObstacle) {
-            for (Ennemis en : listeEnnemisSpawn) {
-                if (en.EstBloque() && obstacle.getPointDeVie() <= 0) {
-                    en.setEstBloque(false);
-                }
+                e.jeSuisBloque(obstacle);
             }
-            e.jeSuisBloque(obstacle);
-
             if (e.getSt() instanceof StrategieChangeante){
                 ((StrategieChangeante) e.getSt()).setNbTour(nbTour);
             }
@@ -347,7 +345,7 @@ public class Jeu {
                 ((AttaqueEnFonctionDeLaBase) e.getSt()).setBase(terrain.getPointArv());
             }
         }
-    }
+
     private void ajusterArgentEtPv() {
         if (getArgent() < 0) {
             setArgentAZero();
