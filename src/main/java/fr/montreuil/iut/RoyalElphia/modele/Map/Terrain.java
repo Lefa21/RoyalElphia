@@ -92,8 +92,7 @@ public class Terrain {
     }
 
 
-    public LinkedList<Cases> calculChemin() {
-        LinkedList<Cases> chemin = new LinkedList<Cases>();
+    public void calculChemin() {
         int i = this.pointDep.getY();
         int j = this.pointDep.getX();
 
@@ -102,29 +101,28 @@ public class Terrain {
             if (verifDimension(i, Direction.Bas)) {
                 Cases c = creerCase(i, j, Direction.Bas);
                 if (verifCasesParcEtValeur(c)) {
-                    i = ajoutCase(chemin,c,Direction.Bas,i);
+                    i = ajoutCase(c,Direction.Bas,i);
                 }
             }
             if (verifDimension(i, Direction.Haut)) {
                 Cases c = creerCase(i, j, Direction.Haut);
                 if (verifCasesParcEtValeur(c)) {
-                    i = ajoutCase(chemin,c,Direction.Haut,i);
+                    i = ajoutCase(c,Direction.Haut,i);
                 }
             }
             if (verifDimension(j, Direction.Droite)) {
                 Cases c = creerCase(i, j, Direction.Droite);
                 if (verifCasesParcEtValeur(c)) {
-                    j = ajoutCase(chemin,c,Direction.Droite,j);
+                    j = ajoutCase(c,Direction.Droite,j);
                 }
             }
             if (verifDimension(j, Direction.Gauche)) {
                 Cases c = creerCase(i, j, Direction.Gauche);
                 if (verifCasesParcEtValeur(c)) {
-                    j = ajoutCase(chemin,c,Direction.Gauche,j);
+                    j = ajoutCase(c,Direction.Gauche,j);
                 }
             }
         }
-        return chemin;
     }
 
     // Méthode qui permet de créer une case en fonction de la case
@@ -163,9 +161,9 @@ public class Terrain {
     }
 
     // Méthode qui s'occupe d'ajouter une case au chemin en fonction de sa direction
-    public int ajoutCase(LinkedList<Cases> chemin, Cases c, Direction d, int x) {
+    public int ajoutCase(Cases c, Direction d, int x) {
         int retour;
-        chemin.addFirst(c);
+        casesParcourues.ajouterCase(c);
         if (d==Direction.Bas || d==Direction.Droite)
             retour = x+1;
         else
@@ -177,7 +175,7 @@ public class Terrain {
         return this.casesParcourues.getCasesParcourues();
     }
 
-    public void setChemin(LinkedList<Cases> chemin) {
-        this.casesParcourues.setCasesParcourues(chemin);
+    public void setChemin() {
+        calculChemin();
     }
 }
