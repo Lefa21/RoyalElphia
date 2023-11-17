@@ -62,15 +62,11 @@ public class JeuController implements Initializable {
     private Tour tour;
     private Obstacle obstacle;
 
-    private Items items;
     private boolean TourPose = true;
 
     private boolean ObstaclePose = true;
     private VueTour vt = new VueTour();
     private VueObstacle vo = new VueObstacle();
-    public static Button getMonBouton(){
-        return ButtonRejouer;
-    }
 
     // La méthode cliqueObstacle permet de récuperer l'obstacle choisi par le joueur et le créer.
 

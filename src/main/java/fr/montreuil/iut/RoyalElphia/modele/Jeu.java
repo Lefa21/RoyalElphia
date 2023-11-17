@@ -48,24 +48,15 @@ public class Jeu {
     private Timeline gameLoop;
     private IntegerProperty pvJoueur;
     private ObservableList<Tour> listeDeTour;
-
     private ObservableList<Obstacle> listeObstacle;
     private IntegerProperty argent;
-
-
     private Niveau niveau;
-
     private IntegerProperty nbVague, nbEnnemisRestant;
-
     private VBox vBox;
-
     private IntegerProperty comptEnnemiTue = new SimpleIntegerProperty(0);
-
     private int temps, nbTour;
     private Vague vague;
-
     private ObservableList<BarreDeVie> barreDeVies;
-
     private AmeliorationDegatTour ameliorationDegatTour;
     private AmeliorationPVObstacle ameliorationPVObstacle;
 
