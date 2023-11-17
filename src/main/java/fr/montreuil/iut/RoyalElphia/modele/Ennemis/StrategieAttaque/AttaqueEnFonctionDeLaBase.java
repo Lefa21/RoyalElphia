@@ -6,7 +6,7 @@ import fr.montreuil.iut.RoyalElphia.modele.Obstacle.Obstacle;
 
 public class AttaqueEnFonctionDeLaBase implements StrategieAttaque{
 
-        private Cases base;
+
 
         public void AttaqueEnnemi(int capacite, int dx, int dy, Obstacle obstacle) {
             int capObstacle = capacite;
@@ -15,8 +15,8 @@ public class AttaqueEnFonctionDeLaBase implements StrategieAttaque{
             int obX = obstacle.getPosX();
             int obY = obstacle.getPosY();
             //Coordonnes base
-            int baseX = base.getX();
-            int baseY = base.getY();
+            int baseX = 39;
+            int baseY = 3;
 
             // Plus l'ennemi est proche de la base, plus il inflige de dégâts à l'obstacle
             if ((((baseX - x) <= 10) && ((baseY - y) >= -6)) && ((x + 6 >= obX && y == obY) || (x == obX && y + 6 >= obY) || (x == obX && y - 6 <= obY) || (x - 6 <= obX && y == obY))) {
@@ -28,7 +28,4 @@ public class AttaqueEnFonctionDeLaBase implements StrategieAttaque{
             }
         }
 
-    public void setBase(Cases base) {
-        this.base = base;
-    }
 }

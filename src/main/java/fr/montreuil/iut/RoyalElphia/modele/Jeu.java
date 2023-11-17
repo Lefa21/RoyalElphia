@@ -308,6 +308,7 @@ public class Jeu {
             degatBase(e);
             enleveObstacleDetruit(tab, e);
             degatEnnemis(e);
+            attaqueEnnemi(e);
             e.getBarreDeVie().setX(e.getX());
             e.getBarreDeVie().setY(e.getY());
             e.getBarreDeVie().setVie(e.getPv());
@@ -339,12 +340,14 @@ public class Jeu {
 
 
         }
+
+    }
+
+    private void attaqueEnnemi(Ennemis e) {
         if (e.getSt() instanceof StrategieChangeante) {
             ((StrategieChangeante) e.getSt()).setNbTour(nbTour);
         }
-        if (e.getSt() instanceof AttaqueEnFonctionDeLaBase) {
-            ((AttaqueEnFonctionDeLaBase) e.getSt()).setBase(terrain.getPointArv());
-        }
+
     }
 
     private void ajusterArgentEtPv() {
