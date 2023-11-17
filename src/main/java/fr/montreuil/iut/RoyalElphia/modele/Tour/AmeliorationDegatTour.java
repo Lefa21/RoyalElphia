@@ -14,4 +14,5 @@ public class AmeliorationDegatTour extends TourDecorator {
     public void strategieAttaque(Tour T) {
 
     }
+
 }
