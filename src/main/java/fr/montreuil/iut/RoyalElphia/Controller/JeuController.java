@@ -265,7 +265,7 @@ public class JeuController implements Initializable {
     // La méthode Quitter permet au clique sur le bouton quitter de revenir à la page d'accueil.
     public void Quitter(ActionEvent actionEvent) throws IOException {
         Stage newWindow = new Stage();
-        newWindow.setTitle("Paramètres de ma parti");
+        newWindow.setTitle("Paramètres de ma partie");
         FXMLLoader loader = new FXMLLoader(LancementJeu.class.getResource("Page_Fxml/Acceuil.fxml"));
         newWindow.setScene(new Scene(loader.load()));
         newWindow.show();

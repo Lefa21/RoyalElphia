@@ -19,14 +19,11 @@ public class StrategieChangeante implements StrategieAttaque{
     @Override
     public void AttaqueEnnemi(int capacite, int dx, int dy, Obstacle obstacle) {    //Sa strategie évolue au fil du nombre de tour
         if (nbTour > 25 && nbTour <= 50){
-            listeStrat.get(0).AttaqueEnnemi(capacite,dx,dy,obstacle);
-            System.out.println("strat 1");
-        } else if (nbTour > 50) {
             listeStrat.get(1).AttaqueEnnemi(capacite,dx,dy,obstacle);
-            System.out.println("strat 2");
+        } else if (nbTour > 50) {
+            listeStrat.get(0).AttaqueEnnemi(capacite,dx,dy,obstacle);
         } else {
             listeStrat.get(2).AttaqueEnnemi(capacite,dx,dy,obstacle);
-            System.out.println("strat 3");
         }
     }
 

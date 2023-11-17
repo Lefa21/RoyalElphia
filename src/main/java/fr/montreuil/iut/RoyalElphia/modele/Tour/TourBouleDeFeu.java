@@ -16,4 +16,9 @@ public class TourBouleDeFeu extends Tour {
     public String getChemin() {
         return "src/main/resources/fr/montreuil/iut/RoyalElphia/ImageTour/TourFeuTerrain.png";
     }
+
+    @Override
+    public void strategieAttaque(Tour T) {
+        st.attaque(T);
+    }
 }
