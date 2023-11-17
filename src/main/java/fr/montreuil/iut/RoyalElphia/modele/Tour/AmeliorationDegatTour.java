@@ -9,4 +9,9 @@ public class AmeliorationDegatTour extends TourDecorator {
     public void ameliorationTour(Jeu jeu) {
         tour.ameliorationTour(jeu);
     }
+
+    @Override
+    public void strategieAttaque(Tour T) {
+
+    }
 }
