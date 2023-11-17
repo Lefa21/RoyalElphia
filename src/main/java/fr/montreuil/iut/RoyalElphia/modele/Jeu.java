@@ -2,6 +2,7 @@ package fr.montreuil.iut.RoyalElphia.modele;
 
 import fr.montreuil.iut.RoyalElphia.Controller.JeuController;
 import fr.montreuil.iut.RoyalElphia.LancementJeu;
+import fr.montreuil.iut.RoyalElphia.modele.Ennemis.StrategieAttaque.AttaqueCorpsAcorps;
 import fr.montreuil.iut.RoyalElphia.modele.Ennemis.StrategieAttaque.AttaqueEnFonctionDeLaBase;
 import fr.montreuil.iut.RoyalElphia.modele.Ennemis.StrategieAttaque.StrategieChangeante;
 import fr.montreuil.iut.RoyalElphia.modele.Map.CasesDégats;
@@ -303,12 +304,9 @@ public class Jeu {
             augmentationCapacité(this.nbTour, e);
             if (e.EstBloque()==false) {
                 e.seDeplace();
-            }
-            else if (e.EstBloque()==true){
                 gererObstacles(e);
             }
             gererObstacles(e);
-            e.setEstBloque(false);
             degatBase(e);
             enleveObstacleDetruit(tab, e);
             degatEnnemis(e);
@@ -336,15 +334,20 @@ public class Jeu {
 
     private void gererObstacles(Ennemis e) {
         for (Obstacle obstacle : this.listeObstacle) {
+            if (e.getSt() instanceof AttaqueCorpsAcorps) {
                 e.jeSuisBloque(obstacle);
+                if (obstacle.getPointDeVie()<=0) e.setEstBloque(false);
             }
-            if (e.getSt() instanceof StrategieChangeante){
-                ((StrategieChangeante) e.getSt()).setNbTour(nbTour);
-            }
-            if (e.getSt() instanceof AttaqueEnFonctionDeLaBase){
-                ((AttaqueEnFonctionDeLaBase) e.getSt()).setBase(terrain.getPointArv());
-            }
+
+
         }
+        if (e.getSt() instanceof StrategieChangeante) {
+            ((StrategieChangeante) e.getSt()).setNbTour(nbTour);
+        }
+        if (e.getSt() instanceof AttaqueEnFonctionDeLaBase) {
+            ((AttaqueEnFonctionDeLaBase) e.getSt()).setBase(terrain.getPointArv());
+        }
+    }
 
     private void ajusterArgentEtPv() {
         if (getArgent() < 0) {

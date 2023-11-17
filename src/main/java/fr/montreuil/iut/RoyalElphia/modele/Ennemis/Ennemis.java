@@ -201,7 +201,7 @@ public abstract class Ennemis {
         int obX = obstacle.getPosX();
         int obY = obstacle.getPosY();
 
-            if (obstacle.getPointDeVie() > 0 && (x + 1 == obX && y == obY) || (x == obX && y + 1 == obY) || (x == obX && y - 1 == obY) || (x - 1 == obX && y == obY)) {
+            if ((x + 1 == obX && y == obY) || (x == obX && y + 1 == obY) || (x == obX && y - 1 == obY) || (x - 1 == obX && y == obY)) {
                 this.estBloque = true;
         }
     }

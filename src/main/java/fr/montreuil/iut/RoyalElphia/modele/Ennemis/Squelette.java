@@ -8,7 +8,7 @@ import fr.montreuil.iut.RoyalElphia.modele.Obstacle.Obstacle;
 public class Squelette extends Ennemis {
     public Squelette(Terrain terrain) {
 
-        super(terrain, 50, 0, 4, 4, 20,0,0, new DeplacementTeleportation(),new StrategieChangeante());
+        super(terrain, 50, 0, 4, 4, 20,0,0, new DeplacementTeleportation(),new AttaqueCorpsAcorps());
 
 
     }
