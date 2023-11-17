@@ -115,5 +115,7 @@ public abstract class Tour extends Items {
             System.out.println("NIV " + getNiveauAmelioration() + " DEGAT " + getDegat());
         }
     }
+
+    public abstract void strategieAttaque(Tour T);
 }
 

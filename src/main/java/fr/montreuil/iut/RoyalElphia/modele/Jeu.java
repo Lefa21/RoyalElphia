@@ -192,24 +192,8 @@ public class Jeu {
         return terrain;
     }
 
-    public ArrayList<Ennemis> getListeEnnemisTuée() {
-        return listeEnnemisTuée;
-    }
-
-    public final void setNbVague(int nbVague) {
-        this.nbVague.set(nbVague);
-    }
-
-    public final int getNbVague() {
-        return nbVague.get();
-    }
-
     public final IntegerProperty getNbVagueProperty() {
         return this.nbVague;
-    }
-
-    public void ajouter(Ennemis e) {
-        this.ennemis.add(e);
     }
 
     public ObservableList<BarreDeVie> getBarreDeVies() {
@@ -311,42 +295,6 @@ public class Jeu {
         return this.nbEnnemisRestant.getValue();
     }
 
-
-    // La méthode un tour permet de de faire déplacer les ennemis et les faire agir avec leurs environnement.
-   /* public void unTour() {
-        int[][] tab = terrain.getTabTerrain();
-        for (int i = 0; i < this.listeDeTour.size(); i++){
-            Tour t = this.listeDeTour.get(i);
-                ((TourABombe) t).tourTemporaire(getNbTour());
-                if (t.getDegat()==0){
-
-                }
-        }
-        for (int i = 0; i < this.ennemis.size(); i++) {
-            Ennemis e = this.ennemis.get(i);
-            for (int j = 0; j < this.listeObstacle.size(); j++) {
-                Obstacle obstacle = this.listeObstacle.get(j);
-                for (Ennemis en:
-                        listeEnnemisSpawn) {
-                    if (en.isEstBloque() == true && obstacle.getPointDeVie() <= 0) en.setEstBloque(false);
-                }
-                e.jeSuisBloque(obstacle);
-                if (e.isEstBloque() == true && obstacle.getPointDeVie() <= 0) e.setEstBloque(false);
-            }
-            augmentationCapacité(this.nbTour, e);
-            if (e.isEstBloque()==false)  e.deplacementV2();
-            degatBase(e);
-            enleveObstacleDetruit(tab, e);
-            degatEnnemis(e);
-        }
-        enleveEnnemisMort();
-
-        if (getArgent() < 0) setArgentAZero();
-        if (getPvJoueur() < 0) setPvZero();
-
-        nbTour++;
-    }*/
-
     public void unTour() {
         int[][] tab = terrain.getTabTerrain();
         gererTours();
@@ -354,7 +302,7 @@ public class Jeu {
             Ennemis e = this.ennemis.get(i);
             gererObstacles(e);
             augmentationCapacité(this.nbTour, e);
-            if (!e.isEstBloque()) {
+            if (!e.EstBloque()) {
                 e.seDeplace();
             }
             degatBase(e);
@@ -372,12 +320,13 @@ public class Jeu {
 
     private void gererTours() {
         for (Tour tour : this.listeDeTour) {
-            if (tour.getSt() instanceof AttaqueRecharge) {
+            tour.strategieAttaque(tour);
+            /*if (tour.getSt() instanceof AttaqueRecharge) {
                 tour.getSt().attaque(tour);
-            } else if (tour.getSt() instanceof AttaqueEvolutive) {
+            } else */if (tour.getSt() instanceof AttaqueEvolutive) {
                 ((AttaqueEvolutive) tour.getSt()).setT(terrain);
                 ((AttaqueEvolutive) tour.getSt()).setNbEnnemis(getComptEnnemiTue());
-                tour.getSt().attaque(tour);
+                tour.strategieAttaque(tour);
             }
         }
     }
@@ -386,12 +335,12 @@ public class Jeu {
     private void gererObstacles(Ennemis e) {
         for (Obstacle obstacle : this.listeObstacle) {
             for (Ennemis en : listeEnnemisSpawn) {
-                if (en.isEstBloque() && obstacle.getPointDeVie() <= 0) {
+                if (en.EstBloque() && obstacle.getPointDeVie() <= 0) {
                     en.setEstBloque(false);
                 }
             }
             e.jeSuisBloque(obstacle);
-            if (e.isEstBloque() && obstacle.getPointDeVie() <= 0) {
+            if (e.EstBloque() && obstacle.getPointDeVie() <= 0) {
                 e.setEstBloque(false);
             }
             if (e.getSt() instanceof StrategieChangeante){

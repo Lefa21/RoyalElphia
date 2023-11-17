@@ -15,4 +15,9 @@ public class TourFleche extends Tour {
         return "src/main/resources/fr/montreuil/iut/RoyalElphia/ImageTour/TourFlecheM.png";
     }
 
+    @Override
+    public void strategieAttaque(Tour T) {
+        st.attaque(T);
+    }
+
 }

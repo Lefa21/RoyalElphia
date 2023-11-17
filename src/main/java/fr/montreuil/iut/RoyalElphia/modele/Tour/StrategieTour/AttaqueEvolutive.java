@@ -13,8 +13,6 @@ public class AttaqueEvolutive implements StrategieTour {
 
     private ArrayList<CasesDégats> newCasesDegats = new ArrayList<>();
 
-    public AttaqueEvolutive(){}
-
     public void setNbEnnemis(int nbEnnemis) {
         this.nbEnnemis = nbEnnemis;
     }
@@ -26,9 +24,7 @@ public class AttaqueEvolutive implements StrategieTour {
     @Override
     public void attaque(Tour T) {
         if (nbEnnemis > 5 && T.getListeCasesDegats() != null) {
-            // Parcourez chaque CasesDégats existante
             for (CasesDégats caseDegat : T.getListeCasesDegats()) {
-                // Obtenez la position actuelle de la case
                 int x = caseDegat.getX() / 32;
                 int y = caseDegat.getY() / 32;
 

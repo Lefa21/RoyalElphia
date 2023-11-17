@@ -54,16 +54,7 @@ public abstract class Ennemis {
         this.chemin  = new LinkedList<Cases>(this.terrain.getChemin());
         this.pvMax = this.pv.getValue();
         this.strategieDeplacement = strategieDeplacement;
-
-        for (int i = chemin.size()-1; i > 105; i--) {
-            System.out.println(chemin.get(i).toString());
-        }
-
-
-
         this.sa = s;
-
-
         /* On multiplie par 32 la case de départ du terrain, pour adapter les dimensions du tableau aux dimensions du
          terrains et on ajoute 16 pour mettre l'ennemi au centre de la case*/
         this.xProperty = new SimpleIntegerProperty(terrain.getPointDep().getX() * 32 + 16);
@@ -202,14 +193,8 @@ public abstract class Ennemis {
     }
 
 
-    public void setPvZero() {
-        this.pv.setValue(0);
-    }
-
-
     public abstract void strategieAttaque(Obstacle o);
 
-    //faire un composite deplacement avec par exemple la teleportation et le fait que l'ennemi est bloque par les obstacles (voir méthode en bas :)
     public void jeSuisBloque(Obstacle obstacle) {
         int x = getX() / 32;
         int y = getY() / 32;
@@ -221,7 +206,7 @@ public abstract class Ennemis {
         }
     }
 
-    public boolean isEstBloque(){
+    public boolean EstBloque(){
         return estBloque;
     }
     public void setEstBloque(boolean b){

@@ -17,4 +17,9 @@ public class TourLaser extends Tour {
     public String getChemin() {
         return "src/main/resources/fr/montreuil/iut/RoyalElphia/ImageTour/TourLaserView.png";
     }
+
+    @Override
+    public void strategieAttaque(Tour T) {
+        st.attaque(T);
+    }
 }
