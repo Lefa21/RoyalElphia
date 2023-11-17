@@ -15,8 +15,8 @@ public class AttaqueEnFonctionDeLaBase implements StrategieAttaque{
             int obX = obstacle.getPosX();
             int obY = obstacle.getPosY();
             //Coordonnes base
-            int baseX = base.getX();
-            int baseY = base.getY();
+            int baseX = 39;
+            int baseY = 3;
 
             // Plus l'ennemi est proche de la base, plus il inflige de dégâts à l'obstacle
             if ((((baseX - x) <= 10) && ((baseY - y) >= -6)) && ((x + 6 >= obX && y == obY) || (x == obX && y + 6 >= obY) || (x == obX && y - 6 <= obY) || (x - 6 <= obX && y == obY))) {

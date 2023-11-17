@@ -20,14 +20,14 @@ public class Maps extends Terrain {
     }
 
     public int[][] getTab1() {
-        String cheminFichier = "C:\\Users\\alaae\\IdeaProjects\\RoyalElphiaLECTEUR\\tab1.txt";
+        String cheminFichier = "tab1.txt";
 
         int[][] tab1 = lireMatriceDepuisFichier(cheminFichier);
         return tab1;
     }
 
     public int[][] getTab2() {
-        String cheminFichier = "C:\\Users\\alaae\\IdeaProjects\\RoyalElphiaLECTEUR\\tab2.txt";
+        String cheminFichier = "tab2.txt";
 
         int[][] tab2 = lireMatriceDepuisFichier(cheminFichier);
 

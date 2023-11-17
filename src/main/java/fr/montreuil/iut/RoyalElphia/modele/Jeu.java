@@ -314,6 +314,7 @@ public class Jeu {
             e.getBarreDeVie().setY(e.getY());
             e.getBarreDeVie().setVie(e.getPv());
             e.getBarreDeVie().miseAJourVieTotale();
+            attaquebase(e);
         }
         enleveEnnemisMort();
         ajusterArgentEtPv();
@@ -338,9 +339,11 @@ public class Jeu {
                 e.jeSuisBloque(obstacle);
                 if (obstacle.getPointDeVie()<=0) e.setEstBloque(false);
             }
-
-
         }
+
+    }
+
+    public void attaquebase(Ennemis e){
         if (e.getSt() instanceof StrategieChangeante) {
             ((StrategieChangeante) e.getSt()).setNbTour(nbTour);
         }
