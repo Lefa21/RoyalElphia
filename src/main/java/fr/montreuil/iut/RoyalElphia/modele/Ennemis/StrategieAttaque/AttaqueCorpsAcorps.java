@@ -12,10 +12,10 @@ public class AttaqueCorpsAcorps implements StrategieAttaque{
         int obX = obstacle.getPosX();
         int obY = obstacle.getPosY();
 
-        if (capObstacle >= obstacle.getMateriaux() && (x + 1 == obX && y == obY) || (x == obX && y + 1 == obY) || (x == obX && y - 1 == obY) || (x - 1 == obX && y == obY)) {
+        if ( (x + 1 == obX && y == obY) || (x == obX && y + 1 == obY) || (x == obX && y - 1 == obY) || (x - 1 == obX && y == obY)) {
             int degat = 13;
             int vieObstacle = obstacle.getPointDeVie() - degat;
             obstacle.setPointDeVie(vieObstacle);
         }
     }
-}
+    }

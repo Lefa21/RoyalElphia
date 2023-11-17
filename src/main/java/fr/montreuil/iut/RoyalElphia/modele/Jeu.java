@@ -2,6 +2,7 @@ package fr.montreuil.iut.RoyalElphia.modele;
 
 import fr.montreuil.iut.RoyalElphia.Controller.JeuController;
 import fr.montreuil.iut.RoyalElphia.LancementJeu;
+import fr.montreuil.iut.RoyalElphia.modele.Ennemis.StrategieAttaque.AttaqueCorpsAcorps;
 import fr.montreuil.iut.RoyalElphia.modele.Ennemis.StrategieAttaque.AttaqueEnFonctionDeLaBase;
 import fr.montreuil.iut.RoyalElphia.modele.Ennemis.StrategieAttaque.StrategieChangeante;
 import fr.montreuil.iut.RoyalElphia.modele.Map.CasesDégats;
@@ -46,24 +47,15 @@ public class Jeu {
     private Timeline gameLoop;
     private IntegerProperty pvJoueur;
     private ObservableList<Tour> listeDeTour;
-
     private ObservableList<Obstacle> listeObstacle;
     private IntegerProperty argent;
-
-
     private Niveau niveau;
-
     private IntegerProperty nbVague, nbEnnemisRestant;
-
     private VBox vBox;
-
     private IntegerProperty comptEnnemiTue = new SimpleIntegerProperty(0);
-
     private int temps, nbTour;
     private Vague vague;
-
     private ObservableList<BarreDeVie> barreDeVies;
-
     private AmeliorationDegatTour ameliorationDegatTour;
     private AmeliorationPVObstacle ameliorationPVObstacle;
 
@@ -306,11 +298,13 @@ public class Jeu {
         gererTours();
         for (int i = 0; i < this.ennemis.size(); i++) {
             Ennemis e = this.ennemis.get(i);
-            gererObstacles(e);
+
             augmentationCapacité(this.nbTour, e);
-            if (!e.EstBloque()) {
+            if (e.EstBloque()==false) {
                 e.seDeplace();
+                gererObstacles(e);
             }
+            gererObstacles(e);
             degatBase(e);
             enleveObstacleDetruit(tab, e);
             degatEnnemis(e);
@@ -327,9 +321,7 @@ public class Jeu {
     private void gererTours() {
         for (Tour tour : this.listeDeTour) {
             tour.strategieAttaque(tour);
-            /*if (tour.getSt() instanceof AttaqueRecharge) {
-                tour.getSt().attaque(tour);
-            } else */if (tour.getSt() instanceof AttaqueEvolutive) {
+            if (tour.getSt() instanceof AttaqueEvolutive) {
                 ((AttaqueEvolutive) tour.getSt()).setT(terrain);
                 ((AttaqueEvolutive) tour.getSt()).setNbEnnemis(getComptEnnemiTue());
                 tour.strategieAttaque(tour);
@@ -340,23 +332,21 @@ public class Jeu {
 
     private void gererObstacles(Ennemis e) {
         for (Obstacle obstacle : this.listeObstacle) {
-            for (Ennemis en : listeEnnemisSpawn) {
-                if (en.EstBloque() && obstacle.getPointDeVie() <= 0) {
-                    en.setEstBloque(false);
-                }
+            if (e.getSt() instanceof AttaqueCorpsAcorps) {
+                e.jeSuisBloque(obstacle);
+                if (obstacle.getPointDeVie()<=0) e.setEstBloque(false);
             }
-            e.jeSuisBloque(obstacle);
-            if (e.EstBloque() && obstacle.getPointDeVie() <= 0) {
-                e.setEstBloque(false);
-            }
-            if (e.getSt() instanceof StrategieChangeante){
-                ((StrategieChangeante) e.getSt()).setNbTour(nbTour);
-            }
-            if (e.getSt() instanceof AttaqueEnFonctionDeLaBase){
-                ((AttaqueEnFonctionDeLaBase) e.getSt()).setBase(terrain.getPointArv());
-            }
+
+
+        }
+        if (e.getSt() instanceof StrategieChangeante) {
+            ((StrategieChangeante) e.getSt()).setNbTour(nbTour);
+        }
+        if (e.getSt() instanceof AttaqueEnFonctionDeLaBase) {
+            ((AttaqueEnFonctionDeLaBase) e.getSt()).setBase(terrain.getPointArv());
         }
     }
+
     private void ajusterArgentEtPv() {
         if (getArgent() < 0) {
             setArgentAZero();
