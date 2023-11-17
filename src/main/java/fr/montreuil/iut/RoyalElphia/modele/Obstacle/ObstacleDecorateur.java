@@ -15,5 +15,7 @@ public abstract class ObstacleDecorateur extends Obstacle {
         return null;
     }
     public abstract void ameliorationObstacle(Jeu jeu);
+
+    public abstract void strategieAttaque(Tour T);
 }
 
