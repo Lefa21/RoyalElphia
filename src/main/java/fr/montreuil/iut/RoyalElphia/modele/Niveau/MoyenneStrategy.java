@@ -5,10 +5,8 @@ import fr.montreuil.iut.RoyalElphia.modele.FabriqueEnnemis.*;
 import fr.montreuil.iut.RoyalElphia.modele.Map.Terrain;
 import java.util.LinkedList;
 
-public class VagueMoyenne extends Vague {
-
-    public VagueMoyenne(int nbEnnemi, Terrain terrain) {
-        super();
+public class MoyenneStrategy implements VagueStrategy {
+    public void créerEnnemis(Vague vague, int nbEnnemi, Terrain terrain) {
         for (int i = 0; i < nbEnnemi; i++) {
             FabriqueEnnemis fabriqueEnnemis;
             // Utilisez un compteur pour alterner entre les types d'ennemis
@@ -22,7 +20,7 @@ public class VagueMoyenne extends Vague {
             }
 
             Ennemis e = fabriqueEnnemis.creerEnnemi(terrain);
-            this.listeEnnemis.addFirst(e);
+            vague.getListeEnnemis().addFirst(e);
         }
     }
 }

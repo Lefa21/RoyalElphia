@@ -6,10 +6,13 @@ import fr.montreuil.iut.RoyalElphia.modele.Ennemis.StrategieAttaque.AttaqueEnFon
 import fr.montreuil.iut.RoyalElphia.modele.Ennemis.StrategieAttaque.StrategieChangeante;
 import fr.montreuil.iut.RoyalElphia.modele.Map.CasesDégats;
 import fr.montreuil.iut.RoyalElphia.modele.Niveau.*;
+import fr.montreuil.iut.RoyalElphia.modele.Obstacle.AmeliorationPVObstacle;
 import fr.montreuil.iut.RoyalElphia.modele.Obstacle.Obstacle;
+import fr.montreuil.iut.RoyalElphia.modele.Tour.AmeliorationDegatTour;
 import fr.montreuil.iut.RoyalElphia.modele.Tour.StrategieTour.AttaqueEvolutive;
 import fr.montreuil.iut.RoyalElphia.modele.Tour.StrategieTour.AttaqueRecharge;
 import fr.montreuil.iut.RoyalElphia.modele.Tour.Tour;
+import fr.montreuil.iut.RoyalElphia.modele.Tour.TourDecorator;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import fr.montreuil.iut.RoyalElphia.modele.Ennemis.*;
@@ -63,6 +66,9 @@ public class Jeu {
 
     private ObservableList<BarreDeVie> barreDeVies;
 
+    private AmeliorationDegatTour ameliorationDegatTour;
+    private AmeliorationPVObstacle ameliorationPVObstacle;
+
 
     private Jeu(Terrain terrain, Niveau niveau, VBox vBox) {
         this.terrain = terrain;
@@ -77,7 +83,8 @@ public class Jeu {
         this.listeDeTour = FXCollections.observableArrayList();
         this.listeObstacle = FXCollections.observableArrayList();
         this.argent = new SimpleIntegerProperty(20000);
-        this.vague = new VagueFacile(this.niveau.getNbEnnemis(), this.terrain);
+        this.vague = new Vague(new FacileStrategy());
+        this.vague.créerVague(this.niveau.getNbEnnemis(), this.terrain);
         this.vBox = vBox;
         this.barreDeVies = FXCollections.observableArrayList();
 
@@ -208,10 +215,11 @@ public class Jeu {
         this.nbVague.setValue(this.nbVague.getValue() + 1);
         this.niveau.setNbEnnemis(this.niveau.getNbEnnemis() * 2);
         this.nbEnnemisRestant.setValue(this.niveau.getNbEnnemis());
-        this.vague = new VagueMoyenne(this.niveau.getNbEnnemis(), this.terrain);
+        this.vague = new Vague(new MoyenneStrategy());
+        this.vague.créerVague(this.niveau.getNbEnnemis(), this.terrain);
         if (this.nbVague.getValue() > 4) {
-            this.vague = new VagueDifficile(this.niveau.getNbEnnemis(), this.terrain);
-        }
+            this.vague = new Vague(new DifficileStrategy());
+            this.vague.créerVague(this.niveau.getNbEnnemis(), this.terrain);        }
     }
 
     public void ajouterBarreDeVie(BarreDeVie b) {
@@ -470,7 +478,8 @@ public class Jeu {
         for (int i = 0; i < this.listeObstacle.size(); i++) {
             Obstacle o = this.listeObstacle.get(i);
             if (Integer.toString(o.getID()).equals(x.getId())){
-                o.ameliotation(this);
+                ameliorationPVObstacle = new AmeliorationPVObstacle(o);
+                ameliorationPVObstacle.ameliorationObstacle(this);
             }
         }
     }
@@ -493,7 +502,8 @@ public class Jeu {
             Tour t = getListeDeTour().get(i);
             if (Integer.toString(t.getID()).equals(x.getId())) {
                 if (t.getNiveauAmelioration() != t.getNiveauMaxAmelioration()) {
-                    t.ameliorationTour(this);
+                    ameliorationDegatTour = new AmeliorationDegatTour(t);
+                    ameliorationDegatTour.ameliorationTour(this);
                 }
                 else
                     System.out.println("niv MAX");

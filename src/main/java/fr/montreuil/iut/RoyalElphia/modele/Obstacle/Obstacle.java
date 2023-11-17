@@ -11,6 +11,9 @@ public class Obstacle extends Items {
 
     private int Materiaux;
     private IntegerProperty  PointDeVie;
+    public Obstacle(){
+
+    }
     public Obstacle(int materiaux,int PointDeVie) {
         super(0,0,0,0,0,0,0);
         this.Materiaux = materiaux;

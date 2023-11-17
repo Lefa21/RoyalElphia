@@ -5,14 +5,12 @@ import fr.montreuil.iut.RoyalElphia.modele.FabriqueEnnemis.*;
 import fr.montreuil.iut.RoyalElphia.modele.Map.Terrain;
 import java.util.LinkedList;
 
-public class VagueFacile extends Vague {
-
-    public VagueFacile(int nbEnnemi, Terrain terrain) {
-        super();
+public class FacileStrategy implements VagueStrategy {
+    public void créerEnnemis(Vague vague, int nbEnnemi, Terrain terrain) {
         for (int i = 0; i < nbEnnemi; i++) {
             FabriqueEnnemis fabriqueEnnemis = new FabriqueSquelette();
             Ennemis e = fabriqueEnnemis.creerEnnemi(terrain);
-            this.listeEnnemis.addFirst(e);
+            vague.getListeEnnemis().addFirst(e);
         }
     }
 }
