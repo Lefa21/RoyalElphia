@@ -2,7 +2,6 @@ package fr.montreuil.iut.RoyalElphia.modele.Ennemis;
 
 
 import fr.montreuil.iut.RoyalElphia.modele.Ennemis.StrategieAttaque.AttaqueEnFonctionDeLaBase;
-import fr.montreuil.iut.RoyalElphia.modele.Ennemis.StrategieAttaque.AttaqueFaible;
 
 import fr.montreuil.iut.RoyalElphia.modele.Ennemis.StrategieDeplacement.DeplacementSimple;
 import fr.montreuil.iut.RoyalElphia.modele.Map.Terrain;

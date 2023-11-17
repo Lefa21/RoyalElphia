@@ -1,10 +1,6 @@
 package fr.montreuil.iut.RoyalElphia.modele.Ennemis;
 
-
-import fr.montreuil.iut.RoyalElphia.modele.Ennemis.StrategieDeplacement.DeplacementAlterne;
-import fr.montreuil.iut.RoyalElphia.modele.Ennemis.StrategieDeplacement.DeplacementSimple;
-import fr.montreuil.iut.RoyalElphia.modele.Ennemis.StrategieDeplacement.StrategieDeplacement;
-
+import fr.montreuil.iut.RoyalElphia.modele.Ennemis.StrategieDeplacement.DeplacementTeleportation;
 import fr.montreuil.iut.RoyalElphia.modele.Ennemis.StrategieAttaque.*;
 import fr.montreuil.iut.RoyalElphia.modele.Map.Terrain;
 import fr.montreuil.iut.RoyalElphia.modele.Obstacle.Obstacle;
@@ -12,7 +8,7 @@ import fr.montreuil.iut.RoyalElphia.modele.Obstacle.Obstacle;
 public class Squelette extends Ennemis {
     public Squelette(Terrain terrain) {
 
-        super(terrain, 50, 0, 4, 4, 20,0,0, new DeplacementSimple(),new StrategieChangeante());
+        super(terrain, 50, 0, 4, 4, 20,0,0, new DeplacementTeleportation(),new StrategieChangeante());
 
 
     }

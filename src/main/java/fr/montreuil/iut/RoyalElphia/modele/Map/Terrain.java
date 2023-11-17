@@ -1,5 +1,7 @@
 package fr.montreuil.iut.RoyalElphia.modele.Map;
 
+import fr.montreuil.iut.RoyalElphia.modele.Direction;
+
 import java.util.ArrayList;
 import java.util.LinkedList;
 
@@ -92,112 +94,88 @@ public class Terrain {
             verif = true;
         return verif;
     }
-    /*
-    public void testChemin() {
-        for (int i = 0; i < chemin.size(); i++) {
-            System.out.println("Case :" + (i + 1));
-            System.out.println("X = " + chemin.get(i).getX());
-            System.out.println("Y = " + chemin.get(i).getY() + "\n");
-        }
-    }
-     */
-
 
 
     public LinkedList<Cases> calculChemin() {
         LinkedList<Cases> chemin = new LinkedList<Cases>();
+        // 30 Hauteur 40 Largeur
         int i = this.pointDep.getY();
         int j = this.pointDep.getX();
+
         while (Tabterrain[i][j] != 2) {
-            if ((i + 1 < 30) && !casesParcourues.verif(new Cases(i+1,j,Tabterrain[i+1][j])) && ((Tabterrain[i + 1][j] == 9) || (Tabterrain[i + 1][j] == 2))) {
-                Cases c = new Cases(i+1,j,Tabterrain[i+1][j]);
-                chemin.addFirst(c);
-                casesParcourues.ajouterCase(c);
-                i = i + 1;
-            } else if ( (i - 1 > -1)  && !casesParcourues.verif(new Cases(i-1,j,Tabterrain[i-1][j])) && ((Tabterrain[i - 1][j] == 9) || (Tabterrain[i - 1][j] == 2))) {
-                Cases c = new Cases(i-1,j,Tabterrain[i-1][j]);
-                chemin.addFirst(c);
-                casesParcourues.ajouterCase(c);
-                i = i - 1;
-            } else if ((j + 1 < 40) && !casesParcourues.verif(new Cases(i,j+1,Tabterrain[i][j+1])) && ((Tabterrain[i][j + 1] == 9) || (Tabterrain[i][j + 1] == 2))) {
-                Cases c = new Cases(i,j+1,Tabterrain[i][j+1]);
-                chemin.addFirst(c);
-                casesParcourues.ajouterCase(c);
-                j = j + 1;
-            } else if ((j - 1 > -1) && !casesParcourues.verif(new Cases(i,j-1,Tabterrain[i][j-1])) && ((Tabterrain[i][j - 1] == 9) || ((Tabterrain[i][j - 1] == 2)))) {
-                Cases c = new Cases(i,j-1,Tabterrain[i][j-1]);
-                chemin.addFirst(c);
-                casesParcourues.ajouterCase(c);
-                j = j - 1;
+
+            if (verifDimension(i, Direction.Bas)) {
+                Cases c = creerCase(i, j, Direction.Bas);
+                if (verifCasesParcEtValeur(c)) {
+                    i = ajoutCase(chemin,c,Direction.Bas,i);
+                }
+            }
+            if (verifDimension(i, Direction.Haut)) {
+                Cases c = creerCase(i, j, Direction.Haut);
+                if (verifCasesParcEtValeur(c)) {
+                    i = ajoutCase(chemin,c,Direction.Haut,i);
+                }
+            }
+            if (verifDimension(j, Direction.Droite)) {
+                Cases c = creerCase(i, j, Direction.Droite);
+                if (verifCasesParcEtValeur(c)) {
+                    j = ajoutCase(chemin,c,Direction.Droite,j);
+                }
+            }
+            if (verifDimension(j, Direction.Gauche)) {
+                Cases c = creerCase(i, j, Direction.Gauche);
+                if (verifCasesParcEtValeur(c)) {
+                    j = ajoutCase(chemin,c,Direction.Gauche,j);
+                }
             }
         }
         return chemin;
     }
 
-
-   /* public LinkedList<Cases> calculChemin() {
-        LinkedList<Cases> chemin = new LinkedList<Cases>();
-        int i = this.pointDep.getY();
-        int j = this.pointDep.getX();
-        while (Tabterrain[i][j] != 2) {
-            if (peutSeDeplacer(1,"BAS",i,j) || peutSeDeplacer(1,"BAS",i,j))  {
-                chemin.addFirst(new Cases(i + 1, j));
-                i = i + 1;
-            } else if (peutSeDeplacer(1,"HAUT",i,j) || peutSeDeplacer(1,"HAUT",i,j)) {
-                chemin.addFirst(new Cases(i - 1, j));
-                i = i - 1;
-            } else if (peutSeDeplacer(1,"DROITE",i,j) || peutSeDeplacer(1,"DROITE",i,j)) {
-                chemin.addFirst(new Cases(i, (j + 1)));
-                j = j + 1;
-            } else if (peutSeDeplacer(1,"GAUCHE",i,j) || peutSeDeplacer(1,"GAUCHE",i,j)) {
-                chemin.addFirst(new Cases(i, j - 1));
-                j = j - 1;
-            }
+    public Cases creerCase(int i, int j, Direction d) {
+        Cases c;
+        if (d == Direction.Droite) {
+            c = new Cases(i, j + 1, Tabterrain[i][j + 1]);
+        } else if (d == Direction.Bas) {
+            c = new Cases(i + 1, j, Tabterrain[i + 1][j]);
+        } else if (d == Direction.Gauche) {
+            c = new Cases(i, j - 1, Tabterrain[i][j - 1]);
+        } else {
+            c = new Cases(i - 1, j, Tabterrain[i - 1][j]);
         }
-        return chemin;
-    }
-*/
-
-    /*
-    public boolean peutSeDeplacer(int i, String s, int x, int y) {
-        boolean retour = false;
-        if (i==1) {
-            if (!casesParcourues.verif(CaseDirection(s,x,y)) && tabDirection(s,x,y) == 9)
-                retour = true;
-        } else if (i == 2) {
-            if (!casesParcourues.verif(CaseDirection(s,x,y)) && tabDirection(s,x,y) == 2)
-                retour = true;
-        }
-        return retour;
-    }
-
-    public Cases CaseDirection (String s, int x, int y) {
-        Cases c = null;
-        if (s.equals("DROITE"))
-            c = new Cases(x+1,y);
-        else if (s.equals("GAUCHE"))
-            c = new Cases(x-1,y);
-        else if (s.equals("HAUT"))
-            c = new Cases(x,y-1);
-        else if (s.equals("BAS"))
-            c = new Cases(x,y+1);
         return c;
     }
 
-    public int tabDirection(String s, int x,int y) {
-        int retour = 0;
-        if (s.equals("DROITE") && ((y+1)<30)) {
-            retour = Tabterrain[x][y+1];
-        } else if (s.equals("GAUCHE") && ((y-1)>-1)){
-            retour = Tabterrain[x][y-1];
-        } else if (s.equals("HAUT") && ((x-1)>-1)) {
-            retour = Tabterrain[x+1][y];
-        } else if (s.equals("BAS") && ((x+1)<40)) {
-            retour = Tabterrain[x-1][y];
+    public boolean verifDimension(int x, Direction d) {
+        boolean verif = false;
+        if (d == Direction.Droite) {
+            if (x + 1 < 40)
+                verif = true;
+        } else if (d == Direction.Bas) {
+            if (x + 1 < 30)
+                verif = true;
+        } else if (d == Direction.Gauche || d == Direction.Haut) {
+            if (x - 1 > -1)
+                verif = true;
         }
+        return verif;
+    }
+
+    public boolean verifCasesParcEtValeur(Cases c) {
+        return !casesParcourues.verif(c) && (c.getValeur() == 9) || (c.getValeur() == 2);
+    }
+
+    public int ajoutCase(LinkedList<Cases> chemin, Cases c, Direction d, int x) {
+        int retour;
+        chemin.addFirst(c);
+        casesParcourues.ajouterCase(c);
+        if (d==Direction.Bas || d==Direction.Droite)
+            retour = x+1;
+        else
+            retour = x-1;
         return retour;
     }
-*/
+
     public LinkedList<Cases> getChemin() {
         return this.casesParcourues.getCasesParcourues();
     }
@@ -205,77 +183,4 @@ public class Terrain {
     public void setChemin(LinkedList<Cases> chemin) {
         this.casesParcourues.setCasesParcourues(chemin);
     }
-
-    /*
-    public void seDeplace() {
-        // On récupère le tableau du terrain
-        int tab[][] = terrain.getTabTerrain();
-
-
-        // On ajoute la case ou se situe l'ennemi à sa liste cases parcourues
-
-        casesParcourues.ajouterCase(new Cases(this.getX(), this.getY()));
-
-
-        if (peutSeDeplacer(1, "DROITE") || peutSeDeplacer(2, "DROITE")) {
-            this.setX(this.getX() + 32);
-            casesParcourues.ajouterCase(new Cases(this.getX(), this.getY()));
-        }
-
-
-        else if (peutSeDeplacer(1, "BAS") || peutSeDeplacer(2, "BAS")) {
-            this.setY(this.getY() + 32);
-            casesParcourues.ajouterCase(new Cases(this.getX(), this.getY()));
-        }
-
-        else if (peutSeDeplacer(1, "GAUCHE") || peutSeDeplacer(2, "GAUCHE")) {
-            this.setX(this.getX() - 32);
-            casesParcourues.ajouterCase(new Cases(this.getX(), this.getY()));
-        }
-
-        else if (peutSeDeplacer(1, "HAUT") || peutSeDeplacer(2, "HAUT")) {
-            this.setY(this.getY() - 32);
-            casesParcourues.ajouterCase(new Cases(this.getX(), this.getY()));
-        }
-    }
-
-    public boolean peutSeDeplacer(String s, int i, int j) {
-        boolean retour = false;
-
-
-            if (!casesParcourues.verif(CasesDirection(s,i,j)) && tabDirection(s,i,j) == 9)
-                retour = true;
-
-        return retour;
-    }
-
-    public Cases CasesDirection(String s, int i, int j) {
-        Cases c = null;
-        if (s.equals("DROITE"))
-            c = new Cases(i, j + 1);
-        else if (s.equals("BAS"))
-            c = new Cases(i + 1, j);
-        else if (s.equals("GAUCHE"))
-            c = new Cases(i, j - 1);
-        else if (s.equals("HAUT"))
-            c = new Cases(i - 1, j);
-        return c;
-    }
-
-    public int tabDirection(String s, int i, int j) {
-        // X = j = 40,  Y = i = 30
-        int retour = 0;
-
-        if (s.equals("DROITE") && (j + 1) < 40)
-            retour = Tabterrain[i][j + 1];
-        else if (s.equals("BAS") && (i + 1) < 30)
-            retour = Tabterrain[i + 1][j];
-        else if (s.equals("GAUCHE") && (j - 1) > -1)
-            retour = Tabterrain[i][j - 1];
-        else if (s.equals("HAUT") && (i - 1) > -1)
-            retour = Tabterrain[i - 1][j];
-        return retour;
-    }
-
-*/
 }

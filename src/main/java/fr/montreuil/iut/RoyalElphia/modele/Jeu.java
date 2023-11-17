@@ -355,7 +355,7 @@ public class Jeu {
             gererObstacles(e);
             augmentationCapacité(this.nbTour, e);
             if (!e.isEstBloque()) {
-                e.deplacementV2();
+                e.seDeplace();
             }
             degatBase(e);
             enleveObstacleDetruit(tab, e);
