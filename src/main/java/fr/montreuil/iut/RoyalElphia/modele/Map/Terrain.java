@@ -9,21 +9,21 @@ public class Terrain {
     protected int[][] Tabterrain;
     private Cases pointDep, pointArv;
 
-    private ArrayList<CasesDégats> casesDégats;
+    private ArrayList<CasesDégats> casesDegats;
     private CasesParcourues casesParcourues;
 
 
     public Terrain() {
-        this.casesDégats = new ArrayList<>();
+        this.casesDegats = new ArrayList<>();
         this.casesParcourues = new CasesParcourues();
     }
 
     public void ajouterCaseDegat(CasesDégats c) {
-        this.casesDégats.add(c);
+        this.casesDegats.add(c);
     }
 
-    public ArrayList<CasesDégats> getCasesDégats() {
-        return this.casesDégats;
+    public ArrayList<CasesDégats> getCasesDegats() {
+        return this.casesDegats;
     }
 
     public int[][] getTabTerrain() {
@@ -36,10 +36,6 @@ public class Terrain {
 
     public void setPointDep(Cases pointDep) {
         this.pointDep = pointDep;
-    }
-
-    public void setTabterrain(int[][] tabterrain) {
-        Tabterrain = tabterrain;
     }
 
     public void setPointArv(Cases pointArv) {
@@ -98,7 +94,6 @@ public class Terrain {
 
     public LinkedList<Cases> calculChemin() {
         LinkedList<Cases> chemin = new LinkedList<Cases>();
-        // 30 Hauteur 40 Largeur
         int i = this.pointDep.getY();
         int j = this.pointDep.getX();
 
@@ -132,6 +127,7 @@ public class Terrain {
         return chemin;
     }
 
+    // Méthode qui permet de créer une case en fonction de la case
     public Cases creerCase(int i, int j, Direction d) {
         Cases c;
         if (d == Direction.Droite) {
@@ -146,6 +142,7 @@ public class Terrain {
         return c;
     }
 
+    // Méthode qui permet de vérifier si les indices ne sortent pas des limites du tableau
     public boolean verifDimension(int x, Direction d) {
         boolean verif = false;
         if (d == Direction.Droite) {
@@ -165,10 +162,10 @@ public class Terrain {
         return !casesParcourues.verif(c) && (c.getValeur() == 9) || (c.getValeur() == 2);
     }
 
+    // Méthode qui s'occupe d'ajouter une case au chemin en fonction de sa direction
     public int ajoutCase(LinkedList<Cases> chemin, Cases c, Direction d, int x) {
         int retour;
         chemin.addFirst(c);
-        casesParcourues.ajouterCase(c);
         if (d==Direction.Bas || d==Direction.Droite)
             retour = x+1;
         else

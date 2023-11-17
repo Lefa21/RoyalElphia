@@ -10,9 +10,7 @@ import fr.montreuil.iut.RoyalElphia.modele.Obstacle.AmeliorationPVObstacle;
 import fr.montreuil.iut.RoyalElphia.modele.Obstacle.Obstacle;
 import fr.montreuil.iut.RoyalElphia.modele.Tour.AmeliorationDegatTour;
 import fr.montreuil.iut.RoyalElphia.modele.Tour.StrategieTour.AttaqueEvolutive;
-import fr.montreuil.iut.RoyalElphia.modele.Tour.StrategieTour.AttaqueRecharge;
 import fr.montreuil.iut.RoyalElphia.modele.Tour.Tour;
-import fr.montreuil.iut.RoyalElphia.modele.Tour.TourDecorator;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import fr.montreuil.iut.RoyalElphia.modele.Ennemis.*;
@@ -112,10 +110,10 @@ public class Jeu {
     }
     // La méthode dégâtsEnnemis permet de vérifier si l'ennemis s'est déplacé sur une case dégats et de lui attribuer les dégats de la tour à qui la case dégâts est attribuer.
     public void degatEnnemis(Ennemis e) {
-        for (int j = 0; j < this.terrain.getCasesDégats().size(); j++) {
-            CasesDégats c = this.terrain.getCasesDégats().get(j);
+        for (int j = 0; j < this.terrain.getCasesDegats().size(); j++) {
+            CasesDégats c = this.terrain.getCasesDegats().get(j);
             if (c.verifDegat(e))
-                e.setPv(this.terrain.getCasesDégats().get(j).getDegat());
+                e.setPv(this.terrain.getCasesDegats().get(j).getDegat());
         }
     }
     // La méthode dégatBase permet que lorsque l'ennemi arrive à la base il inflige ces dégâts de base et meurt.

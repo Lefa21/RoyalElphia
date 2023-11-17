@@ -8,7 +8,6 @@ import fr.montreuil.iut.RoyalElphia.modele.Tour.StrategieTour.StrategieTour;
 
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
-import javafx.scene.layout.Pane;
 
 import java.util.ArrayList;
 
@@ -96,7 +95,7 @@ public abstract class Tour extends Items {
 
 
     public void TourDevientInoffensif(Terrain terrain, ArrayList<CasesDégats> listeCasesDegats) {          //Enleve toutes les cases dégats associées à une tour.
-        terrain.getCasesDégats().removeAll(listeCasesDegats);
+        terrain.getCasesDegats().removeAll(listeCasesDegats);
     }
 
     public ArrayList<CasesDégats> getListeCasesDegats() {
