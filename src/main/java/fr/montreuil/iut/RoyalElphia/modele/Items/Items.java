@@ -23,7 +23,7 @@ public abstract class Items {
     private IntegerProperty posX,posY;
     private int ID;
 
-
+protected Items(){}
 
     public Items(int CoutAchat, int CoutVente, int CoutAmelioration, int NiveauAmelioration, int NiveauMaxAmelioration,int posX,int posY) {
         this.CoutAchat = CoutAchat;

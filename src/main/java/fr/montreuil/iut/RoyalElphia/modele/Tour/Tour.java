@@ -21,6 +21,10 @@ public abstract class Tour extends Items {
 
     protected StrategieTour st;
 
+    protected Tour(){
+        super();
+    }
+
     public Tour(int porteeAttaque, int typeAttaque, int degat, StrategieTour s) {
 
         super(0, 0, 0, 0, 0, 0, 0);
