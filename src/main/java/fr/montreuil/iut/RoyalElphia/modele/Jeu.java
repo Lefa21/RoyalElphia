@@ -339,9 +339,7 @@ public class Jeu {
                 }
             }
             e.jeSuisBloque(obstacle);
-            if (e.EstBloque() && obstacle.getPointDeVie() <= 0) {
-                e.setEstBloque(false);
-            }
+
             if (e.getSt() instanceof StrategieChangeante){
                 ((StrategieChangeante) e.getSt()).setNbTour(nbTour);
             }
