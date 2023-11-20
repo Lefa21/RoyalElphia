@@ -203,7 +203,9 @@ public abstract class Ennemis {
 
             if ((x + 1 == obX && y == obY) || (x == obX && y + 1 == obY) || (x == obX && y - 1 == obY) || (x - 1 == obX && y == obY)) {
                 this.estBloque = true;
-        }
+        } else {
+                this.estBloque = false;
+            }
     }
 
     public boolean EstBloque(){

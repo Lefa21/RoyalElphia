@@ -1,5 +1,6 @@
 package fr.montreuil.iut.RoyalElphia.modele.Map;
 
+import fr.montreuil.iut.RoyalElphia.modele.Direction;
 import fr.montreuil.iut.RoyalElphia.modele.Ennemis.Ennemis;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -13,7 +14,7 @@ public class CasesDégats extends Cases {
 
 
     // On récupère la position de la tour et ses attribut pour créer une case dégât
-    public CasesDégats(int x, int y, int degat, int typeAttaque, String direction, int multi) {
+    public CasesDégats(int x, int y, int degat, int typeAttaque, Direction d, int multi) {
         super(x, y);
         // Le paramètre multi sert à calculer la portée de la tour
 
@@ -21,18 +22,18 @@ public class CasesDégats extends Cases {
         En fonction de la direction on crée une case plus loin que la tour
         */
 
-        if (direction.equals("H")) {
+        if (d.equals(Direction.Haut)) {
             this.setX(transitionFormat(x));
             this.setY(transitionFormatCaseSuivante(y,multi,2));
 
-        } else if (direction.equals("D")) {
+        } else if (d.equals(Direction.Droite)) {
             this.setX(transitionFormatCaseSuivante(x,multi,1));
             this.setY(transitionFormat(y));
 
-        } else if (direction.equals("B")) {
+        } else if (d.equals(Direction.Bas)) {
             this.setX(transitionFormat(x));
             this.setY(transitionFormatCaseSuivante(y,multi,1));
-        } else if (direction.equals("G")) {
+        } else if (d.equals(Direction.Gauche)) {
             this.setX(transitionFormatCaseSuivante(x,multi,2));
             this.setY(transitionFormat(y));
         }
@@ -74,17 +75,12 @@ public class CasesDégats extends Cases {
 
     // Méthode qui permet de vérifier si l'ennemi se trouve sur une case ou il subit des dégâts et de vérifier son immunité
     public boolean verifDegat(Ennemis e) {
-        boolean verif = false;
-        if (e.getX() == this.getX() && e.getY() == this.getY() && e.getImmunite() != this.getTypeAttaque())
-            verif = true;
-        return verif;
+        return e.getX() == this.getX() && e.getY() == this.getY() && e.getImmunite() != this.getTypeAttaque();
     }
 
     @Override
     public String toString() {
-        return super.toString() +
-                " ,degat = " + this.getDegat() +
-                ", typeAttaque = " + typeAttaque;
+        return super.toString() + " ,degat = " + this.getDegat() + ", typeAttaque = " + typeAttaque;
     }
 }
 

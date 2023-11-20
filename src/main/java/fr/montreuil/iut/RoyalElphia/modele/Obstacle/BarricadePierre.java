@@ -4,7 +4,7 @@ public class BarricadePierre extends Obstacle {
 
     public BarricadePierre() {
 
-        super(4,100);
+        super(4,40);
 
         this.setCoutAchat(100);
         this.setCoutVente(50);

@@ -13,9 +13,9 @@ public class AttaqueCorpsAcorps implements StrategieAttaque{
         int obY = obstacle.getPosY();
 
         if ( (x + 1 == obX && y == obY) || (x == obX && y + 1 == obY) || (x == obX && y - 1 == obY) || (x - 1 == obX && y == obY)) {
-            int degat = 13;
+            int degat = 1;
             int vieObstacle = obstacle.getPointDeVie() - degat;
             obstacle.setPointDeVie(vieObstacle);
         }
     }
-    }
+}

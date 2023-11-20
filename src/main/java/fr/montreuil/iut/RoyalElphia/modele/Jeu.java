@@ -11,9 +11,7 @@ import fr.montreuil.iut.RoyalElphia.modele.Obstacle.AmeliorationPVObstacle;
 import fr.montreuil.iut.RoyalElphia.modele.Obstacle.Obstacle;
 import fr.montreuil.iut.RoyalElphia.modele.Tour.AmeliorationDegatTour;
 import fr.montreuil.iut.RoyalElphia.modele.Tour.StrategieTour.AttaqueEvolutive;
-import fr.montreuil.iut.RoyalElphia.modele.Tour.StrategieTour.AttaqueRecharge;
 import fr.montreuil.iut.RoyalElphia.modele.Tour.Tour;
-import fr.montreuil.iut.RoyalElphia.modele.Tour.TourDecorator;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import fr.montreuil.iut.RoyalElphia.modele.Ennemis.*;
@@ -104,10 +102,10 @@ public class Jeu {
     }
     // La méthode dégâtsEnnemis permet de vérifier si l'ennemis s'est déplacé sur une case dégats et de lui attribuer les dégats de la tour à qui la case dégâts est attribuer.
     public void degatEnnemis(Ennemis e) {
-        for (int j = 0; j < this.terrain.getCasesDégats().size(); j++) {
-            CasesDégats c = this.terrain.getCasesDégats().get(j);
+        for (int j = 0; j < this.terrain.getCasesDegats().size(); j++) {
+            CasesDégats c = this.terrain.getCasesDegats().get(j);
             if (c.verifDegat(e))
-                e.setPv(this.terrain.getCasesDégats().get(j).getDegat());
+                e.setPv(this.terrain.getCasesDegats().get(j).getDegat());
         }
     }
     // La méthode dégatBase permet que lorsque l'ennemi arrive à la base il inflige ces dégâts de base et meurt.
@@ -300,13 +298,13 @@ public class Jeu {
         gererTours();
         for (int i = 0; i < this.ennemis.size(); i++) {
             Ennemis e = this.ennemis.get(i);
-
             augmentationCapacité(this.nbTour, e);
             if (e.EstBloque()==false) {
                 e.seDeplace();
-                gererObstacles(e);
+                //gererObstacles(e);
             }
-            gererObstacles(e);
+            //gererObstacles(e);
+            attaqueEnnemi(e);
             degatBase(e);
             enleveObstacleDetruit(tab, e);
             degatEnnemis(e);
@@ -314,7 +312,6 @@ public class Jeu {
             e.getBarreDeVie().setY(e.getY());
             e.getBarreDeVie().setVie(e.getPv());
             e.getBarreDeVie().miseAJourVieTotale();
-            attaquebase(e);
         }
         enleveEnnemisMort();
         ajusterArgentEtPv();
@@ -343,12 +340,21 @@ public class Jeu {
 
     }
 
-    public void attaquebase(Ennemis e){
+
+    private void attaqueEnnemi(Ennemis e) {
+        e.setEstBloque(false);
         if (e.getSt() instanceof StrategieChangeante) {
             ((StrategieChangeante) e.getSt()).setNbTour(nbTour);
         }
-        if (e.getSt() instanceof AttaqueEnFonctionDeLaBase) {
-            ((AttaqueEnFonctionDeLaBase) e.getSt()).setBase(terrain.getPointArv());
+
+        for (int j = 0; j < this.listeObstacle.size(); j++){
+            Obstacle o = this.listeObstacle.get(j);
+            if (e.getSt() instanceof AttaqueCorpsAcorps) {
+                e.jeSuisBloque(o);
+                e.strategieAttaque(o);
+
+            }
+            e.strategieAttaque(o);
         }
     }
 

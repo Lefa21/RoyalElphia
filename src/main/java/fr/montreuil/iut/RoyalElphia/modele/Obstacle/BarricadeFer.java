@@ -3,7 +3,7 @@ package fr.montreuil.iut.RoyalElphia.modele.Obstacle;
 public class BarricadeFer extends Obstacle{
     public BarricadeFer() {
 
-        super(2, 40);
+        super(2, 25);
         this.setCoutAchat(30);
         this.setCoutVente(20);
         this.setCoutAmelioration(10);

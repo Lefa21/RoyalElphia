@@ -28,7 +28,4 @@ public class AttaqueEnFonctionDeLaBase implements StrategieAttaque{
             }
         }
 
-    public void setBase(Cases base) {
-        this.base = base;
-    }
 }

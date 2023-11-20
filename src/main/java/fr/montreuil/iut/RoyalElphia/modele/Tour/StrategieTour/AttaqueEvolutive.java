@@ -1,5 +1,6 @@
 package fr.montreuil.iut.RoyalElphia.modele.Tour.StrategieTour;
 
+import fr.montreuil.iut.RoyalElphia.modele.Direction;
 import fr.montreuil.iut.RoyalElphia.modele.Map.CasesDégats;
 import fr.montreuil.iut.RoyalElphia.modele.Map.Terrain;
 import fr.montreuil.iut.RoyalElphia.modele.Tour.Tour;
@@ -32,25 +33,25 @@ public class AttaqueEvolutive implements StrategieTour {
                 int portee = 1; // Portée des nouvelles cases
                 if (T.getListeCasesDegats().size() < 30) {
                     if ((y - portee) > -1 && (t.getTabTerrain()[y - portee][x] == 9 || t.getTabTerrain()[y - portee][x] == 8)) {
-                        CasesDégats c1 = new CasesDégats(x, y - (portee), T.getDegat(), T.getTypeAttaque(), "H", portee);
+                        CasesDégats c1 = new CasesDégats(x, y - (portee), T.getDegat(), T.getTypeAttaque(), Direction.Haut, portee);
                         t.ajouterCaseDegat(c1);
                         newCasesDegats.add(c1);
                         c1.getDegatProperty().bind(T.getDegatProperty());
                     }
                     if ((x + portee) < 40 && (t.getTabTerrain()[y][x + (portee)] == 9 || t.getTabTerrain()[y][x + (portee)] == 8)) {
-                        CasesDégats c2 = new CasesDégats(x + (portee), y, T.getDegat(), T.getTypeAttaque(), "D", portee);
+                        CasesDégats c2 = new CasesDégats(x + (portee), y, T.getDegat(), T.getTypeAttaque(), Direction.Droite, portee);
                         t.ajouterCaseDegat(c2);
                         newCasesDegats.add(c2);
                         c2.getDegatProperty().bind(T.getDegatProperty());
                     }
                     if ((y + portee) < 30 && (t.getTabTerrain()[y + (portee)][x] == 9 || t.getTabTerrain()[y + (portee)][x] == 8)) {
-                        CasesDégats c3 = new CasesDégats(x, y + (portee), T.getDegat(), T.getTypeAttaque(), "B", portee);
+                        CasesDégats c3 = new CasesDégats(x, y + (portee), T.getDegat(), T.getTypeAttaque(), Direction.Bas, portee);
                         t.ajouterCaseDegat(c3);
                         newCasesDegats.add(c3);
                         c3.getDegatProperty().bind(T.getDegatProperty());
                     }
                     if ((x - portee) > -1 && (t.getTabTerrain()[y][x - (portee)] == 9 || t.getTabTerrain()[y][x - (portee)] == 8)) {
-                        CasesDégats c4 = new CasesDégats(x - (portee), y, T.getDegat(), T.getTypeAttaque(), "G", portee);
+                        CasesDégats c4 = new CasesDégats(x - (portee), y, T.getDegat(), T.getTypeAttaque(), Direction.Gauche, portee);
                         t.ajouterCaseDegat(c4);
                         newCasesDegats.add(c4);
                         c4.getDegatProperty().bind(T.getDegatProperty());
