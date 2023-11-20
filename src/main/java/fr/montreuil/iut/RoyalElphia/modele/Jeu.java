@@ -166,6 +166,7 @@ public class Jeu {
         return this.argent.getValue();
     }
 
+
     public boolean verifArgent(Tour t) {
         return t.getCoutAchat() <= getArgent();
     }
