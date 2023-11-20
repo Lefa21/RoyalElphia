@@ -9,7 +9,7 @@ public class Terrain {
     protected int[][] Tabterrain;
     private Cases pointDep, pointArv;
 
-    private ArrayList<CasesDégats> casesDegats;
+    private ArrayList<CasesDegats> casesDegats;
     private CasesParcourues casesParcourues;
 
 
@@ -18,11 +18,11 @@ public class Terrain {
         this.casesParcourues = new CasesParcourues();
     }
 
-    public void ajouterCaseDegat(CasesDégats c) {
+    public void ajouterCaseDegat(CasesDegats c) {
         this.casesDegats.add(c);
     }
 
-    public ArrayList<CasesDégats> getCasesDegats() {
+    public ArrayList<CasesDegats> getCasesDegats() {
         return this.casesDegats;
     }
 
@@ -40,10 +40,6 @@ public class Terrain {
 
     public void setPointArv(Cases pointArv) {
         this.pointArv = pointArv;
-    }
-
-    public Cases getPointArv() {
-        return pointArv;
     }
 
     public Cases calculPointDep() {
@@ -79,16 +75,13 @@ public class Terrain {
     }
 
     public boolean verifPArv(int x, int y) {
-        boolean verif = false;
 
         // Méthode qui permet de vérifier si l'ennemi est arrivé à la base du joueur
         /*
         On multiplie par 32 pour faire correspondre la position sur le tableau terrain à celle sur la map
         et on ajout 16 pour atteindre le centre
         */
-        if (x >= pointArv.getX() * 32 + 16 && y >= pointArv.getY() * 32 + 16)
-            verif = true;
-        return verif;
+        return x >= pointArv.getX() * 32 + 16 && y >= pointArv.getY() * 32 + 16;
     }
 
 

@@ -1,11 +1,7 @@
 package fr.montreuil.iut.RoyalElphia.modele.Items;
 
-import fr.montreuil.iut.RoyalElphia.modele.Map.CasesDégats;
-import fr.montreuil.iut.RoyalElphia.modele.Map.Terrain;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
-
-import java.util.ArrayList;
 
 /*
 La classe Items regroupe les différents item tel que obstacle.

@@ -3,9 +3,8 @@ package fr.montreuil.iut.RoyalElphia.modele;
 import fr.montreuil.iut.RoyalElphia.Controller.JeuController;
 import fr.montreuil.iut.RoyalElphia.LancementJeu;
 import fr.montreuil.iut.RoyalElphia.modele.Ennemis.StrategieAttaque.AttaqueCorpsAcorps;
-import fr.montreuil.iut.RoyalElphia.modele.Ennemis.StrategieAttaque.AttaqueEnFonctionDeLaBase;
 import fr.montreuil.iut.RoyalElphia.modele.Ennemis.StrategieAttaque.StrategieChangeante;
-import fr.montreuil.iut.RoyalElphia.modele.Map.CasesDégats;
+import fr.montreuil.iut.RoyalElphia.modele.Map.CasesDegats;
 import fr.montreuil.iut.RoyalElphia.modele.Niveau.*;
 import fr.montreuil.iut.RoyalElphia.modele.Obstacle.AmeliorationPVObstacle;
 import fr.montreuil.iut.RoyalElphia.modele.Obstacle.Obstacle;
@@ -74,7 +73,7 @@ public class Jeu {
         this.listeObstacle = FXCollections.observableArrayList();
         this.argent = new SimpleIntegerProperty(20000);
         this.vague = new Vague(new FacileStrategy());
-        this.vague.créerVague(this.niveau.getNbEnnemis(), this.terrain);
+        this.vague.creerVague(this.niveau.getNbEnnemis(), this.terrain);
         this.vBox = vBox;
         this.barreDeVies = FXCollections.observableArrayList();
 
@@ -103,7 +102,7 @@ public class Jeu {
     // La méthode dégâtsEnnemis permet de vérifier si l'ennemis s'est déplacé sur une case dégats et de lui attribuer les dégats de la tour à qui la case dégâts est attribuer.
     public void degatEnnemis(Ennemis e) {
         for (int j = 0; j < this.terrain.getCasesDegats().size(); j++) {
-            CasesDégats c = this.terrain.getCasesDegats().get(j);
+            CasesDegats c = this.terrain.getCasesDegats().get(j);
             if (c.verifDegat(e))
                 e.setPv(this.terrain.getCasesDegats().get(j).getDegat());
         }
@@ -206,10 +205,10 @@ public class Jeu {
         this.niveau.setNbEnnemis(this.niveau.getNbEnnemis() * 2);
         this.nbEnnemisRestant.setValue(this.niveau.getNbEnnemis());
         this.vague = new Vague(new MoyenneStrategy());
-        this.vague.créerVague(this.niveau.getNbEnnemis(), this.terrain);
+        this.vague.creerVague(this.niveau.getNbEnnemis(), this.terrain);
         if (this.nbVague.getValue() > 4) {
             this.vague = new Vague(new DifficileStrategy());
-            this.vague.créerVague(this.niveau.getNbEnnemis(), this.terrain);        }
+            this.vague.creerVague(this.niveau.getNbEnnemis(), this.terrain);        }
     }
 
     public void ajouterBarreDeVie(BarreDeVie b) {
@@ -436,7 +435,7 @@ public class Jeu {
             ImageView imV = new ImageView(im);
             vBox.getChildren().add(imV);
             Popup popup = new Popup();
-            Label label = new Label("" + en.affichageImmunité());
+            Label label = new Label("" + en.affichageImmunite());
             label.minHeight(180);
             label.minWidth(180);
             label.setBackground(Background.fill(Color.WHITE));

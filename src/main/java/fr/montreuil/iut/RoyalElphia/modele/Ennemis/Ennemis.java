@@ -170,7 +170,7 @@ public abstract class Ennemis {
     }
 
     // Méthode permettant de gérer l'affichage de l'immunité aux tours de l'ennemi
-    public String affichageImmunité() {
+    public String affichageImmunite() {
         String affichage = "Cet ennemi est immunisé face aux tours";
         switch (this.Immunite) {
             case 1:

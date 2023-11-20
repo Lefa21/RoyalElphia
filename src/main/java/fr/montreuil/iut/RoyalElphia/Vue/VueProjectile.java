@@ -1,9 +1,7 @@
 package fr.montreuil.iut.RoyalElphia.Vue;
 
-import fr.montreuil.iut.RoyalElphia.modele.Map.CasesDégats;
+import fr.montreuil.iut.RoyalElphia.modele.Map.CasesDegats;
 import fr.montreuil.iut.RoyalElphia.modele.Tour.*;
-import javafx.beans.binding.Bindings;
-import javafx.beans.binding.BooleanBinding;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
@@ -23,7 +21,7 @@ public class VueProjectile {
                 Image im = null;
 
                 // Cette variable permet de récuperer la position de la case dégât pour placer l'image
-                CasesDégats c = tour.getListeCasesDegats().get(i);
+                CasesDegats c = tour.getListeCasesDegats().get(i);
                 if (tour instanceof TourABombe) {
                     im = new Image(new FileInputStream("src/main/resources/fr/montreuil/iut/RoyalElphia/ImageProjectile/Bombe.gif"));
                 } else if (tour instanceof TourBouleDeFeu) {

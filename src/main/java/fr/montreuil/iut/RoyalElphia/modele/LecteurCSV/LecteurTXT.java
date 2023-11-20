@@ -51,20 +51,4 @@ public class LecteurTXT {
 
         return null;
     }
-/*
-    public static void main(String[] args) {
-        String cheminFichier = "C:\\Users\\alaae\\IdeaProjects\\RoyalElphiaLECTEUR\\tab1.txt";
-
-        int[][] matrice = lireMatriceDepuisFichier(cheminFichier);
-
-        if (matrice != null) {
-            for (int i = 0; i < matrice.length; i++) {
-                for (int j = 0; j < matrice[i].length; j++) {
-                    System.out.print(matrice[i][j] + " ");
-                }
-                System.out.println();
-            }
-        }
-    }
-*/
 }

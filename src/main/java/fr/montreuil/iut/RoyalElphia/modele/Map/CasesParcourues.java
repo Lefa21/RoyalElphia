@@ -22,8 +22,7 @@ public class CasesParcourues {
     // Méthode qui vérifie si une case c est contenue dans la liste de cases parcourues et renvoie un boolean
     public boolean verif(Cases c) {
         boolean verif = false;
-        for (int i = 0; i < this.casesParcourues.size(); i++) {
-            Cases cases = casesParcourues.get(i);
+        for (Cases cases : this.casesParcourues) {
             if (cases.getX() == c.getX() && cases.getY() == c.getY()) {
                 verif = true;
             }
@@ -33,10 +32,6 @@ public class CasesParcourues {
 
     public LinkedList<Cases> getCasesParcourues() {
         return casesParcourues;
-    }
-
-    public void setCasesParcourues(LinkedList<Cases> casesParcourues) {
-        this.casesParcourues = casesParcourues;
     }
 
 }

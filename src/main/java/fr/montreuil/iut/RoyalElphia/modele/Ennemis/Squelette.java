@@ -15,7 +15,7 @@ public class Squelette extends Ennemis {
     // Immunité 4 -->  Immunisé face au tour flèche
 
     public void strategieAttaque(Obstacle o) {
-        sa.AttaqueEnnemi(getCapaciteObstacle(),getX(),getY(),o);
+        sa.AttaqueEnnemi(getX(),getY(),o);
     }
 
     public String getChemin() {
