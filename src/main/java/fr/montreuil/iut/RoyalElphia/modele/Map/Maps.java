@@ -24,8 +24,7 @@ public class Maps extends Terrain {
         String cheminFichier = "src/main/java/fr/montreuil/iut/RoyalElphia/modele/Map/TableauxMap/tab1.txt";
 
 
-        int[][] tab1 = lireMatriceDepuisFichier(cheminFichier);
-        return tab1;
+        return lireMatriceDepuisFichier(cheminFichier);
     }
 
     public int[][] getTab2() {
@@ -33,9 +32,7 @@ public class Maps extends Terrain {
         String cheminFichier = "src/main/java/fr/montreuil/iut/RoyalElphia/modele/Map/TableauxMap/tab2.txt";
 
 
-        int[][] tab2 = lireMatriceDepuisFichier(cheminFichier);
-
-        return tab2;
+        return lireMatriceDepuisFichier(cheminFichier);
     }
 }
 

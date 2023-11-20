@@ -8,9 +8,9 @@ import fr.montreuil.iut.RoyalElphia.modele.Ennemis.StrategieAttaque.AttaqueCorps
 import fr.montreuil.iut.RoyalElphia.modele.Map.Terrain;
 import fr.montreuil.iut.RoyalElphia.modele.Obstacle.Obstacle;
 
-public class Géant extends Ennemis {
+public class Geant extends Ennemis {
 
-    public Géant(Terrain terrain){
+    public Geant(Terrain terrain){
 
         super(terrain,150,65,2,1,100,3,15, new DeplacementSimple(), new AttaqueCorpsAcorps());
 
@@ -18,7 +18,7 @@ public class Géant extends Ennemis {
 
     // Immunité 2 -->  Immunisé face au tour boule de feu
     public void strategieAttaque(Obstacle o) {
-        sa.AttaqueEnnemi(getCapaciteObstacle(),getX(),getY(),o);
+        sa.AttaqueEnnemi(getX(),getY(),o);
     }
 
     public String getChemin() {

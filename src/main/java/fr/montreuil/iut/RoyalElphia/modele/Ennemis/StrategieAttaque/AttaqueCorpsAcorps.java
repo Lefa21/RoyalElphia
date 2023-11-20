@@ -1,12 +1,10 @@
 package fr.montreuil.iut.RoyalElphia.modele.Ennemis.StrategieAttaque;
 
-import fr.montreuil.iut.RoyalElphia.modele.Ennemis.Ennemis;
 import fr.montreuil.iut.RoyalElphia.modele.Obstacle.Obstacle;
 
 public class AttaqueCorpsAcorps implements StrategieAttaque{
     @Override
-    public void AttaqueEnnemi(int capacite, int dx, int dy, Obstacle obstacle) {
-        int capObstacle = capacite;
+    public void AttaqueEnnemi( int dx, int dy, Obstacle obstacle) {
         int x = dx / 32;
         int y = dy / 32;
         int obX = obstacle.getPosX();

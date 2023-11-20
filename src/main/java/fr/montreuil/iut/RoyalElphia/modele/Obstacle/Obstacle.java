@@ -20,10 +20,6 @@ public class Obstacle extends Items {
         this.PointDeVie = new SimpleIntegerProperty(PointDeVie);
     }
 
-    public int getMateriaux() {
-        return Materiaux;
-    }
-
     public int getPointDeVie() {
         return this.PointDeVie.getValue();
     }

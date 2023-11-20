@@ -25,7 +25,7 @@ public class ListObsEnnemis implements ListChangeListener<Ennemis> {
                 for (Ennemis a : c.getAddedSubList()) {
                     VueEnnemi vueEnm = new VueEnnemi(panneauJeu);
                     try {
-                        vueEnm.créerSprite(a);
+                        vueEnm.creerSprite(a);
                     } catch (FileNotFoundException e) {
                         throw new RuntimeException(e);
                     }
