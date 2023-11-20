@@ -14,7 +14,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class GagnéControlleur implements Initializable {
+public class GagneControlleur implements Initializable {
 
     @FXML
     private Button Buttonrejouer;
