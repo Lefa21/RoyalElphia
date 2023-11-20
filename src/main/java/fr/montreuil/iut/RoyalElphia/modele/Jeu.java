@@ -301,9 +301,7 @@ public class Jeu {
             augmentationCapacité(this.nbTour, e);
             if (e.EstBloque()==false) {
                 e.seDeplace();
-                //gererObstacles(e);
             }
-            //gererObstacles(e);
             attaqueEnnemi(e);
             degatBase(e);
             enleveObstacleDetruit(tab, e);
@@ -329,18 +327,6 @@ public class Jeu {
         }
     }
 
-
-    private void gererObstacles(Ennemis e) {
-        for (Obstacle obstacle : this.listeObstacle) {
-            if (e.getSt() instanceof AttaqueCorpsAcorps) {
-                e.jeSuisBloque(obstacle);
-                if (obstacle.getPointDeVie()<=0) e.setEstBloque(false);
-            }
-        }
-
-    }
-
-
     private void attaqueEnnemi(Ennemis e) {
         e.setEstBloque(false);
         if (e.getSt() instanceof StrategieChangeante) {
@@ -352,7 +338,6 @@ public class Jeu {
             if (e.getSt() instanceof AttaqueCorpsAcorps) {
                 e.jeSuisBloque(o);
                 e.strategieAttaque(o);
-
             }
             e.strategieAttaque(o);
         }
@@ -367,7 +352,6 @@ public class Jeu {
         }
     }
 
-    //Lorsque le joueur gagne on lui affiche cette page.
     public void gagne() throws IOException {
         Stage newWindow = new Stage();
         newWindow.setTitle("Bravo !");

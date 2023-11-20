@@ -12,8 +12,8 @@ public class AttaqueDistance implements StrategieAttaque{
         int obX = obstacle.getPosX();
         int obY = obstacle.getPosY();
 
-        if (capObstacle >= obstacle.getMateriaux() && (x + 6 >= obX && y == obY) || (x == obX && y + 6 >= obY) || (x == obX && y - 6 <= obY) || (x - 6 <= obX && y == obY)) {
-            int degat = 5;
+        if (capObstacle >= obstacle.getMateriaux() && (x + 3 >= obX && y == obY) || (x == obX && y + 3 >= obY) || (x == obX && y - 3 <= obY) || (x - 3 <= obX && y == obY)) {
+            int degat = 2;
             int vieObstacle = obstacle.getPointDeVie() - degat;
             obstacle.setPointDeVie(vieObstacle);
         }
