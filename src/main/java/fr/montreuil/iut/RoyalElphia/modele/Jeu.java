@@ -103,8 +103,13 @@ public class Jeu {
     public void degatEnnemis(Ennemis e) {
         for (int j = 0; j < this.terrain.getCasesDegats().size(); j++) {
             CasesDegats c = this.terrain.getCasesDegats().get(j);
-            if (c.verifDegat(e))
+            if (c.verifDegat(e)){
                 e.setPv(this.terrain.getCasesDegats().get(j).getDegat());
+                if(c.verifPoison(e)){
+                    e.activerPoison();
+                    e.setDegatPoison(c.getDegatPoison());
+                }
+            }
         }
     }
     // La méthode dégatBase permet que lorsque l'ennemi arrive à la base il inflige ces dégâts de base et meurt.
@@ -117,7 +122,7 @@ public class Jeu {
     //Cette méthode enlève les ennemis mort de la liste d'ennemis
     public void enleveEnnemisMort() {
         for (int i = this.ennemis.size() - 1; i >= 0; i--) {
-            if (this.ennemis.get(i).getPv() == 0)
+            if (this.ennemis.get(i).getPv() <= 0)
                 this.ennemis.remove(i);
         }
     }
@@ -299,6 +304,7 @@ public class Jeu {
             degatBase(e);
             enleveObstacleDetruit(tab, e);
             degatEnnemis(e);
+            e.poisonEnCours();
             e.getBarreDeVie().setX(e.getX());
             e.getBarreDeVie().setY(e.getY());
             e.getBarreDeVie().setVie(e.getPv());
@@ -514,5 +520,13 @@ public class Jeu {
             return true;
         }
         return false;
+    }
+
+    public void miseAJourCasesDegats(){
+        this.terrain.getCasesDegats().clear();
+        for(Tour t : getListeDeTour()){
+            t.rayonDegat(terrain, t.getPosX(), t.getPosY(), t.getDegat());
+            System.out.println(t.isPoison());
+        }
     }
 }

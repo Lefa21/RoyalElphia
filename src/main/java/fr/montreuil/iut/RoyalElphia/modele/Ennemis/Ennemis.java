@@ -18,7 +18,6 @@ public abstract class Ennemis {
 
     private int pvMax;
     private IntegerProperty xProperty, yProperty;
-
     protected Terrain terrain;
     public static int compteur = 0;
     private String id;
@@ -26,17 +25,14 @@ public abstract class Ennemis {
     private IntegerProperty pv;
     private CasesParcourues casesParcourues;
     private int degatObstacle;
-
     private LinkedList<Cases> chemin;
     private StrategieDeplacement strategieDeplacement;
-
     protected StrategieAttaque sa;
-
     private BarreDeVie barreDeVie;
-
     private boolean estBloque = false;
-
-
+    private boolean poison;
+    private int degatPoison;
+    private int compteurPoison;
 
     public Ennemis(Terrain terrain, int pv, int ptsDefense, int immunite, int degatBase, int butin, int capaciteObstacle, int degatObstacle, StrategieDeplacement strategieDeplacement, StrategieAttaque s) {
 
@@ -51,7 +47,7 @@ public abstract class Ennemis {
         this.degatObstacle = degatObstacle;
         compteur++;
         this.terrain = terrain;
-        this.chemin  = new LinkedList<Cases>(this.terrain.getChemin());
+        this.chemin  = new LinkedList<>(this.terrain.getChemin());
         this.pvMax = this.pv.getValue();
         this.strategieDeplacement = strategieDeplacement;
         this.sa = s;
@@ -61,7 +57,33 @@ public abstract class Ennemis {
         this.yProperty = new SimpleIntegerProperty(terrain.getPointDep().getY() * 32 + 16);
 
         this.barreDeVie = new BarreDeVie(getPv(), getPvMax(), getId(), getX(), getY());
+        this.poison = false;
+        this.degatPoison = 0;
+        this.compteurPoison = 0;
+    }
 
+    public void poisonEnCours(){
+        if(this.compteurPoison==5){
+            this.compteurPoison=0;
+            this.desactiverPoison();
+            System.out.println("alaa");
+        }
+        if(this.poison){
+            this.pv.setValue(this.getPv()-this.degatPoison);
+            this.compteurPoison++;
+        }
+    }
+
+    public void setDegatPoison(int degatPoison) {
+        this.degatPoison = degatPoison;
+    }
+
+    public void activerPoison(){
+        this.poison = true;
+    }
+
+    public void desactiverPoison(){
+        this.poison = false;
     }
 
     public BarreDeVie getBarreDeVie() {

@@ -11,16 +11,15 @@ public class CasesDegats extends Cases {
 
     private IntegerProperty degat;
     private int typeAttaque; // Permet de savoir sur quel ennemi la tour va faire des dégâts
-
+    private boolean poisonActif;
+    private int degatPoison;
 
     // On récupère la position de la tour et ses attribut pour créer une case dégât
-    public CasesDegats(int x, int y, int degat, int typeAttaque, Direction d, int multi) {
+    public CasesDegats(int x, int y, int degat, int typeAttaque, Direction d, int multi, boolean poisonActif, int degatPoison) {
         super(x, y);
         // Le paramètre multi sert à calculer la portée de la tour
 
-
         // En fonction de la direction on crée une case plus loin que la tour
-
 
         if (d.equals(Direction.Haut)) {
             this.setX(transitionFormat(x));
@@ -39,6 +38,12 @@ public class CasesDegats extends Cases {
         }
         this.degat = new SimpleIntegerProperty(degat);
         this.typeAttaque = typeAttaque;
+        this.poisonActif = poisonActif;
+        this.degatPoison = degatPoison;
+    }
+
+    public int getDegatPoison() {
+        return degatPoison;
     }
 
     // Méthode qui permet de changer de dimension pour alléger le constructeur
@@ -81,6 +86,10 @@ public class CasesDegats extends Cases {
     @Override
     public String toString() {
         return super.toString() + " ,degat = " + this.getDegat() + ", typeAttaque = " + typeAttaque;
+    }
+
+    public boolean verifPoison(Ennemis e) {
+        return this.poisonActif;
     }
 }
 
