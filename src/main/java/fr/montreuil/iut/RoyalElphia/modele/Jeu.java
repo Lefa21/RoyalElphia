@@ -291,7 +291,7 @@ public class Jeu {
         int[][] tab = terrain.getTabTerrain();
         gererTours();
         for (Ennemis e : this.ennemis) {
-            augmentationCapacite(this.nbTour, e);
+            //augmentationCapacite(this.nbTour, e);
             if (!e.EstBloque()) {
                 e.seDeplace();
             }

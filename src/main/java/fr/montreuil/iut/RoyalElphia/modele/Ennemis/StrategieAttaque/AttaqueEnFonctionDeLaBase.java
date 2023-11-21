@@ -15,10 +15,11 @@ public class AttaqueEnFonctionDeLaBase implements StrategieAttaque{
             int baseY = 3;
 
             // Plus l'ennemi est proche de la base, plus il inflige de dégâts à l'obstacle
-            if ((((baseX - x) <= 10) && ((baseY - y) >= -6)) && ((x + 6 >= obX && y == obY) || (x == obX && y + 6 >= obY) || (x == obX && y - 6 <= obY) || (x - 6 <= obX && y == obY))) {
+            boolean b = (x + 6 >= obX && y == obY) || (x == obX && y + 6 >= obY) || (x == obX && y - 6 <= obY) || (x - 6 <= obX && y == obY);
+            if ((((baseX - x) <= 10) && ((baseY - y) >= -6)) && b) {
                 int degat = 5;
                 obstacle.setPointDeVie(obstacle.getPointDeVie() - degat);
-            } else if ((x + 6 >= obX && y == obY) || (x == obX && y + 6 >= obY) || (x == obX && y - 6 <= obY) || (x - 6 <= obX && y == obY)) {
+            } else if (b) {
                 int degat = 3; // Dégâts normaux à l'obstacle dans les autres cas
                 obstacle.setPointDeVie(obstacle.getPointDeVie() - degat);
             }
