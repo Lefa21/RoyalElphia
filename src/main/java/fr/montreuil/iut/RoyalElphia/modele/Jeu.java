@@ -330,7 +330,6 @@ public class Jeu {
         for (Obstacle o : this.listeObstacle) {
             if (e.getSt() instanceof AttaqueCorpsAcorps) {
                 e.jeSuisBloque(o);
-                e.strategieAttaque(o);
             }
             e.strategieAttaque(o);
         }
