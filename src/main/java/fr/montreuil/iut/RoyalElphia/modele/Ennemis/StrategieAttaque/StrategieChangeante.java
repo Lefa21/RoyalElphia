@@ -21,7 +21,7 @@ public class StrategieChangeante implements StrategieAttaque{
     public void AttaqueEnnemi(int dx, int dy, Obstacle obstacle) {    //Sa strategie évolue au fil du nombre de tour
         if (nbTour <= 75){
             listeStrat.get(1).AttaqueEnnemi(dx,dy,obstacle);
-        System.out.println("distance");}
+            System.out.println("distance");}
         if (nbTour > 75) {
             listeStrat.get(0).AttaqueEnnemi(dx,dy,obstacle);
             System.out.println("base");

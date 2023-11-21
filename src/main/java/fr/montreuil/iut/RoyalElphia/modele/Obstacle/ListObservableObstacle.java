@@ -17,7 +17,7 @@ public class ListObservableObstacle implements  ListChangeListener<Obstacle> {
     }
 
     @Override
-    public void onChanged(ListChangeListener.Change<? extends Obstacle> c) {
+    public void onChanged(Change<? extends Obstacle> c) {
         while (c.next()) {
             if (c.wasRemoved()) {
                 for (Obstacle a : c.getRemoved()

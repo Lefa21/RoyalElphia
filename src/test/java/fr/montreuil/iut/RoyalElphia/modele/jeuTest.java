@@ -1,4 +1,4 @@
-/*
+package fr.montreuil.iut.RoyalElphia.modele;/*
 package fr.montreuil.iut.RoyalElphia.modele;
 
 import fr.montreuil.iut.RoyalElphia.modele.Ennemis.Ennemis;

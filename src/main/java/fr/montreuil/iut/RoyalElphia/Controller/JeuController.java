@@ -6,6 +6,7 @@ import fr.montreuil.iut.RoyalElphia.modele.*;
 import fr.montreuil.iut.RoyalElphia.modele.Ennemis.BarreDeVie;
 import fr.montreuil.iut.RoyalElphia.modele.Ennemis.Ennemis;
 import fr.montreuil.iut.RoyalElphia.modele.Ennemis.ListObsEnnemis;
+import fr.montreuil.iut.RoyalElphia.modele.Items.Items;
 import fr.montreuil.iut.RoyalElphia.modele.Map.Maps;
 import fr.montreuil.iut.RoyalElphia.modele.Map.Terrain;
 import fr.montreuil.iut.RoyalElphia.modele.Niveau.Niveau;
@@ -154,7 +155,7 @@ public class JeuController implements Initializable {
 
         // La méthode créerNiveau récupère  le choix du joueur entrer sur la page ChoixMap et créer le niveau associé.
 
-    public void creerNiveau(){
+    public void créerNiveau(){
         int niveau = ChoixMapController.getNiveau();
         if (niveau == 1) {
             this.niveau = new Niveau(1);
@@ -167,7 +168,7 @@ public class JeuController implements Initializable {
 
     // La méthode créerTerrain récupère le choix de map du joueur entrer sur la page ChoixMap et créer le terrain associé.
 
-    public void creerTerrain() {
+    public void créerTerrain() {
         int terrain = ChoixMapController.getTerrain();
         if (terrain == 1) {
             this.terrain = new Maps(2);
@@ -178,9 +179,9 @@ public class JeuController implements Initializable {
 
     // La méthode création Partie permet de créer le niveau et le terrain et l'affecter à la nouvelle partie
 
-    public void creationPartie() {
-        creerNiveau();
-        creerTerrain();
+    public void créationPartie() {
+        créerNiveau();
+        créerTerrain();
         this.jeu = Jeu.getInstance(this.terrain,this.niveau,this.menuEnnemi);
     }
 
@@ -200,7 +201,7 @@ public class JeuController implements Initializable {
     // La méthode permet de gérer les écouteur entre le modèle et la vue et de lancer le jeu.
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-            creationPartie();
+            créationPartie();
 
             //demarre l'animation
             jeu.initAnimation();

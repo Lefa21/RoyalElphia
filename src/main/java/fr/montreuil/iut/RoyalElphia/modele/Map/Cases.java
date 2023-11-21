@@ -21,6 +21,10 @@ public class Cases {
         this.valeur = valeur;
     }
 
+    public boolean compare(Cases c) {
+        return this.getX()==c.getX() && this.getY()==c.getY();
+    }
+
     public int getX() {
         return x.getValue();
     }
@@ -41,6 +45,8 @@ public class Cases {
 
     //@Override
     public String toString() {
-        return "Cases :" + " x = " + getX() + ", y = " + getY();
+        return "Cases " +
+                " x = " + getX() +
+                ", y = " + getY();
     }
 }

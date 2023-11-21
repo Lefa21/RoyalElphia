@@ -103,7 +103,7 @@ public abstract class Ennemis {
         }
     }
 
-    public void ameliorationPv(int pv) {
+    public void améliorationPv(int pv) {
         this.pv.setValue(pv);
     }
 
@@ -170,7 +170,7 @@ public abstract class Ennemis {
     }
 
     // Méthode permettant de gérer l'affichage de l'immunité aux tours de l'ennemi
-    public String affichageImmunite() {
+    public String affichageImmunité() {
         String affichage = "Cet ennemi est immunisé face aux tours";
         switch (this.Immunite) {
             case 1:
@@ -203,9 +203,7 @@ public abstract class Ennemis {
 
             if ((x + 1 == obX && y == obY) || (x == obX && y + 1 == obY) || (x == obX && y - 1 == obY) || (x - 1 == obX && y == obY)) {
                 this.estBloque = true;
-        } else {
-                this.estBloque = false;
-            }
+        }
     }
 
     public boolean EstBloque(){
@@ -220,6 +218,9 @@ public abstract class Ennemis {
     }
     public abstract String getChemin();
 
+    public void ameliorationPv(int pv) {
+        this.pv.setValue(pv);
+    }
 }
 
 

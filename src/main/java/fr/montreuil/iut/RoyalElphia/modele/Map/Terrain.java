@@ -9,21 +9,21 @@ public class Terrain {
     protected int[][] Tabterrain;
     private Cases pointDep, pointArv;
 
-    private ArrayList<CasesDegats> casesDegats;
+    private ArrayList<CasesDégats> casesDégats;
     private CasesParcourues casesParcourues;
 
 
     public Terrain() {
-        this.casesDegats = new ArrayList<>();
+        this.casesDégats = new ArrayList<>();
         this.casesParcourues = new CasesParcourues();
     }
 
-    public void ajouterCaseDegat(CasesDegats c) {
-        this.casesDegats.add(c);
+    public void ajouterCaseDegat(CasesDégats c) {
+        this.casesDégats.add(c);
     }
 
-    public ArrayList<CasesDegats> getCasesDegats() {
-        return this.casesDegats;
+    public ArrayList<CasesDégats> getCasesDégats() {
+        return this.casesDégats;
     }
 
     public int[][] getTabTerrain() {
@@ -38,8 +38,16 @@ public class Terrain {
         this.pointDep = pointDep;
     }
 
+    public void setTabterrain(int[][] tabterrain) {
+        Tabterrain = tabterrain;
+    }
+
     public void setPointArv(Cases pointArv) {
         this.pointArv = pointArv;
+    }
+
+    public Cases getPointArv() {
+        return pointArv;
     }
 
     public Cases calculPointDep() {
@@ -75,17 +83,22 @@ public class Terrain {
     }
 
     public boolean verifPArv(int x, int y) {
+        boolean verif = false;
 
         // Méthode qui permet de vérifier si l'ennemi est arrivé à la base du joueur
         /*
         On multiplie par 32 pour faire correspondre la position sur le tableau terrain à celle sur la map
         et on ajout 16 pour atteindre le centre
         */
-        return x >= pointArv.getX() * 32 + 16 && y >= pointArv.getY() * 32 + 16;
+        if (x >= pointArv.getX() * 32 + 16 && y >= pointArv.getY() * 32 + 16)
+            verif = true;
+        return verif;
     }
 
 
-    public void calculChemin() {
+    public LinkedList<Cases> calculChemin() {
+        LinkedList<Cases> chemin = new LinkedList<Cases>();
+        // 30 Hauteur 40 Largeur
         int i = this.pointDep.getY();
         int j = this.pointDep.getX();
 
@@ -94,31 +107,31 @@ public class Terrain {
             if (verifDimension(i, Direction.Bas)) {
                 Cases c = creerCase(i, j, Direction.Bas);
                 if (verifCasesParcEtValeur(c)) {
-                    i = ajoutCase(c,Direction.Bas,i);
+                    i = ajoutCase(chemin,c,Direction.Bas,i);
                 }
             }
             if (verifDimension(i, Direction.Haut)) {
                 Cases c = creerCase(i, j, Direction.Haut);
                 if (verifCasesParcEtValeur(c)) {
-                    i = ajoutCase(c,Direction.Haut,i);
+                    i = ajoutCase(chemin,c,Direction.Haut,i);
                 }
             }
             if (verifDimension(j, Direction.Droite)) {
                 Cases c = creerCase(i, j, Direction.Droite);
                 if (verifCasesParcEtValeur(c)) {
-                    j = ajoutCase(c,Direction.Droite,j);
+                    j = ajoutCase(chemin,c,Direction.Droite,j);
                 }
             }
             if (verifDimension(j, Direction.Gauche)) {
                 Cases c = creerCase(i, j, Direction.Gauche);
                 if (verifCasesParcEtValeur(c)) {
-                    j = ajoutCase(c,Direction.Gauche,j);
+                    j = ajoutCase(chemin,c,Direction.Gauche,j);
                 }
             }
         }
+        return chemin;
     }
 
-    // Méthode qui permet de créer une case en fonction de la case
     public Cases creerCase(int i, int j, Direction d) {
         Cases c;
         if (d == Direction.Droite) {
@@ -133,7 +146,6 @@ public class Terrain {
         return c;
     }
 
-    // Méthode qui permet de vérifier si les indices ne sortent pas des limites du tableau
     public boolean verifDimension(int x, Direction d) {
         boolean verif = false;
         if (d == Direction.Droite) {
@@ -153,9 +165,9 @@ public class Terrain {
         return !casesParcourues.verif(c) && (c.getValeur() == 9) || (c.getValeur() == 2);
     }
 
-    // Méthode qui s'occupe d'ajouter une case au chemin en fonction de sa direction
-    public int ajoutCase(Cases c, Direction d, int x) {
+    public int ajoutCase(LinkedList<Cases> chemin, Cases c, Direction d, int x) {
         int retour;
+        chemin.addFirst(c);
         casesParcourues.ajouterCase(c);
         if (d==Direction.Bas || d==Direction.Droite)
             retour = x+1;
@@ -168,7 +180,7 @@ public class Terrain {
         return this.casesParcourues.getCasesParcourues();
     }
 
-    public void setChemin() {
-        calculChemin();
+    public void setChemin(LinkedList<Cases> chemin) {
+        this.casesParcourues.setCasesParcourues(chemin);
     }
 }
