@@ -3,14 +3,17 @@ package fr.montreuil.iut.RoyalElphia.modele;
 import fr.montreuil.iut.RoyalElphia.Controller.JeuController;
 import fr.montreuil.iut.RoyalElphia.LancementJeu;
 import fr.montreuil.iut.RoyalElphia.modele.Ennemis.StrategieAttaque.AttaqueCorpsAcorps;
+import fr.montreuil.iut.RoyalElphia.modele.Ennemis.StrategieAttaque.AttaqueEnFonctionDeLaBase;
 import fr.montreuil.iut.RoyalElphia.modele.Ennemis.StrategieAttaque.StrategieChangeante;
-import fr.montreuil.iut.RoyalElphia.modele.Map.CasesDegats;
+import fr.montreuil.iut.RoyalElphia.modele.Map.CasesDégats;
 import fr.montreuil.iut.RoyalElphia.modele.Niveau.*;
 import fr.montreuil.iut.RoyalElphia.modele.Obstacle.AmeliorationPVObstacle;
 import fr.montreuil.iut.RoyalElphia.modele.Obstacle.Obstacle;
 import fr.montreuil.iut.RoyalElphia.modele.Tour.AmeliorationDegatTour;
 import fr.montreuil.iut.RoyalElphia.modele.Tour.StrategieTour.AttaqueEvolutive;
+import fr.montreuil.iut.RoyalElphia.modele.Tour.StrategieTour.AttaqueRecharge;
 import fr.montreuil.iut.RoyalElphia.modele.Tour.Tour;
+import fr.montreuil.iut.RoyalElphia.modele.Tour.TourDecorator;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import fr.montreuil.iut.RoyalElphia.modele.Ennemis.*;
@@ -41,7 +44,7 @@ public class Jeu {
     private static Jeu uniqueInstance=null;
     private Terrain terrain;
     private ObservableList<Ennemis> ennemis;
-    private ArrayList<Ennemis> listeEnnemisTuee;
+    private ArrayList<Ennemis> listeEnnemisTuée;
     private ArrayList<Ennemis> listeEnnemisSpawn;
     private Timeline gameLoop;
     private IntegerProperty pvJoueur;
@@ -62,7 +65,7 @@ public class Jeu {
     private Jeu(Terrain terrain, Niveau niveau, VBox vBox) {
         this.terrain = terrain;
         this.ennemis = FXCollections.observableArrayList();
-        this.listeEnnemisTuee = new ArrayList<>();
+        this.listeEnnemisTuée = new ArrayList<>();
         this.listeEnnemisSpawn = new ArrayList<>();
         this.niveau = niveau;
         this.nbTour = 0;
@@ -73,7 +76,7 @@ public class Jeu {
         this.listeObstacle = FXCollections.observableArrayList();
         this.argent = new SimpleIntegerProperty(20000);
         this.vague = new Vague(new FacileStrategy());
-        this.vague.creerVague(this.niveau.getNbEnnemis(), this.terrain);
+        this.vague.créerVague(this.niveau.getNbEnnemis(), this.terrain);
         this.vBox = vBox;
         this.barreDeVies = FXCollections.observableArrayList();
 
@@ -101,10 +104,10 @@ public class Jeu {
     }
     // La méthode dégâtsEnnemis permet de vérifier si l'ennemis s'est déplacé sur une case dégats et de lui attribuer les dégats de la tour à qui la case dégâts est attribuer.
     public void degatEnnemis(Ennemis e) {
-        for (int j = 0; j < this.terrain.getCasesDegats().size(); j++) {
-            CasesDegats c = this.terrain.getCasesDegats().get(j);
+        for (int j = 0; j < this.terrain.getCasesDégats().size(); j++) {
+            CasesDégats c = this.terrain.getCasesDégats().get(j);
             if (c.verifDegat(e))
-                e.setPv(this.terrain.getCasesDegats().get(j).getDegat());
+                e.setPv(this.terrain.getCasesDégats().get(j).getDegat());
         }
     }
     // La méthode dégatBase permet que lorsque l'ennemi arrive à la base il inflige ces dégâts de base et meurt.
@@ -119,17 +122,6 @@ public class Jeu {
         for (int i = this.ennemis.size() - 1; i >= 0; i--) {
             if (this.ennemis.get(i).getPv() == 0)
                 this.ennemis.remove(i);
-        }
-    }
-    //Cette méthode augment aléatoire les capacité d'un ennemis durant un tour
-
-    public void augmentationCapacite(int nbTour, Ennemis e) {
-
-        if (nbTour % 128 == 0) {
-
-            e.setDegatObstacle((e.getDegatObstacle() + (e.getDegatObstacle() * 50 / 100)));
-            e.ameliorationPv((e.getPv() + (e.getPv() * 50 / 100)));
-            e.setDegatBase((e.getDegatBase() + (e.getDegatBase() * 50 / 100)));
         }
     }
 
@@ -166,13 +158,18 @@ public class Jeu {
         return this.argent.getValue();
     }
 
-
     public boolean verifArgent(Tour t) {
-        return t.getCoutAchat() <= getArgent();
+        if (t.getCoutAchat() > getArgent()) {
+            return false;
+        }
+        return true;
     }
 
     public boolean verifArgentObstacle(Obstacle O) {
-        return O.getCoutAchat() <= getArgent();
+        if (O.getCoutAchat() > getArgent()) {
+            return false;
+        }
+        return true;
     }
 
     public Niveau getNiveau() {
@@ -200,14 +197,24 @@ public class Jeu {
         this.niveau.setNbEnnemis(this.niveau.getNbEnnemis() * 2);
         this.nbEnnemisRestant.setValue(this.niveau.getNbEnnemis());
         this.vague = new Vague(new MoyenneStrategy());
-        this.vague.creerVague(this.niveau.getNbEnnemis(), this.terrain);
+        this.vague.créerVague(this.niveau.getNbEnnemis(), this.terrain);
         if (this.nbVague.getValue() > 4) {
             this.vague = new Vague(new DifficileStrategy());
-            this.vague.creerVague(this.niveau.getNbEnnemis(), this.terrain);        }
+            this.vague.créerVague(this.niveau.getNbEnnemis(), this.terrain);        }
     }
 
     public void ajouterBarreDeVie(BarreDeVie b) {
         barreDeVies.add(b);
+    }
+
+    public void augmentationCapacite(int nbTour, Ennemis e) {
+
+        if (nbTour % 128 == 0) {
+
+            e.setDegatObstacle((e.getDegatObstacle() + (e.getDegatObstacle() * 50 / 100)));
+            e.ameliorationPv((e.getPv() + (e.getPv() * 50 / 100)));
+            e.setDegatBase((e.getDegatBase() + (e.getDegatBase() * 50 / 100)));
+        }
     }
 
 
@@ -226,11 +233,11 @@ public class Jeu {
     }
 
     public void ajoutEnnemisMort(Ennemis enm) {
-        listeEnnemisTuee.add(enm);
+        listeEnnemisTuée.add(enm);
     }
 
     public ArrayList<Ennemis> getEnnemisTue() {
-        return listeEnnemisTuee;
+        return listeEnnemisTuée;
     }
 
 
@@ -344,6 +351,7 @@ public class Jeu {
         }
     }
 
+    //Lorsque le joueur gagne on lui affiche cette page.
     public void gagne() throws IOException {
         Stage newWindow = new Stage();
         newWindow.setTitle("Bravo !");
@@ -421,13 +429,14 @@ public class Jeu {
     // Les ennemis présent sur la map sont ajouté aux menus des ennemis.
     public void menuEnnemiA(VBox vBox) throws FileNotFoundException {
 
-        for (Ennemis en : ennemis) {
+        for (int i = 0; i < ennemis.size(); i++) {
+            Ennemis en = ennemis.get(i);
             Image im = new Image(new FileInputStream(en.getChemin()));
 
             ImageView imV = new ImageView(im);
             vBox.getChildren().add(imV);
             Popup popup = new Popup();
-            Label label = new Label("" + en.affichageImmunite());
+            Label label = new Label("" + en.affichageImmunité());
             label.minHeight(180);
             label.minWidth(180);
             label.setBackground(Background.fill(Color.WHITE));
@@ -449,8 +458,9 @@ public class Jeu {
 
 
     public void ameliorationObstacle(ImageView x) {
-        for (Obstacle o : this.listeObstacle) {
-            if (Integer.toString(o.getID()).equals(x.getId())) {
+        for (int i = 0; i < this.listeObstacle.size(); i++) {
+            Obstacle o = this.listeObstacle.get(i);
+            if (Integer.toString(o.getID()).equals(x.getId())){
                 ameliorationPVObstacle = new AmeliorationPVObstacle(o);
                 ameliorationPVObstacle.ameliorationObstacle(this);
             }

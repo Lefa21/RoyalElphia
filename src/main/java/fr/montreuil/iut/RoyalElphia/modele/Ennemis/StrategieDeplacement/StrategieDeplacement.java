@@ -6,5 +6,5 @@ import fr.montreuil.iut.RoyalElphia.modele.Map.CasesParcourues;
 import java.util.LinkedList;
 
 public interface StrategieDeplacement {
-    int[] deplacement(CasesParcourues casesParcourues, LinkedList<Cases> chemin);
+    public int[] deplacement(CasesParcourues casesParcourues, LinkedList<Cases> chemin);
 }

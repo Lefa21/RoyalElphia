@@ -1,6 +1,7 @@
 package fr.montreuil.iut.RoyalElphia.modele.Niveau;
 
 import fr.montreuil.iut.RoyalElphia.modele.Ennemis.*;
+import fr.montreuil.iut.RoyalElphia.modele.FabriqueEnnemis.*;
 import fr.montreuil.iut.RoyalElphia.modele.Map.Terrain;
 import java.util.LinkedList;
 
@@ -17,7 +18,7 @@ public class Vague {
         return listeEnnemis;
     }
 
-    public void creerVague(int nbEnnemi, Terrain terrain) {
-        vagueStrategy.creerEnnemis(this, nbEnnemi, terrain);
+    public void créerVague(int nbEnnemi, Terrain terrain) {
+        vagueStrategy.créerEnnemis(this, nbEnnemi, terrain);
     }
 }

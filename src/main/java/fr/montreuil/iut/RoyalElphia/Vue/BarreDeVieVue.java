@@ -3,6 +3,7 @@ package fr.montreuil.iut.RoyalElphia.Vue;
 import fr.montreuil.iut.RoyalElphia.modele.Ennemis.BarreDeVie;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.layout.Pane;
+import org.controlsfx.control.tableview2.filter.filtereditor.SouthFilter;
 
 public class BarreDeVieVue {
     private Pane panneauJeu;

@@ -16,7 +16,7 @@ public class ListObservableTour implements ListChangeListener<Tour> {
     }
 
     @Override
-    public void onChanged(ListChangeListener.Change<? extends Tour> c) {
+    public void onChanged(Change<? extends Tour> c) {
         System.out.println("changement");
         while (c.next()) {
             if (c.wasRemoved()) {
