@@ -290,8 +290,9 @@ public class Jeu {
     public void unTour() {
         int[][] tab = terrain.getTabTerrain();
         gererTours();
-        for (Ennemis e : this.ennemis) {
-            //augmentationCapacite(this.nbTour, e);
+        for (int i = 0; i < this.ennemis.size(); i++) {
+            Ennemis e = this.ennemis.get(i);
+            augmentationCapacite(this.nbTour, e);
             if (!e.EstBloque()) {
                 e.seDeplace();
             }
