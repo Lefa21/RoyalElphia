@@ -103,7 +103,7 @@ public abstract class Ennemis {
         }
     }
 
-    public void améliorationPv(int pv) {
+    public void ameliorationPv(int pv) {
         this.pv.setValue(pv);
     }
 

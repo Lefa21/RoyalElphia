@@ -13,7 +13,6 @@ import java.io.FileNotFoundException;
 
 public class VueEnnemi {
 
-    private Ennemis ennemis;
     protected Pane pane;
 
     public VueEnnemi(Pane pane) {

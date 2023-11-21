@@ -1,6 +1,5 @@
 package fr.montreuil.iut.RoyalElphia.modele.Tour.StrategieTour;
 
-import fr.montreuil.iut.RoyalElphia.modele.Map.Terrain;
 import fr.montreuil.iut.RoyalElphia.modele.Tour.Tour;
 
 public interface StrategieTour {

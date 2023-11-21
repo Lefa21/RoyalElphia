@@ -41,7 +41,7 @@ public class Jeu {
     private static Jeu uniqueInstance=null;
     private Terrain terrain;
     private ObservableList<Ennemis> ennemis;
-    private ArrayList<Ennemis> listeEnnemisTuée;
+    private ArrayList<Ennemis> listeEnnemisTuee;
     private ArrayList<Ennemis> listeEnnemisSpawn;
     private Timeline gameLoop;
     private IntegerProperty pvJoueur;
@@ -62,7 +62,7 @@ public class Jeu {
     private Jeu(Terrain terrain, Niveau niveau, VBox vBox) {
         this.terrain = terrain;
         this.ennemis = FXCollections.observableArrayList();
-        this.listeEnnemisTuée = new ArrayList<>();
+        this.listeEnnemisTuee = new ArrayList<>();
         this.listeEnnemisSpawn = new ArrayList<>();
         this.niveau = niveau;
         this.nbTour = 0;
@@ -123,12 +123,12 @@ public class Jeu {
     }
     //Cette méthode augment aléatoire les capacité d'un ennemis durant un tour
 
-    public void augmentationCapacité(int nbTour, Ennemis e) {
+    public void augmentationCapacite(int nbTour, Ennemis e) {
 
         if (nbTour % 128 == 0) {
 
             e.setDegatObstacle((e.getDegatObstacle() + (e.getDegatObstacle() * 50 / 100)));
-            e.améliorationPv((e.getPv() + (e.getPv() * 50 / 100)));
+            e.ameliorationPv((e.getPv() + (e.getPv() * 50 / 100)));
             e.setDegatBase((e.getDegatBase() + (e.getDegatBase() * 50 / 100)));
         }
     }
@@ -166,18 +166,13 @@ public class Jeu {
         return this.argent.getValue();
     }
 
+
     public boolean verifArgent(Tour t) {
-        if (t.getCoutAchat() > getArgent()) {
-            return false;
-        }
-        return true;
+        return t.getCoutAchat() <= getArgent();
     }
 
     public boolean verifArgentObstacle(Obstacle O) {
-        if (O.getCoutAchat() > getArgent()) {
-            return false;
-        }
-        return true;
+        return O.getCoutAchat() <= getArgent();
     }
 
     public Niveau getNiveau() {
@@ -231,11 +226,11 @@ public class Jeu {
     }
 
     public void ajoutEnnemisMort(Ennemis enm) {
-        listeEnnemisTuée.add(enm);
+        listeEnnemisTuee.add(enm);
     }
 
     public ArrayList<Ennemis> getEnnemisTue() {
-        return listeEnnemisTuée;
+        return listeEnnemisTuee;
     }
 
 
@@ -295,10 +290,9 @@ public class Jeu {
     public void unTour() {
         int[][] tab = terrain.getTabTerrain();
         gererTours();
-        for (int i = 0; i < this.ennemis.size(); i++) {
-            Ennemis e = this.ennemis.get(i);
-            augmentationCapacité(this.nbTour, e);
-            if (e.EstBloque()==false) {
+        for (Ennemis e : this.ennemis) {
+            augmentationCapacite(this.nbTour, e);
+            if (!e.EstBloque()) {
                 e.seDeplace();
             }
             attaqueEnnemi(e);
@@ -332,8 +326,7 @@ public class Jeu {
             ((StrategieChangeante) e.getSt()).setNbTour(nbTour);
         }
 
-        for (int j = 0; j < this.listeObstacle.size(); j++){
-            Obstacle o = this.listeObstacle.get(j);
+        for (Obstacle o : this.listeObstacle) {
             if (e.getSt() instanceof AttaqueCorpsAcorps) {
                 e.jeSuisBloque(o);
                 e.strategieAttaque(o);
@@ -428,8 +421,7 @@ public class Jeu {
     // Les ennemis présent sur la map sont ajouté aux menus des ennemis.
     public void menuEnnemiA(VBox vBox) throws FileNotFoundException {
 
-        for (int i = 0; i < ennemis.size(); i++) {
-            Ennemis en = ennemis.get(i);
+        for (Ennemis en : ennemis) {
             Image im = new Image(new FileInputStream(en.getChemin()));
 
             ImageView imV = new ImageView(im);
@@ -457,9 +449,8 @@ public class Jeu {
 
 
     public void ameliorationObstacle(ImageView x) {
-        for (int i = 0; i < this.listeObstacle.size(); i++) {
-            Obstacle o = this.listeObstacle.get(i);
-            if (Integer.toString(o.getID()).equals(x.getId())){
+        for (Obstacle o : this.listeObstacle) {
+            if (Integer.toString(o.getID()).equals(x.getId())) {
                 ameliorationPVObstacle = new AmeliorationPVObstacle(o);
                 ameliorationPVObstacle.ameliorationObstacle(this);
             }

@@ -17,7 +17,7 @@ public abstract class Tour extends Items {
     private int PorteeAttaque;
     private int TypeAttaque;
     protected IntegerProperty degat;
-    private ArrayList<CasesDegats> listeCasesDegats;
+    private ArrayList<CasesDegats> listeCasesDegats = new ArrayList<>();
 
     protected StrategieTour st;
 
@@ -62,8 +62,7 @@ public abstract class Tour extends Items {
     }
 
 
-    public ArrayList<CasesDegats> rayonDegat(Terrain terrain, int x, int y, int degat) throws ArrayIndexOutOfBoundsException{
-        this.listeCasesDegats = new ArrayList<>();
+    public void rayonDegat(Terrain terrain, int x, int y, int degat) throws ArrayIndexOutOfBoundsException{
 
         for (int i = 1; i <= this.getPorteeAttaque(); i++) {
             if ((y-i) > -1 && (terrain.getTabTerrain()[y - i][x] == 9 || terrain.getTabTerrain()[y - i][x] == 8)) {
@@ -87,11 +86,9 @@ public abstract class Tour extends Items {
             if ((x-i) > -1 &&  (terrain.getTabTerrain()[y][x - i] == 9 || terrain.getTabTerrain()[y][x - i] == 8)) {
                 CasesDegats c4 = new CasesDegats(x, y, degat, this.getTypeAttaque(), Direction.Gauche, i);
                 terrain.ajouterCaseDegat(c4);
-                listeCasesDegats.add(c4);
                 c4.getDegatProperty().bind(this.getDegatProperty());
             }
         }
-        return listeCasesDegats;
     }
 
 
