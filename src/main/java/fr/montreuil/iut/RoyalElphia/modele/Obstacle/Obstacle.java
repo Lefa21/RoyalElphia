@@ -11,6 +11,7 @@ public class Obstacle extends Items {
 
     private int Materiaux;
     private IntegerProperty  PointDeVie;
+    private int degat;
     public Obstacle(){
 
     }
@@ -18,6 +19,7 @@ public class Obstacle extends Items {
         super(0,0,0,0,0,0,0);
         this.Materiaux = materiaux;
         this.PointDeVie = new SimpleIntegerProperty(PointDeVie);
+        this.degat = 0;
     }
 
     public int getPointDeVie() {
@@ -56,5 +58,13 @@ public class Obstacle extends Items {
     }else
             System.out.println("niv MAX");
 
+    }
+
+    public int getDegat() {
+        return degat;
+    }
+
+    public void ameliorerDegat() {
+        this.degat = this.degat + 20;
     }
 }

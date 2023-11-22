@@ -95,6 +95,7 @@ public class Jeu {
             if (obstacle.getPointDeVie() <= 0) {
                 tab[obstacle.getPosY()][obstacle.getPosX()] = 9;
                 this.listeObstacle.remove(this.listeObstacle.get(j));
+                e.perteDeVie(obstacle.getDegat());
             }
             e.strategieAttaque(obstacle);
         }

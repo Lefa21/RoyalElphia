@@ -74,6 +74,10 @@ public abstract class Ennemis {
         }
     }
 
+    public void perteDeVie(int degat){
+        this.pv.setValue(this.getPv()-degat);
+    }
+
     public void setDegatPoison(int degatPoison) {
         this.degatPoison = degatPoison;
     }
