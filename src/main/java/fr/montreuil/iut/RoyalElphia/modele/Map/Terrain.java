@@ -9,7 +9,7 @@ public class Terrain {
     protected int[][] Tabterrain;
     private Cases pointDep, pointArv;
 
-    private ArrayList<CasesDégats> casesDégats;
+    private ArrayList<CasesDegats> casesDégats;
     private CasesParcourues casesParcourues;
 
 
@@ -18,11 +18,11 @@ public class Terrain {
         this.casesParcourues = new CasesParcourues();
     }
 
-    public void ajouterCaseDegat(CasesDégats c) {
+    public void ajouterCaseDegat(CasesDegats c) {
         this.casesDégats.add(c);
     }
 
-    public ArrayList<CasesDégats> getCasesDégats() {
+    public ArrayList<CasesDegats> getCasesDégats() {
         return this.casesDégats;
     }
 
