@@ -3,17 +3,14 @@ package fr.montreuil.iut.RoyalElphia.modele;
 import fr.montreuil.iut.RoyalElphia.Controller.JeuController;
 import fr.montreuil.iut.RoyalElphia.LancementJeu;
 import fr.montreuil.iut.RoyalElphia.modele.Ennemis.StrategieAttaque.AttaqueCorpsAcorps;
-import fr.montreuil.iut.RoyalElphia.modele.Ennemis.StrategieAttaque.AttaqueEnFonctionDeLaBase;
 import fr.montreuil.iut.RoyalElphia.modele.Ennemis.StrategieAttaque.StrategieChangeante;
-import fr.montreuil.iut.RoyalElphia.modele.Map.CasesDégats;
+import fr.montreuil.iut.RoyalElphia.modele.Map.CasesDegats;
 import fr.montreuil.iut.RoyalElphia.modele.Niveau.*;
 import fr.montreuil.iut.RoyalElphia.modele.Obstacle.AmeliorationPVObstacle;
 import fr.montreuil.iut.RoyalElphia.modele.Obstacle.Obstacle;
 import fr.montreuil.iut.RoyalElphia.modele.Tour.AmeliorationDegatTour;
 import fr.montreuil.iut.RoyalElphia.modele.Tour.StrategieTour.AttaqueEvolutive;
-import fr.montreuil.iut.RoyalElphia.modele.Tour.StrategieTour.AttaqueRecharge;
 import fr.montreuil.iut.RoyalElphia.modele.Tour.Tour;
-import fr.montreuil.iut.RoyalElphia.modele.Tour.TourDecorator;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import fr.montreuil.iut.RoyalElphia.modele.Ennemis.*;
@@ -98,6 +95,7 @@ public class Jeu {
             if (obstacle.getPointDeVie() <= 0) {
                 tab[obstacle.getPosY()][obstacle.getPosX()] = 9;
                 this.listeObstacle.remove(this.listeObstacle.get(j));
+                e.perteDeVie(obstacle.getDegat());
             }
             e.strategieAttaque(obstacle);
         }
@@ -105,9 +103,14 @@ public class Jeu {
     // La méthode dégâtsEnnemis permet de vérifier si l'ennemis s'est déplacé sur une case dégats et de lui attribuer les dégats de la tour à qui la case dégâts est attribuer.
     public void degatEnnemis(Ennemis e) {
         for (int j = 0; j < this.terrain.getCasesDégats().size(); j++) {
-            CasesDégats c = this.terrain.getCasesDégats().get(j);
-            if (c.verifDegat(e))
+            CasesDegats c = this.terrain.getCasesDégats().get(j);
+            if (c.verifDegat(e)) {
                 e.setPv(this.terrain.getCasesDégats().get(j).getDegat());
+                if(c.verifPoison(e)){
+                    e.activerPoison();
+                    e.setDegatPoison(c.getDegatPoison());
+                }
+            }
         }
     }
     // La méthode dégatBase permet que lorsque l'ennemi arrive à la base il inflige ces dégâts de base et meurt.
@@ -120,7 +123,7 @@ public class Jeu {
     //Cette méthode enlève les ennemis mort de la liste d'ennemis
     public void enleveEnnemisMort() {
         for (int i = this.ennemis.size() - 1; i >= 0; i--) {
-            if (this.ennemis.get(i).getPv() == 0)
+            if (this.ennemis.get(i).getPv() <= 0)
                 this.ennemis.remove(i);
         }
     }
@@ -130,8 +133,8 @@ public class Jeu {
         listeDeTour.add(t);
     }
 
-    public void ajouterObstacle(Obstacle O) {
-        listeObstacle.add(O);
+    public void ajouterObstacle(Obstacle o) {
+        listeObstacle.add(o);
     }
 
     public final ObservableList<Obstacle> getListeObstacle() {
@@ -165,11 +168,8 @@ public class Jeu {
         return true;
     }
 
-    public boolean verifArgentObstacle(Obstacle O) {
-        if (O.getCoutAchat() > getArgent()) {
-            return false;
-        }
-        return true;
+    public boolean verifArgentObstacle(Obstacle o) {
+        return o.getCoutAchat() <= getArgent();
     }
 
     public Niveau getNiveau() {
@@ -305,6 +305,7 @@ public class Jeu {
             }
             attaqueEnnemi(e);
             degatBase(e);
+            e.poisonEnCours();
             enleveObstacleDetruit(tab, e);
             degatEnnemis(e);
             e.getBarreDeVie().setX(e.getX());
@@ -315,6 +316,14 @@ public class Jeu {
         enleveEnnemisMort();
         ajusterArgentEtPv();
         nbTour++;
+    }
+
+    public void miseAJourCasesDegats(){
+        this.terrain.getCasesDégats().clear();
+        for(Tour t : getListeDeTour()){
+            t.rayonDegat(terrain, t.getPosX(), t.getPosY(), t.getDegat());
+            System.out.println(t.isPoison());
+        }
     }
 
     private void gererTours() {

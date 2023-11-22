@@ -9,6 +9,7 @@ public class AmeliorationPVObstacle extends ObstacleDecorateur {
     }
     public void ameliorationObstacle(Jeu jeu) {
         obstacle.ameliotation(jeu);
+        obstacle.ameliorerDegat();
     }
     @Override
     public void strategieAttaque(Tour T) {

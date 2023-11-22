@@ -8,6 +8,13 @@ public class AmeliorationDegatTour extends TourDecorator {
     }
     public void ameliorationTour(Jeu jeu) {
         tour.ameliorationTour(jeu);
+        if (tour.isPoison()){
+            tour.ameliorerDegat();
+        }
+        if (!tour.isPoison()){
+            tour.activerPoison();
+        }
+        jeu.miseAJourCasesDegats();
     }
 
     @Override

@@ -35,6 +35,9 @@ public abstract class Ennemis {
     private BarreDeVie barreDeVie;
 
     private boolean estBloque = false;
+    private boolean poison;
+    private int degatPoison;
+    private int compteurPoison;
 
 
 
@@ -61,7 +64,37 @@ public abstract class Ennemis {
         this.yProperty = new SimpleIntegerProperty(terrain.getPointDep().getY() * 32 + 16);
 
         this.barreDeVie = new BarreDeVie(getPv(), getPvMax(), getId(), getX(), getY());
+        this.poison = false;
+        this.degatPoison = 0;
+        this.compteurPoison = 0;
+    }
 
+    public void poisonEnCours(){
+        if(this.compteurPoison==5){
+            this.compteurPoison=0;
+            this.desactiverPoison();
+            System.out.println("alaa");
+        }
+        if(this.poison){
+            this.pv.setValue(this.getPv()-this.degatPoison);
+            this.compteurPoison++;
+        }
+    }
+
+    public void perteDeVie(int degat){
+        this.pv.setValue(this.getPv()-degat);
+    }
+
+    public void setDegatPoison(int degatPoison) {
+        this.degatPoison = degatPoison;
+    }
+
+    public void activerPoison(){
+        this.poison = true;
+    }
+
+    public void desactiverPoison(){
+        this.poison = false;
     }
 
     public BarreDeVie getBarreDeVie() {

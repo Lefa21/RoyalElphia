@@ -16,18 +16,18 @@ public class Maps extends Terrain {
         }
         this.setPointDep(this.calculPointDep());
         this.setPointArv(this.calculPointArv());
-        this.setChemin(this.calculChemin());
+        this.calculChemin();
     }
 
     public int[][] getTab1() {
-        String cheminFichier = "tab1.txt";
+        String cheminFichier = "src/main/resources/fr/montreuil/iut/RoyalElphia/TableauxMap/tab1.txt";
 
         int[][] tab1 = lireMatriceDepuisFichier(cheminFichier);
         return tab1;
     }
 
     public int[][] getTab2() {
-        String cheminFichier = "tab2.txt";
+        String cheminFichier = "src/main/resources/fr/montreuil/iut/RoyalElphia/TableauxMap/tab2.txt";
 
         int[][] tab2 = lireMatriceDepuisFichier(cheminFichier);
 
