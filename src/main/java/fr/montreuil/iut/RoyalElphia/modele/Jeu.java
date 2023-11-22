@@ -98,6 +98,7 @@ public class Jeu {
             if (obstacle.getPointDeVie() <= 0) {
                 tab[obstacle.getPosY()][obstacle.getPosX()] = 9;
                 this.listeObstacle.remove(this.listeObstacle.get(j));
+                e.perteDeVie(obstacle.getDegat());
             }
             e.strategieAttaque(obstacle);
         }
@@ -106,8 +107,13 @@ public class Jeu {
     public void degatEnnemis(Ennemis e) {
         for (int j = 0; j < this.terrain.getCasesDégats().size(); j++) {
             CasesDégats c = this.terrain.getCasesDégats().get(j);
-            if (c.verifDegat(e))
+            if (c.verifDegat(e)) {
                 e.setPv(this.terrain.getCasesDégats().get(j).getDegat());
+                if(c.verifPoison(e)){
+                    e.activerPoison();
+                    e.setDegatPoison(c.getDegatPoison());
+                }
+            }
         }
     }
     // La méthode dégatBase permet que lorsque l'ennemi arrive à la base il inflige ces dégâts de base et meurt.
@@ -120,7 +126,7 @@ public class Jeu {
     //Cette méthode enlève les ennemis mort de la liste d'ennemis
     public void enleveEnnemisMort() {
         for (int i = this.ennemis.size() - 1; i >= 0; i--) {
-            if (this.ennemis.get(i).getPv() == 0)
+            if (this.ennemis.get(i).getPv() <= 0)
                 this.ennemis.remove(i);
         }
     }
@@ -305,6 +311,7 @@ public class Jeu {
             }
             attaqueEnnemi(e);
             degatBase(e);
+            e.poisonEnCours();
             enleveObstacleDetruit(tab, e);
             degatEnnemis(e);
             e.getBarreDeVie().setX(e.getX());
@@ -315,6 +322,14 @@ public class Jeu {
         enleveEnnemisMort();
         ajusterArgentEtPv();
         nbTour++;
+    }
+
+    public void miseAJourCasesDegats(){
+        this.terrain.getCasesDégats().clear();
+        for(Tour t : getListeDeTour()){
+            t.rayonDegat(terrain, t.getPosX(), t.getPosY(), t.getDegat());
+            System.out.println(t.isPoison());
+        }
     }
 
     private void gererTours() {
