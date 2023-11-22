@@ -3,17 +3,14 @@ package fr.montreuil.iut.RoyalElphia.modele;
 import fr.montreuil.iut.RoyalElphia.Controller.JeuController;
 import fr.montreuil.iut.RoyalElphia.LancementJeu;
 import fr.montreuil.iut.RoyalElphia.modele.Ennemis.StrategieAttaque.AttaqueCorpsAcorps;
-import fr.montreuil.iut.RoyalElphia.modele.Ennemis.StrategieAttaque.AttaqueEnFonctionDeLaBase;
 import fr.montreuil.iut.RoyalElphia.modele.Ennemis.StrategieAttaque.StrategieChangeante;
-import fr.montreuil.iut.RoyalElphia.modele.Map.CasesDégats;
+import fr.montreuil.iut.RoyalElphia.modele.Map.CasesDegats;
 import fr.montreuil.iut.RoyalElphia.modele.Niveau.*;
 import fr.montreuil.iut.RoyalElphia.modele.Obstacle.AmeliorationPVObstacle;
 import fr.montreuil.iut.RoyalElphia.modele.Obstacle.Obstacle;
 import fr.montreuil.iut.RoyalElphia.modele.Tour.AmeliorationDegatTour;
 import fr.montreuil.iut.RoyalElphia.modele.Tour.StrategieTour.AttaqueEvolutive;
-import fr.montreuil.iut.RoyalElphia.modele.Tour.StrategieTour.AttaqueRecharge;
 import fr.montreuil.iut.RoyalElphia.modele.Tour.Tour;
-import fr.montreuil.iut.RoyalElphia.modele.Tour.TourDecorator;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import fr.montreuil.iut.RoyalElphia.modele.Ennemis.*;
@@ -106,7 +103,7 @@ public class Jeu {
     // La méthode dégâtsEnnemis permet de vérifier si l'ennemis s'est déplacé sur une case dégats et de lui attribuer les dégats de la tour à qui la case dégâts est attribuer.
     public void degatEnnemis(Ennemis e) {
         for (int j = 0; j < this.terrain.getCasesDégats().size(); j++) {
-            CasesDégats c = this.terrain.getCasesDégats().get(j);
+            CasesDegats c = this.terrain.getCasesDégats().get(j);
             if (c.verifDegat(e)) {
                 e.setPv(this.terrain.getCasesDégats().get(j).getDegat());
                 if(c.verifPoison(e)){
@@ -136,8 +133,8 @@ public class Jeu {
         listeDeTour.add(t);
     }
 
-    public void ajouterObstacle(Obstacle O) {
-        listeObstacle.add(O);
+    public void ajouterObstacle(Obstacle o) {
+        listeObstacle.add(o);
     }
 
     public final ObservableList<Obstacle> getListeObstacle() {
@@ -171,11 +168,8 @@ public class Jeu {
         return true;
     }
 
-    public boolean verifArgentObstacle(Obstacle O) {
-        if (O.getCoutAchat() > getArgent()) {
-            return false;
-        }
-        return true;
+    public boolean verifArgentObstacle(Obstacle o) {
+        return o.getCoutAchat() <= getArgent();
     }
 
     public Niveau getNiveau() {

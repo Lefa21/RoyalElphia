@@ -4,7 +4,7 @@ import fr.montreuil.iut.RoyalElphia.modele.Ennemis.Ennemis;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 
-public class CasesDégats extends Cases {
+public class CasesDegats extends Cases {
     /*
     Classe permmettant de gérer les dégâts des tours
     */
@@ -15,7 +15,7 @@ public class CasesDégats extends Cases {
 
 
     // On récupère la position de la tour et ses attribut pour créer une case dégât
-    public CasesDégats(int x, int y, int degat, int typeAttaque, String direction, int multi, boolean poisonActif, int degatPoison) {
+    public CasesDegats(int x, int y, int degat, int typeAttaque, String direction, int multi, boolean poisonActif, int degatPoison) {
         super(x, y);
         // Le paramètre multi sert à calculer la portée de la tour
 
