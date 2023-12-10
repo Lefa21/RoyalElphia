@@ -43,5 +43,10 @@ public class AttaqueRecharge implements StrategieTour {
             T.setDegat(0);
         }
     }
+
+    @Override
+    public String toString() {
+        return "AttaqueRecharge";
+    }
 }
 

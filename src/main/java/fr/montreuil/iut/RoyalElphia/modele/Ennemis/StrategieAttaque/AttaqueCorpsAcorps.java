@@ -16,4 +16,9 @@ public class AttaqueCorpsAcorps implements StrategieAttaque{
             obstacle.setPointDeVie(vieObstacle);
         }
     }
+
+    @Override
+    public String toString() {
+        return "AttaqueCorpsAcorps";
+    }
 }

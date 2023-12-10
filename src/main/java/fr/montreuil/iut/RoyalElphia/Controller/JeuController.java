@@ -3,10 +3,9 @@ package fr.montreuil.iut.RoyalElphia.Controller;
 import fr.montreuil.iut.RoyalElphia.LancementJeu;
 import fr.montreuil.iut.RoyalElphia.Vue.*;
 import fr.montreuil.iut.RoyalElphia.modele.*;
-import fr.montreuil.iut.RoyalElphia.modele.Ennemis.BarreDeVie;
-import fr.montreuil.iut.RoyalElphia.modele.Ennemis.Ennemis;
-import fr.montreuil.iut.RoyalElphia.modele.Ennemis.ListObsEnnemis;
-import fr.montreuil.iut.RoyalElphia.modele.Items.Items;
+import fr.montreuil.iut.RoyalElphia.modele.Ennemis.*;
+import fr.montreuil.iut.RoyalElphia.modele.JDBC.DefenseDAO;
+import fr.montreuil.iut.RoyalElphia.modele.JDBC.EnnemiDAO;
 import fr.montreuil.iut.RoyalElphia.modele.Map.Maps;
 import fr.montreuil.iut.RoyalElphia.modele.Map.Terrain;
 import fr.montreuil.iut.RoyalElphia.modele.Niveau.Niveau;
@@ -37,6 +36,7 @@ La classe JeuController à pour but de récuperer les données choisis par le jo
  */
 
 public class JeuController implements Initializable {
+
 
     private Terrain terrain;
     @FXML
@@ -201,29 +201,67 @@ public class JeuController implements Initializable {
     // La méthode permet de gérer les écouteur entre le modèle et la vue et de lancer le jeu.
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-            créationPartie();
+        créationPartie();
 
-            //demarre l'animation
-            jeu.initAnimation();
-            TerrainVue terrainVue = new TerrainVue(terrain, map);
-            this.LabelVague.textProperty().bind(this.jeu.getNbVagueProperty().asString());
-            this.LabelArgent.textProperty().bind(this.jeu.getArgentProperty().asString().concat(" $"));
-            this.LabelPV.textProperty().bind(this.jeu.getPvJoueurProperty().asString().concat(" pv"));
-            this.LabelnbEnnemisRestant.textProperty().bind(this.jeu.nbEnnemisRestantProperty().asString());
-            this.LabelMort.textProperty().bind(this.jeu.ComptEnnemiTueProperty().asString());
+        envoieDonneeBD();
 
-            ListChangeListener<Ennemis> listenerEnnemis = new ListObsEnnemis(this.jeu, this.panneauJeu);
-            jeu.getEnnemis().addListener(listenerEnnemis);
+        jeu.initAnimation();
+        TerrainVue terrainVue = new TerrainVue(terrain, map);
+        this.LabelVague.textProperty().bind(this.jeu.getNbVagueProperty().asString());
+        this.LabelArgent.textProperty().bind(this.jeu.getArgentProperty().asString().concat(" $"));
+        this.LabelPV.textProperty().bind(this.jeu.getPvJoueurProperty().asString().concat(" pv"));
+        this.LabelnbEnnemisRestant.textProperty().bind(this.jeu.nbEnnemisRestantProperty().asString());
+        this.LabelMort.textProperty().bind(this.jeu.ComptEnnemiTueProperty().asString());
 
-            ListChangeListener<Obstacle> listenerObstacle = new ListObservableObstacle(this.jeu, this.panneauJeu);
-            jeu.getListeObstacle().addListener(listenerObstacle);
+        ListChangeListener<Ennemis> listenerEnnemis = new ListObsEnnemis(this.jeu, this.panneauJeu);
+        jeu.getEnnemis().addListener(listenerEnnemis);
 
-            ListChangeListener<Tour> listenerTour = new ListObservableTour(this.jeu, this.panneauJeu);
-            jeu.getListeDeTour().addListener(listenerTour);
+        ListChangeListener<Obstacle> listenerObstacle = new ListObservableObstacle(this.jeu, this.panneauJeu);
+        jeu.getListeObstacle().addListener(listenerObstacle);
 
-            ListChangeListener<BarreDeVie> listenB = new ListObsBarreDeVie(panneauJeu);
-            jeu.getBarreDeVies().addListener(listenB);
+        ListChangeListener<Tour> listenerTour = new ListObservableTour(this.jeu, this.panneauJeu);
+        jeu.getListeDeTour().addListener(listenerTour);
 
+        ListChangeListener<BarreDeVie> listenB = new ListObsBarreDeVie(panneauJeu);
+        jeu.getBarreDeVies().addListener(listenB);
+    }
+
+    private void envoieDonneeBD() {
+        EnnemiDAO ennemiDAO = new EnnemiDAO();
+        Ennemis e;
+        e = new Géant(terrain);
+        ennemiDAO.envoieDonnerDebut("Geant", e.getPv(), e.getPtsDefense(), e.getDegatBase(), e.getDegatObstacle(), e.getButin(), String.valueOf(e.getImmunite()), e.getCapaciteObstacle(), String.valueOf(e.getSt()), String.valueOf(e.getStd()));
+        e = new gobelins(terrain);
+        ennemiDAO.envoieDonnerDebut("Gobelin", e.getPv(), e.getPtsDefense(), e.getDegatBase(), e.getDegatObstacle(), e.getButin(), String.valueOf(e.getImmunite()), e.getCapaciteObstacle(), String.valueOf(e.getSt()), String.valueOf(e.getStd()));
+        e = new GéantRoyal(terrain);
+        ennemiDAO.envoieDonnerDebut("GéantRoyal", e.getPv(), e.getPtsDefense(), e.getDegatBase(), e.getDegatObstacle(), e.getButin(), String.valueOf(e.getImmunite()), e.getCapaciteObstacle(), String.valueOf(e.getSt()), String.valueOf(e.getStd()));
+        e = new Sorcières(terrain);
+        ennemiDAO.envoieDonnerDebut("Sorcières", e.getPv(), e.getPtsDefense(), e.getDegatBase(), e.getDegatObstacle(), e.getButin(), String.valueOf(e.getImmunite()), e.getCapaciteObstacle(), String.valueOf(e.getSt()), String.valueOf(e.getStd()));
+        e = new Squelette(terrain);
+        ennemiDAO.envoieDonnerDebut("Squelette", e.getPv(), e.getPtsDefense(), e.getDegatBase(), e.getDegatObstacle(), e.getButin(), String.valueOf(e.getImmunite()), e.getCapaciteObstacle(), String.valueOf(e.getSt()), String.valueOf(e.getStd()));
+
+        DefenseDAO defenseDAO = new DefenseDAO();
+        Tour d;
+        d = new TourABombe();
+        defenseDAO.envoieDonnerDebut("TourABombe", d.getCoutAchat(), d.getCoutVente(), d.getNiveauAmelioration(), d.getNiveauMaxAmelioration(), String.valueOf(d.getSt()));
+        d = new TourElectrique();
+        defenseDAO.envoieDonnerDebut("TourElectrique", d.getCoutAchat(), d.getCoutVente(), d.getNiveauAmelioration(), d.getNiveauMaxAmelioration(), String.valueOf(d.getSt()));
+        d = new TourBouleDeFeu();
+        defenseDAO.envoieDonnerDebut("TourBouleDeFeu", d.getCoutAchat(), d.getCoutVente(), d.getNiveauAmelioration(), d.getNiveauMaxAmelioration(), String.valueOf(d.getSt()));
+        d = new TourFleche();
+        defenseDAO.envoieDonnerDebut("TourFleche", d.getCoutAchat(), d.getCoutVente(), d.getNiveauAmelioration(), d.getNiveauMaxAmelioration(), String.valueOf(d.getSt()));
+        d = new TourLaser();
+        defenseDAO.envoieDonnerDebut("TourLaser", d.getCoutAchat(), d.getCoutVente(), d.getNiveauAmelioration(), d.getNiveauMaxAmelioration(), String.valueOf(d.getSt()));
+
+        Obstacle o;
+        o = new BarricadeBois();
+        defenseDAO.envoieDonnerDebut("BarricadeBois", o.getCoutAchat(), o.getCoutVente(), o.getNiveauAmelioration(), o.getNiveauMaxAmelioration(), "null");
+        o = new BarricadeFer();
+        defenseDAO.envoieDonnerDebut("BarricadeFer", o.getCoutAchat(), o.getCoutVente(), o.getNiveauAmelioration(), o.getNiveauMaxAmelioration(), "null");
+        o = new BarricadeMetal();
+        defenseDAO.envoieDonnerDebut("BarricadeMetal", o.getCoutAchat(), o.getCoutVente(), o.getNiveauAmelioration(), o.getNiveauMaxAmelioration(), "null");
+        o = new BarricadePierre();
+        defenseDAO.envoieDonnerDebut("BarricadePierre", o.getCoutAchat(), o.getCoutVente(), o.getNiveauAmelioration(), o.getNiveauMaxAmelioration(), "null");
     }
 
     // La méthode démarrer permet de lancer la gameloop lors du click sur le bouton démarrer

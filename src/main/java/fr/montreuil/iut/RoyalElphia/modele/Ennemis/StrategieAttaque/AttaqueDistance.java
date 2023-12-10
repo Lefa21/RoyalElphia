@@ -17,6 +17,11 @@ public class AttaqueDistance implements StrategieAttaque{
             obstacle.setPointDeVie(vieObstacle);
         }
     }
+
+    @Override
+    public String toString() {
+        return "AttaqueDistance";
+    }
 }
 
 

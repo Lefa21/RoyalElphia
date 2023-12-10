@@ -5,6 +5,7 @@ module jeu.royalelphia {
     requires org.controlsfx.controls;
 
     requires junit;
+    requires java.sql;
 
 
     opens fr.montreuil.iut.RoyalElphia to javafx.fxml;

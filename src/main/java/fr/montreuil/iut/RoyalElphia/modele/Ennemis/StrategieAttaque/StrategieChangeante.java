@@ -30,4 +30,8 @@ public class StrategieChangeante implements StrategieAttaque{
 
     public void setNbTour(int nb){this.nbTour = nb;}
 
+    @Override
+    public String toString() {
+        return "StrategieChangeante";
+    }
 }
