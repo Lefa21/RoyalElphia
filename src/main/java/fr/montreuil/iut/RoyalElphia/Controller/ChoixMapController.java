@@ -19,7 +19,7 @@ import java.util.ResourceBundle;
 
 public class ChoixMapController implements Initializable {
 
-    private static int niveau;
+    public static int niveau;
     private static int terrain;
 
     @FXML

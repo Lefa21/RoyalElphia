@@ -22,19 +22,27 @@ public class PartieDAO extends ConnexionJDBC{
         }
     }
 
-    public void envoieDonnerDebut(String requete, String nom, String description) {
-        try (PreparedStatement preparedStatement = getConnection().prepareStatement(requete)){
-            preparedStatement.setString(1, nom);
-            preparedStatement.setString(2, description);
+    public void envoieDonnerFin(int nb_ennemis_tues, int argent_restant, int vague_atteinte, int pv_base, String status, int id_map, int id_joueur, int id_niveau) {
+        String requete = "INSERT INTO partie (nb_ennemis_tues, argent_restant, vague_atteinte, pv_base, status, id_map, id_joueur, id_niveau) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
-            // Execute the insertion query
+        try (PreparedStatement preparedStatement = getConnection().prepareStatement(requete)){
+            preparedStatement.setInt(1, nb_ennemis_tues);
+            preparedStatement.setInt(2, argent_restant);
+            preparedStatement.setInt(3, vague_atteinte);
+            preparedStatement.setInt(4, pv_base);
+            preparedStatement.setString(5, status);
+            preparedStatement.setInt(6, id_map);
+            preparedStatement.setInt(7, id_joueur);
+            preparedStatement.setInt(8, id_niveau);
+
+                // Exécuter la requête d'insertion
             int rowsAffected = preparedStatement.executeUpdate();
 
-            // Check if the insertion was successful
+                // Vérifier si l'insertion a réussi
             if (rowsAffected > 0) {
-                System.out.println("Insertion successful.");
+                System.out.println("Insertion réussie.");
             } else {
-                System.out.println("Insertion failed.");
+                System.out.println("Échec de l'insertion.");
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -44,7 +52,6 @@ public class PartieDAO extends ConnexionJDBC{
     public static void main(String[] args) {
         PartieDAO c = new PartieDAO();
         c.envoieDonner("Select * from listeJoueur");
-        c.envoieDonnerDebut("INSERT INTO listeJoueur (nom, description) VALUES (?, ?)" , "Alaa", "Joueur");
         c.envoieDonner("Select * from listeJoueur");
 
     }

@@ -4,6 +4,7 @@ import static fr.montreuil.iut.RoyalElphia.modele.LecteurCSV.LecteurTXT.lireMatr
 
 public class Maps extends Terrain {
 
+    public static int idMap = 0;
 
 
     public Maps(int a) {
@@ -23,6 +24,7 @@ public class Maps extends Terrain {
         String cheminFichier = "src/main/resources/fr/montreuil/iut/RoyalElphia/TableauxMap/tab1.txt";
 
         int[][] tab1 = lireMatriceDepuisFichier(cheminFichier);
+        idMap = 1;
         return tab1;
     }
 
@@ -30,7 +32,7 @@ public class Maps extends Terrain {
         String cheminFichier = "src/main/resources/fr/montreuil/iut/RoyalElphia/TableauxMap/tab2.txt";
 
         int[][] tab2 = lireMatriceDepuisFichier(cheminFichier);
-
+        idMap = 2;
         return tab2;
     }
 }

@@ -20,6 +20,7 @@ public class LancementJeu extends Application {
         newWindow.show();
     }
 
+
     public static void main(String[] args) {
         launch();
     }

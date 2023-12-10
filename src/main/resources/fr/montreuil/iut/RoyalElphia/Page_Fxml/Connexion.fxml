@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<BorderPane prefHeight="500" prefWidth="800" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.montreuil.iut.RoyalElphia.Controller.ConnexionControlleur">
+
+    <center>
+        <Pane>
+            <children>
+                <ImageView fitHeight="800.0" fitWidth="800.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../ImageFond/fond-acceuil.jpg" />
+                    </image>
+                </ImageView>
+            </children>
+            <children>
+                <ImageView fitHeight="200.0" fitWidth="600.0" layoutX="260.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../ImageFond/bienvenue.png" />
+                    </image>
+                </ImageView>
+            </children>
+            <children>
+                <VBox layoutX="234.0" layoutY="134.0" prefHeight="160.0" prefWidth="361.0">
+               <children>
+                  <HBox alignment="TOP_CENTER" prefHeight="28.0" prefWidth="362.0">
+                     <children>
+                        <Label alignment="TOP_CENTER" contentDisplay="CENTER" text="Connexion" />
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="40.0" prefWidth="362.0">
+                     <children>
+                        <Label prefHeight="18.0" prefWidth="83.0" text="Login :" />
+                        <TextField fx:id="loginLabel" />
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="31.0" prefWidth="362.0">
+                     <children>
+                        <Label prefHeight="18.0" prefWidth="82.0" text="Mot de passe :" />
+                        <TextField fx:id="mdpLabel" prefWidth="150.0" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <Button fx:id="connexionBouton" alignment="CENTER" mnemonicParsing="false" onAction="#Lancer" text="Se connecter" />
+                     </children>
+                  </HBox>
+               </children>
+                </VBox>
+                <VBox layoutX="300.0" layoutY="320.0" prefHeight="200.0" prefWidth="379.0">
+                    <children>
+                        <Button style="-fx-background-color: red;" textFill="white" mnemonicParsing="false" prefHeight="65.0" prefWidth="200.0" onAction="#Retour" text="Retour" />
+                    </children>
+                </VBox>
+            </children></Pane>
+    </center>
+</BorderPane>

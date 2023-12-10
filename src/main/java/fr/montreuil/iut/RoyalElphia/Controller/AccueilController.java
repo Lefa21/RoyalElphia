@@ -28,8 +28,8 @@ public class AccueilController implements Initializable {
     @FXML
     public void LancerJeu(ActionEvent event) throws IOException {
         Stage newWindow =    (Stage) this.lancer.getScene().getWindow();
-        newWindow.setTitle("Paramètres de ma partie");
-        FXMLLoader loader = new FXMLLoader(LancementJeu.class.getResource("Page_Fxml/ChoixMap.fxml"));
+        newWindow.setTitle("Connexion");
+        FXMLLoader loader = new FXMLLoader(LancementJeu.class.getResource("Page_Fxml/Connexion.fxml"));
         newWindow.setScene(new Scene(loader.load()));
     }
 

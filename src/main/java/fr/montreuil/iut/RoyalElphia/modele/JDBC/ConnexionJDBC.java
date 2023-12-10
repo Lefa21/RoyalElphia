@@ -24,4 +24,47 @@ public class ConnexionJDBC {
         }
         return connection;
     }
+
+    public boolean connexionJoueur(String loginAVerifier, String mdpAVerifier) throws SQLException {
+        String requete = "SELECT * FROM joueur WHERE login = ? AND mdp = ?";
+        try (PreparedStatement preparedStatement = getConnection().prepareStatement(requete)) {
+            preparedStatement.setString(1, loginAVerifier);
+            preparedStatement.setString(2, mdpAVerifier);
+
+                // Exécuter la requête
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                if (resultSet.next()) {
+                    // Les informations de connexion sont correctes
+                    System.out.println("Connexion réussie !");
+                    return true;
+                } else {
+                        // Aucune correspondance trouvée
+                    System.out.println("Login ou mot de passe incorrect.");
+                }
+            }
+        } catch (SQLException e) {
+        // Gérer les exceptions liées à la connexion ou à la requête SQL
+        e.printStackTrace();
+    }
+        return false;
 }
+
+    public int trouverIDJoueur(String login) throws SQLException {
+        Connection connexion = getConnection(); // Assurez-vous d'avoir une méthode obtenirConnexion()
+
+        String query = "SELECT id_joueur FROM joueur WHERE login = ?";
+        try (PreparedStatement preparedStatement = connexion.prepareStatement(query)) {
+            preparedStatement.setString(1, login);
+
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                if (resultSet.next()) {
+                    return resultSet.getInt("id_joueur");
+                } else {
+                    // Ajustez le comportement en cas de joueur non trouvé (par exemple, renvoyer -1)
+                    return -1;
+                }
+            }
+        }
+    }
+}
+
