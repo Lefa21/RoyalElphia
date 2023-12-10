@@ -249,6 +249,9 @@ public abstract class Ennemis {
     public StrategieAttaque getSt() {
         return sa;
     }
+    public StrategieDeplacement getStd(){
+        return strategieDeplacement;
+    }
     public abstract String getChemin();
 
     public void ameliorationPv(int pv) {

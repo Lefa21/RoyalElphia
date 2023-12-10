@@ -5,7 +5,12 @@ import fr.montreuil.iut.RoyalElphia.modele.Obstacle.Obstacle;
 public class AttaqueEnFonctionDeLaBase implements StrategieAttaque{
 
 
-    public void AttaqueEnnemi( int dx, int dy, Obstacle obstacle) {
+    @Override
+    public String toString() {
+        return "AttaqueEnFonctionDeLaBase";
+    }
+
+    public void AttaqueEnnemi(int dx, int dy, Obstacle obstacle) {
         int x = dx / 32;
         int y = dy / 32;
         int obX = obstacle.getPosX();

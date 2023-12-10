@@ -8,7 +8,7 @@ public class TourLaser extends Tour {
     public TourLaser() {
 
         super(2, 5,18, new AttaqueEvolutive());
-        setCoutAchat(2);
+        setCoutAchat(50);
         setCoutVente(40);
         setCoutAmelioration(35);
         setNiveauMaxAmelioration(3);

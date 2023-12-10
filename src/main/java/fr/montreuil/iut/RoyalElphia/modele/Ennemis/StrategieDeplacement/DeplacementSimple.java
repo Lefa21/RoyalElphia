@@ -15,4 +15,9 @@ public class DeplacementSimple implements StrategieDeplacement{
         casesParcourues.ajouterCase(new Cases(tab[0],tab[1]));
         return tab;
     }
+
+    @Override
+    public String toString() {
+        return "DeplacementSimple";
+    }
 }

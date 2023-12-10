@@ -62,5 +62,10 @@ public class AttaqueEvolutive implements StrategieTour {
             T.setDegat(5);
         }
     }
+
+    @Override
+    public String toString() {
+        return "AttaqueEvolutive";
+    }
 }
 

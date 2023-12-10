@@ -35,4 +35,9 @@ public class DeplacementTeleportation implements StrategieDeplacement{
         }
         return tab;
     }
+
+    @Override
+    public String toString() {
+        return "DeplacementTeleportation";
+    }
 }
