@@ -6,6 +6,7 @@ import fr.montreuil.iut.RoyalElphia.modele.*;
 import fr.montreuil.iut.RoyalElphia.modele.Ennemis.*;
 import fr.montreuil.iut.RoyalElphia.modele.JDBC.DefenseDAO;
 import fr.montreuil.iut.RoyalElphia.modele.JDBC.EnnemiDAO;
+import fr.montreuil.iut.RoyalElphia.modele.JDBC.NiveauDAO;
 import fr.montreuil.iut.RoyalElphia.modele.Map.Maps;
 import fr.montreuil.iut.RoyalElphia.modele.Map.Terrain;
 import fr.montreuil.iut.RoyalElphia.modele.Niveau.Niveau;
@@ -262,6 +263,15 @@ public class JeuController implements Initializable {
         defenseDAO.envoieDonnerDebut("BarricadeMetal", o.getCoutAchat(), o.getCoutVente(), o.getNiveauAmelioration(), o.getNiveauMaxAmelioration(), "null");
         o = new BarricadePierre();
         defenseDAO.envoieDonnerDebut("BarricadePierre", o.getCoutAchat(), o.getCoutVente(), o.getNiveauAmelioration(), o.getNiveauMaxAmelioration(), "null");
+
+        NiveauDAO niveauDAO = new NiveauDAO();
+        Niveau n;
+        n = new Niveau(1);
+        niveauDAO.envoieDonnerDebut("Facile", n.getNbEnnemis()*36);
+        n = new Niveau(5);
+        niveauDAO.envoieDonnerDebut("Moyen", n.getNbEnnemis()*36);
+        n = new Niveau(10);
+        niveauDAO.envoieDonnerDebut("Difficile", n.getNbEnnemis()*36);
     }
 
     // La méthode démarrer permet de lancer la gameloop lors du click sur le bouton démarrer

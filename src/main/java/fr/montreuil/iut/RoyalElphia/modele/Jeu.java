@@ -1,5 +1,6 @@
 package fr.montreuil.iut.RoyalElphia.modele;
 
+import fr.montreuil.iut.RoyalElphia.Controller.ChoixMapController;
 import fr.montreuil.iut.RoyalElphia.Controller.JeuController;
 import fr.montreuil.iut.RoyalElphia.LancementJeu;
 import fr.montreuil.iut.RoyalElphia.modele.Ennemis.StrategieAttaque.AttaqueCorpsAcorps;
@@ -37,7 +38,6 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import static fr.montreuil.iut.RoyalElphia.Controller.ChoixMapController.niveau;
 import static fr.montreuil.iut.RoyalElphia.Controller.ConnexionControlleur.login;
 import static fr.montreuil.iut.RoyalElphia.modele.Map.Maps.idMap;
 
@@ -54,7 +54,7 @@ public class Jeu {
     private ObservableList<Tour> listeDeTour;
     private ObservableList<Obstacle> listeObstacle;
     private IntegerProperty argent;
-    private Niveau niveaun;
+    private Niveau niveau;
     private IntegerProperty nbVague, nbEnnemisRestant;
     private VBox vBox;
     private IntegerProperty comptEnnemiTue = new SimpleIntegerProperty(0);
@@ -70,16 +70,16 @@ public class Jeu {
         this.ennemis = FXCollections.observableArrayList();
         this.listeEnnemisTuée = new ArrayList<>();
         this.listeEnnemisSpawn = new ArrayList<>();
-        this.niveaun = niveau;
+        this.niveau = niveau;
         this.nbTour = 0;
-        this.nbEnnemisRestant = new SimpleIntegerProperty(this.niveaun.getNbEnnemis());
+        this.nbEnnemisRestant = new SimpleIntegerProperty(this.niveau.getNbEnnemis());
         this.nbVague = new SimpleIntegerProperty(1);
         this.pvJoueur = new SimpleIntegerProperty(10);
         this.listeDeTour = FXCollections.observableArrayList();
         this.listeObstacle = FXCollections.observableArrayList();
         this.argent = new SimpleIntegerProperty(20000);
         this.vague = new Vague(new FacileStrategy());
-        this.vague.créerVague(this.niveaun.getNbEnnemis(), this.terrain);
+        this.vague.créerVague(this.niveau.getNbEnnemis(), this.terrain);
         this.vBox = vBox;
         this.barreDeVies = FXCollections.observableArrayList();
 
@@ -178,8 +178,8 @@ public class Jeu {
         return o.getCoutAchat() <= getArgent();
     }
 
-    public Niveau getNiveaun() {
-        return niveaun;
+    public Niveau getNiveau() {
+        return niveau;
     }
 
     public Terrain getTerrain() {
@@ -200,13 +200,13 @@ public class Jeu {
         listeEnnemisSpawn.clear();
         ennemis.clear();
         this.nbVague.setValue(this.nbVague.getValue() + 1);
-        this.niveaun.setNbEnnemis(this.niveaun.getNbEnnemis() * 2);
-        this.nbEnnemisRestant.setValue(this.niveaun.getNbEnnemis());
+        this.niveau.setNbEnnemis(this.niveau.getNbEnnemis() * 2);
+        this.nbEnnemisRestant.setValue(this.niveau.getNbEnnemis());
         this.vague = new Vague(new MoyenneStrategy());
-        this.vague.créerVague(this.niveaun.getNbEnnemis(), this.terrain);
+        this.vague.créerVague(this.niveau.getNbEnnemis(), this.terrain);
         if (this.nbVague.getValue() > 4) {
             this.vague = new Vague(new DifficileStrategy());
-            this.vague.créerVague(this.niveaun.getNbEnnemis(), this.terrain);        }
+            this.vague.créerVague(this.niveau.getNbEnnemis(), this.terrain);        }
     }
 
     public void ajouterBarreDeVie(BarreDeVie b) {
@@ -369,7 +369,7 @@ public class Jeu {
     //Lorsque le joueur gagne on lui affiche cette page.
     public void gagne() throws IOException, SQLException {
         PartieDAO partieDAO = new PartieDAO();
-        partieDAO.envoieDonnerFin(getComptEnnemiTue(), getArgent(), getNbVagueProperty().get(), getPvJoueur(), "Victoire", idMap, partieDAO.trouverIDJoueur(login), niveau);
+        partieDAO.envoieDonnerFin(getComptEnnemiTue(), getArgent(), getNbVagueProperty().get(), getPvJoueur(), "Victoire", idMap, partieDAO.trouverIDJoueur(login), ChoixMapController.niveau);
 
         Stage newWindow = new Stage();
         newWindow.setTitle("Bravo !");
@@ -379,7 +379,10 @@ public class Jeu {
         JeuController.stage.close();
     }
 
-    public void perdu() throws IOException {
+    public void perdu() throws IOException, SQLException {
+        PartieDAO partieDAO = new PartieDAO();
+        partieDAO.envoieDonnerFin(getComptEnnemiTue(), getArgent(), getNbVagueProperty().get(), getPvJoueur(), "Defaite", idMap, partieDAO.trouverIDJoueur(login), ChoixMapController.niveau);
+
         Stage newWindow = new Stage();
         newWindow.setTitle("Mince !");
         FXMLLoader loader = new FXMLLoader(LancementJeu.class.getResource("Page_Fxml/Perdu.fxml"));
@@ -413,7 +416,7 @@ public class Jeu {
                         getEnnemisTue().removeAll(getEnnemisTue());
                     } else if (temps % 3 == 0) {
                         unTour();
-                    } else if (temps % 10 == 0 && getListeEnnemisSpawn().size() < this.niveaun.getNbEnnemis()) {
+                    } else if (temps % 10 == 0 && getListeEnnemisSpawn().size() < this.niveau.getNbEnnemis()) {
                         spwanEnnemi();
                         menuEnnemiS(vBox);
                         try {
@@ -436,6 +439,8 @@ public class Jeu {
                         try {
                             perdu();
                         } catch (IOException e) {
+                            throw new RuntimeException(e);
+                        } catch (SQLException e) {
                             throw new RuntimeException(e);
                         }
                         gameLoop.stop();
