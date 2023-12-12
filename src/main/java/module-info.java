@@ -6,6 +6,7 @@ module jeu.royalelphia {
 
     requires junit;
     requires java.sql;
+    requires mysql.connector.j;
 
 
     opens fr.montreuil.iut.RoyalElphia to javafx.fxml;

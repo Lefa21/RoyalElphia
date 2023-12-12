@@ -28,11 +28,15 @@ public class NiveauDAO extends ConnexionJDBC{
     }
 
     private boolean typeEnnemiExists(String niveau) {
-        String selectQuery = "SELECT 1 FROM niveau WHERE niveau = ?";
+        String selectQuery = "SELECT COUNT(*) FROM niveau WHERE niveau = ?";
         try (PreparedStatement preparedStatement = getConnection().prepareStatement(selectQuery)) {
             preparedStatement.setString(1, niveau);
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
-                return resultSet.next(); // Retourne true si des résultats sont trouvés
+                if (resultSet.next()) {
+                    int count = resultSet.getInt(1);
+                    System.out.println("Nombre de lignes trouvées : " + count);
+                    return count > 0; // Retourne true si des résultats sont trouvés
+                }
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -40,16 +44,18 @@ public class NiveauDAO extends ConnexionJDBC{
         return false;
     }
 
+
     public void envoieDonnerDebut(String niveau, int nb_ennemi) {
         // Vérifier si le type d'ennemi existe déjà
         if (typeEnnemiExists(niveau)) {
-            System.out.println("Le type d'ennemi existe déjà dans la table. Effectuer une mise à jour.");
+            System.out.println("Le niveau existe déjà dans la table. Effectuer une mise à jour.");
 
             // Si le type d'ennemi existe, effectuer la mise à jour
-            String requete = "UPDATE niveau SET niveau = ?, nb_ennemi = ?";
+            String requete = "UPDATE niveau SET niveau = ?, nb_ennemi = ? WHERE niveau = ?";
             try (PreparedStatement preparedStatement = getConnection().prepareStatement(requete)) {
                 preparedStatement.setString(1, niveau);
                 preparedStatement.setInt(2, nb_ennemi);
+                preparedStatement.setString(3, niveau);
 
                 // Exécuter la requête de mise à jour
                 int rowsAffected = preparedStatement.executeUpdate();
@@ -65,7 +71,7 @@ public class NiveauDAO extends ConnexionJDBC{
             }
         } else {
             // Si le type d'ennemi n'existe pas, effectuer l'insertion
-            System.out.println("Le type d'ennemi n'existe pas. Effectuer une insertion.");
+            System.out.println("Le type Niveau n'existe pas. Effectuer une insertion.");
 
             String insertQuery = "INSERT INTO niveau (niveau, nb_ennemi) VALUES (?, ?)";
             try (PreparedStatement preparedStatement = getConnection().prepareStatement(insertQuery)) {
